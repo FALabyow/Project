@@ -16,7 +16,7 @@ Admin Database
 ---> dotnet ef migrations add InitialMigration --context AdminDbContext --startup-project ../Project.API
 ---> dotnet ef database update --context AdminDbContext --startup-project ../Project.API
 
-Note: Follow naming convention for naming the branch
+Note: Follow naming convention for branching
 ---> feature1/test
 ---> feature2/test
 
