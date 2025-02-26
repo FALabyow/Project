@@ -1,6 +1,9 @@
 
 using Microsoft.EntityFrameworkCore;
+using Project.Application.Interfaces;
+using Project.Application.Services;
 using Project.Infrastructure.Persistence;
+using Project.Infrastructure.Repositories;
 using System;
 
 namespace Project.API
@@ -14,6 +17,11 @@ namespace Project.API
             // Add services to the container.
             builder.Services.AddDbContext<ProjectDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("AppDbContextConnection")));
+
+            builder.Services.AddScoped<IProductRepository, ProductRepository>();
+            builder.Services.AddScoped<ProductService>();
+
+
 
 
             builder.Services.AddControllers();
