@@ -1,4 +1,8 @@
 
+using Microsoft.EntityFrameworkCore;
+using Project.Infrastructure.Persistence;
+using System;
+
 namespace Project.API
 {
     public class Program
@@ -8,7 +12,8 @@ namespace Project.API
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-
+            builder.Services.AddDbContext<ProjectDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("AppDbContextConnection")));
 
 
             builder.Services.AddControllers();
