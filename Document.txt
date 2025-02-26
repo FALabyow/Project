@@ -1,0 +1,24 @@
+---> cd Project.Infrastructure
+
+To apply migration:
+---> dotnet ef migrations add <name> --startup-project ../Project.API
+
+To update database:
+---> dotnet ef database update <name> --startup-project ../Project.API
+
+To create two databases using migration:
+
+User Database
+---> dotnet ef migrations add InitialMigration --context UserDbContext --startup-project ../Project.API
+---> dotnet ef database update --context UserDbContext --startup-project ../Project.API
+
+Admin Database
+---> dotnet ef migrations add InitialMigration --context AdminDbContext --startup-project ../Project.API
+---> dotnet ef database update --context AdminDbContext --startup-project ../Project.API
+
+Note: Follow naming convention for naming the branch
+---> feature1/test
+---> feature2/test
+
+AFTER CLONING, PLEASE CREATE A BRANCH BEFORE PUSHING!
+
