@@ -15,6 +15,18 @@ namespace Project.Application.Services
         {
             _productRepository = productRepository;
         }
-        
+
+        public async Task<List<ProductDTO>> GetAllProductsAsync()
+        {
+            var products = await _productRepository.GetAllAsync();
+            return products.Select(b => new ProductDTO
+            {
+                Id = b.Id,
+                Name = b.Name,
+                Price = b.Price,
+                CategoryId = b.CategoryId
+
+            }).ToList();
+        }
     }
 }
