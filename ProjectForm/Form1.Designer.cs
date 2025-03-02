@@ -353,6 +353,7 @@
             btnProduct.BackColor = Color.Peru;
             btnProduct.Dock = DockStyle.Top;
             btnProduct.FlatStyle = FlatStyle.Flat;
+            btnProduct.ImageAlign = ContentAlignment.MiddleRight;
             btnProduct.Location = new Point(0, 215);
             btnProduct.Name = "btnProduct";
             btnProduct.Padding = new Padding(5, 0, 0, 0);
