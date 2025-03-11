@@ -2,11 +2,32 @@ namespace ProjectForm
 {
     public partial class Form1 : Form
     {
+        // part 1 of the tutorial
+        //https://www.youtube.com/watch?v=TipJwf0-yLg&list=PLcDvtJ2MXvhy_YrXdO4VXqZBOADCRJhSc
         public Form1()
         {
             InitializeComponent();
             customizeDesign();
         }
+
+        private Form activeform = null;
+
+
+        private void openChildForm(Form childForm)
+        {
+            if (activeform != null)
+                activeform.Close();
+            activeform = childForm;
+            childForm.TopLevel = false;
+            childForm.FormBorderStyle = FormBorderStyle.None;
+            childForm.Dock = DockStyle.Fill;
+            lblTitle.Text = childForm.Text;
+            pnlMain.Controls.Add(childForm);
+            pnlMain.Tag = childForm;
+            childForm.BringToFront();
+            childForm.Show();
+        }
+
 
         //side menu
 
@@ -31,15 +52,10 @@ namespace ProjectForm
                 pnlSubStock.Visible = false;
         }
 
+
         private void showSubMenu(Panel subMenu)
         {
-            if (subMenu.Visible == false)
-            {
-                hideSubMenu();
-                subMenu.Visible = true;
-            }
-            else
-                subMenu.Visible = false;
+            subMenu.Visible = !subMenu.Visible;
         }
 
         private void btnDashboard_Click(object sender, EventArgs e)
@@ -49,16 +65,18 @@ namespace ProjectForm
 
         private void btnProduct_Click(object sender, EventArgs e)
         {
-           showSubMenu(pnlSubProduct);
+            showSubMenu(pnlSubProduct);
         }
 
         private void btnProdlist_Click(object sender, EventArgs e)
         {
+            openChildForm(new Product());
             hideSubMenu();
         }
 
         private void btnCategory_Click(object sender, EventArgs e)
         {
+            openChildForm(new Category());
             hideSubMenu();
         }
 
@@ -104,7 +122,7 @@ namespace ProjectForm
 
         private void btnSetting_Click(object sender, EventArgs e)
         {
-           showSubMenu(pnlSubSetting);
+            showSubMenu(pnlSubSetting);
         }
 
         private void btnUser_Click(object sender, EventArgs e)
@@ -118,6 +136,11 @@ namespace ProjectForm
         }
 
         private void btnLogout_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void pnlLogo_Paint(object sender, PaintEventArgs e)
         {
 
         }
