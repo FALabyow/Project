@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.VisualBasic;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -9,10 +10,13 @@ namespace Project.Domain.Entities
 {
     public class Product
     {
-        public int Id { get; set; } 
-        public string Name { get; set; }
-        public decimal Price { get; set; }
-        public int Stock {  get; set; }
+        public Guid ProductId { get; set; } 
+        public string BarcodeData {  get; set; }
+        public string ProductName { get; set; }
+        public decimal ProductPrice { get; set; }
+        public int ProductQuantity {  get; set; }
+        public int ProductPreOrder {  get; set; }
+        public DateAndTime ScannedAt { get; set; }  
         public int CategoryId { get; set; }
         public Category Category { get; set; }
 

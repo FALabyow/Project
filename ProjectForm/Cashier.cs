@@ -66,7 +66,7 @@ namespace ProjectForm
         }
 
         private void btnLogout_Click(object sender, EventArgs e)
-        {
+        { 
             slide(btnLogout);
         }
 

@@ -1,10 +1,15 @@
 ---> cd Project.Infrastructure
 
 To apply migration:
----> dotnet ef migrations add <name> --startup-project ../Project.API
+---> dotnet ef migrations add InitialCreate --startup-project ../Project.API
 
 To update database:
----> dotnet ef database update <name> --startup-project ../Project.API
+---> dotnet ef database update --startup-project ../Project.API
+
+To drop database:
+---> dotnet ef database drop --context ProjectDbContext --startup-project ../Project.API -f
+
+
 
 To create two databases using migration:
 
