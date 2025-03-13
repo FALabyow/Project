@@ -44,7 +44,7 @@ namespace ProjectForm
         {
             var response = await _httpClient.GetAsync("/Categories/All");
 
-            if(response != null)
+            if(response.IsSuccessStatusCode)
             {
                 var responseData = await response.Content.ReadAsStringAsync();
                 var categories = JsonSerializer.Deserialize<List<CategoryDto>>(responseData, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
@@ -57,12 +57,12 @@ namespace ProjectForm
                 }
                 else
                 {
-                    MessageBox.Show("No categories found.");
+                    Debug.WriteLine("No categories found.");
                 }
             }
             else
             {
-                MessageBox.Show($"Error: {response.StatusCode}");
+                Debug.WriteLine($"Error: {response.StatusCode}");
             }
         }
 
