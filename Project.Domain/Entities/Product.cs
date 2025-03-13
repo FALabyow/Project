@@ -10,13 +10,13 @@ namespace Project.Domain.Entities
 {
     public class Product
     {
-        public Guid ProductId { get; set; } 
+        public Guid ProductId { get; set; } = Guid.NewGuid();
         public string BarcodeData {  get; set; }
         public string ProductName { get; set; }
         public decimal ProductPrice { get; set; }
         public int ProductQuantity {  get; set; }
         public int ProductPreOrder {  get; set; }
-        public DateAndTime ScannedAt { get; set; }  
+        public DateTime ScannedAt { get; set; }  
         public int CategoryId { get; set; }
         public Category Category { get; set; }
 
