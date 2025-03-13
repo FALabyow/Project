@@ -115,7 +115,7 @@
             btnLogout.BackColor = Color.FromArgb(193, 135, 107);
             btnLogout.FlatAppearance.BorderSize = 0;
             btnLogout.FlatStyle = FlatStyle.Flat;
-            btnLogout.Font = new Font("Century Gothic", 10.8F);
+            btnLogout.Font = new Font("Microsoft Sans Serif", 10.8F);
             btnLogout.ForeColor = Color.Cornsilk;
             btnLogout.Image = Properties.Resources.logout1;
             btnLogout.ImageAlign = ContentAlignment.MiddleLeft;
@@ -134,7 +134,7 @@
             btnDailySales.Dock = DockStyle.Top;
             btnDailySales.FlatAppearance.BorderSize = 0;
             btnDailySales.FlatStyle = FlatStyle.Flat;
-            btnDailySales.Font = new Font("Century Gothic", 10.8F);
+            btnDailySales.Font = new Font("Microsoft Sans Serif", 10.8F);
             btnDailySales.ForeColor = Color.FromArgb(255, 245, 230);
             btnDailySales.Image = Properties.Resources.charts;
             btnDailySales.ImageAlign = ContentAlignment.MiddleLeft;
@@ -152,7 +152,7 @@
             btnClearCart.Dock = DockStyle.Top;
             btnClearCart.FlatAppearance.BorderSize = 0;
             btnClearCart.FlatStyle = FlatStyle.Flat;
-            btnClearCart.Font = new Font("Century Gothic", 10.8F);
+            btnClearCart.Font = new Font("Microsoft Sans Serif", 10.8F);
             btnClearCart.ForeColor = Color.FromArgb(255, 245, 230);
             btnClearCart.Image = Properties.Resources.clear;
             btnClearCart.ImageAlign = ContentAlignment.MiddleLeft;
@@ -170,7 +170,7 @@
             btnPayment.Dock = DockStyle.Top;
             btnPayment.FlatAppearance.BorderSize = 0;
             btnPayment.FlatStyle = FlatStyle.Flat;
-            btnPayment.Font = new Font("Century Gothic", 10.8F);
+            btnPayment.Font = new Font("Microsoft Sans Serif", 10.8F);
             btnPayment.ForeColor = Color.FromArgb(255, 245, 230);
             btnPayment.Image = Properties.Resources.payment_method;
             btnPayment.ImageAlign = ContentAlignment.MiddleLeft;
@@ -189,7 +189,7 @@
             btnDiscount.Dock = DockStyle.Top;
             btnDiscount.FlatAppearance.BorderSize = 0;
             btnDiscount.FlatStyle = FlatStyle.Flat;
-            btnDiscount.Font = new Font("Century Gothic", 10.8F);
+            btnDiscount.Font = new Font("Microsoft Sans Serif", 10.8F);
             btnDiscount.ForeColor = Color.FromArgb(255, 245, 230);
             btnDiscount.Image = Properties.Resources.discount;
             btnDiscount.ImageAlign = ContentAlignment.MiddleLeft;
@@ -209,7 +209,7 @@
             btnSearchProduct.Dock = DockStyle.Top;
             btnSearchProduct.FlatAppearance.BorderSize = 0;
             btnSearchProduct.FlatStyle = FlatStyle.Flat;
-            btnSearchProduct.Font = new Font("Century Gothic", 10.8F);
+            btnSearchProduct.Font = new Font("Microsoft Sans Serif", 10.8F);
             btnSearchProduct.ForeColor = Color.FromArgb(255, 245, 230);
             btnSearchProduct.Image = Properties.Resources.search_interface_symbol32;
             btnSearchProduct.ImageAlign = ContentAlignment.MiddleLeft;
@@ -228,7 +228,7 @@
             btnTransaction.Dock = DockStyle.Top;
             btnTransaction.FlatAppearance.BorderSize = 0;
             btnTransaction.FlatStyle = FlatStyle.Flat;
-            btnTransaction.Font = new Font("Century Gothic", 10.2F);
+            btnTransaction.Font = new Font("Microsoft Sans Serif", 10.2F);
             btnTransaction.ForeColor = Color.FromArgb(255, 245, 230);
             btnTransaction.Image = Properties.Resources.transaction1;
             btnTransaction.ImageAlign = ContentAlignment.MiddleLeft;
@@ -255,11 +255,11 @@
             // 
             label1.AutoSize = true;
             label1.BackColor = Color.Transparent;
-            label1.Font = new Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label1.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label1.ForeColor = Color.Black;
             label1.Location = new Point(55, 139);
             label1.Name = "label1";
-            label1.Size = new Size(82, 23);
+            label1.Size = new Size(63, 20);
             label1.TabIndex = 0;
             label1.Text = "Cashier";
             // 
@@ -328,7 +328,7 @@
             // 
             lblTimer.BackColor = Color.Moccasin;
             lblTimer.Dock = DockStyle.Bottom;
-            lblTimer.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblTimer.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblTimer.Location = new Point(0, 600);
             lblTimer.Name = "lblTimer";
             lblTimer.Size = new Size(220, 50);
@@ -351,7 +351,7 @@
             label8.AutoSize = true;
             label8.Location = new Point(8, 380);
             label8.Name = "label8";
-            label8.Size = new Size(110, 21);
+            label8.Size = new Size(90, 18);
             label8.TabIndex = 7;
             label8.Text = "Sales Total :";
             // 
@@ -360,17 +360,17 @@
             txtBarcode.Location = new Point(8, 279);
             txtBarcode.Name = "txtBarcode";
             txtBarcode.ReadOnly = true;
-            txtBarcode.Size = new Size(145, 30);
+            txtBarcode.Size = new Size(145, 24);
             txtBarcode.TabIndex = 6;
             txtBarcode.TextChanged += txtBarcode_TextChanged;
             // 
             // label7
             // 
             label7.AutoSize = true;
-            label7.Font = new Font("Century Gothic", 10.8F, FontStyle.Underline, GraphicsUnit.Point, 0);
+            label7.Font = new Font("Microsoft Sans Serif", 10.8F, FontStyle.Underline, GraphicsUnit.Point, 0);
             label7.Location = new Point(8, 247);
             label7.Name = "label7";
-            label7.Size = new Size(85, 21);
+            label7.Size = new Size(64, 18);
             label7.TabIndex = 5;
             label7.Text = "Barcode";
             // 
@@ -379,17 +379,17 @@
             lblDate.AutoSize = true;
             lblDate.Location = new Point(8, 204);
             lblDate.Name = "lblDate";
-            lblDate.Size = new Size(90, 21);
+            lblDate.Size = new Size(72, 18);
             lblDate.TabIndex = 4;
             lblDate.Text = "00000000";
             // 
             // label6
             // 
             label6.AutoSize = true;
-            label6.Font = new Font("Century Gothic", 10.8F, FontStyle.Underline, GraphicsUnit.Point, 0);
+            label6.Font = new Font("Microsoft Sans Serif", 10.8F, FontStyle.Underline, GraphicsUnit.Point, 0);
             label6.Location = new Point(8, 167);
             label6.Name = "label6";
-            label6.Size = new Size(54, 21);
+            label6.Size = new Size(39, 18);
             label6.TabIndex = 3;
             label6.Text = "Date";
             // 
@@ -398,17 +398,17 @@
             lblTranNo.AutoSize = true;
             lblTranNo.Location = new Point(6, 125);
             lblTranNo.Name = "lblTranNo";
-            lblTranNo.Size = new Size(140, 21);
+            lblTranNo.Size = new Size(112, 18);
             lblTranNo.TabIndex = 2;
             lblTranNo.Text = "0000000000000";
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Font = new Font("Century Gothic", 10.8F, FontStyle.Underline, GraphicsUnit.Point, 0);
+            label3.Font = new Font("Microsoft Sans Serif", 10.8F, FontStyle.Underline, GraphicsUnit.Point, 0);
             label3.Location = new Point(6, 88);
             label3.Name = "label3";
-            label3.Size = new Size(145, 21);
+            label3.Size = new Size(114, 18);
             label3.TabIndex = 1;
             label3.Text = "Transaction No.";
             // 
@@ -416,7 +416,7 @@
             // 
             lblDisplaytotal.BackColor = Color.FromArgb(141, 110, 98);
             lblDisplaytotal.Dock = DockStyle.Top;
-            lblDisplaytotal.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblDisplaytotal.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblDisplaytotal.Location = new Point(0, 0);
             lblDisplaytotal.Name = "lblDisplaytotal";
             lblDisplaytotal.Size = new Size(220, 31);
@@ -431,7 +431,7 @@
             dgvCashier.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = Color.FromArgb(93, 64, 55);
-            dataGridViewCellStyle1.Font = new Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle1.Font = new Font("Microsoft Sans Serif", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             dataGridViewCellStyle1.ForeColor = Color.FromArgb(255, 236, 179);
             dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
@@ -456,7 +456,7 @@
             Column1.HeaderText = "No.";
             Column1.MinimumWidth = 6;
             Column1.Name = "Column1";
-            Column1.Width = 67;
+            Column1.Width = 55;
             // 
             // Column8
             // 
@@ -464,7 +464,7 @@
             Column8.HeaderText = "ID";
             Column8.MinimumWidth = 6;
             Column8.Name = "Column8";
-            Column8.Width = 55;
+            Column8.Width = 45;
             // 
             // Column2
             // 
@@ -472,7 +472,7 @@
             Column2.HeaderText = "Pcode";
             Column2.MinimumWidth = 6;
             Column2.Name = "Column2";
-            Column2.Width = 96;
+            Column2.Width = 74;
             // 
             // Column4
             // 
@@ -489,7 +489,7 @@
             Column6.HeaderText = "Price";
             Column6.MinimumWidth = 6;
             Column6.Name = "Column6";
-            Column6.Width = 80;
+            Column6.Width = 65;
             // 
             // Column3
             // 
@@ -499,7 +499,7 @@
             Column3.HeaderText = "Qty";
             Column3.MinimumWidth = 6;
             Column3.Name = "Column3";
-            Column3.Width = 71;
+            Column3.Width = 54;
             // 
             // Column5
             // 
@@ -509,7 +509,7 @@
             Column5.HeaderText = "Discount";
             Column5.MinimumWidth = 6;
             Column5.Name = "Column5";
-            Column5.Width = 113;
+            Column5.Width = 90;
             // 
             // Column7
             // 
@@ -519,7 +519,7 @@
             Column7.HeaderText = "Total";
             Column7.MinimumWidth = 6;
             Column7.Name = "Column7";
-            Column7.Width = 79;
+            Column7.Width = 64;
             // 
             // colAdd
             // 
@@ -566,7 +566,7 @@
             // 
             // Cashier
             // 
-            AutoScaleDimensions = new SizeF(11F, 21F);
+            AutoScaleDimensions = new SizeF(8F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(225, 215, 190);
             ClientSize = new Size(1200, 700);
@@ -576,7 +576,7 @@
             Controls.Add(panel3);
             Controls.Add(panel1);
             Controls.Add(panel7);
-            Font = new Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            Font = new Font("Microsoft Sans Serif", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             FormBorderStyle = FormBorderStyle.None;
             Margin = new Padding(4, 3, 4, 3);
             Name = "Cashier";
