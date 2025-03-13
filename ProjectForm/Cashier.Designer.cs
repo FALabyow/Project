@@ -77,6 +77,7 @@
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            panel3.SuspendLayout();
             panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)picClose).BeginInit();
             panel5.SuspendLayout();
@@ -86,7 +87,6 @@
             // panel1
             // 
             panel1.BackColor = Color.FromArgb(141, 110, 98);
-            panel1.Controls.Add(pnlSlide);
             panel1.Controls.Add(btnLogout);
             panel1.Controls.Add(btnDailySales);
             panel1.Controls.Add(btnClearCart);
@@ -104,14 +104,14 @@
             // pnlSlide
             // 
             pnlSlide.BackColor = Color.SaddleBrown;
-            pnlSlide.Location = new Point(192, 180);
+            pnlSlide.Location = new Point(0, 180);
             pnlSlide.Name = "pnlSlide";
             pnlSlide.Size = new Size(8, 50);
             pnlSlide.TabIndex = 4;
             // 
             // btnLogout
             // 
-            btnLogout.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
+            btnLogout.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             btnLogout.BackColor = Color.FromArgb(193, 135, 107);
             btnLogout.FlatAppearance.BorderSize = 0;
             btnLogout.FlatStyle = FlatStyle.Flat;
@@ -276,6 +276,7 @@
             // panel3
             // 
             panel3.BackColor = Color.FromArgb(141, 110, 98);
+            panel3.Controls.Add(pnlSlide);
             panel3.Dock = DockStyle.Left;
             panel3.Location = new Point(200, 0);
             panel3.Name = "panel3";
@@ -398,9 +399,9 @@
             lblTranNo.AutoSize = true;
             lblTranNo.Location = new Point(6, 125);
             lblTranNo.Name = "lblTranNo";
-            lblTranNo.Size = new Size(140, 21);
+            lblTranNo.Size = new Size(100, 21);
             lblTranNo.TabIndex = 2;
-            lblTranNo.Text = "0000000000000";
+            lblTranNo.Text = "000000000";
             // 
             // label3
             // 
@@ -582,10 +583,12 @@
             Name = "Cashier";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Cashier";
+            WindowState = FormWindowState.Maximized;
             panel1.ResumeLayout(false);
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            panel3.ResumeLayout(false);
             panel4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)picClose).EndInit();
             panel5.ResumeLayout(false);

@@ -18,5 +18,17 @@ namespace ProjectForm
         {
             InitializeComponent();
         }
+
+        public void GetRefNo()
+        {
+            Random rnd = new Random();
+            txtRefNo.Clear();
+            txtRefNo.Text += rnd.Next();
+        }
+
+        private void LinGenerate_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            GetRefNo();
+        }
     }
 }
