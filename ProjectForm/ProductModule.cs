@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
@@ -18,6 +19,7 @@ namespace ProjectForm
         //Part 3 of the tutorial
         //https://www.youtube.com/watch?v=9LdU5zA5agA&list=PLcDvtJ2MXvhy_YrXdO4VXqZBOADCRJhSc&index=4
         private readonly HttpClient _httpClient;
+        private Guid _productId;
         public ProductModule()
         {
             InitializeComponent();
@@ -86,6 +88,7 @@ namespace ProjectForm
             if (cmbCategory.SelectedItem is CategoryDto selectedCategory)
             {
                 Debug.WriteLine($"Selected Category: {selectedCategory.CategoryName} (ID: {selectedCategory.CategoryId})");
+                _productId = selectedCategory.CategoryId;
             }
         }
 
@@ -94,9 +97,41 @@ namespace ProjectForm
 
         }
 
-        private void btnSave_Click(object sender, EventArgs e)
+        private async void btnSave_Click(object sender, EventArgs e)
         {
-            Debug.WriteLine("Product Saved!");
+            decimal price;
+            if (decimal.TryParse(txtPrice.Text, NumberStyles.Any, CultureInfo.InvariantCulture, out price))
+            {
+                Debug.WriteLine($"Converted Price: {price}");
+            }
+            else
+            {
+                Debug.WriteLine("Invalid input.");
+            }
+            int preOrderValue = (int)nudReorder.Value;
+            var Product = new AddProductDto
+            {
+                BarcodeData = txtBarcode.Text,
+                ProductName = txtDescription.Text,
+                ProductPrice = price,
+                ScannedAt = DateTime.Now,
+                ProductPreOrder = preOrderValue,
+                CategoryId = _productId,
+
+            };
+
+            var json = JsonSerializer.Serialize(Product);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+            var response = await _httpClient.PostAsync("/Product/AddProduct", content);
+            if (response.IsSuccessStatusCode)
+            {
+                Console.WriteLine(response.Content);
+            }
+            else
+            {
+                Console.WriteLine("Error Adding Category");
+            }
+            Debug.WriteLine(_productId);
         }
     }
 }

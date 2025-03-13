@@ -17,7 +17,7 @@ namespace Project.Domain.Entities
         public int ProductQuantity {  get; set; }
         public int ProductPreOrder {  get; set; }
         public DateTime ScannedAt { get; set; }  
-        public int CategoryId { get; set; }
+        public Guid CategoryId { get; set; }
         public Category Category { get; set; }
 
     }
