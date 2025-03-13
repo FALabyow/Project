@@ -68,6 +68,11 @@ namespace ProjectForm
         private void btnLogout_Click(object sender, EventArgs e)
         {
             slide(btnLogout);
+            if (MessageBox.Show("Are you sure you want to exit?", "Exit", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                Application.Exit();
+            }
+
         }
 
         private void lblTimer_Click(object sender, EventArgs e)
@@ -92,5 +97,7 @@ namespace ProjectForm
             //Tutorial Part 9 – Search product using Barcode
             //https://youtu.be/rPjDiwp-R8g?si=d0FGLXedW8AnlonY
         }
+
+        
     }
 }
