@@ -66,6 +66,7 @@
             txtSearch.PlaceholderText = "Search...";
             txtSearch.Size = new Size(415, 27);
             txtSearch.TabIndex = 5;
+            
             // 
             // btnAdd
             // 

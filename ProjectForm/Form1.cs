@@ -98,6 +98,7 @@ namespace ProjectForm
 
         private void btnManage_Click(object sender, EventArgs e)
         {
+            openChildForm(new StockAdjustments());
             hideSubMenu();
         }
 
