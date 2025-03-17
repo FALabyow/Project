@@ -282,7 +282,7 @@
             cbTopsell.Items.AddRange(new object[] { "Sort By Qty", "Sort By Total Amount", "" });
             cbTopsell.Location = new Point(482, 38);
             cbTopsell.Name = "cbTopsell";
-            cbTopsell.Size = new Size(169, 29);
+            cbTopsell.Size = new Size(179, 29);
             cbTopsell.TabIndex = 4;
             cbTopsell.Text = "Select Sort Type";
             // 
@@ -701,9 +701,9 @@
             // 
             tabPage5.Controls.Add(dgvStockin);
             tabPage5.Controls.Add(panel5);
-            tabPage5.Location = new Point(4, 36);
+            tabPage5.Location = new Point(4, 35);
             tabPage5.Name = "tabPage5";
-            tabPage5.Size = new Size(974, 516);
+            tabPage5.Size = new Size(974, 517);
             tabPage5.TabIndex = 4;
             tabPage5.Text = "Stock In History";
             tabPage5.UseVisualStyleBackColor = true;
@@ -731,7 +731,7 @@
             dgvStockin.Name = "dgvStockin";
             dgvStockin.RowHeadersVisible = false;
             dgvStockin.RowHeadersWidth = 51;
-            dgvStockin.Size = new Size(974, 400);
+            dgvStockin.Size = new Size(974, 401);
             dgvStockin.TabIndex = 9;
             // 
             // dataGridViewTextBoxColumn19
