@@ -90,7 +90,7 @@
             txtSearch.Location = new Point(323, 30);
             txtSearch.Name = "txtSearch";
             txtSearch.PlaceholderText = "Search...";
-            txtSearch.Size = new Size(415, 30);
+            txtSearch.Size = new Size(464, 30);
             txtSearch.TabIndex = 6;
             // 
             // lblManageProduct

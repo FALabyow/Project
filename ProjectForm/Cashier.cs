@@ -63,6 +63,8 @@ namespace ProjectForm
         private void btnDailySales_Click(object sender, EventArgs e)
         {
             slide(btnDailySales);
+            DailySale dailySale = new DailySale();
+            dailySale.ShowDialog(); 
         }
 
         private void btnLogout_Click(object sender, EventArgs e)

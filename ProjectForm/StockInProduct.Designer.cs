@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            dgvCategory = new DataGridView();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            dgvProduct = new DataGridView();
             Column1 = new DataGridViewTextBoxColumn();
             Column2 = new DataGridViewTextBoxColumn();
             Column4 = new DataGridViewTextBoxColumn();
@@ -39,36 +39,36 @@
             btnClose = new Button();
             txtSearch = new TextBox();
             lblManageProduct = new Label();
-            ((System.ComponentModel.ISupportInitialize)dgvCategory).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgvProduct).BeginInit();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
-            // dgvCategory
+            // dgvProduct
             // 
-            dgvCategory.AllowUserToAddRows = false;
-            dgvCategory.BackgroundColor = Color.White;
-            dgvCategory.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = Color.FromArgb(93, 64, 55);
-            dataGridViewCellStyle1.Font = new Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle1.ForeColor = Color.FromArgb(255, 236, 179);
-            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-            dgvCategory.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            dgvCategory.ColumnHeadersHeight = 30;
-            dgvCategory.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dgvCategory.Columns.AddRange(new DataGridViewColumn[] { Column1, Column2, Column4, Column7, Select });
-            dgvCategory.Dock = DockStyle.Fill;
-            dgvCategory.EnableHeadersVisualStyles = false;
-            dgvCategory.GridColor = Color.White;
-            dgvCategory.Location = new Point(0, 0);
-            dgvCategory.Name = "dgvCategory";
-            dgvCategory.RowHeadersVisible = false;
-            dgvCategory.RowHeadersWidth = 51;
-            dgvCategory.Size = new Size(838, 491);
-            dgvCategory.TabIndex = 5;
-            dgvCategory.CellContentClick += dgvCategory_CellContentClick;
+            dgvProduct.AllowUserToAddRows = false;
+            dgvProduct.BackgroundColor = Color.White;
+            dgvProduct.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = Color.FromArgb(93, 64, 55);
+            dataGridViewCellStyle2.Font = new Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle2.ForeColor = Color.FromArgb(255, 236, 179);
+            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
+            dgvProduct.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dgvProduct.ColumnHeadersHeight = 30;
+            dgvProduct.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            dgvProduct.Columns.AddRange(new DataGridViewColumn[] { Column1, Column2, Column4, Column7, Select });
+            dgvProduct.Dock = DockStyle.Fill;
+            dgvProduct.EnableHeadersVisualStyles = false;
+            dgvProduct.GridColor = Color.White;
+            dgvProduct.Location = new Point(0, 0);
+            dgvProduct.Name = "dgvProduct";
+            dgvProduct.RowHeadersVisible = false;
+            dgvProduct.RowHeadersWidth = 51;
+            dgvProduct.Size = new Size(838, 491);
+            dgvProduct.TabIndex = 5;
+            dgvProduct.CellContentClick += dgvCategory_CellContentClick;
             // 
             // Column1
             // 
@@ -160,7 +160,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(838, 569);
             ControlBox = false;
-            Controls.Add(dgvCategory);
+            Controls.Add(dgvProduct);
             Controls.Add(panel1);
             Font = new Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             FormBorderStyle = FormBorderStyle.FixedSingle;
@@ -168,7 +168,7 @@
             Name = "StockInProduct";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "StockInProduct";
-            ((System.ComponentModel.ISupportInitialize)dgvCategory).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgvProduct).EndInit();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ResumeLayout(false);
@@ -176,7 +176,7 @@
 
         #endregion
 
-        private DataGridView dgvCategory;
+        private DataGridView dgvProduct;
         private Panel panel1;
         private TextBox txtSearch;
         private Label lblManageProduct;
