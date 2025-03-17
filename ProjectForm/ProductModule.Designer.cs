@@ -224,7 +224,7 @@
             // 
             txtPrice.Location = new Point(170, 261);
             txtPrice.Name = "txtPrice";
-            txtPrice.Size = new Size(254, 30);
+            txtPrice.Size = new Size(278, 30);
             txtPrice.TabIndex = 22;
             // 
             // ProductModule
