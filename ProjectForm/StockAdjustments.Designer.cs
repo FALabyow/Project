@@ -224,7 +224,7 @@
             dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
             dgvAdjustment.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            dgvAdjustment.ColumnHeadersHeight = 30;
+            dgvAdjustment.ColumnHeadersHeight = 40;
             dgvAdjustment.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             dgvAdjustment.Columns.AddRange(new DataGridViewColumn[] { Column1, Column2, Column3, Column4, Column5, Column6, Column7, Select });
             dgvAdjustment.Dock = DockStyle.Fill;

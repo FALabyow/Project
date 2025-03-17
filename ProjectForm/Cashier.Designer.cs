@@ -35,7 +35,6 @@
             DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
             panel1 = new Panel();
-            pnlSlide = new Panel();
             btnLogout = new Button();
             btnDailySales = new Button();
             btnClearCart = new Button();
@@ -46,6 +45,7 @@
             panel2 = new Panel();
             label1 = new Label();
             pictureBox1 = new PictureBox();
+            pnlSlide = new Panel();
             panel3 = new Panel();
             panel4 = new Panel();
             picClose = new PictureBox();
@@ -100,14 +100,6 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(200, 700);
             panel1.TabIndex = 0;
-            // 
-            // pnlSlide
-            // 
-            pnlSlide.BackColor = Color.SaddleBrown;
-            pnlSlide.Location = new Point(0, 180);
-            pnlSlide.Name = "pnlSlide";
-            pnlSlide.Size = new Size(8, 50);
-            pnlSlide.TabIndex = 4;
             // 
             // btnLogout
             // 
@@ -272,6 +264,14 @@
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox1.TabIndex = 4;
             pictureBox1.TabStop = false;
+            // 
+            // pnlSlide
+            // 
+            pnlSlide.BackColor = Color.SaddleBrown;
+            pnlSlide.Location = new Point(0, 180);
+            pnlSlide.Name = "pnlSlide";
+            pnlSlide.Size = new Size(8, 50);
+            pnlSlide.TabIndex = 4;
             // 
             // panel3
             // 
@@ -438,7 +438,7 @@
             dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
             dgvCashier.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            dgvCashier.ColumnHeadersHeight = 30;
+            dgvCashier.ColumnHeadersHeight = 40;
             dgvCashier.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             dgvCashier.Columns.AddRange(new DataGridViewColumn[] { Column1, Column8, Column2, Column4, Column6, Column3, Column5, Column7, colAdd, colReduce, Delete });
             dgvCashier.Dock = DockStyle.Fill;

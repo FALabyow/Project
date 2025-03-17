@@ -118,6 +118,7 @@ namespace ProjectForm
 
         private void btnPOSrecord_Click(object sender, EventArgs e)
         { 
+            openChildForm(new POSrecord());
             hideSubMenu();
         }
 
