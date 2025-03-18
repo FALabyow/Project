@@ -52,7 +52,7 @@
             label3 = new Label();
             label1 = new Label();
             tabPage4 = new TabPage();
-            dataGridView1 = new DataGridView();
+            dataStockIn = new DataGridView();
             dataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
             dataGridViewTextBoxColumn2 = new DataGridViewTextBoxColumn();
             dataGridViewTextBoxColumn3 = new DataGridViewTextBoxColumn();
@@ -72,7 +72,7 @@
             ((System.ComponentModel.ISupportInitialize)dgvStockIn).BeginInit();
             panel2.SuspendLayout();
             tabPage4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dataStockIn).BeginInit();
             panel3.SuspendLayout();
             SuspendLayout();
             // 
@@ -149,7 +149,7 @@
             dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
             dgvStockIn.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            dgvStockIn.ColumnHeadersHeight = 30;
+            dgvStockIn.ColumnHeadersHeight = 40;
             dgvStockIn.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             dgvStockIn.Columns.AddRange(new DataGridViewColumn[] { Column1, Column8, Column9, Column2, Column4, Column7, Column5, Delete });
             dgvStockIn.Dock = DockStyle.Top;
@@ -221,8 +221,7 @@
             // 
             Delete.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             Delete.HeaderText = "";
-            Delete.Image = Properties.Resources.delete;
-            Delete.ImageLayout = DataGridViewImageCellLayout.Zoom;
+            Delete.Image = Properties.Resources.bin;
             Delete.MinimumWidth = 6;
             Delete.Name = "Delete";
             Delete.Width = 6;
@@ -299,7 +298,7 @@
             // 
             // tabPage4
             // 
-            tabPage4.Controls.Add(dataGridView1);
+            tabPage4.Controls.Add(dataStockIn);
             tabPage4.Controls.Add(panel3);
             tabPage4.Location = new Point(4, 30);
             tabPage4.Name = "tabPage4";
@@ -309,11 +308,11 @@
             tabPage4.Text = "Stock In Record";
             tabPage4.UseVisualStyleBackColor = true;
             // 
-            // dataGridView1
+            // dataStockIn
             // 
-            dataGridView1.AllowUserToAddRows = false;
-            dataGridView1.BackgroundColor = Color.White;
-            dataGridView1.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dataStockIn.AllowUserToAddRows = false;
+            dataStockIn.BackgroundColor = Color.White;
+            dataStockIn.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = Color.FromArgb(93, 64, 55);
             dataGridViewCellStyle2.Font = new Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
@@ -321,19 +320,19 @@
             dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
             dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
-            dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
-            dataGridView1.ColumnHeadersHeight = 30;
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn1, dataGridViewTextBoxColumn2, dataGridViewTextBoxColumn3, dataGridViewTextBoxColumn4, dataGridViewTextBoxColumn5, dataGridViewTextBoxColumn6, dataGridViewTextBoxColumn7 });
-            dataGridView1.Dock = DockStyle.Top;
-            dataGridView1.EnableHeadersVisualStyles = false;
-            dataGridView1.GridColor = Color.White;
-            dataGridView1.Location = new Point(3, 139);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.RowHeadersVisible = false;
-            dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.Size = new Size(968, 437);
-            dataGridView1.TabIndex = 5;
+            dataStockIn.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataStockIn.ColumnHeadersHeight = 40;
+            dataStockIn.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            dataStockIn.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn1, dataGridViewTextBoxColumn2, dataGridViewTextBoxColumn3, dataGridViewTextBoxColumn4, dataGridViewTextBoxColumn5, dataGridViewTextBoxColumn6, dataGridViewTextBoxColumn7 });
+            dataStockIn.Dock = DockStyle.Top;
+            dataStockIn.EnableHeadersVisualStyles = false;
+            dataStockIn.GridColor = Color.White;
+            dataStockIn.Location = new Point(3, 139);
+            dataStockIn.Name = "dataStockIn";
+            dataStockIn.RowHeadersVisible = false;
+            dataStockIn.RowHeadersWidth = 51;
+            dataStockIn.Size = new Size(968, 437);
+            dataStockIn.TabIndex = 5;
             // 
             // dataGridViewTextBoxColumn1
             // 
@@ -411,7 +410,7 @@
             btnLoad.FlatAppearance.BorderSize = 0;
             btnLoad.FlatStyle = FlatStyle.Flat;
             btnLoad.Font = new Font("Century Gothic", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnLoad.Location = new Point(759, 40);
+            btnLoad.Location = new Point(759, 48);
             btnLoad.Name = "btnLoad";
             btnLoad.Size = new Size(167, 30);
             btnLoad.TabIndex = 10;
@@ -420,7 +419,7 @@
             // 
             // dateTimePicker3
             // 
-            dateTimePicker3.Location = new Point(482, 40);
+            dateTimePicker3.Location = new Point(482, 48);
             dateTimePicker3.Name = "dateTimePicker3";
             dateTimePicker3.Size = new Size(250, 30);
             dateTimePicker3.TabIndex = 3;
@@ -428,7 +427,7 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(446, 45);
+            label4.Location = new Point(446, 53);
             label4.Name = "label4";
             label4.Size = new Size(30, 21);
             label4.TabIndex = 2;
@@ -436,7 +435,7 @@
             // 
             // dateTimePicker2
             // 
-            dateTimePicker2.Location = new Point(190, 40);
+            dateTimePicker2.Location = new Point(190, 48);
             dateTimePicker2.Name = "dateTimePicker2";
             dateTimePicker2.Size = new Size(250, 30);
             dateTimePicker2.TabIndex = 1;
@@ -444,7 +443,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(7, 45);
+            label2.Location = new Point(7, 53);
             label2.Name = "label2";
             label2.Size = new Size(177, 21);
             label2.TabIndex = 0;
@@ -472,7 +471,7 @@
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
             tabPage4.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dataStockIn).EndInit();
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
             ResumeLayout(false);
@@ -494,15 +493,7 @@
         private LinkLabel LinProduct;
         public DateTimePicker dateTimePicker1;
         public TextBox txtRefNo;
-        private DataGridViewTextBoxColumn Column1;
-        private DataGridViewTextBoxColumn Column8;
-        private DataGridViewTextBoxColumn Column9;
-        private DataGridViewTextBoxColumn Column2;
-        private DataGridViewTextBoxColumn Column4;
-        private DataGridViewTextBoxColumn Column7;
-        private DataGridViewTextBoxColumn Column5;
-        private DataGridViewImageColumn Delete;
-        private DataGridView dataGridView1;
+        private DataGridView dataStockIn;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
@@ -516,5 +507,13 @@
         private DateTimePicker dateTimePicker2;
         private Label label2;
         private Button btnLoad;
+        private DataGridViewTextBoxColumn Column1;
+        private DataGridViewTextBoxColumn Column8;
+        private DataGridViewTextBoxColumn Column9;
+        private DataGridViewTextBoxColumn Column2;
+        private DataGridViewTextBoxColumn Column4;
+        private DataGridViewTextBoxColumn Column7;
+        private DataGridViewTextBoxColumn Column5;
+        private DataGridViewImageColumn Delete;
     }
 }

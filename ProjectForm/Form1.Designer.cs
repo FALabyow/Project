@@ -31,8 +31,6 @@
             pnlSlide = new Panel();
             btnLogout = new Button();
             pnlSubSetting = new Panel();
-            btnStore = new Button();
-            btnSetting = new Button();
             pnlSubRecord = new Panel();
             btnPOSrecord = new Button();
             btnSales = new Button();
@@ -54,7 +52,6 @@
             lblTitle = new Label();
             pnlMain = new Panel();
             pnlSlide.SuspendLayout();
-            pnlSubSetting.SuspendLayout();
             pnlSubRecord.SuspendLayout();
             pnlSubStock.SuspendLayout();
             pnlSubProduct.SuspendLayout();
@@ -69,7 +66,6 @@
             pnlSlide.BackColor = Color.FromArgb(160, 120, 90);
             pnlSlide.Controls.Add(btnLogout);
             pnlSlide.Controls.Add(pnlSubSetting);
-            pnlSlide.Controls.Add(btnSetting);
             pnlSlide.Controls.Add(pnlSubRecord);
             pnlSlide.Controls.Add(btnRecord);
             pnlSlide.Controls.Add(pnlSubStock);
@@ -89,7 +85,7 @@
             btnLogout.BackColor = Color.Peru;
             btnLogout.Dock = DockStyle.Bottom;
             btnLogout.FlatStyle = FlatStyle.Flat;
-            btnLogout.Location = new Point(0, 757);
+            btnLogout.Location = new Point(0, 712);
             btnLogout.Name = "btnLogout";
             btnLogout.Padding = new Padding(5, 0, 0, 0);
             btnLogout.Size = new Size(191, 45);
@@ -101,43 +97,11 @@
             // 
             // pnlSubSetting
             // 
-            pnlSubSetting.Controls.Add(btnStore);
             pnlSubSetting.Dock = DockStyle.Top;
-            pnlSubSetting.Location = new Point(0, 667);
+            pnlSubSetting.Location = new Point(0, 622);
             pnlSubSetting.Name = "pnlSubSetting";
             pnlSubSetting.Size = new Size(191, 90);
             pnlSubSetting.TabIndex = 8;
-            // 
-            // btnStore
-            // 
-            btnStore.BackColor = Color.Chocolate;
-            btnStore.Dock = DockStyle.Top;
-            btnStore.FlatStyle = FlatStyle.Flat;
-            btnStore.ImageAlign = ContentAlignment.MiddleLeft;
-            btnStore.Location = new Point(0, 0);
-            btnStore.Name = "btnStore";
-            btnStore.Padding = new Padding(35, 0, 0, 0);
-            btnStore.Size = new Size(191, 45);
-            btnStore.TabIndex = 7;
-            btnStore.Text = "Store";
-            btnStore.TextAlign = ContentAlignment.MiddleLeft;
-            btnStore.UseVisualStyleBackColor = false;
-            btnStore.Click += btnStore_Click;
-            // 
-            // btnSetting
-            // 
-            btnSetting.BackColor = Color.Peru;
-            btnSetting.Dock = DockStyle.Top;
-            btnSetting.FlatStyle = FlatStyle.Flat;
-            btnSetting.Location = new Point(0, 622);
-            btnSetting.Name = "btnSetting";
-            btnSetting.Padding = new Padding(5, 0, 0, 0);
-            btnSetting.Size = new Size(191, 45);
-            btnSetting.TabIndex = 7;
-            btnSetting.Text = "Setting";
-            btnSetting.TextAlign = ContentAlignment.MiddleLeft;
-            btnSetting.UseVisualStyleBackColor = false;
-            btnSetting.Click += btnSetting_Click;
             // 
             // pnlSubRecord
             // 
@@ -419,7 +383,6 @@
             Text = "Point of Sales";
             WindowState = FormWindowState.Maximized;
             pnlSlide.ResumeLayout(false);
-            pnlSubSetting.ResumeLayout(false);
             pnlSubRecord.ResumeLayout(false);
             pnlSubStock.ResumeLayout(false);
             pnlSubProduct.ResumeLayout(false);
@@ -451,8 +414,6 @@
         private Button btnSales;
         private Button btnLogout;
         private Panel pnlSubSetting;
-        private Button btnStore;
-        private Button btnSetting;
         private PictureBox pictureBox1;
         private Label label2;
         private Label lblName;

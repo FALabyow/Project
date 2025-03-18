@@ -90,7 +90,7 @@
             dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
             dgvCategory.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            dgvCategory.ColumnHeadersHeight = 30;
+            dgvCategory.ColumnHeadersHeight = 40;
             dgvCategory.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             dgvCategory.Columns.AddRange(new DataGridViewColumn[] { Column1, Column2, Column3, Edit, Delete });
             dgvCategory.Dock = DockStyle.Fill;

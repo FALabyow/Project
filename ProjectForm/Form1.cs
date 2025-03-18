@@ -10,6 +10,8 @@ namespace ProjectForm
             customizeDesign();
         }
 
+        
+
         private Form activeform = null;
 
 
@@ -98,13 +100,10 @@ namespace ProjectForm
 
         private void btnManage_Click(object sender, EventArgs e)
         {
+            openChildForm(new StockAdjustments());
             hideSubMenu();
         }
 
-        private void btnSupplier_Click(object sender, EventArgs e)
-        {
-            hideSubMenu();
-        }
 
         private void btnRecord_Click(object sender, EventArgs e)
         {
@@ -113,11 +112,13 @@ namespace ProjectForm
 
         private void btnSales_Click(object sender, EventArgs e)
         {
+            openChildForm(new DailySale());
             hideSubMenu();
         }
 
         private void btnPOSrecord_Click(object sender, EventArgs e)
-        {
+        { 
+            openChildForm(new POSrecord());
             hideSubMenu();
         }
 

@@ -29,22 +29,25 @@
         private void InitializeComponent()
         {
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             panel1 = new Panel();
             txtSearch = new TextBox();
             btnAdd = new Button();
             lblManageProduct = new Label();
-            dgvCategory = new DataGridView();
+            dgvProduct = new DataGridView();
             Column1 = new DataGridViewTextBoxColumn();
             Column2 = new DataGridViewTextBoxColumn();
-            Column3 = new DataGridViewTextBoxColumn();
+            Column8 = new DataGridViewTextBoxColumn();
             Column4 = new DataGridViewTextBoxColumn();
-            Column5 = new DataGridViewTextBoxColumn();
+            Column3 = new DataGridViewTextBoxColumn();
             Column6 = new DataGridViewTextBoxColumn();
-            Column7 = new DataGridViewTextBoxColumn();
+            Column5 = new DataGridViewTextBoxColumn();
             Edit = new DataGridViewImageColumn();
             Delete = new DataGridViewImageColumn();
             panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dgvCategory).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgvProduct).BeginInit();
             SuspendLayout();
             // 
             // panel1
@@ -92,11 +95,11 @@
             lblManageProduct.Text = "Manage Product";
             lblManageProduct.Click += lblManageProduct_Click;
             // 
-            // dgvCategory
+            // dgvProduct
             // 
-            dgvCategory.AllowUserToAddRows = false;
-            dgvCategory.BackgroundColor = Color.White;
-            dgvCategory.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dgvProduct.AllowUserToAddRows = false;
+            dgvProduct.BackgroundColor = Color.White;
+            dgvProduct.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = Color.FromArgb(93, 64, 55);
             dataGridViewCellStyle1.Font = new Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
@@ -104,20 +107,19 @@
             dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-            dgvCategory.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            dgvCategory.ColumnHeadersHeight = 30;
-            dgvCategory.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dgvCategory.Columns.AddRange(new DataGridViewColumn[] { Column1, Column2, Column3, Column4, Column5, Column6, Column7, Edit, Delete });
-            dgvCategory.Dock = DockStyle.Fill;
-            dgvCategory.EnableHeadersVisualStyles = false;
-            dgvCategory.GridColor = Color.White;
-            dgvCategory.Location = new Point(0, 0);
-            dgvCategory.Name = "dgvCategory";
-            dgvCategory.RowHeadersVisible = false;
-            dgvCategory.RowHeadersWidth = 51;
-            dgvCategory.Size = new Size(982, 475);
-            dgvCategory.TabIndex = 3;
-            dgvCategory.CellContentClick += dgvCategory_CellContentClick;
+            dgvProduct.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dgvProduct.ColumnHeadersHeight = 40;
+            dgvProduct.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            dgvProduct.Columns.AddRange(new DataGridViewColumn[] { Column1, Column2, Column8, Column4, Column3, Column6, Column5, Edit, Delete });
+            dgvProduct.Dock = DockStyle.Fill;
+            dgvProduct.EnableHeadersVisualStyles = false;
+            dgvProduct.GridColor = Color.White;
+            dgvProduct.Location = new Point(0, 0);
+            dgvProduct.Name = "dgvProduct";
+            dgvProduct.RowHeadersVisible = false;
+            dgvProduct.RowHeadersWidth = 51;
+            dgvProduct.Size = new Size(982, 475);
+            dgvProduct.TabIndex = 6;
             // 
             // Column1
             // 
@@ -135,13 +137,13 @@
             Column2.Name = "Column2";
             Column2.Width = 96;
             // 
-            // Column3
+            // Column8
             // 
-            Column3.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            Column3.HeaderText = "Bardcode";
-            Column3.MinimumWidth = 6;
-            Column3.Name = "Column3";
-            Column3.Width = 124;
+            Column8.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            Column8.HeaderText = "Barcode";
+            Column8.MinimumWidth = 6;
+            Column8.Name = "Column8";
+            Column8.Width = 112;
             // 
             // Column4
             // 
@@ -150,29 +152,35 @@
             Column4.MinimumWidth = 6;
             Column4.Name = "Column4";
             // 
-            // Column5
+            // Column3
             // 
-            Column5.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            Column5.HeaderText = "Category";
-            Column5.MinimumWidth = 6;
-            Column5.Name = "Column5";
-            Column5.Width = 123;
+            Column3.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            Column3.DefaultCellStyle = dataGridViewCellStyle2;
+            Column3.HeaderText = "Category";
+            Column3.MinimumWidth = 6;
+            Column3.Name = "Column3";
+            Column3.Width = 123;
             // 
             // Column6
             // 
             Column6.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleRight;
+            Column6.DefaultCellStyle = dataGridViewCellStyle3;
             Column6.HeaderText = "Price";
             Column6.MinimumWidth = 6;
             Column6.Name = "Column6";
             Column6.Width = 80;
             // 
-            // Column7
+            // Column5
             // 
-            Column7.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            Column7.HeaderText = "Re-Order";
-            Column7.MinimumWidth = 6;
-            Column7.Name = "Column7";
-            Column7.Width = 116;
+            Column5.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleRight;
+            Column5.DefaultCellStyle = dataGridViewCellStyle4;
+            Column5.HeaderText = "Reorder";
+            Column5.MinimumWidth = 6;
+            Column5.Name = "Column5";
+            Column5.Width = 106;
             // 
             // Edit
             // 
@@ -188,6 +196,7 @@
             Delete.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             Delete.HeaderText = "";
             Delete.Image = Properties.Resources.bin;
+            Delete.ImageLayout = DataGridViewImageCellLayout.Zoom;
             Delete.MinimumWidth = 6;
             Delete.Name = "Delete";
             Delete.Width = 6;
@@ -197,13 +206,13 @@
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(982, 553);
-            Controls.Add(dgvCategory);
+            Controls.Add(dgvProduct);
             Controls.Add(panel1);
             Name = "Product";
             Text = "Product";
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dgvCategory).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgvProduct).EndInit();
             ResumeLayout(false);
         }
 
@@ -212,14 +221,14 @@
         private Label lblManageProduct;
         private Button btnAdd;
         private TextBox txtSearch;
-        private DataGridView dgvCategory;
+        private DataGridView dgvProduct;
         private DataGridViewTextBoxColumn Column1;
         private DataGridViewTextBoxColumn Column2;
-        private DataGridViewTextBoxColumn Column3;
+        private DataGridViewTextBoxColumn Column8;
         private DataGridViewTextBoxColumn Column4;
-        private DataGridViewTextBoxColumn Column5;
+        private DataGridViewTextBoxColumn Column3;
         private DataGridViewTextBoxColumn Column6;
-        private DataGridViewTextBoxColumn Column7;
+        private DataGridViewTextBoxColumn Column5;
         private DataGridViewImageColumn Edit;
         private DataGridViewImageColumn Delete;
     }

@@ -116,12 +116,12 @@
             // 
             // label2
             // 
-            label2.AutoSize = true;
+            label2.Font = new Font("Century Gothic", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label2.Location = new Point(17, 95);
             label2.Name = "label2";
             label2.Size = new Size(121, 20);
             label2.TabIndex = 9;
-            label2.Text = "Product Code :";
+            label2.Text = "Pcode:\r\n";
             // 
             // btnSave
             // 
@@ -167,7 +167,7 @@
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(17, 265);
+            label6.Location = new Point(17, 264);
             label6.Name = "label6";
             label6.Size = new Size(54, 20);
             label6.TabIndex = 15;
@@ -176,7 +176,7 @@
             // label7
             // 
             label7.AutoSize = true;
-            label7.Location = new Point(567, 265);
+            label7.Location = new Point(506, 264);
             label7.Name = "label7";
             label7.Size = new Size(76, 20);
             label7.TabIndex = 16;
@@ -214,7 +214,7 @@
             // 
             // nudReorder
             // 
-            nudReorder.Location = new Point(662, 260);
+            nudReorder.Location = new Point(659, 260);
             nudReorder.Maximum = new decimal(new int[] { 1000, 0, 0, 0 });
             nudReorder.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             nudReorder.Name = "nudReorder";
@@ -225,7 +225,7 @@
             // 
             // txtPrice
             // 
-            txtPrice.Location = new Point(170, 260);
+            txtPrice.Location = new Point(170, 261);
             txtPrice.Name = "txtPrice";
             txtPrice.Size = new Size(278, 25);
             txtPrice.TabIndex = 22;
