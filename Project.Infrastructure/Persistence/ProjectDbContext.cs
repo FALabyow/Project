@@ -16,6 +16,19 @@ namespace Project.Infrastructure.Persistence
 
         public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories  { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Product>()
+                .HasIndex(b => b.ProductCode) // 🔹 Creates an index
+                .IsUnique();            // 🔹 Ensures uniqueness
+
+            modelBuilder.Entity<Category>()
+                .HasIndex(b => b.CategoryCode) // 🔹 Creates an index
+                .IsUnique();            // 🔹 Ensures uniqueness
+
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }
     

@@ -12,7 +12,7 @@ using Project.Infrastructure.Persistence;
 namespace Project.Infrastructure.Migrations
 {
     [DbContext(typeof(ProjectDbContext))]
-    [Migration("20250313085143_InitialCreate")]
+    [Migration("20250318140119_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -31,11 +31,18 @@ namespace Project.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("CategoryCode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("CategoryName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("CategoryId");
+
+                    b.HasIndex("CategoryCode")
+                        .IsUnique();
 
                     b.ToTable("Categories");
                 });
@@ -52,6 +59,10 @@ namespace Project.Infrastructure.Migrations
 
                     b.Property<Guid>("CategoryId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("ProductCode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProductName")
                         .IsRequired()
@@ -72,6 +83,9 @@ namespace Project.Infrastructure.Migrations
                     b.HasKey("ProductId");
 
                     b.HasIndex("CategoryId");
+
+                    b.HasIndex("ProductCode")
+                        .IsUnique();
 
                     b.ToTable("Products");
                 });

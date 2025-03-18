@@ -11,6 +11,8 @@ namespace Project.Domain.Entities
     public class Product
     {
         public Guid ProductId { get; set; } = Guid.NewGuid();
+
+        public string ProductCode { get; set; }
         public string BarcodeData {  get; set; }
         public string ProductName { get; set; }
         public decimal ProductPrice { get; set; }
