@@ -16,8 +16,7 @@ namespace Project.Infrastructure.Migrations
                 columns: table => new
                 {
                     CategoryId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    CategoryCode = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    CategoryName = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    CategoryName = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -50,9 +49,9 @@ namespace Project.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Categories_CategoryCode",
+                name: "IX_Categories_CategoryName",
                 table: "Categories",
-                column: "CategoryCode",
+                column: "CategoryName",
                 unique: true);
 
             migrationBuilder.CreateIndex(

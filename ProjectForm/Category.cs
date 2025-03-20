@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProjectForm.Presenter;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -23,6 +24,7 @@ namespace ProjectForm
         private void btnAdd_Click(object sender, EventArgs e)
         {
             CategoryModule categoryModule = new CategoryModule();
+            var presenter = new CategoryModulePresenter(categoryModule);
             categoryModule.ShowDialog();    
         }
     }

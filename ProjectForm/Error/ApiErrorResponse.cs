@@ -4,12 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Project.Application.DTOs
-
+namespace ProjectForm.Error
 {
-    public class CategoryInfoDto
+    public class ApiErrorResponse
     {
-        public string CategoryName { get; set; }
-
+        public string Error { get; set; }
     }
 }

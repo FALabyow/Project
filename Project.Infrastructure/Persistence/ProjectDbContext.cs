@@ -20,12 +20,16 @@ namespace Project.Infrastructure.Persistence
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Product>()
-                .HasIndex(b => b.ProductCode) // 🔹 Creates an index
-                .IsUnique();            // 🔹 Ensures uniqueness
+                .HasIndex(b => b.ProductCode)
+                .IsUnique();
 
             modelBuilder.Entity<Category>()
-                .HasIndex(b => b.CategoryCode) // 🔹 Creates an index
-                .IsUnique();            // 🔹 Ensures uniqueness
+                .HasIndex(b => b.CategoryName)
+                .IsUnique();
+
+            modelBuilder.Entity<Product>()
+                .Property(p => p.ProductPrice)
+                .HasColumnType("decimal(18,2)");
 
             base.OnModelCreating(modelBuilder);
         }

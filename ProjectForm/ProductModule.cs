@@ -1,4 +1,4 @@
-﻿using ProjectForm.DTOs;
+﻿using ProjectForm.Model.DTOs;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
