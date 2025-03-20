@@ -30,10 +30,10 @@ namespace ProjectForm.Presenter
         {
             var category = new CategoryDto
             {
-                CategoryName = _categoryModuleView.CategoryName,
+                CategoryName = char.ToUpper(_categoryModuleView.CategoryName[0]) + _categoryModuleView.CategoryName.Substring(1),
             };
 
-            if(category.CategoryName == null )
+            if(category.CategoryName == "" )
             {
                 _categoryModuleView.ShowMessage("Field cannot be empty!");
                 return;

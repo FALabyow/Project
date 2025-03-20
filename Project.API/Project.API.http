@@ -1,6 +1,19 @@
-@Project.API_HostAddress = http://localhost:5106
+@Project.API_HostAddress = https://localhost:7014
 
 GET {{Project.API_HostAddress}}/weatherforecast/
 Accept: application/json
+
+###
+
+GET {{Project.API_HostAddress}}/Categories/All
+
+###
+
+POST {{Project.API_HostAddress}}/Category/AddCategory
+Content-Type: application/json
+
+{
+  //CategoryInfoDto
+}
 
 ###
