@@ -16,6 +16,23 @@ namespace Project.Infrastructure.Persistence
 
         public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories  { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Product>()
+                .HasIndex(b => b.ProductCode)
+                .IsUnique();
+
+            modelBuilder.Entity<Category>()
+                .HasIndex(b => b.CategoryName)
+                .IsUnique();
+
+            modelBuilder.Entity<Product>()
+                .Property(p => p.ProductPrice)
+                .HasColumnType("decimal(18,2)");
+
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }
     

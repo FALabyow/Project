@@ -9,7 +9,8 @@ To update database:
 To drop database:
 ---> dotnet ef database drop --context ProjectDbContext --startup-project ../Project.API -f
 
-
+To remove migrations:
+---> dotnet ef migrations remove --startup-project ../Project.API
 
 To create two databases using migration:
 

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProjectForm.DTOs
+namespace ProjectForm.Model.DTOs
 {
     public class AddProductDto
     {
