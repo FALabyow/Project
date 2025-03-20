@@ -23,8 +23,16 @@ namespace Project.API.Controllers
         [HttpPost("/Product/AddProduct")]
         public async Task<IActionResult> AddCategoryAsync([FromBody] ProductInfoDto productInfoDto)
         {
-            await _productService.AddProductAsync(productInfoDto);
-            return Ok(productInfoDto);
+            try
+            {
+                await _productService.AddProductAsync(productInfoDto);
+                return Ok(productInfoDto);
+            }
+            catch(InvalidOperationException ex)
+            {
+                return BadRequest(new {error = ex.Message});    
+            }
+            
         }
     }
 }

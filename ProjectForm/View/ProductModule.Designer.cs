@@ -61,7 +61,7 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(880, 50);
             panel1.TabIndex = 6;
-            panel1.Paint += panel1_Paint;
+            
             // 
             // picClose
             // 
@@ -85,7 +85,6 @@
             label1.Size = new Size(129, 18);
             label1.TabIndex = 1;
             label1.Text = "Product  Module";
-            label1.Click += label1_Click;
             // 
             // btnUpdate
             // 
@@ -210,7 +209,6 @@
             cmbCategory.Name = "cmbCategory";
             cmbCategory.Size = new Size(642, 27);
             cmbCategory.TabIndex = 19;
-            cmbCategory.SelectedIndexChanged += cmbCategory_SelectedIndexChanged;
             // 
             // nudReorder
             // 

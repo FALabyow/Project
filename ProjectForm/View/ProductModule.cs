@@ -1,4 +1,6 @@
 ﻿using ProjectForm.Model.DTOs;
+using ProjectForm.Presenter;
+using ProjectForm.View.IView;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,19 +16,46 @@ using System.Windows.Forms;
 
 namespace ProjectForm
 {
-    public partial class ProductModule : Form
+    public partial class ProductModule : Form, IProductModuleView
     {
         //Part 3 of the tutorial
         //https://www.youtube.com/watch?v=9LdU5zA5agA&list=PLcDvtJ2MXvhy_YrXdO4VXqZBOADCRJhSc&index=4
         private readonly HttpClient _httpClient;
         private Guid _productId;
+
         public ProductModule()
         {
             InitializeComponent();
             _httpClient = new HttpClient { BaseAddress = new Uri("https://localhost:7014/api") };
+            cmbCategory.SelectedIndexChanged += (s, e) => SelectedIndexCategoryCombo?.Invoke(this, EventArgs.Empty);
+
+        }
+        public event EventHandler ClearClicked;
+        public event EventHandler SelectedIndexCategoryCombo;
+        public Guid Selectedcategory
+        {
+            get
+            {
+                if (cmbCategory.SelectedValue != null && Guid.TryParse(cmbCategory.SelectedValue.ToString(), out Guid categoryId))
+                {
+                    return categoryId;
+                }
+                return Guid.Empty;
+            }
+        }
+
+        public void LoadCategory(List<CategoryDto> categoryDto)
+        {
+            cmbCategory.DataSource = categoryDto;
+            cmbCategory.DisplayMember = "CategoryName";
+            cmbCategory.ValueMember = "CategoryId";
 
         }
 
+        public void ShowMessage(string message)
+        {
+            MessageBox.Show(message);
+        }
         public void Clear()
         {
             txtPcode.Text = "";
@@ -36,37 +65,6 @@ namespace ProjectForm
             nudReorder.Value = 1;
         }
 
-        private async void ProductModule_Load(object sender, EventArgs e)
-        {
-
-            await LoadCategoriesAsync();
-        }
-
-        private async Task LoadCategoriesAsync()
-        {
-            var response = await _httpClient.GetAsync("/Categories/All");
-
-            if(response.IsSuccessStatusCode)
-            {
-                var responseData = await response.Content.ReadAsStringAsync();
-                var categories = JsonSerializer.Deserialize<List<CategoryDto>>(responseData, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
-
-                if (categories != null && categories.Count > 0)
-                {
-                    cmbCategory.DataSource = categories;
-                    cmbCategory.DisplayMember = nameof(CategoryDto.CategoryName); 
-                    cmbCategory.ValueMember = nameof(CategoryDto.CategoryId); 
-                }
-                else
-                {
-                    Debug.WriteLine("No categories found.");
-                }
-            }
-            else
-            {
-                Debug.WriteLine($"Error: {response.StatusCode}");
-            }
-        }
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
@@ -76,25 +74,6 @@ namespace ProjectForm
         private void btnCancel_Click(object sender, EventArgs e)
         {
             Clear();
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private async void cmbCategory_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (cmbCategory.SelectedItem is CategoryDto selectedCategory)
-            {
-                Debug.WriteLine($"Selected Category: {selectedCategory.CategoryName} (ID: {selectedCategory.CategoryId})");
-                _productId = selectedCategory.CategoryId;
-            }
-        }
-
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
         }
 
         private async void btnSave_Click(object sender, EventArgs e)
@@ -132,6 +111,13 @@ namespace ProjectForm
                 Console.WriteLine("Error Adding Category");
             }
             Debug.WriteLine(_productId);
+        }
+
+        private async void ProductModule_Load(object sender, EventArgs e)
+        {
+            var presenter = new ProductModulePresenter(this);
+            //Debug.WriteLine("loading...");
+            await presenter.LoadCategoryAsync();
         }
     }
 }
