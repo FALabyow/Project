@@ -8,6 +8,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http.Json;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace ProjectForm.Presenter
@@ -21,39 +22,42 @@ namespace ProjectForm.Presenter
             _productModuleView = productModuleView;
             _httpClient = new HttpClient { BaseAddress = new Uri("https://localhost:7014/api")};
             _productModuleView.SelectedIndexCategoryCombo += OnSelectedIndexCategoryCombo;
+            _productModuleView.SaveClicked += OnSaveClicked;    
             
         }
 
         public async Task LoadCategoryAsync()
-        {
-            Debug.WriteLine("LoadCategoryAsyn() is loaded");
+        {  
             try
             {
+                _productModuleView.LoadingMessage("Waiting for category list...");
                 var response = await _httpClient.GetAsync("/Categories/All");
                 if (response.IsSuccessStatusCode)
                 {
+                    
                     var categories = await response.Content.ReadFromJsonAsync<List<CategoryDto>>();
                     if(categories == null || categories.Count == 0)
                     {
                         Debug.WriteLine("Categories is empty");
                         return;
+                        
                     }
                     Debug.WriteLine("Categories is not empty");
                     _productModuleView.LoadCategory(categories);
+                    
 
                 }
                 else if(response.StatusCode == HttpStatusCode.BadRequest)
                 {
                     var errorRes = await response.Content.ReadFromJsonAsync<ApiErrorResponse>();
-                    if (errorRes != null)
-                    {
-                        _productModuleView.ShowMessage(errorRes.Error);
-                    }
+                    _productModuleView.ShowMessage(errorRes.Error);
+                    
                 }
                 else
                 {
                     _productModuleView.ShowMessage("An expected error occured!");
                 }
+                _productModuleView.LoadingMessage("");
             }
             catch(Exception ex)
             {
@@ -68,6 +72,83 @@ namespace ProjectForm.Presenter
                 Debug.WriteLine($"Selected category: {selectedCategoryId}");
             }
         }
-        
+        private async void OnSaveClicked(object sender, EventArgs e)
+        {
+            var product = new AddProductDto
+            {
+                ProductName = _productModuleView.Description,
+                BarcodeData = _productModuleView.Barcode,
+                ScannedAt = DateTime.Now,
+                ProductPreOrder = _productModuleView.Preorder,
+                CategoryId = _productModuleView.Selectedcategory,
+                ProductPrice = _productModuleView.Price,
+                ProductQuantity = _productModuleView.Quantity,
+                ProductCode = _productModuleView.Pcode,
+            };
+            Debug.WriteLine(product.ProductName);
+            Debug.WriteLine(product.BarcodeData);
+            Debug.WriteLine(product.ScannedAt);
+            Debug.WriteLine(product.ProductPreOrder);
+            Debug.WriteLine(product.CategoryId);
+            Debug.WriteLine(product.ProductPrice);
+            Debug.WriteLine(product.ProductQuantity);
+
+
+            if (string.IsNullOrEmpty(product.ProductName) || string.IsNullOrEmpty(product.BarcodeData))
+            {
+                _productModuleView.ShowMessage("Field cannot be empty!");
+                return;
+            }
+
+            if(product.CategoryId == Guid.Empty)
+            {
+                _productModuleView.ShowMessage("Please select category");
+                return;
+            }
+
+            if(product.ProductPrice < 0)
+            {
+                _productModuleView.ShowMessage("Invalid price");
+                return;
+            }
+
+            if(product.ProductQuantity < 0)
+            {
+                _productModuleView.ShowMessage("Invalid Quantity");
+                return;
+            }
+
+            try
+            {
+                var json = JsonSerializer.Serialize(product);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+                var res = await _httpClient.PostAsync("/Product/AddProduct", content);
+
+                if (res.IsSuccessStatusCode)
+                {
+                    _productModuleView.LoadingMessage("Product added successfully!");
+                }
+                else if(res.StatusCode == HttpStatusCode.BadRequest)
+                {
+                    var errorRes = await res.Content.ReadFromJsonAsync<ApiErrorResponse>();
+                    if(errorRes != null)
+                    {
+                        Debug.WriteLine(errorRes.Error);
+                        _productModuleView.ShowMessage(errorRes.Error);
+                    }
+
+                }
+                else
+                {
+                    Debug.WriteLine("Something went wrong");
+                    _productModuleView?.ShowMessage("Something went wrong");
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+                _productModuleView?.ShowMessage("error2");
+            }
+        }
     }
 }
