@@ -25,7 +25,6 @@ namespace ProjectForm
         private void btnAdd_Click(object sender, EventArgs e)
         {
             ProductModule productModule = new ProductModule();
-            var presenter = new ProductModulePresenter(productModule);
             productModule.ShowDialog();
         }
 

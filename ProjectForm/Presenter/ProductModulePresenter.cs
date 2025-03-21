@@ -22,7 +22,8 @@ namespace ProjectForm.Presenter
             _productModuleView = productModuleView;
             _httpClient = new HttpClient { BaseAddress = new Uri("https://localhost:7014/api")};
             _productModuleView.SelectedIndexCategoryCombo += OnSelectedIndexCategoryCombo;
-            _productModuleView.SaveClicked += OnSaveClicked;    
+            _productModuleView.SaveClicked -= OnSaveClicked; //Unsubsccibe event
+            _productModuleView.SaveClicked += OnSaveClicked; //subscribe event  
             
         }
 
@@ -74,6 +75,7 @@ namespace ProjectForm.Presenter
         }
         private async void OnSaveClicked(object sender, EventArgs e)
         {
+            Debug.WriteLine("Hey");
             var product = new AddProductDto
             {
                 ProductName = _productModuleView.Description,
@@ -85,14 +87,6 @@ namespace ProjectForm.Presenter
                 ProductQuantity = _productModuleView.Quantity,
                 ProductCode = _productModuleView.Pcode,
             };
-            Debug.WriteLine(product.ProductName);
-            Debug.WriteLine(product.BarcodeData);
-            Debug.WriteLine(product.ScannedAt);
-            Debug.WriteLine(product.ProductPreOrder);
-            Debug.WriteLine(product.CategoryId);
-            Debug.WriteLine(product.ProductPrice);
-            Debug.WriteLine(product.ProductQuantity);
-
 
             if (string.IsNullOrEmpty(product.ProductName) || string.IsNullOrEmpty(product.BarcodeData))
             {

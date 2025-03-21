@@ -22,6 +22,7 @@ namespace ProjectForm
         //https://www.youtube.com/watch?v=9LdU5zA5agA&list=PLcDvtJ2MXvhy_YrXdO4VXqZBOADCRJhSc&index=4
         private readonly HttpClient _httpClient;
         private Guid _productId;
+        private ProductModulePresenter _presenter;
 
         public ProductModule()
         {
@@ -33,6 +34,15 @@ namespace ProjectForm
             btnClear.Click += (s, e) => ClearClicked?.Invoke(this, EventArgs.Empty);
 
         }
+        private async void ProductModule_Load(object sender, EventArgs e)
+        {
+            if (_presenter == null)
+            {
+                _presenter = new ProductModulePresenter(this);
+            }
+            await _presenter.LoadCategoryAsync();
+        }
+
         public event EventHandler ClearClicked;
         public event EventHandler SelectedIndexCategoryCombo;
         public event EventHandler SaveClicked;
@@ -136,6 +146,9 @@ namespace ProjectForm
             txtPrice.Text = "";
             txtDescription.Text = "";
             nudReorder.Value = 1;
+            categoryLoadingMessageLabel.Text = "";
+            textQty.Text = "";
+            
         }
 
 
@@ -149,11 +162,6 @@ namespace ProjectForm
             Clear();
         }
 
-        private async void ProductModule_Load(object sender, EventArgs e)
-        {
-            var presenter = new ProductModulePresenter(this);
-            //Debug.WriteLine("loading...");
-            await presenter.LoadCategoryAsync();
-        }
+        
     }
 }
