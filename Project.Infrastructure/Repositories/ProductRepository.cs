@@ -21,14 +21,32 @@ namespace Project.Infrastructure.Repositories
         {
             return await _context.Products.ToListAsync();
         }
+        public async Task<Product?> GetProductByNameAsync(string name)
+        {
+            return await _context.Products
+                .Include(b => b.Category)
+                .FirstOrDefaultAsync();
+        }
         public async Task<Product> GetProductByIdAsync(int id)
         {
             return await _context.Products.FindAsync(id);
         }
         public async Task AddProductAsync(Product product)
         {
-            await _context.Products.AddAsync(product);
-            await _context.SaveChangesAsync();  
+            try
+            {
+                await _context.Products.AddAsync(product);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateException ex)
+            {
+                throw new InvalidOperationException("Duplicate product code detected!" + ex.Message);
+            }
+            catch(Exception ex)
+            {
+                throw new InvalidOperationException(ex.Message);
+            }
+             
         }
         public async Task UpdateProductAsync(Product product)
         {

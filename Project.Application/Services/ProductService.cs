@@ -33,19 +33,29 @@ namespace Project.Application.Services
         }
         public async Task AddProductAsync(ProductInfoDto productInfoDto)
         {
-            var product = new Product
+            try
             {
-                BarcodeData = productInfoDto.BarcodeData,
-                CategoryId = productInfoDto.CategoryId, 
-                ProductName = productInfoDto.ProductName,   
-                ScannedAt= productInfoDto.ScannedAt,
-                ProductPreOrder= productInfoDto.ProductPreOrder,
-                ProductPrice= productInfoDto.ProductPrice,
-                ProductQuantity= productInfoDto.ProductQuantity,
-                
-            };
+                var product = new Product
+                {
+                    BarcodeData = productInfoDto.BarcodeData,
+                    CategoryId = productInfoDto.CategoryId,
+                    ProductName = productInfoDto.ProductName,
+                    ScannedAt = productInfoDto.ScannedAt,
+                    ProductPreOrder = productInfoDto.ProductPreOrder,
+                    ProductPrice = productInfoDto.ProductPrice,
+                    ProductQuantity = productInfoDto.ProductQuantity,
+                    ProductCode = productInfoDto.ProductCode,
 
-            await _productRepository.AddProductAsync(product);
+                };
+
+                await _productRepository.AddProductAsync(product);
+            }
+            catch (InvalidOperationException)
+            {
+                throw;
+            }
+            
+            
         }
     }
 }
