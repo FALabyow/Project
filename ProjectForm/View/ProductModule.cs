@@ -32,6 +32,8 @@ namespace ProjectForm
             btnSave.Click += (s, e) => SaveClicked?.Invoke(this, EventArgs.Empty);
             btnUpdate.Click += (s, e) => UpdateClicked?.Invoke(this, EventArgs.Empty);
             btnClear.Click += (s, e) => ClearClicked?.Invoke(this, EventArgs.Empty);
+            cmbCategory.Text = "Select Category";
+
 
         }
         private async void ProductModule_Load(object sender, EventArgs e)
@@ -125,9 +127,11 @@ namespace ProjectForm
         }
         public void LoadCategory(List<CategoryDto> categoryDto)
         {
+            categoryDto.Insert(0, new CategoryDto { CategoryId = Guid.Empty, CategoryName = "Select Category" });
             cmbCategory.DataSource = categoryDto;
             cmbCategory.DisplayMember = "CategoryName";
             cmbCategory.ValueMember = "CategoryId";
+            cmbCategory.SelectedIndex = 0;
 
         }
 
