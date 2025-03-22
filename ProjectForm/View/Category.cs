@@ -26,6 +26,7 @@ namespace ProjectForm
         public Category()
         {
             InitializeComponent();
+            dgvCategory.CellContentClick += DataGridCategoryView_CellContentClick;
         }
 
         public void DisplayCategoryList(List<CategoryDto> categortList)
@@ -59,6 +60,26 @@ namespace ProjectForm
         {
             presenter = new CategoryPresenter(this);
             presenter.LoadCategoryList();
+        }
+
+        public event EventHandler<DataGridViewCellEventArgs> DeleteClicked;
+        public event EventHandler<DataGridViewCellEventArgs> EditClicked;
+
+        private void DataGridCategoryView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            var gridView = sender as DataGridView;
+            if (gridView == null || e.RowIndex < 0) return;
+
+            if (gridView.Columns[e.ColumnIndex].Name == "Delete")
+            {
+                DeleteClicked?.Invoke(sender, e);
+                
+            }
+
+            if (gridView.Columns[e.ColumnIndex].Name == "Edit")
+            {
+                EditClicked?.Invoke(sender, e);
+            }
         }
     }
 }

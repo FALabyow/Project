@@ -10,9 +10,9 @@ namespace Project.Application.Interfaces
     public interface ICategoryRepository
     {
         Task<IEnumerable<Category>> GetAllCategoryAsync();
-        Task<Category> GetCategoryByIdAsync(int id);
+        Task<Category> GetCategoryByIdAsync(Guid id);
         Task AddCategoryAsync(Category category);   
         Task UpdateCategoryAsync(Category category);
-        Task DeleteCategoryAsync(int id);
+        Task DeleteCategoryAsync(Guid id);
     }
 }

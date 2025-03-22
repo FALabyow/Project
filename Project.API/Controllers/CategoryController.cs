@@ -49,6 +49,30 @@ namespace Project.API.Controllers
             }
             
         }
+        
+        [HttpDelete("/Category/Delete/{id}")]
+        public async Task<IActionResult> DeleteCategoryAsync(Guid id)
+        {
+            try
+            {
+                await _categoryService.DeleteCategoryAsync(id);
+                return NoContent();
+
+            }
+            catch (InvalidOperationException ex)
+            {
+                return Conflict(new { error = ex.Message });
+            }
+            catch(Exception ex)
+            {
+                return StatusCode(500, new
+                {
+                    StatusCode = 500,
+                    Message = "An unexpected error occurred.",
+                    Details = ex.Message
+                });
+            }
+        }
 
     }
 }

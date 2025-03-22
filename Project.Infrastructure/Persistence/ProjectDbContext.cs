@@ -31,6 +31,12 @@ namespace Project.Infrastructure.Persistence
                 .Property(p => p.ProductPrice)
                 .HasColumnType("decimal(18,2)");
 
+            modelBuilder.Entity<Product>()
+                .HasOne(p => p.Category)
+                .WithMany(c => c.Products)
+                .HasForeignKey(p => p.CategoryId)
+                .OnDelete(DeleteBehavior.Restrict);
+
             base.OnModelCreating(modelBuilder);
         }
     }

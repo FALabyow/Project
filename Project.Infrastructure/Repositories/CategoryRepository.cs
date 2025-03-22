@@ -36,7 +36,7 @@ namespace Project.Infrastructure.Repositories
             }
         }
 
-        public async Task<Category> GetCategoryByIdAsync(int id)
+        public async Task<Category> GetCategoryByIdAsync(Guid id)
         {
             return await _context.Categories.FindAsync(id);
         }
@@ -70,13 +70,20 @@ namespace Project.Infrastructure.Repositories
             _context.Categories.Update(category);
             await _context.SaveChangesAsync();
         }
-        public async Task DeleteCategoryAsync(int id)
+        public async Task DeleteCategoryAsync(Guid id)
         {
-            var category = await _context.Categories.FindAsync(id);
-            if(category != null)
+            try
             {
-                _context.Categories.Remove(category);
-                await _context.SaveChangesAsync();
+                var category = await _context.Categories.FindAsync(id);
+                if (category != null)
+                {
+                    _context.Categories.Remove(category);
+                    await _context.SaveChangesAsync();
+                }
+            }
+            catch (DbUpdateException)
+            {
+                throw new InvalidOperationException("Unable to delete the category because it has related products. Please delete or reassign the products before deleting the category.");
             }
         }
 

@@ -62,5 +62,18 @@ namespace Project.Application.Services
 
 
         }
+
+        public async Task DeleteCategoryAsync(Guid id)
+        {
+            try
+            {
+
+                await _categoryRepository.DeleteCategoryAsync(id);
+            }
+            catch (InvalidOperationException)
+            {
+                throw;
+            }
+        }
     }
 }
