@@ -16,6 +16,7 @@ namespace ProjectForm.Presenter
     {
         private readonly ICategoryModuleView _categoryModuleView;
         private readonly HttpClient _httpClient;
+        
 
         public CategoryModulePresenter(ICategoryModuleView categoryModuleView)
         {
@@ -39,6 +40,10 @@ namespace ProjectForm.Presenter
                 return;
             }
 
+            var confirmResult = MessageBox.Show("Are you sure you want to add category?", "Confirm Add", MessageBoxButtons.YesNo);
+
+            if (confirmResult != DialogResult.Yes) return;
+
             try
             {
                 var json = JsonSerializer.Serialize(category);
@@ -46,7 +51,13 @@ namespace ProjectForm.Presenter
                 var response = await _httpClient.PostAsync("/Category/AddCategory", content);
                 if (response.IsSuccessStatusCode)
                 {
-                    _categoryModuleView.ShowMessage("Saved!");
+                    if (Application.OpenForms["Category"] is Category categoryForm)
+                    {
+                        var existingPresenter = categoryForm.presenter;
+                        categoryForm.rowNumber = 0;
+                        existingPresenter.LoadCategoryList();
+                    }
+                    
                 }
                 else if(response.StatusCode == HttpStatusCode.BadRequest)
                 {

@@ -33,9 +33,9 @@
             lblManageCategory = new Label();
             btnAdd = new Button();
             dgvCategory = new DataGridView();
-            Column1 = new DataGridViewTextBoxColumn();
-            Column2 = new DataGridViewTextBoxColumn();
-            Column3 = new DataGridViewTextBoxColumn();
+            numberCol = new DataGridViewTextBoxColumn();
+            categoryId = new DataGridViewTextBoxColumn();
+            categoryName = new DataGridViewTextBoxColumn();
             Edit = new DataGridViewImageColumn();
             Delete = new DataGridViewImageColumn();
             panel1.SuspendLayout();
@@ -92,7 +92,7 @@
             dgvCategory.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dgvCategory.ColumnHeadersHeight = 40;
             dgvCategory.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dgvCategory.Columns.AddRange(new DataGridViewColumn[] { Column1, Column2, Column3, Edit, Delete });
+            dgvCategory.Columns.AddRange(new DataGridViewColumn[] { numberCol, categoryId, categoryName, Edit, Delete });
             dgvCategory.Dock = DockStyle.Fill;
             dgvCategory.EnableHeadersVisualStyles = false;
             dgvCategory.GridColor = Color.White;
@@ -103,29 +103,29 @@
             dgvCategory.Size = new Size(1007, 475);
             dgvCategory.TabIndex = 1;
             // 
-            // Column1
+            // numberCol
             // 
-            Column1.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            Column1.HeaderText = "No.";
-            Column1.MinimumWidth = 6;
-            Column1.Name = "Column1";
-            Column1.Width = 67;
+            numberCol.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            numberCol.HeaderText = "No.";
+            numberCol.MinimumWidth = 6;
+            numberCol.Name = "numberCol";
+            numberCol.Width = 67;
             // 
-            // Column2
+            // categoryId
             // 
-            Column2.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            Column2.HeaderText = "ID";
-            Column2.MinimumWidth = 6;
-            Column2.Name = "Column2";
-            Column2.Visible = false;
-            Column2.Width = 125;
+            categoryId.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            categoryId.HeaderText = "ID";
+            categoryId.MinimumWidth = 6;
+            categoryId.Name = "categoryId";
+            categoryId.Visible = false;
+            categoryId.Width = 125;
             // 
-            // Column3
+            // categoryName
             // 
-            Column3.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            Column3.HeaderText = "Category";
-            Column3.MinimumWidth = 6;
-            Column3.Name = "Column3";
+            categoryName.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            categoryName.HeaderText = "Category";
+            categoryName.MinimumWidth = 6;
+            categoryName.Name = "categoryName";
             // 
             // Edit
             // 
@@ -162,6 +162,7 @@
             Name = "Category";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Category";
+            Load += Category_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgvCategory).EndInit();
@@ -174,9 +175,9 @@
         private DataGridView dgvCategory;
         private Label lblManageCategory;
         private Button btnAdd;
-        private DataGridViewTextBoxColumn Column1;
-        private DataGridViewTextBoxColumn Column2;
-        private DataGridViewTextBoxColumn Column3;
+        private DataGridViewTextBoxColumn numberCol;
+        private DataGridViewTextBoxColumn categoryId;
+        private DataGridViewTextBoxColumn categoryName;
         private DataGridViewImageColumn Edit;
         private DataGridViewImageColumn Delete;
     }
