@@ -46,6 +46,8 @@
             cmbCategory = new ComboBox();
             nudReorder = new NumericUpDown();
             txtPrice = new TextBox();
+            textQty = new TextBox();
+            label8 = new Label();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)picboxClose).BeginInit();
             ((System.ComponentModel.ISupportInitialize)nudReorder).BeginInit();
@@ -92,7 +94,7 @@
             btnUpdate.BackColor = Color.LightSalmon;
             btnUpdate.FlatAppearance.BorderSize = 0;
             btnUpdate.FlatStyle = FlatStyle.Flat;
-            btnUpdate.Location = new Point(616, 354);
+            btnUpdate.Location = new Point(616, 362);
             btnUpdate.Name = "btnUpdate";
             btnUpdate.Size = new Size(107, 46);
             btnUpdate.TabIndex = 11;
@@ -105,7 +107,7 @@
             btnClear.BackColor = Color.MistyRose;
             btnClear.FlatAppearance.BorderSize = 0;
             btnClear.FlatStyle = FlatStyle.Flat;
-            btnClear.Location = new Point(729, 354);
+            btnClear.Location = new Point(729, 362);
             btnClear.Name = "btnClear";
             btnClear.Size = new Size(107, 46);
             btnClear.TabIndex = 10;
@@ -128,7 +130,7 @@
             btnSave.BackColor = Color.Peru;
             btnSave.FlatAppearance.BorderSize = 0;
             btnSave.FlatStyle = FlatStyle.Flat;
-            btnSave.Location = new Point(503, 354);
+            btnSave.Location = new Point(503, 362);
             btnSave.Name = "btnSave";
             btnSave.Size = new Size(107, 46);
             btnSave.TabIndex = 8;
@@ -227,11 +229,29 @@
             txtPrice.Size = new Size(278, 30);
             txtPrice.TabIndex = 22;
             // 
+            // textQty
+            // 
+            textQty.Location = new Point(170, 314);
+            textQty.Name = "textQty";
+            textQty.Size = new Size(278, 30);
+            textQty.TabIndex = 24;
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Location = new Point(17, 317);
+            label8.Name = "label8";
+            label8.Size = new Size(54, 21);
+            label8.TabIndex = 23;
+            label8.Text = "Qty :";
+            // 
             // ProductModule
             // 
             AutoScaleDimensions = new SizeF(11F, 21F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(880, 412);
+            ClientSize = new Size(880, 420);
+            Controls.Add(textQty);
+            Controls.Add(label8);
             Controls.Add(txtPrice);
             Controls.Add(nudReorder);
             Controls.Add(cmbCategory);
@@ -283,5 +303,7 @@
         public ComboBox cmbCategory;
         public NumericUpDown nudReorder;
         private PictureBox picboxClose;
+        private TextBox textQty;
+        private Label label8;
     }
 }
