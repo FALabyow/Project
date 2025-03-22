@@ -51,6 +51,7 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(881, 50);
             panel1.TabIndex = 0;
+            panel1.Paint += panel1_Paint;
             // 
             // label1
             // 
@@ -58,7 +59,7 @@
             label1.Font = new Font("Century Gothic", 10.8F, FontStyle.Bold | FontStyle.Underline, GraphicsUnit.Point, 0);
             label1.Location = new Point(12, 12);
             label1.Name = "label1";
-            label1.Size = new Size(143, 18);
+            label1.Size = new Size(170, 22);
             label1.TabIndex = 1;
             label1.Text = "Category  Module";
             // 
@@ -79,7 +80,7 @@
             // 
             txtCategoryName.Location = new Point(183, 102);
             txtCategoryName.Name = "txtCategoryName";
-            txtCategoryName.Size = new Size(642, 25);
+            txtCategoryName.Size = new Size(642, 30);
             txtCategoryName.TabIndex = 1;
             // 
             // btnSave
@@ -94,17 +95,15 @@
             btnSave.TabIndex = 2;
             btnSave.Text = "Save";
             btnSave.UseVisualStyleBackColor = false;
-           
             // 
             // label2
             // 
             label2.AutoSize = true;
             label2.Location = new Point(12, 105);
             label2.Name = "label2";
-            label2.Size = new Size(135, 20);
+            label2.Size = new Size(165, 21);
             label2.TabIndex = 3;
             label2.Text = "Category Name :";
-           
             // 
             // btnClear
             // 
@@ -118,7 +117,6 @@
             btnClear.TabIndex = 4;
             btnClear.Text = "Clear";
             btnClear.UseVisualStyleBackColor = false;
-            
             // 
             // btnUpdate
             // 
@@ -132,20 +130,18 @@
             btnUpdate.TabIndex = 5;
             btnUpdate.Text = "Update";
             btnUpdate.UseVisualStyleBackColor = false;
-            
             // 
             // showMessageLabel
             // 
             showMessageLabel.AutoSize = true;
             showMessageLabel.Location = new Point(183, 140);
             showMessageLabel.Name = "showMessageLabel";
-            showMessageLabel.Size = new Size(53, 20);
+            showMessageLabel.Size = new Size(0, 21);
             showMessageLabel.TabIndex = 6;
-            showMessageLabel.Text = "label3";
             // 
             // CategoryModule
             // 
-            AutoScaleDimensions = new SizeF(8F, 19F);
+            AutoScaleDimensions = new SizeF(11F, 21F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(881, 243);
             Controls.Add(showMessageLabel);
@@ -161,6 +157,7 @@
             Name = "CategoryModule";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "CategoryModule";
+            Load += CategoryModule_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)picboxClose).EndInit();

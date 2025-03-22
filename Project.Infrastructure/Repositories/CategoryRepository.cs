@@ -36,9 +36,14 @@ namespace Project.Infrastructure.Repositories
             }
         }
 
-        public async Task<Category> GetCategoryByIdAsync(int id)
+        public async Task<Category> GetCategoryByIdAsync(Guid id)
         {
-            return await _context.Categories.FindAsync(id);
+            var category = await _context.Categories.FindAsync(id);
+            if (category == null)
+            {
+                throw new KeyNotFoundException("Category name does not exist");
+            }
+            return category;
         }
         public async Task AddCategoryAsync(Category category)
         {
@@ -67,16 +72,36 @@ namespace Project.Infrastructure.Repositories
         }
         public async Task UpdateCategoryAsync(Category category)
         {
-            _context.Categories.Update(category);
-            await _context.SaveChangesAsync();
-        }
-        public async Task DeleteCategoryAsync(int id)
-        {
-            var category = await _context.Categories.FindAsync(id);
-            if(category != null)
+            try
             {
-                _context.Categories.Remove(category);
+                if(category == null)
+                {
+                    throw new ArgumentNullException(nameof(category), "Category cannot be empty");
+                }
+
+                _context.Categories.Update(category);
                 await _context.SaveChangesAsync();
+            }
+            catch(DbUpdateException ex)
+            {
+                throw new InvalidOperationException("The category cannot be updated because the name already exists. " + ex.Message);
+            }
+           
+        }
+        public async Task DeleteCategoryAsync(Guid id)
+        {
+            try
+            {
+                var category = await _context.Categories.FindAsync(id);
+                if (category != null)
+                {
+                    _context.Categories.Remove(category);
+                    await _context.SaveChangesAsync();
+                }
+            }
+            catch (DbUpdateException)
+            {
+                throw new InvalidOperationException("Unable to delete the category because it has related products. Please delete or reassign the products before deleting the category.");
             }
         }
 

@@ -62,5 +62,53 @@ namespace Project.Application.Services
 
 
         }
+
+        public async Task DeleteCategoryAsync(Guid id)
+        {
+            try
+            {
+
+                await _categoryRepository.DeleteCategoryAsync(id);
+            }
+            catch (InvalidOperationException)
+            {
+                throw;
+            }
+        }
+
+        public async Task<CategoryDto> GetCategoryByIdAsync(Guid id)
+        {
+            try
+            {
+                var category = await _categoryRepository.GetCategoryByIdAsync(id);
+                return new CategoryDto
+                {
+                    CategoryId = category.CategoryId,
+                };
+            }
+            catch (KeyNotFoundException)
+            {
+                throw;
+            }
+            
+        }
+        public async Task UpdateCategoryAsync(CategoryDto categoryDto)
+        {
+            try
+            {
+                var category = await _categoryRepository.GetCategoryByIdAsync(categoryDto.CategoryId);
+                category.CategoryName = categoryDto.CategoryName;
+
+                await _categoryRepository.UpdateCategoryAsync(category);
+            }
+            catch(ArgumentNullException)
+            {
+                throw;
+            }
+            catch (InvalidOperationException)
+            {
+                throw;
+            }
+        }
     }
 }

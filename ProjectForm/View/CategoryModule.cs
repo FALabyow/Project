@@ -1,4 +1,6 @@
-﻿using ProjectForm.View.IView;
+﻿using ProjectForm.Model.DTOs;
+using ProjectForm.Presenter;
+using ProjectForm.View.IView;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,6 +19,7 @@ namespace ProjectForm
     public partial class CategoryModule : Form, ICategoryModuleView
     {
         private readonly HttpClient _httpClient;
+        private CategoryModulePresenter presenter;
         public CategoryModule()
         {
             InitializeComponent();
@@ -37,7 +40,7 @@ namespace ProjectForm
         }
         public void ShowMessage(string message)
         {
-            showMessageLabel.Text = message;
+            MessageBox.Show(message);
         }
 
         public void ClearMessage()
@@ -50,5 +53,14 @@ namespace ProjectForm
             this.Dispose();
         }
 
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void CategoryModule_Load(object sender, EventArgs e)
+        {
+            presenter = new CategoryModulePresenter(this);
+        }
     }
 }
