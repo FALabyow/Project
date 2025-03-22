@@ -10,16 +10,11 @@ using System.Windows.Forms;
 
 namespace ProjectForm
 {
-    public partial class SearchProducts : Form
+    public partial class Qty : Form
     {
-        public SearchProducts()
+        public Qty()
         {
             InitializeComponent();
-        }
-
-        private void btnClose_Click(object sender, EventArgs e)
-        {
-            this.Dispose();
         }
     }
 }

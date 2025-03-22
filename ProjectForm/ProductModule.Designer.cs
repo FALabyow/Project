@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             panel1 = new Panel();
-            picClose = new PictureBox();
+            picboxClose = new PictureBox();
             label1 = new Label();
             btnUpdate = new Button();
             btnClear = new Button();
@@ -47,14 +47,14 @@
             nudReorder = new NumericUpDown();
             txtPrice = new TextBox();
             panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)picClose).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)picboxClose).BeginInit();
             ((System.ComponentModel.ISupportInitialize)nudReorder).BeginInit();
             SuspendLayout();
             // 
             // panel1
             // 
             panel1.BackColor = Color.FromArgb(121, 85, 72);
-            panel1.Controls.Add(picClose);
+            panel1.Controls.Add(picboxClose);
             panel1.Controls.Add(label1);
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 0);
@@ -62,18 +62,18 @@
             panel1.Size = new Size(880, 50);
             panel1.TabIndex = 6;
             // 
-            // picClose
+            // picboxClose
             // 
-            picClose.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            picClose.BackColor = Color.FromArgb(255, 128, 128);
-            picClose.Image = Properties.Resources.close1;
-            picClose.Location = new Point(829, 12);
-            picClose.Name = "picClose";
-            picClose.Size = new Size(39, 33);
-            picClose.SizeMode = PictureBoxSizeMode.Zoom;
-            picClose.TabIndex = 12;
-            picClose.TabStop = false;
-            picClose.Click += pictureBox1_Click;
+            picboxClose.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            picboxClose.BackColor = Color.FromArgb(255, 128, 128);
+            picboxClose.Image = Properties.Resources.close1;
+            picboxClose.Location = new Point(829, 12);
+            picboxClose.Name = "picboxClose";
+            picboxClose.Size = new Size(39, 33);
+            picboxClose.SizeMode = PictureBoxSizeMode.Zoom;
+            picboxClose.TabIndex = 12;
+            picboxClose.TabStop = false;
+            picboxClose.Click += pictureBox1_Click;
             // 
             // label1
             // 
@@ -257,7 +257,7 @@
             Load += ProductModule_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)picClose).EndInit();
+            ((System.ComponentModel.ISupportInitialize)picboxClose).EndInit();
             ((System.ComponentModel.ISupportInitialize)nudReorder).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -271,7 +271,6 @@
         private Button btnClear;
         private Label label2;
         private Button btnSave;
-        private PictureBox picClose;
         private Label label3;
         private Label label4;
         private Label label5;
@@ -283,5 +282,6 @@
         private TextBox txtPrice;
         public ComboBox cmbCategory;
         public NumericUpDown nudReorder;
+        private PictureBox picboxClose;
     }
 }

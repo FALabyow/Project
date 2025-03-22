@@ -41,22 +41,37 @@ namespace ProjectForm
         }
 
         private void btnSearchProduct_Click(object sender, EventArgs e)
-        {
+        { 
             slide(btnSearchProduct);
+            SearchProducts searchProducts = new SearchProducts();
+            searchProducts.Show();
+            
         }
 
         private void btnDiscount_Click(object sender, EventArgs e)
         {
+            //should only be enable if there is an item in the cart
+            //if not this button should be disabled
             slide(btnDiscount);
+            Discount discount = new Discount();
+            discount.txtTotalprice.Text = lblDisplaytotal.Text;
+            discount.ShowDialog();
         }
 
         private void btnPayment_Click(object sender, EventArgs e)
         {
+            //should only be enable if there is an item in the cart
+            //if not this button should be disabled
             slide(btnPayment);
+            SettlePayment settlePayment = new SettlePayment();
+            settlePayment.txtSale.Text = lblDisplaytotal.Text;
+            settlePayment.ShowDialog();
         }
 
         private void btnClearCart_Click(object sender, EventArgs e)
         {
+            //should only be enable if there is an item in the cart
+            //if not this button should be disabled
             slide(btnClearCart);
         }
 

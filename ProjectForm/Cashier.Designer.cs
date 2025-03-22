@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle9 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle10 = new DataGridViewCellStyle();
             panel1 = new Panel();
             btnLogout = new Button();
             btnDailySales = new Button();
@@ -430,14 +430,14 @@
             dgvCashier.AllowUserToAddRows = false;
             dgvCashier.BackgroundColor = Color.White;
             dgvCashier.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = Color.FromArgb(93, 64, 55);
-            dataGridViewCellStyle1.Font = new Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle1.ForeColor = Color.FromArgb(255, 236, 179);
-            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-            dgvCashier.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = Color.FromArgb(93, 64, 55);
+            dataGridViewCellStyle6.Font = new Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle6.ForeColor = Color.FromArgb(255, 236, 179);
+            dataGridViewCellStyle6.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = DataGridViewTriState.True;
+            dgvCashier.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
             dgvCashier.ColumnHeadersHeight = 40;
             dgvCashier.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             dgvCashier.Columns.AddRange(new DataGridViewColumn[] { Column1, Column8, Column2, Column4, Column6, Column3, Column5, Column7, colAdd, colReduce, Delete });
@@ -485,8 +485,8 @@
             // Column6
             // 
             Column6.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleRight;
-            Column6.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle7.Alignment = DataGridViewContentAlignment.MiddleRight;
+            Column6.DefaultCellStyle = dataGridViewCellStyle7;
             Column6.HeaderText = "Price";
             Column6.MinimumWidth = 6;
             Column6.Name = "Column6";
@@ -495,8 +495,8 @@
             // Column3
             // 
             Column3.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            Column3.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle8.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            Column3.DefaultCellStyle = dataGridViewCellStyle8;
             Column3.HeaderText = "Qty";
             Column3.MinimumWidth = 6;
             Column3.Name = "Column3";
@@ -505,8 +505,8 @@
             // Column5
             // 
             Column5.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleRight;
-            Column5.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle9.Alignment = DataGridViewContentAlignment.MiddleRight;
+            Column5.DefaultCellStyle = dataGridViewCellStyle9;
             Column5.HeaderText = "Discount";
             Column5.MinimumWidth = 6;
             Column5.Name = "Column5";
@@ -515,8 +515,8 @@
             // Column7
             // 
             Column7.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleRight;
-            Column7.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle10.Alignment = DataGridViewContentAlignment.MiddleRight;
+            Column7.DefaultCellStyle = dataGridViewCellStyle10;
             Column7.HeaderText = "Total";
             Column7.MinimumWidth = 6;
             Column7.Name = "Column7";
@@ -615,7 +615,6 @@
         private Button btnLogout;
         private PictureBox picClose;
         private Panel pnlSlide;
-        private DataGridView dgvCashier;
         private Panel panel7;
         private DataGridViewTextBoxColumn Column1;
         private DataGridViewTextBoxColumn Column8;
@@ -628,16 +627,17 @@
         private DataGridViewImageColumn colAdd;
         private DataGridViewImageColumn colReduce;
         private DataGridViewImageColumn Delete;
-        private Label lblDisplaytotal;
         private Label label3;
         private Label label8;
         private TextBox txtBarcode;
         private Label label7;
         private Label lblDate;
         private Label label6;
-        private Label lblTranNo;
         private Label lblSalesTotal;
         private Label lblTimer;
         private System.Windows.Forms.Timer timer1;
+        public Label lblTranNo;
+        public DataGridView dgvCashier;
+        public Label lblDisplaytotal;
     }
 }
