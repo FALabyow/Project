@@ -38,7 +38,12 @@ namespace Project.Infrastructure.Repositories
 
         public async Task<Category> GetCategoryByIdAsync(Guid id)
         {
-            return await _context.Categories.FindAsync(id);
+            var category = await _context.Categories.FindAsync(id);
+            if (category == null)
+            {
+                throw new KeyNotFoundException("Category name does not exist");
+            }
+            return category;
         }
         public async Task AddCategoryAsync(Category category)
         {
@@ -67,8 +72,21 @@ namespace Project.Infrastructure.Repositories
         }
         public async Task UpdateCategoryAsync(Category category)
         {
-            _context.Categories.Update(category);
-            await _context.SaveChangesAsync();
+            try
+            {
+                if(category == null)
+                {
+                    throw new ArgumentNullException(nameof(category), "Category cannot be empty");
+                }
+
+                _context.Categories.Update(category);
+                await _context.SaveChangesAsync();
+            }
+            catch(DbUpdateException ex)
+            {
+                throw new InvalidOperationException("The category cannot be updated because the name already exists. " + ex.Message);
+            }
+           
         }
         public async Task DeleteCategoryAsync(Guid id)
         {

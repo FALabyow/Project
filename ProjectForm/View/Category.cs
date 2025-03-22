@@ -21,7 +21,7 @@ namespace ProjectForm
     //pagbutang ug loading na UI para while fetching sa data kay loading ang ma display instead of blank grid
     public partial class Category : Form, ICategoryView
     {
-        public int rowNumber = 0;
+        
         public CategoryPresenter presenter;
         public Category()
         {
@@ -29,7 +29,7 @@ namespace ProjectForm
             dgvCategory.CellContentClick += DataGridCategoryView_CellContentClick;
         }
 
-        public void DisplayCategoryList(List<CategoryDto> categortList)
+        public void DisplayCategoryList(List<CategoryDto> categortList, int rowNumber)
         {
             dgvCategory.Rows.Clear();
             foreach (var category in categortList)

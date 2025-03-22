@@ -74,5 +74,24 @@ namespace Project.API.Controllers
             }
         }
 
+        [HttpPut("/Category/Update/{id}")]
+        public async Task<IActionResult> UpdateCategoryAsync(Guid id, [FromBody] CategoryDto categoryDto)
+        {
+            if(id != categoryDto.CategoryId) return BadRequest();
+            try
+            {
+                await _categoryService.UpdateCategoryAsync(categoryDto);
+                return NoContent();
+            }
+            catch(ArgumentNullException ex)
+            {
+                return StatusCode(500, new {error = ex.Message});
+            }
+            catch(InvalidOperationException ex)
+            {
+                return BadRequest(new { error = ex.Message});
+            }
+        }
+
     }
 }

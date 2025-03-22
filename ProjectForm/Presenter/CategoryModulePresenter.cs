@@ -54,7 +54,6 @@ namespace ProjectForm.Presenter
                     if (Application.OpenForms["Category"] is Category categoryForm)
                     {
                         var existingPresenter = categoryForm.presenter;
-                        categoryForm.rowNumber = 0;
                         existingPresenter.LoadCategoryList();
                     }
                     
