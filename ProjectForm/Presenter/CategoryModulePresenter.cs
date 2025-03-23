@@ -16,11 +16,11 @@ namespace ProjectForm.Presenter
     {
         private readonly ICategoryModuleView _categoryModuleView;
         private readonly HttpClient _httpClient;
-        
-
-        public CategoryModulePresenter(ICategoryModuleView categoryModuleView)
+        private readonly CategoryPresenter _presenter;
+        public CategoryModulePresenter(ICategoryModuleView categoryModuleView, CategoryPresenter presenter)
         {
             _categoryModuleView = categoryModuleView;
+            _presenter = presenter;
             _httpClient = new HttpClient { BaseAddress = new Uri("https://localhost:7014/api") };
             _categoryModuleView.SaveClicked += OnSaveClicked;
             _categoryModuleView.UpdateClicked += OnUpdateClicked;   
@@ -52,16 +52,19 @@ namespace ProjectForm.Presenter
                 if (response.IsSuccessStatusCode)
                 {
                     if (Application.OpenForms["Category"] is Category categoryForm)
-                    {
-                        var existingPresenter = categoryForm.presenter;
-                        existingPresenter.LoadCategoryList();
+                    {                       
+                        _presenter.LoadCategoryList();
                     }
                     
                 }
                 else if(response.StatusCode == HttpStatusCode.BadRequest)
                 {
                     var errorRes = await response.Content.ReadFromJsonAsync<ApiErrorResponse>();
-                    _categoryModuleView.ShowMessage(errorRes.Error);
+                    if(errorRes != null)
+                    {
+                        _categoryModuleView.ShowMessage(errorRes.Error);
+                    }
+                    
                 }
                 
 
@@ -76,7 +79,7 @@ namespace ProjectForm.Presenter
         {
 
         }
-        private async void OnClearClicked(object sender, EventArgs e)
+        private void OnClearClicked(object sender, EventArgs e)
         {
             _categoryModuleView.CategoryName = "";
             _categoryModuleView.ClearMessage();

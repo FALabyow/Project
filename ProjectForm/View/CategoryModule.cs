@@ -18,20 +18,20 @@ namespace ProjectForm
     // https://youtu.be/bwLZAB8VT2Y?si=2yvkCOgqmHRAri6S
     public partial class CategoryModule : Form, ICategoryModuleView
     {
-        private readonly HttpClient _httpClient;
-        private CategoryModulePresenter presenter;
-        public CategoryModule()
+        private CategoryModulePresenter? presenter;
+        private readonly CategoryPresenter presenterPresenter;
+        public CategoryModule(CategoryPresenter presenterPresenter)
         {
             InitializeComponent();
             btnSave.Click += (s, e) => SaveClicked?.Invoke(this, EventArgs.Empty);
             btnUpdate.Click += (s, e) => UpdateClicked?.Invoke(this, EventArgs.Empty);
             btnClear.Click += (s, e) => ClearClicked?.Invoke(this, EventArgs.Empty);
-
+            this.presenterPresenter = presenterPresenter;
         }
 
-        public event EventHandler SaveClicked;
-        public event EventHandler UpdateClicked;
-        public event EventHandler ClearClicked;
+        public event EventHandler? SaveClicked;
+        public event EventHandler? UpdateClicked;
+        public event EventHandler? ClearClicked;
 
         public string CategoryName
         {
@@ -60,7 +60,7 @@ namespace ProjectForm
 
         private void CategoryModule_Load(object sender, EventArgs e)
         {
-            presenter = new CategoryModulePresenter(this);
+            presenter = new CategoryModulePresenter(this, presenterPresenter);
         }
     }
 }

@@ -47,7 +47,7 @@ namespace ProjectForm.Presenter
                 _view.ShowMessage(ex.Message);  
             }
         }
-        private async void OnDeleteClicked(object sender, DataGridViewCellEventArgs e)
+        private async void OnDeleteClicked(object? sender, DataGridViewCellEventArgs e)
         {
             try
             {
@@ -92,7 +92,7 @@ namespace ProjectForm.Presenter
                 _view.ShowMessage(ex.Message);
             }
         }
-        private async void OnEditClicked(object sender, DataGridViewCellEventArgs e)
+        private async void OnEditClicked(object? sender, DataGridViewCellEventArgs e)
         {
             try
             {

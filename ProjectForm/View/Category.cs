@@ -22,7 +22,7 @@ namespace ProjectForm
     public partial class Category : Form, ICategoryView
     {
         
-        public CategoryPresenter presenter;
+        private CategoryPresenter? presenter;
         public Category()
         {
             InitializeComponent();
@@ -51,9 +51,12 @@ namespace ProjectForm
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            CategoryModule categoryModule = new CategoryModule();
-            //var presenter = new CategoryModulePresenter(categoryModule);
-            categoryModule.ShowDialog();
+            if(presenter != null)
+            {
+                CategoryModule categoryModule = new CategoryModule(presenter);
+                //var presenter = new CategoryModulePresenter(categoryModule);
+                categoryModule.ShowDialog();
+            }
         }
 
         private void Category_Load(object sender, EventArgs e)
@@ -62,8 +65,8 @@ namespace ProjectForm
             presenter.LoadCategoryList();
         }
 
-        public event EventHandler<DataGridViewCellEventArgs> DeleteClicked;
-        public event EventHandler<DataGridViewCellEventArgs> EditClicked;
+        public event EventHandler<DataGridViewCellEventArgs>? DeleteClicked;
+        public event EventHandler<DataGridViewCellEventArgs>? EditClicked;
 
         private void DataGridCategoryView_CellContentClick(object? sender, DataGridViewCellEventArgs e)
         {

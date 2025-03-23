@@ -17,14 +17,14 @@ namespace ProjectForm
     //https://www.youtube.com/watch?v=9LdU5zA5agA&list=PLcDvtJ2MXvhy_YrXdO4VXqZBOADCRJhSc&index=4
     public partial class Product : Form, IProductView
     {
-        public 
+       
         public Product()
         {
             InitializeComponent();
             dgvProduct.CellContentClick += DataGridProductView_CellContentClick;
         }
-        public event EventHandler<DataGridViewCellEventArgs> DeleteClicked;
-        public event EventHandler<DataGridViewCellEventArgs> EditClicked;
+        public event EventHandler<DataGridViewCellEventArgs>? DeleteClicked;
+        public event EventHandler<DataGridViewCellEventArgs>? EditClicked;
         private void btnAdd_Click(object sender, EventArgs e)
         {
             ProductModule productModule = new ProductModule();
