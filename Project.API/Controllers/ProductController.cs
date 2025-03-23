@@ -14,6 +14,7 @@ namespace Project.API.Controllers
         {
             _productService = productService;
         }
+        
         [HttpGet("/Products/All")]
         public async Task<ActionResult<IEnumerable<ProductDto>>> GetAllCategoryAsync()
         {
@@ -32,6 +33,7 @@ namespace Project.API.Controllers
             }
 
         }
+        
         [HttpPost("/Product/AddProduct")]
         public async Task<IActionResult> AddCategoryAsync([FromBody] ProductInfoDto productInfoDto)
         {
@@ -45,6 +47,49 @@ namespace Project.API.Controllers
                 return BadRequest(new {error = ex.Message});    
             }
             
+        }
+
+        [HttpDelete("/Product/Delete/{id}")]
+        public async Task<IActionResult> DeleteCategoryAsync(Guid id)
+        {
+            try
+            {
+                await _productService.DeleteProductAsync(id);
+                return NoContent();
+
+            }
+            catch (InvalidOperationException ex)
+            {
+                return Conflict(new { error = ex.Message });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new
+                {
+                    StatusCode = 500,
+                    Message = "An unexpected error occurred.",
+                    Details = ex.Message
+                });
+            }
+        }
+        
+        [HttpPut("/Product/Update/{id}")]
+        public async Task<IActionResult> UpdateCategoryAsync(Guid id, [FromBody] ProductDto productDto)
+        {
+            if (id != productDto.ProductId) return BadRequest();
+            try
+            {
+                await _productService.UpdateProductAsync(productDto);
+                return NoContent();
+            }
+            catch (ArgumentNullException ex)
+            {
+                return StatusCode(500, new { error = ex.Message });
+            }
+            catch (InvalidOperationException ex)
+            {
+                return BadRequest(new { error = ex.Message });
+            }
         }
     }
 }

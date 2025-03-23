@@ -23,6 +23,10 @@ namespace Project.Infrastructure.Persistence
                 .HasIndex(b => b.ProductCode)
                 .IsUnique();
 
+            modelBuilder.Entity<Product>()
+                .HasIndex(b => b.ProductName)
+                .IsUnique();
+
             modelBuilder.Entity<Category>()
                 .HasIndex(b => b.CategoryName)
                 .IsUnique();

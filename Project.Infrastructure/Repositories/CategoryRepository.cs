@@ -38,11 +38,7 @@ namespace Project.Infrastructure.Repositories
 
         public async Task<Category> GetCategoryByIdAsync(Guid id)
         {
-            var category = await _context.Categories.FindAsync(id);
-            if (category == null)
-            {
-                throw new KeyNotFoundException("Category name does not exist");
-            }
+            var category = await _context.Categories.FindAsync(id) ?? throw new KeyNotFoundException("Category name does not exist");
             return category;
         }
         public async Task AddCategoryAsync(Category category)

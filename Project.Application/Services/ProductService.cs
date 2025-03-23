@@ -75,5 +75,51 @@ namespace Project.Application.Services
             
             
         }
+        public async Task<ProductDto> GetProductByIdAsync(Guid id)
+        {
+            try
+            {
+                var product = await _productRepository.GetProductByIdAsync(id);
+                return new ProductDto
+                {
+                    ProductId = product.ProductId,
+                };
+            }
+            catch (KeyNotFoundException)
+            {
+                throw;
+            }
+
+        }
+        public async Task DeleteProductAsync(Guid id)
+        {
+            try
+            {
+
+                await _productRepository.DeleteProductAsync(id);
+            }
+            catch (InvalidOperationException)
+            {
+                throw;
+            }
+        }
+        public async Task UpdateProductAsync(ProductDto productDto)
+        {
+            try
+            {
+                var product = await _productRepository.GetProductByIdAsync(productDto.ProductId);
+                product.ProductName = productDto.ProductName;
+
+                await _productRepository.UpdateProductAsync(product);
+            }
+            catch (ArgumentNullException)
+            {
+                throw;
+            }
+            catch (InvalidOperationException)
+            {
+                throw;
+            }
+        }
     }
 }

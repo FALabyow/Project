@@ -1,10 +1,14 @@
-﻿using ProjectForm.Model.DTOs;
+﻿using ProjectForm.Error;
+using ProjectForm.Model.DTOs;
 using ProjectForm.View.IView;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Net;
 using System.Net.Http.Json;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace ProjectForm.Presenter
@@ -49,11 +53,114 @@ namespace ProjectForm.Presenter
         }
         private async void OnDeleteClicked(object? sender, DataGridViewCellEventArgs e)
         {
+            try
+            {
+                var gridView = sender as DataGridView;
+                if (gridView == null || e.RowIndex < 0)
+                {
+                    return;
+                }
 
+                var productId = (Guid)gridView.Rows[e.RowIndex].Cells["productId"].Value;
+                var productName = gridView.Rows[e.RowIndex].Cells["productDescription"].Value;
+                Debug.WriteLine(productId);
+                var confirmResult = MessageBox.Show($"Do you want {productName} from this list?", "Confirm Delete", MessageBoxButtons.YesNo);
+
+                if (confirmResult != DialogResult.Yes) return;
+
+                var res = await _httpClient.DeleteAsync($"/Product/Delete/{productId}");
+                if (res.IsSuccessStatusCode)
+                {
+                    _view.ShowMessage("Deleted Successfully");
+                    LoadProductList();
+                }
+                else if (res.StatusCode == HttpStatusCode.Conflict)
+                {
+                    var errorRes = await res.Content.ReadFromJsonAsync<ApiErrorResponse>();
+                    if (errorRes != null)
+                    {
+                        _view.ShowMessage(errorRes.Error);
+                    }
+                }
+                else
+                {
+                    _view.ShowMessage("Failed to delete product!");
+                }
+            }
+            catch (HttpRequestException ex)
+            {
+                _view.ShowMessage("Failed to connect to a server: " + ex.Message);
+            }
+            catch (Exception ex)
+            {
+                _view.ShowMessage(ex.Message);
+            }
         }
         private async void OnEditClicked(object? sender, DataGridViewCellEventArgs e)
         {
+            try
+            {
+                var gridView = sender as DataGridView;
+                if (gridView == null || e.RowIndex < 0)
+                {
+                    return;
+                }
 
+                var productId = (Guid)gridView.Rows[e.RowIndex].Cells["productId"].Value;
+                var productName = (string)gridView.Rows[e.RowIndex].Cells["productDescription"].Value;
+
+                var product = new ProductDto
+                {
+                    ProductId = productId,
+                    ProductName = productName,
+                    
+                };
+
+                if (string.IsNullOrWhiteSpace(productName))
+                {
+                    _view.ShowMessage("Product name cannot be empty");
+                    return;
+                }
+
+                var confirmResult = MessageBox.Show($"Do you want to update the product?", "Confirm Update", MessageBoxButtons.YesNo);
+
+                if (confirmResult != DialogResult.Yes) return;
+
+                var json = JsonSerializer.Serialize(product);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+                var res = await _httpClient.PutAsync($"/Product/Update/{productId}", content);
+
+                if (res.IsSuccessStatusCode)
+                {
+                    _view.ShowMessage("Updated Successfully");
+                    LoadProductList();
+                }
+                else if (res.StatusCode == HttpStatusCode.BadRequest)
+                {
+                    var errorRes = await res.Content.ReadFromJsonAsync<ApiErrorResponse>();
+
+                    if (errorRes != null)
+                    {
+                        _view.ShowMessage(errorRes.Error);
+                        LoadProductList();
+                    }
+                }
+                else
+                {
+                    _view.ShowMessage("Failed to update product!");
+                    LoadProductList();
+                }
+            }
+            catch (HttpRequestException ex)
+            {
+                _view.ShowMessage("Failed to connect to a server: " + ex.Message);
+                LoadProductList();
+            }
+            catch (Exception ex)
+            {
+                _view.ShowMessage(ex.Message);
+                LoadProductList();
+            }
         }
         private void OnProductSearched(object? sender, EventArgs e)
         {

@@ -50,7 +50,7 @@ namespace ProjectForm.Presenter
                 var response = await _httpClient.PostAsync("/Category/AddCategory", content);
                 if (response.IsSuccessStatusCode)
                 {
-                    if (Application.OpenForms["Category"] is Category categoryForm)
+                    if (Application.OpenForms["Category"] is Category)
                     {                       
                         _presenter.LoadCategoryList();
                     }

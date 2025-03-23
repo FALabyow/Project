@@ -122,7 +122,10 @@ namespace ProjectForm.Presenter
 
                 if (res.IsSuccessStatusCode)
                 {
-                    _productModuleView.LoadingMessage("Product added successfully!");
+                    if (Application.OpenForms["Product"] is Product)
+                    {
+                        _presenter.LoadProductList();
+                    }
                 }
                 else if(res.StatusCode == HttpStatusCode.BadRequest)
                 {

@@ -43,20 +43,6 @@ namespace ProjectForm
         }
         public void DisplayProductList(List<ProductDto> productList)
         {
-            //dgvProduct.Rows.Clear();
-            //foreach (var product in productList)
-            //{
-
-
-            //    int rowIndex = dgvProduct
-            //        .Rows
-            //        .Add(product.CategoryId, product.ProductCode, product.BarcodeData, product.ProductName, product.CategoryName, product.CategoryId, product.ProductPrice, product.ProductQuantity, product.ProductPreOrder, product.ScannedAt);
-
-            //    dgvProduct.Rows[rowIndex].Cells["Edit"].Value = Properties.Resources.edit;
-            //    dgvProduct.Rows[rowIndex].Cells["Delete"].Value = Properties.Resources.delete;
-
-            //}
-
             _bindingSource.DataSource = productList;
             foreach (DataGridViewRow row in dgvProduct.Rows)
             {
@@ -93,12 +79,11 @@ namespace ProjectForm
             presenter = new ProductPresenter(this);
             presenter.LoadProductList();
         }
-
         private void dgvProduct_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
             using (SolidBrush brush = new SolidBrush(dgvProduct.RowHeadersDefaultCellStyle.ForeColor))
             {
-                string rowNumber = (e.RowIndex + 1).ToString(); // 1-based index
+                string rowNumber = (e.RowIndex + 1).ToString();
                 e.Graphics.DrawString(rowNumber, dgvProduct.Font, brush, e.RowBounds.Left + 10, e.RowBounds.Top + 4);
             }
         }
