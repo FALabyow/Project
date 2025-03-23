@@ -18,9 +18,8 @@ namespace ProjectForm
     // https://youtu.be/bwLZAB8VT2Y?si=2yvkCOgqmHRAri6S
     public partial class CategoryModule : Form, ICategoryModuleView
     {
-        private readonly HttpClient _httpClient;
-        private CategoryModulePresenter presenter;
-        private CategoryPresenter presenterPresenter;
+        private CategoryModulePresenter? presenter;
+        private readonly CategoryPresenter presenterPresenter;
         public CategoryModule(CategoryPresenter presenterPresenter)
         {
             InitializeComponent();
@@ -30,9 +29,9 @@ namespace ProjectForm
             this.presenterPresenter = presenterPresenter;
         }
 
-        public event EventHandler SaveClicked;
-        public event EventHandler UpdateClicked;
-        public event EventHandler ClearClicked;
+        public event EventHandler? SaveClicked;
+        public event EventHandler? UpdateClicked;
+        public event EventHandler? ClearClicked;
 
         public string CategoryName
         {

@@ -23,8 +23,8 @@ namespace ProjectForm
             InitializeComponent();
             dgvProduct.CellContentClick += DataGridProductView_CellContentClick;
         }
-        public event EventHandler<DataGridViewCellEventArgs> DeleteClicked;
-        public event EventHandler<DataGridViewCellEventArgs> EditClicked;
+        public event EventHandler<DataGridViewCellEventArgs>? DeleteClicked;
+        public event EventHandler<DataGridViewCellEventArgs>? EditClicked;
         private void btnAdd_Click(object sender, EventArgs e)
         {
             ProductModule productModule = new ProductModule();

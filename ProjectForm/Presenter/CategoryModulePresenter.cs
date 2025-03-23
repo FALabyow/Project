@@ -17,8 +17,6 @@ namespace ProjectForm.Presenter
         private readonly ICategoryModuleView _categoryModuleView;
         private readonly HttpClient _httpClient;
         private readonly CategoryPresenter _presenter;
-        
-
         public CategoryModulePresenter(ICategoryModuleView categoryModuleView, CategoryPresenter presenter)
         {
             _categoryModuleView = categoryModuleView;
@@ -54,8 +52,7 @@ namespace ProjectForm.Presenter
                 if (response.IsSuccessStatusCode)
                 {
                     if (Application.OpenForms["Category"] is Category categoryForm)
-                    {
-                        
+                    {                       
                         _presenter.LoadCategoryList();
                     }
                     
@@ -63,7 +60,11 @@ namespace ProjectForm.Presenter
                 else if(response.StatusCode == HttpStatusCode.BadRequest)
                 {
                     var errorRes = await response.Content.ReadFromJsonAsync<ApiErrorResponse>();
-                    _categoryModuleView.ShowMessage(errorRes.Error);
+                    if(errorRes != null)
+                    {
+                        _categoryModuleView.ShowMessage(errorRes.Error);
+                    }
+                    
                 }
                 
 
@@ -78,7 +79,7 @@ namespace ProjectForm.Presenter
         {
 
         }
-        private async void OnClearClicked(object sender, EventArgs e)
+        private void OnClearClicked(object sender, EventArgs e)
         {
             _categoryModuleView.CategoryName = "";
             _categoryModuleView.ClearMessage();

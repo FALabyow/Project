@@ -20,9 +20,9 @@ namespace ProjectForm.View.IView
         void Clear();
         void ShowMessage(string message);   
         void LoadingMessage(string message);
-        event EventHandler ClearClicked;
-        event EventHandler SelectedIndexCategoryCombo;
-        event EventHandler SaveClicked;
-        event EventHandler UpdateClicked;
+        event EventHandler? ClearClicked;
+        event EventHandler? SelectedIndexCategoryCombo;
+        event EventHandler? SaveClicked;
+        event EventHandler? UpdateClicked;
     }
 }

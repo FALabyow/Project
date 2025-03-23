@@ -10,9 +10,9 @@ namespace ProjectForm.View.IView
     {
         string CategoryName { get; set; }
 
-        event EventHandler SaveClicked;
-        event EventHandler UpdateClicked;
-        event EventHandler ClearClicked;
+        event EventHandler? SaveClicked;
+        event EventHandler? UpdateClicked;
+        event EventHandler? ClearClicked;
         void ShowMessage(string message);
         void ClearMessage();
     }
