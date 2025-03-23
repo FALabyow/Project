@@ -17,10 +17,6 @@ namespace ProjectForm
     //https://www.youtube.com/watch?v=9LdU5zA5agA&list=PLcDvtJ2MXvhy_YrXdO4VXqZBOADCRJhSc&index=4
     public partial class Product : Form, IProductView
     {
-<<<<<<< HEAD
-=======
-       
->>>>>>> 71f7a2b912e9007de9427e0cb4745f4b8c909d57
         public Product()
         {
             InitializeComponent();
