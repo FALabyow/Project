@@ -20,13 +20,14 @@ namespace ProjectForm
     {
         private readonly HttpClient _httpClient;
         private CategoryModulePresenter presenter;
-        public CategoryModule()
+        private CategoryPresenter presenterPresenter;
+        public CategoryModule(CategoryPresenter presenterPresenter)
         {
             InitializeComponent();
             btnSave.Click += (s, e) => SaveClicked?.Invoke(this, EventArgs.Empty);
             btnUpdate.Click += (s, e) => UpdateClicked?.Invoke(this, EventArgs.Empty);
             btnClear.Click += (s, e) => ClearClicked?.Invoke(this, EventArgs.Empty);
-
+            this.presenterPresenter = presenterPresenter;
         }
 
         public event EventHandler SaveClicked;
@@ -60,7 +61,7 @@ namespace ProjectForm
 
         private void CategoryModule_Load(object sender, EventArgs e)
         {
-            presenter = new CategoryModulePresenter(this);
+            presenter = new CategoryModulePresenter(this, presenterPresenter);
         }
     }
 }

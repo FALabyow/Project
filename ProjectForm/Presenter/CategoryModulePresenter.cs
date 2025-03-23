@@ -16,11 +16,13 @@ namespace ProjectForm.Presenter
     {
         private readonly ICategoryModuleView _categoryModuleView;
         private readonly HttpClient _httpClient;
+        private readonly CategoryPresenter _presenter;
         
 
-        public CategoryModulePresenter(ICategoryModuleView categoryModuleView)
+        public CategoryModulePresenter(ICategoryModuleView categoryModuleView, CategoryPresenter presenter)
         {
             _categoryModuleView = categoryModuleView;
+            _presenter = presenter;
             _httpClient = new HttpClient { BaseAddress = new Uri("https://localhost:7014/api") };
             _categoryModuleView.SaveClicked += OnSaveClicked;
             _categoryModuleView.UpdateClicked += OnUpdateClicked;   
@@ -53,8 +55,8 @@ namespace ProjectForm.Presenter
                 {
                     if (Application.OpenForms["Category"] is Category categoryForm)
                     {
-                        var existingPresenter = categoryForm.presenter;
-                        existingPresenter.LoadCategoryList();
+                        
+                        _presenter.LoadCategoryList();
                     }
                     
                 }

@@ -22,7 +22,7 @@ namespace ProjectForm
     public partial class Category : Form, ICategoryView
     {
         
-        public CategoryPresenter presenter;
+        private CategoryPresenter presenter;
         public Category()
         {
             InitializeComponent();
@@ -51,7 +51,7 @@ namespace ProjectForm
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            CategoryModule categoryModule = new CategoryModule();
+            CategoryModule categoryModule = new CategoryModule(presenter);
             //var presenter = new CategoryModulePresenter(categoryModule);
             categoryModule.ShowDialog();
         }
