@@ -13,6 +13,7 @@ namespace ProjectForm.Presenter
     {
         private readonly IProductView _view;
         private readonly HttpClient _httpClient;
+        private List<ProductDto> _allProducts = new();
 
         public ProductPresenter(IProductView view)
         {
@@ -20,8 +21,8 @@ namespace ProjectForm.Presenter
             _httpClient = new HttpClient { BaseAddress = new Uri("https://localhost:7014/api") };
             _view.DeleteClicked += OnDeleteClicked;
             _view.EditClicked += OnEditClicked;
+            _view.ProductSearched += OnProductSearched;
         }
-
         public async void LoadProductList()
         {
             try
@@ -37,6 +38,7 @@ namespace ProjectForm.Presenter
                         return;
                     }
 
+                    _allProducts = products;
                     _view.DisplayProductList(products, 0);
                 }
             }
@@ -52,6 +54,27 @@ namespace ProjectForm.Presenter
         private async void OnEditClicked(object? sender, DataGridViewCellEventArgs e)
         {
 
+        }
+        private void OnProductSearched(object? sender, EventArgs e)
+        {
+            string searchText = _view.SearchText;
+            var filteredList = _allProducts;
+
+            if (decimal.TryParse(searchText, out decimal price))
+            {
+                filteredList = _allProducts.Where(c => c.ProductPrice == price).ToList();
+            }
+            else
+            {
+                filteredList = _allProducts
+                    .Where(
+                        c => c.ProductName != null && c.ProductName.ToLower().Contains(searchText) ||
+                        c.CategoryName != null && c.CategoryName.ToLower().Contains(searchText)
+                    )
+                    .ToList();
+            }
+
+            _view.DisplayProductList(filteredList, 0);
         }
     }
 }

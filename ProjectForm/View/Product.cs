@@ -22,9 +22,13 @@ namespace ProjectForm
         {
             InitializeComponent();
             dgvProduct.CellContentClick += DataGridProductView_CellContentClick;
+            txtSearch.TextChanged += ProductSearched_TextChanged;
         }
         public event EventHandler<DataGridViewCellEventArgs>? DeleteClicked;
         public event EventHandler<DataGridViewCellEventArgs>? EditClicked;
+        public event EventHandler? ProductSearched;
+
+        public string SearchText => txtSearch.Text.ToLower();
         private void btnAdd_Click(object sender, EventArgs e)
         {
             if(presenter != null)
@@ -69,6 +73,10 @@ namespace ProjectForm
             {
                 EditClicked?.Invoke(sender, e);
             }
+        }
+        private void ProductSearched_TextChanged(object? sender, EventArgs e)
+        {
+            ProductSearched?.Invoke(sender, e);
         }
         private void Product_Load(object sender, EventArgs e)
         {
