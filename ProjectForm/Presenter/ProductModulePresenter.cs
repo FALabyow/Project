@@ -124,7 +124,7 @@ namespace ProjectForm.Presenter
                 {
                     if (Application.OpenForms["Product"] is Product)
                     {
-                        _presenter.LoadProductList();
+                        await _presenter.LoadProductList();
                     }
                 }
                 else if(res.StatusCode == HttpStatusCode.BadRequest)

@@ -51,8 +51,8 @@ namespace ProjectForm.Presenter
                 if (response.IsSuccessStatusCode)
                 {
                     if (Application.OpenForms["Category"] is Category)
-                    {                       
-                        _presenter.LoadCategoryList();
+                    {
+                        await _presenter.LoadCategoryList();
                     }
                     
                 }

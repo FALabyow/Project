@@ -27,7 +27,7 @@ namespace ProjectForm.Presenter
             _view.EditClicked += OnEditClicked;
             _view.ProductSearched += OnProductSearched;
         }
-        public async void LoadProductList()
+        public async Task LoadProductList()
         {
             try
             {
@@ -72,7 +72,8 @@ namespace ProjectForm.Presenter
                 if (res.IsSuccessStatusCode)
                 {
                     _view.ShowMessage("Deleted Successfully");
-                    LoadProductList();
+                    gridView.Rows.RemoveAt(e.RowIndex);
+                    await LoadProductList();
                 }
                 else if (res.StatusCode == HttpStatusCode.Conflict)
                 {
@@ -133,7 +134,7 @@ namespace ProjectForm.Presenter
                 if (res.IsSuccessStatusCode)
                 {
                     _view.ShowMessage("Updated Successfully");
-                    LoadProductList();
+                    await LoadProductList();
                 }
                 else if (res.StatusCode == HttpStatusCode.BadRequest)
                 {
@@ -142,24 +143,24 @@ namespace ProjectForm.Presenter
                     if (errorRes != null)
                     {
                         _view.ShowMessage(errorRes.Error);
-                        LoadProductList();
+                        await LoadProductList();
                     }
                 }
                 else
                 {
                     _view.ShowMessage("Failed to update product!");
-                    LoadProductList();
+                    await LoadProductList();
                 }
             }
             catch (HttpRequestException ex)
             {
                 _view.ShowMessage("Failed to connect to a server: " + ex.Message);
-                LoadProductList();
+                await LoadProductList();
             }
             catch (Exception ex)
             {
                 _view.ShowMessage(ex.Message);
-                LoadProductList();
+                await LoadProductList();
             }
         }
         private void OnProductSearched(object? sender, EventArgs e)

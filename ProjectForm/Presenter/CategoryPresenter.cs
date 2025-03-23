@@ -26,7 +26,7 @@ namespace ProjectForm.Presenter
 
         }
 
-        public async void LoadCategoryList()
+        public async Task LoadCategoryList()
         {
             try
             {
@@ -68,7 +68,8 @@ namespace ProjectForm.Presenter
                 if (res.IsSuccessStatusCode)
                 {
                     _view.ShowMessage("Deleted Successfully");
-                    LoadCategoryList();
+                    gridView.Rows.RemoveAt(e.RowIndex);
+                    await LoadCategoryList();
                 }
                 else if (res.StatusCode == HttpStatusCode.Conflict)
                 {
@@ -128,7 +129,7 @@ namespace ProjectForm.Presenter
                 if (res.IsSuccessStatusCode)
                 {
                     _view.ShowMessage("Update Successfully");
-                    LoadCategoryList();
+                    await LoadCategoryList();
                 }
                 else if (res.StatusCode == HttpStatusCode.BadRequest)
                 {
@@ -137,24 +138,24 @@ namespace ProjectForm.Presenter
                     if (errorRes != null)
                     {
                         _view.ShowMessage(errorRes.Error);
-                        LoadCategoryList();
+                        await LoadCategoryList();
                     }
                 }
                 else
                 {
                     _view.ShowMessage("Failed to update category!");
-                    LoadCategoryList();
+                    await LoadCategoryList();
                 }
             }
             catch (HttpRequestException ex)
             {
                 _view.ShowMessage("Failed to connect to a server: " + ex.Message);
-                LoadCategoryList();
+                await LoadCategoryList();
             }
             catch (Exception ex)
             {
                 _view.ShowMessage(ex.Message);
-                LoadCategoryList();
+                await LoadCategoryList();
             }
         }
     }
