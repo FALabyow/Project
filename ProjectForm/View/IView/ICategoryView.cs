@@ -11,7 +11,7 @@ namespace ProjectForm.View.IView
     {
         void DisplayCategoryList (List<CategoryDto> categortList, int rowNumber);
         void ShowMessage(string message);
-        event EventHandler<DataGridViewCellEventArgs> DeleteClicked;
-        event EventHandler<DataGridViewCellEventArgs> EditClicked;
+        event EventHandler<DataGridViewCellEventArgs>? DeleteClicked;
+        event EventHandler<DataGridViewCellEventArgs>? EditClicked;
     }
 }

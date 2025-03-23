@@ -22,7 +22,7 @@ namespace ProjectForm
         //https://www.youtube.com/watch?v=9LdU5zA5agA&list=PLcDvtJ2MXvhy_YrXdO4VXqZBOADCRJhSc&index=4
         private readonly HttpClient _httpClient;
         private Guid _productId;
-        private ProductModulePresenter _presenter;
+        private ProductModulePresenter? _presenter;
 
         public ProductModule()
         {
@@ -45,10 +45,10 @@ namespace ProjectForm
             await _presenter.LoadCategoryAsync();
         }
 
-        public event EventHandler ClearClicked;
-        public event EventHandler SelectedIndexCategoryCombo;
-        public event EventHandler SaveClicked;
-        public event EventHandler UpdateClicked;
+        public event EventHandler? ClearClicked;
+        public event EventHandler? SelectedIndexCategoryCombo;
+        public event EventHandler? SaveClicked;
+        public event EventHandler? UpdateClicked;
         public Guid Selectedcategory
         {
             get
