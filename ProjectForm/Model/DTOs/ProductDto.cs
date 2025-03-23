@@ -17,5 +17,6 @@ namespace ProjectForm.Model.DTOs
         public int ProductPreOrder { get; set; }
         public DateTime ScannedAt { get; set; }
         public Guid CategoryId { get; set; }
+        public string CategoryName { get; set; }
     }
 }

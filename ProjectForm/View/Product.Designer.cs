@@ -39,13 +39,16 @@
             lblManageProduct = new Label();
             dgvProduct = new DataGridView();
             rowNumber = new DataGridViewTextBoxColumn();
+            productId = new DataGridViewTextBoxColumn();
             productCode = new DataGridViewTextBoxColumn();
             productBarcode = new DataGridViewTextBoxColumn();
             productDescription = new DataGridViewTextBoxColumn();
             productCategory = new DataGridViewTextBoxColumn();
+            productCategoryId = new DataGridViewTextBoxColumn();
             productPrice = new DataGridViewTextBoxColumn();
             productQty = new DataGridViewTextBoxColumn();
             productReorder = new DataGridViewTextBoxColumn();
+            scannedAt = new DataGridViewTextBoxColumn();
             Edit = new DataGridViewImageColumn();
             Delete = new DataGridViewImageColumn();
             panel1.SuspendLayout();
@@ -111,7 +114,7 @@
             dgvProduct.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dgvProduct.ColumnHeadersHeight = 40;
             dgvProduct.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dgvProduct.Columns.AddRange(new DataGridViewColumn[] { rowNumber, productCode, productBarcode, productDescription, productCategory, productPrice, productQty, productReorder, Edit, Delete });
+            dgvProduct.Columns.AddRange(new DataGridViewColumn[] { rowNumber, productId, productCode, productBarcode, productDescription, productCategory, productCategoryId, productPrice, productQty, productReorder, scannedAt, Edit, Delete });
             dgvProduct.Dock = DockStyle.Fill;
             dgvProduct.EnableHeadersVisualStyles = false;
             dgvProduct.GridColor = Color.White;
@@ -129,6 +132,7 @@
             dgvProduct.RowHeadersWidth = 51;
             dgvProduct.Size = new Size(982, 475);
             dgvProduct.TabIndex = 6;
+            dgvProduct.RowPostPaint += dgvProduct_RowPostPaint;
             // 
             // rowNumber
             // 
@@ -138,9 +142,19 @@
             rowNumber.Name = "rowNumber";
             rowNumber.Width = 67;
             // 
+            // productId
+            // 
+            productId.DataPropertyName = "ProductId";
+            productId.HeaderText = "ProductId";
+            productId.MinimumWidth = 6;
+            productId.Name = "productId";
+            productId.Visible = false;
+            productId.Width = 125;
+            // 
             // productCode
             // 
             productCode.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            productCode.DataPropertyName = "ProductCode";
             productCode.HeaderText = "Pcode";
             productCode.MinimumWidth = 6;
             productCode.Name = "productCode";
@@ -149,6 +163,7 @@
             // productBarcode
             // 
             productBarcode.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            productBarcode.DataPropertyName = "BarcodeData";
             productBarcode.HeaderText = "Barcode";
             productBarcode.MinimumWidth = 6;
             productBarcode.Name = "productBarcode";
@@ -157,6 +172,7 @@
             // productDescription
             // 
             productDescription.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            productDescription.DataPropertyName = "ProductName";
             productDescription.HeaderText = "Description";
             productDescription.MinimumWidth = 6;
             productDescription.Name = "productDescription";
@@ -164,6 +180,7 @@
             // productCategory
             // 
             productCategory.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            productCategory.DataPropertyName = "CategoryName";
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
             productCategory.DefaultCellStyle = dataGridViewCellStyle2;
             productCategory.HeaderText = "Category";
@@ -171,9 +188,19 @@
             productCategory.Name = "productCategory";
             productCategory.Width = 123;
             // 
+            // productCategoryId
+            // 
+            productCategoryId.DataPropertyName = "CategoryId";
+            productCategoryId.HeaderText = "Category Id";
+            productCategoryId.MinimumWidth = 6;
+            productCategoryId.Name = "productCategoryId";
+            productCategoryId.Visible = false;
+            productCategoryId.Width = 125;
+            // 
             // productPrice
             // 
             productPrice.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            productPrice.DataPropertyName = "ProductPrice";
             dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleRight;
             productPrice.DefaultCellStyle = dataGridViewCellStyle3;
             productPrice.HeaderText = "Price";
@@ -184,6 +211,7 @@
             // productQty
             // 
             productQty.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            productQty.DataPropertyName = "ProductQuantity";
             productQty.HeaderText = "Qty";
             productQty.MinimumWidth = 6;
             productQty.Name = "productQty";
@@ -192,6 +220,7 @@
             // productReorder
             // 
             productReorder.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            productReorder.DataPropertyName = "ProductPreOrder";
             dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleRight;
             productReorder.DefaultCellStyle = dataGridViewCellStyle4;
             productReorder.HeaderText = "Reorder";
@@ -199,20 +228,29 @@
             productReorder.Name = "productReorder";
             productReorder.Width = 106;
             // 
+            // scannedAt
+            // 
+            scannedAt.DataPropertyName = "ScannedAt";
+            scannedAt.HeaderText = "Scanned At:";
+            scannedAt.MinimumWidth = 6;
+            scannedAt.Name = "scannedAt";
+            scannedAt.Visible = false;
+            scannedAt.Width = 125;
+            // 
             // Edit
             // 
             Edit.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             Edit.HeaderText = "";
-            Edit.Image = Properties.Resources.pen;
+            Edit.ImageLayout = DataGridViewImageCellLayout.Zoom;
             Edit.MinimumWidth = 6;
             Edit.Name = "Edit";
+            Edit.Resizable = DataGridViewTriState.True;
             Edit.Width = 6;
             // 
             // Delete
             // 
             Delete.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             Delete.HeaderText = "";
-            Delete.Image = Properties.Resources.bin;
             Delete.ImageLayout = DataGridViewImageCellLayout.Zoom;
             Delete.MinimumWidth = 6;
             Delete.Name = "Delete";
@@ -241,13 +279,16 @@
         private TextBox txtSearch;
         private DataGridView dgvProduct;
         private DataGridViewTextBoxColumn rowNumber;
+        private DataGridViewTextBoxColumn productId;
         private DataGridViewTextBoxColumn productCode;
         private DataGridViewTextBoxColumn productBarcode;
         private DataGridViewTextBoxColumn productDescription;
         private DataGridViewTextBoxColumn productCategory;
+        private DataGridViewTextBoxColumn productCategoryId;
         private DataGridViewTextBoxColumn productPrice;
         private DataGridViewTextBoxColumn productQty;
         private DataGridViewTextBoxColumn productReorder;
+        private DataGridViewTextBoxColumn scannedAt;
         private DataGridViewImageColumn Edit;
         private DataGridViewImageColumn Delete;
     }

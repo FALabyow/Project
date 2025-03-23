@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 using Project.Application.Interfaces;
 using Project.Domain.Entities;
 using Project.Infrastructure.Persistence;
@@ -19,17 +20,29 @@ namespace Project.Infrastructure.Repositories
         }
         public async Task<IEnumerable<Product>> GetAllProductAsync()
         {
-            return await _context.Products.ToListAsync();
+            try
+            {
+                var res = await _context.Products
+                    .Include(p => p.Category)
+                    .ToListAsync();
+
+                return res;
+            }
+            catch (InvalidOperationException ex) when (ex.InnerException is SqlException sqlEx && sqlEx.Number == 4060)
+            {
+                throw new InvalidOperationException("Database does not exist or access denied!", ex);
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException("An error occurred while fetching categories.", ex);
+            }
         }
-        public async Task<Product?> GetProductByNameAsync(string name)
+        public async Task<Product> GetProductByIdAsync(Guid id)
         {
-            return await _context.Products
-                .Include(b => b.Category)
-                .FirstOrDefaultAsync();
-        }
-        public async Task<Product> GetProductByIdAsync(int id)
-        {
-            return await _context.Products.FindAsync(id);
+            var product = await _context.Products.FindAsync(id) ?? throw new KeyNotFoundException("Product name does not exist");
+
+            return product;
+            //return await _context.Products.FindAsync(id);
         }
         public async Task AddProductAsync(Product product)
         {
@@ -46,20 +59,40 @@ namespace Project.Infrastructure.Repositories
             {
                 throw new InvalidOperationException(ex.Message);
             }
+
              
         }
         public async Task UpdateProductAsync(Product product)
         {
-            _context.Products.Update(product);
-            await _context.SaveChangesAsync();  
-        }
-        public async Task DeleteProductAsync(int id)
-        {
-            var product = await _context.Products.FindAsync(id);
-            if(product != null)
+            try
             {
-                _context.Products.Remove(product);
+                if (product == null)
+                {
+                    throw new ArgumentNullException(nameof(product), "Product name cannot be empty");
+                }
+
+                _context.Products.Update(product);
                 await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateException ex)
+            {
+                throw new InvalidOperationException("The product cannot be updated because the name already exists. " + ex.Message);
+            }
+        }
+        public async Task DeleteProductAsync(Guid id)
+        {
+            try
+            {
+                var product = await _context.Products.FindAsync(id);
+                if (product != null)
+                {
+                    _context.Products.Remove(product);
+                    await _context.SaveChangesAsync();
+                }
+            }
+            catch (DbUpdateException ex)
+            {
+                throw new InvalidOperationException("Failed to delete product: " + ex.Message);
             }
         }
     }

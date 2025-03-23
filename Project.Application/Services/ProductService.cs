@@ -18,18 +18,36 @@ namespace Project.Application.Services
         }
         public async Task<List<ProductDto>> GetAllProductAsync()
         {
-            var products = await _productRepository.GetAllProductAsync();
-            return products.Select(b => new ProductDto
+            try
             {
-                ProductId = b.ProductId,
-                BarcodeData = b.BarcodeData,
-                CategoryId = b.CategoryId,
-                ProductName = b.ProductName,
-                ProductPreOrder = b.ProductPreOrder,
-                ProductPrice = b.ProductPrice,
-                ProductQuantity = b.ProductQuantity,
-                ScannedAt = b.ScannedAt,
-            }).ToList();
+                var products = await _productRepository.GetAllProductAsync();
+                if(!products.Any())
+                    throw new InvalidOperationException("No products found in the database!");
+                return products.Select(b => new ProductDto
+                {
+                    ProductId = b.ProductId,
+                    BarcodeData = b.BarcodeData,
+                    CategoryId = b.CategoryId,
+                    ProductName = b.ProductName,
+                    ProductPreOrder = b.ProductPreOrder,
+                    ProductPrice = b.ProductPrice,
+                    ProductQuantity = b.ProductQuantity,
+                    ScannedAt = b.ScannedAt,
+                    CategoryName = b.Category.CategoryName,
+                    ProductCode = b.ProductCode,
+                }).ToList();
+
+            }
+            catch (InvalidOperationException)
+            {
+                throw;
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException("Unexpected error in service layer", ex);
+            }
+
+
         }
         public async Task AddProductAsync(ProductInfoDto productInfoDto)
         {
@@ -56,6 +74,52 @@ namespace Project.Application.Services
             }
             
             
+        }
+        public async Task<ProductDto> GetProductByIdAsync(Guid id)
+        {
+            try
+            {
+                var product = await _productRepository.GetProductByIdAsync(id);
+                return new ProductDto
+                {
+                    ProductId = product.ProductId,
+                };
+            }
+            catch (KeyNotFoundException)
+            {
+                throw;
+            }
+
+        }
+        public async Task DeleteProductAsync(Guid id)
+        {
+            try
+            {
+
+                await _productRepository.DeleteProductAsync(id);
+            }
+            catch (InvalidOperationException)
+            {
+                throw;
+            }
+        }
+        public async Task UpdateProductAsync(ProductDto productDto)
+        {
+            try
+            {
+                var product = await _productRepository.GetProductByIdAsync(productDto.ProductId);
+                product.ProductName = productDto.ProductName;
+
+                await _productRepository.UpdateProductAsync(product);
+            }
+            catch (ArgumentNullException)
+            {
+                throw;
+            }
+            catch (InvalidOperationException)
+            {
+                throw;
+            }
         }
     }
 }

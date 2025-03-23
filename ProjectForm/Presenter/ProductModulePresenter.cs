@@ -17,9 +17,11 @@ namespace ProjectForm.Presenter
     {
         private readonly IProductModuleView _productModuleView;
         private readonly HttpClient _httpClient;
-        public ProductModulePresenter(IProductModuleView productModuleView)
+        private readonly ProductPresenter _presenter;
+        public ProductModulePresenter(IProductModuleView productModuleView, ProductPresenter presenter)
         {
             _productModuleView = productModuleView;
+            _presenter = presenter;
             _httpClient = new HttpClient { BaseAddress = new Uri("https://localhost:7014/api")};
             _productModuleView.SelectedIndexCategoryCombo += OnSelectedIndexCategoryCombo;
             _productModuleView.SaveClicked -= OnSaveClicked; //Unsubsccibe event
@@ -65,7 +67,7 @@ namespace ProjectForm.Presenter
                 _productModuleView?.ShowMessage(ex.Message);
             }
         }
-        private void OnSelectedIndexCategoryCombo(object sender, EventArgs e)
+        private void OnSelectedIndexCategoryCombo(object? sender, EventArgs e)
         {
             Guid selectedCategoryId = _productModuleView.Selectedcategory;
             if (selectedCategoryId != Guid.Empty)
@@ -73,7 +75,7 @@ namespace ProjectForm.Presenter
                 Debug.WriteLine($"Selected category: {selectedCategoryId}");
             }
         }
-        private async void OnSaveClicked(object sender, EventArgs e)
+        private async void OnSaveClicked(object? sender, EventArgs e)
         {
             Debug.WriteLine("Hey");
             var product = new AddProductDto
@@ -120,7 +122,10 @@ namespace ProjectForm.Presenter
 
                 if (res.IsSuccessStatusCode)
                 {
-                    _productModuleView.LoadingMessage("Product added successfully!");
+                    if (Application.OpenForms["Product"] is Product)
+                    {
+                        await _presenter.LoadProductList();
+                    }
                 }
                 else if(res.StatusCode == HttpStatusCode.BadRequest)
                 {

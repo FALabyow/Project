@@ -9,9 +9,11 @@ namespace ProjectForm.View.IView
 {
     public interface IProductView
     {
-        void DisplayProductList(List<ProductDto> productList, int rowNumber);
+        void DisplayProductList(List<ProductDto> productList);
+        string SearchText { get; }
         void ShowMessage(string message);
         event EventHandler<DataGridViewCellEventArgs>? DeleteClicked;
         event EventHandler<DataGridViewCellEventArgs>? EditClicked;
+        event EventHandler? ProductSearched;
     }
 }
