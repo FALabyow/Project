@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace ProjectForm.View.IView
 {
-    public interface ICategoryView
+    public interface IProductView
     {
-        void DisplayCategoryList (List<CategoryDto> categortList, int rowNumber);
+        void DisplayProductList(List<ProductDto> productList, int rowNumber);
         void ShowMessage(string message);
         event EventHandler<DataGridViewCellEventArgs>? DeleteClicked;
         event EventHandler<DataGridViewCellEventArgs>? EditClicked;
