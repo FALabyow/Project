@@ -103,12 +103,16 @@ namespace Project.Application.Services
                 throw;
             }
         }
-        public async Task UpdateProductAsync(ProductDto productDto)
+        public async Task UpdateProductAsync(UpdateProductDto productDto)
         {
             try
             {
                 var product = await _productRepository.GetProductByIdAsync(productDto.ProductId);
+
                 product.ProductName = productDto.ProductName;
+                product.ProductPrice = productDto.ProductPrice;
+                product.ProductPreOrder = productDto.ProductPreOrder;
+                product.ProductQuantity = productDto.ProductQuantity;
 
                 await _productRepository.UpdateProductAsync(product);
             }

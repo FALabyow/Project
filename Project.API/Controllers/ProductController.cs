@@ -74,7 +74,7 @@ namespace Project.API.Controllers
         }
         
         [HttpPut("/Product/Update/{id}")]
-        public async Task<IActionResult> UpdateCategoryAsync(Guid id, [FromBody] ProductDto productDto)
+        public async Task<IActionResult> UpdateCategoryAsync(Guid id, [FromBody] UpdateProductDto productDto)
         {
             if (id != productDto.ProductId) return BadRequest();
             try

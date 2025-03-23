@@ -109,11 +109,17 @@ namespace ProjectForm.Presenter
 
                 var productId = (Guid)gridView.Rows[e.RowIndex].Cells["productId"].Value;
                 var productName = (string)gridView.Rows[e.RowIndex].Cells["productDescription"].Value;
+                var productPrice = (Decimal)gridView.Rows[e.RowIndex].Cells["productPrice"].Value;
+                var productReorder = (int)gridView.Rows[e.RowIndex].Cells["productReorder"].Value;
+                var productQty = (int)gridView.Rows[e.RowIndex].Cells["productQty"].Value;
 
                 var product = new ProductDto
                 {
                     ProductId = productId,
                     ProductName = productName,
+                    ProductPrice = productPrice,
+                    ProductQuantity = productQty,
+                    ProductPreOrder = productReorder,
                     
                 };
 
@@ -142,7 +148,7 @@ namespace ProjectForm.Presenter
 
                     if (errorRes != null)
                     {
-                        _view.ShowMessage(errorRes.Error);
+                        _view.ShowMessage("dli maka update uy" + productId);
                         await LoadProductList();
                     }
                 }
