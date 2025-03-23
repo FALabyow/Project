@@ -132,6 +132,7 @@
             dgvProduct.RowHeadersWidth = 51;
             dgvProduct.Size = new Size(982, 475);
             dgvProduct.TabIndex = 6;
+            dgvProduct.RowPostPaint += dgvProduct_RowPostPaint;
             // 
             // rowNumber
             // 
@@ -143,6 +144,7 @@
             // 
             // productId
             // 
+            productId.DataPropertyName = "ProductId";
             productId.HeaderText = "ProductId";
             productId.MinimumWidth = 6;
             productId.Name = "productId";
@@ -152,6 +154,7 @@
             // productCode
             // 
             productCode.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            productCode.DataPropertyName = "ProductCode";
             productCode.HeaderText = "Pcode";
             productCode.MinimumWidth = 6;
             productCode.Name = "productCode";
@@ -160,6 +163,7 @@
             // productBarcode
             // 
             productBarcode.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            productBarcode.DataPropertyName = "BarcodeData";
             productBarcode.HeaderText = "Barcode";
             productBarcode.MinimumWidth = 6;
             productBarcode.Name = "productBarcode";
@@ -168,6 +172,7 @@
             // productDescription
             // 
             productDescription.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            productDescription.DataPropertyName = "ProductName";
             productDescription.HeaderText = "Description";
             productDescription.MinimumWidth = 6;
             productDescription.Name = "productDescription";
@@ -175,6 +180,7 @@
             // productCategory
             // 
             productCategory.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            productCategory.DataPropertyName = "CategoryName";
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
             productCategory.DefaultCellStyle = dataGridViewCellStyle2;
             productCategory.HeaderText = "Category";
@@ -184,6 +190,7 @@
             // 
             // productCategoryId
             // 
+            productCategoryId.DataPropertyName = "CategoryId";
             productCategoryId.HeaderText = "Category Id";
             productCategoryId.MinimumWidth = 6;
             productCategoryId.Name = "productCategoryId";
@@ -193,6 +200,7 @@
             // productPrice
             // 
             productPrice.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            productPrice.DataPropertyName = "ProductPrice";
             dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleRight;
             productPrice.DefaultCellStyle = dataGridViewCellStyle3;
             productPrice.HeaderText = "Price";
@@ -203,6 +211,7 @@
             // productQty
             // 
             productQty.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            productQty.DataPropertyName = "ProductQuantity";
             productQty.HeaderText = "Qty";
             productQty.MinimumWidth = 6;
             productQty.Name = "productQty";
@@ -211,6 +220,7 @@
             // productReorder
             // 
             productReorder.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            productReorder.DataPropertyName = "ProductPreOrder";
             dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleRight;
             productReorder.DefaultCellStyle = dataGridViewCellStyle4;
             productReorder.HeaderText = "Reorder";
@@ -220,6 +230,7 @@
             // 
             // scannedAt
             // 
+            scannedAt.DataPropertyName = "ScannedAt";
             scannedAt.HeaderText = "Scanned At:";
             scannedAt.MinimumWidth = 6;
             scannedAt.Name = "scannedAt";

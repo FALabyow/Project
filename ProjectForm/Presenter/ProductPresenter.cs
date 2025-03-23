@@ -39,7 +39,7 @@ namespace ProjectForm.Presenter
                     }
 
                     _allProducts = products;
-                    _view.DisplayProductList(products, 0);
+                    _view.DisplayProductList(products);
                 }
             }
             catch(HttpRequestException ex)
@@ -74,7 +74,7 @@ namespace ProjectForm.Presenter
                     .ToList();
             }
 
-            _view.DisplayProductList(filteredList, 0);
+            _view.DisplayProductList(filteredList);
         }
     }
 }
