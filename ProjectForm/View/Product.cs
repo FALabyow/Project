@@ -17,6 +17,7 @@ namespace ProjectForm
     //https://www.youtube.com/watch?v=9LdU5zA5agA&list=PLcDvtJ2MXvhy_YrXdO4VXqZBOADCRJhSc&index=4
     public partial class Product : Form, IProductView
     {
+        private ProductPresenter? presenter;
         public Product()
         {
             InitializeComponent();
@@ -26,12 +27,28 @@ namespace ProjectForm
         public event EventHandler<DataGridViewCellEventArgs>? EditClicked;
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            ProductModule productModule = new ProductModule();
-            productModule.ShowDialog();
+            if(presenter != null)
+            {
+                ProductModule productModule = new ProductModule(presenter);
+                productModule.ShowDialog();
+            }
+            
         }
         public void DisplayProductList(List<ProductDto> productList, int rowNumber)
         {
+            dgvProduct.Rows.Clear();
+            foreach(var product in productList)
+            {
+                rowNumber++;
 
+                int rowIndex = dgvProduct
+                    .Rows
+                    .Add(rowNumber, product.CategoryId, product.ProductCode, product.BarcodeData, product.ProductName, product.CategoryName, product.CategoryId, product.ProductPrice, product.ProductQuantity, product.ProductPreOrder, product.ScannedAt);
+
+                dgvProduct.Rows[rowIndex].Cells["Edit"].Value = Properties.Resources.edit;
+                dgvProduct.Rows[rowIndex].Cells["Delete"].Value = Properties.Resources.delete;
+
+            }
         }
         public void ShowMessage(string message)
         {
@@ -53,10 +70,10 @@ namespace ProjectForm
                 EditClicked?.Invoke(sender, e);
             }
         }
-
         private void Product_Load(object sender, EventArgs e)
         {
-
+            presenter = new ProductPresenter(this);
+            presenter.LoadProductList();
         }
     }
 }

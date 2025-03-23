@@ -23,8 +23,9 @@ namespace ProjectForm
         private readonly HttpClient _httpClient;
         private Guid _productId;
         private ProductModulePresenter? _presenter;
+        private readonly ProductPresenter presenterPresenter;
 
-        public ProductModule()
+        public ProductModule(ProductPresenter presenterPresenter)
         {
             InitializeComponent();
             _httpClient = new HttpClient { BaseAddress = new Uri("https://localhost:7014/api") };
@@ -33,6 +34,7 @@ namespace ProjectForm
             btnUpdate.Click += (s, e) => UpdateClicked?.Invoke(this, EventArgs.Empty);
             btnClear.Click += (s, e) => ClearClicked?.Invoke(this, EventArgs.Empty);
             cmbCategory.Text = "Select Category";
+            this.presenterPresenter = presenterPresenter;
 
 
         }
@@ -40,7 +42,7 @@ namespace ProjectForm
         {
             if (_presenter == null)
             {
-                _presenter = new ProductModulePresenter(this);
+                _presenter = new ProductModulePresenter(this, presenterPresenter);
             }
             await _presenter.LoadCategoryAsync();
         }

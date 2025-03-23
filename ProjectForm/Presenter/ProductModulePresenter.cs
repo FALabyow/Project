@@ -17,9 +17,11 @@ namespace ProjectForm.Presenter
     {
         private readonly IProductModuleView _productModuleView;
         private readonly HttpClient _httpClient;
-        public ProductModulePresenter(IProductModuleView productModuleView)
+        private readonly ProductPresenter _presenter;
+        public ProductModulePresenter(IProductModuleView productModuleView, ProductPresenter presenter)
         {
             _productModuleView = productModuleView;
+            _presenter = presenter;
             _httpClient = new HttpClient { BaseAddress = new Uri("https://localhost:7014/api")};
             _productModuleView.SelectedIndexCategoryCombo += OnSelectedIndexCategoryCombo;
             _productModuleView.SaveClicked -= OnSaveClicked; //Unsubsccibe event

@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 using Project.Application.Interfaces;
 using Project.Domain.Entities;
 using Project.Infrastructure.Persistence;
@@ -19,7 +20,22 @@ namespace Project.Infrastructure.Repositories
         }
         public async Task<IEnumerable<Product>> GetAllProductAsync()
         {
-            return await _context.Products.ToListAsync();
+            try
+            {
+                var res = await _context.Products
+                    .Include(p => p.Category)
+                    .ToListAsync();
+
+                return res;
+            }
+            catch (InvalidOperationException ex) when (ex.InnerException is SqlException sqlEx && sqlEx.Number == 4060)
+            {
+                throw new InvalidOperationException("Database does not exist or access denied!", ex);
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException("An error occurred while fetching categories.", ex);
+            }
         }
         public async Task<Product?> GetProductByNameAsync(string name)
         {

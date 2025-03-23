@@ -17,8 +17,20 @@ namespace Project.API.Controllers
         [HttpGet("/Products/All")]
         public async Task<ActionResult<IEnumerable<ProductDto>>> GetAllCategoryAsync()
         {
-            var products = await _productService.GetAllProductAsync();
-            return Ok(products);
+            try
+            {
+                var products = await _productService.GetAllProductAsync();
+                return Ok(products);
+            }
+            catch (InvalidOperationException ex)
+            {
+                return BadRequest(new { error = ex.Message });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { error = "An unexpected error occurred.", details = ex.Message });
+            }
+
         }
         [HttpPost("/Product/AddProduct")]
         public async Task<IActionResult> AddCategoryAsync([FromBody] ProductInfoDto productInfoDto)
