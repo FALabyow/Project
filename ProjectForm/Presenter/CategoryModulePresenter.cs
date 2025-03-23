@@ -22,12 +22,11 @@ namespace ProjectForm.Presenter
             _categoryModuleView = categoryModuleView;
             _presenter = presenter;
             _httpClient = new HttpClient { BaseAddress = new Uri("https://localhost:7014/api") };
-            _categoryModuleView.SaveClicked += OnSaveClicked;
-            _categoryModuleView.UpdateClicked += OnUpdateClicked;   
+            _categoryModuleView.SaveClicked += OnSaveClicked;  
             _categoryModuleView.ClearClicked += OnClearClicked;
            
         }
-        private async void OnSaveClicked(object sender, EventArgs e)
+        private async void OnSaveClicked(object? sender, EventArgs e)
         {
             var category = new CategoryDto
             {
@@ -75,11 +74,8 @@ namespace ProjectForm.Presenter
                 _categoryModuleView?.ShowMessage(ex.Message);
             }
         }
-        private async void OnUpdateClicked(object sender, EventArgs e)
-        {
-
-        }
-        private void OnClearClicked(object sender, EventArgs e)
+       
+        private void OnClearClicked(object? sender, EventArgs e)
         {
             _categoryModuleView.CategoryName = "";
             _categoryModuleView.ClearMessage();

@@ -65,7 +65,7 @@ namespace ProjectForm.Presenter
                 _productModuleView?.ShowMessage(ex.Message);
             }
         }
-        private void OnSelectedIndexCategoryCombo(object sender, EventArgs e)
+        private void OnSelectedIndexCategoryCombo(object? sender, EventArgs e)
         {
             Guid selectedCategoryId = _productModuleView.Selectedcategory;
             if (selectedCategoryId != Guid.Empty)
@@ -73,7 +73,7 @@ namespace ProjectForm.Presenter
                 Debug.WriteLine($"Selected category: {selectedCategoryId}");
             }
         }
-        private async void OnSaveClicked(object sender, EventArgs e)
+        private async void OnSaveClicked(object? sender, EventArgs e)
         {
             Debug.WriteLine("Hey");
             var product = new AddProductDto
