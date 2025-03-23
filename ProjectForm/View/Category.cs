@@ -65,7 +65,7 @@ namespace ProjectForm
         public event EventHandler<DataGridViewCellEventArgs> DeleteClicked;
         public event EventHandler<DataGridViewCellEventArgs> EditClicked;
 
-        private void DataGridCategoryView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void DataGridCategoryView_CellContentClick(object? sender, DataGridViewCellEventArgs e)
         {
             var gridView = sender as DataGridView;
             if (gridView == null || e.RowIndex < 0) return;

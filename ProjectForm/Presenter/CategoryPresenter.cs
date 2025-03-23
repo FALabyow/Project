@@ -92,7 +92,6 @@ namespace ProjectForm.Presenter
                 _view.ShowMessage(ex.Message);
             }
         }
-
         private async void OnEditClicked(object sender, DataGridViewCellEventArgs e)
         {
             try
