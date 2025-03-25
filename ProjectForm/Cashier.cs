@@ -43,16 +43,23 @@ namespace ProjectForm
         private void btnSearchProduct_Click(object sender, EventArgs e)
         {
             slide(btnSearchProduct);
+            SearchProducts searchProducts = new SearchProducts();
+            searchProducts.ShowDialog();
         }
 
         private void btnDiscount_Click(object sender, EventArgs e)
         {
             slide(btnDiscount);
+            Discount discount = new Discount();
+            discount.ShowDialog();
         }
 
         private void btnPayment_Click(object sender, EventArgs e)
         {
             slide(btnPayment);
+            SettlePayment settlepayment = new SettlePayment();
+            settlepayment.txtSale.Text = lblDisplaytotal.Text;
+            settlepayment.ShowDialog();
         }
 
         private void btnClearCart_Click(object sender, EventArgs e)

@@ -61,19 +61,19 @@
             label3 = new Label();
             lblDisplaytotal = new Label();
             dgvCashier = new DataGridView();
+            panel7 = new Panel();
+            timer1 = new System.Windows.Forms.Timer(components);
             Column1 = new DataGridViewTextBoxColumn();
             Column8 = new DataGridViewTextBoxColumn();
             Column2 = new DataGridViewTextBoxColumn();
             Column4 = new DataGridViewTextBoxColumn();
-            Column6 = new DataGridViewTextBoxColumn();
+            price = new DataGridViewTextBoxColumn();
             Column3 = new DataGridViewTextBoxColumn();
             Column5 = new DataGridViewTextBoxColumn();
             Column7 = new DataGridViewTextBoxColumn();
             colAdd = new DataGridViewImageColumn();
             colReduce = new DataGridViewImageColumn();
             Delete = new DataGridViewImageColumn();
-            panel7 = new Panel();
-            timer1 = new System.Windows.Forms.Timer(components);
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
@@ -440,7 +440,7 @@
             dgvCashier.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dgvCashier.ColumnHeadersHeight = 40;
             dgvCashier.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dgvCashier.Columns.AddRange(new DataGridViewColumn[] { Column1, Column8, Column2, Column4, Column6, Column3, Column5, Column7, colAdd, colReduce, Delete });
+            dgvCashier.Columns.AddRange(new DataGridViewColumn[] { Column1, Column8, Column2, Column4, price, Column3, Column5, Column7, colAdd, colReduce, Delete });
             dgvCashier.Dock = DockStyle.Fill;
             dgvCashier.EnableHeadersVisualStyles = false;
             dgvCashier.GridColor = Color.White;
@@ -450,6 +450,19 @@
             dgvCashier.RowHeadersWidth = 51;
             dgvCashier.Size = new Size(772, 650);
             dgvCashier.TabIndex = 5;
+            // 
+            // panel7
+            // 
+            panel7.Dock = DockStyle.Fill;
+            panel7.Location = new Point(0, 0);
+            panel7.Name = "panel7";
+            panel7.Size = new Size(1200, 700);
+            panel7.TabIndex = 0;
+            // 
+            // timer1
+            // 
+            timer1.Enabled = true;
+            timer1.Tick += timer1_Tick;
             // 
             // Column1
             // 
@@ -482,15 +495,15 @@
             Column4.MinimumWidth = 6;
             Column4.Name = "Column4";
             // 
-            // Column6
+            // price
             // 
-            Column6.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            price.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleRight;
-            Column6.DefaultCellStyle = dataGridViewCellStyle2;
-            Column6.HeaderText = "Price";
-            Column6.MinimumWidth = 6;
-            Column6.Name = "Column6";
-            Column6.Width = 80;
+            price.DefaultCellStyle = dataGridViewCellStyle2;
+            price.HeaderText = "Price";
+            price.MinimumWidth = 6;
+            price.Name = "price";
+            price.Width = 80;
             // 
             // Column3
             // 
@@ -552,19 +565,6 @@
             Delete.Name = "Delete";
             Delete.Width = 6;
             // 
-            // panel7
-            // 
-            panel7.Dock = DockStyle.Fill;
-            panel7.Location = new Point(0, 0);
-            panel7.Name = "panel7";
-            panel7.Size = new Size(1200, 700);
-            panel7.TabIndex = 0;
-            // 
-            // timer1
-            // 
-            timer1.Enabled = true;
-            timer1.Tick += timer1_Tick;
-            // 
             // Cashier
             // 
             AutoScaleDimensions = new SizeF(11F, 21F);
@@ -617,18 +617,6 @@
         private Panel pnlSlide;
         private DataGridView dgvCashier;
         private Panel panel7;
-        private DataGridViewTextBoxColumn Column1;
-        private DataGridViewTextBoxColumn Column8;
-        private DataGridViewTextBoxColumn Column2;
-        private DataGridViewTextBoxColumn Column4;
-        private DataGridViewTextBoxColumn Column6;
-        private DataGridViewTextBoxColumn Column3;
-        private DataGridViewTextBoxColumn Column5;
-        private DataGridViewTextBoxColumn Column7;
-        private DataGridViewImageColumn colAdd;
-        private DataGridViewImageColumn colReduce;
-        private DataGridViewImageColumn Delete;
-        private Label lblDisplaytotal;
         private Label label3;
         private Label label8;
         private TextBox txtBarcode;
@@ -639,5 +627,17 @@
         private Label lblSalesTotal;
         private Label lblTimer;
         private System.Windows.Forms.Timer timer1;
+        public Label lblDisplaytotal;
+        private DataGridViewTextBoxColumn Column1;
+        private DataGridViewTextBoxColumn Column8;
+        private DataGridViewTextBoxColumn Column2;
+        private DataGridViewTextBoxColumn Column4;
+        private DataGridViewTextBoxColumn price;
+        private DataGridViewTextBoxColumn Column3;
+        private DataGridViewTextBoxColumn Column5;
+        private DataGridViewTextBoxColumn Column7;
+        private DataGridViewImageColumn colAdd;
+        private DataGridViewImageColumn colReduce;
+        private DataGridViewImageColumn Delete;
     }
 }

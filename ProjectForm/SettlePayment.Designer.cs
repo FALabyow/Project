@@ -33,7 +33,7 @@
             txtSale = new TextBox();
             txtCash = new TextBox();
             txtChange = new TextBox();
-            button1 = new Button();
+            btnEnter = new Button();
             SuspendLayout();
             // 
             // contextMenuStrip1
@@ -44,7 +44,9 @@
             // 
             // txtSale
             // 
+            txtSale.Enabled = false;
             txtSale.Location = new Point(12, 23);
+            txtSale.Multiline = true;
             txtSale.Name = "txtSale";
             txtSale.Size = new Size(412, 30);
             txtSale.TabIndex = 1;
@@ -52,37 +54,48 @@
             // txtCash
             // 
             txtCash.Location = new Point(12, 75);
+            txtCash.Multiline = true;
             txtCash.Name = "txtCash";
             txtCash.Size = new Size(412, 30);
             txtCash.TabIndex = 2;
+            txtCash.TextChanged += txtCash_TextChanged;
+            txtCash.KeyPress += txtCash_KeyPress;
             // 
             // txtChange
             // 
+            txtChange.Enabled = false;
             txtChange.Location = new Point(12, 127);
+            txtChange.Multiline = true;
             txtChange.Name = "txtChange";
             txtChange.Size = new Size(412, 30);
             txtChange.TabIndex = 3;
             // 
-            // button1
+            // btnEnter
             // 
-            button1.Location = new Point(12, 174);
-            button1.Name = "button1";
-            button1.Size = new Size(50, 50);
-            button1.TabIndex = 4;
-            button1.Text = "button1";
-            button1.UseVisualStyleBackColor = true;
+            btnEnter.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            btnEnter.BackColor = Color.Peru;
+            btnEnter.FlatAppearance.BorderSize = 0;
+            btnEnter.FlatStyle = FlatStyle.Flat;
+            btnEnter.Location = new Point(148, 194);
+            btnEnter.Name = "btnEnter";
+            btnEnter.Size = new Size(118, 46);
+            btnEnter.TabIndex = 9;
+            btnEnter.Text = "Enter";
+            btnEnter.UseVisualStyleBackColor = false;
             // 
             // SettlePayment
             // 
             AutoScaleDimensions = new SizeF(11F, 21F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(436, 522);
-            Controls.Add(button1);
+            ClientSize = new Size(436, 261);
+            Controls.Add(btnEnter);
             Controls.Add(txtChange);
             Controls.Add(txtCash);
             Controls.Add(txtSale);
             Font = new Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             Margin = new Padding(4, 3, 4, 3);
+            MaximizeBox = false;
+            MinimizeBox = false;
             Name = "SettlePayment";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "SettlePayment";
@@ -93,9 +106,9 @@
         #endregion
 
         private ContextMenuStrip contextMenuStrip1;
-        private TextBox txtSale;
         private TextBox txtCash;
         private TextBox txtChange;
-        private Button button1;
+        private Button btnEnter;
+        public TextBox txtSale;
     }
 }

@@ -10,27 +10,27 @@ using System.Windows.Forms;
 
 namespace ProjectForm
 {
-    public partial class SettlePayment : Form
+    public partial class Discount : Form
     {
-        public SettlePayment()
+        // Discount is per item so 
+        public Discount()
         {
             InitializeComponent();
         }
 
-        private void txtCash_TextChanged(object sender, EventArgs e)
+        private void picClose_Click(object sender, EventArgs e)
         {
-
+            this.Dispose();
         }
 
-        private void txtCash_KeyPress(object sender, KeyPressEventArgs e)
+        private void txtDiscount_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&
-            (e.KeyChar != '.' || txtCash.Text.Contains(".")))
+            (e.KeyChar != '.' || txtDiscount.Text.Contains(".")))
             {
                 e.Handled = true; // Block invalid characters
 
             }
         }
     }
-
 }
