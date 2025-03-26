@@ -1,4 +1,9 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore.ValueGeneration.Internal;
+using Project.Application.Services;
+using ProjectForm.Model.DTOs;
+using ProjectForm.Presenter;
+using ProjectForm.View.IView;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,17 +12,106 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Tab;
 
 namespace ProjectForm
 {
     //part 6 of the tutorial
     //https://www.youtube.com/watch?v=iOc2_NeYF2g&t=490s
-    public partial class Cashier : Form
+    public partial class Cashier : Form, ICashierView
     {
+
+        private readonly CashierPresenter _presenter;
+        public event Action<string, int> QuantityUpdated;
+
         public Cashier()
         {
             InitializeComponent();
+            HttpClient httpClient = new HttpClient { BaseAddress = new Uri("https://localhost:7014/api") };
+            CashierService cashierService = new CashierService(httpClient);
+            _presenter = new CashierPresenter(this, cashierService);
+            dgvCashier.AutoGenerateColumns = false;
+            barcodetxt.TextChanged += cashiersearch_TextChanged;
+            this.Load += async (s, e) => await _presenter.InitializeAsync();
+
+          
+
+            dgvCashier.Visible = true;
         }
+
+
+        public void DisplayProducts(DataTable dataTable)
+        {
+            dgvCashier.DataSource = dataTable;
+        }
+
+        public void ShowError(string message)
+        {
+            MessageBox.Show(message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        public void ClearProductList()
+        {
+            dgvCashier.DataSource = null;
+        }
+
+        public void UpdateTotal(decimal total)
+        {
+            lblSalesTotal.Text = $"{total:C}";
+        }
+
+        private void cashiersearch_TextChanged(object sender, EventArgs e)
+        {
+            _presenter.SearchProduct(barcodetxt.Text);
+        }
+
+
+
+        private void AddRemoveButtonColumn()
+        {
+            if (!dgvCashier.Columns.Contains("Remove"))
+            {
+                DataGridViewButtonColumn btnColumn = new DataGridViewButtonColumn
+                {
+                    HeaderText = "Action",
+                    Text = "Remove",
+                    UseColumnTextForButtonValue = true,
+                    Name = "Remove"
+                };
+                dgvCashier.Columns.Add(btnColumn);
+            }
+        }
+
+        public void AddQuantityColumn()
+        {
+            if (dgvCashier.Columns["BuyerQuantity"] == null)
+            {
+                DataGridViewTextBoxColumn quantityColumn = new DataGridViewTextBoxColumn
+                {
+                    Name = "BuyerQuantity",
+                    HeaderText = "Quantity",
+                    ValueType = typeof(int),
+                    DefaultCellStyle = { NullValue = 1 }
+                };
+                dgvCashier.Columns.Add(quantityColumn);
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         private void picClose_Click(object sender, EventArgs e)
         {
@@ -71,11 +165,11 @@ namespace ProjectForm
         {
             slide(btnDailySales);
             DailySale dailySale = new DailySale();
-            dailySale.ShowDialog(); 
+            dailySale.ShowDialog();
         }
 
         private void btnLogout_Click(object sender, EventArgs e)
-        { 
+        {
             slide(btnLogout);
             if (MessageBox.Show("Are you sure you want to exit?", "Exit", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
@@ -101,10 +195,56 @@ namespace ProjectForm
             lblTranNo.Text = transNo;
         }
 
-        private void txtBarcode_TextChanged(object sender, EventArgs e)
+  
+
+        private void dgvCashier_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            //Tutorial Part 9 – Search product using Barcode
-            //https://youtu.be/rPjDiwp-R8g?si=d0FGLXedW8AnlonY
+            dgvCashier.EndEdit();
+
+            if (e.ColumnIndex >= 0)
+            {
+                // Handle Remove button click
+                if (dgvCashier.Columns[e.ColumnIndex].Name == "Remove")
+                {
+                    string barcode = dgvCashier.Rows[e.RowIndex].Cells["BarcodeData"].Value?.ToString();
+                    if (!string.IsNullOrEmpty(barcode))
+                    {
+                        _presenter.RemoveProduct(barcode);
+                    }
+                }
+
+                // Handle BuyerQuantity column changes
+                else if (e.ColumnIndex == dgvCashier.Columns["BuyerQuantity"].Index)
+                {
+                    var barcode = dgvCashier.Rows[e.RowIndex].Cells["BarcodeData"].Value?.ToString();
+                    var quantityCell = dgvCashier.Rows[e.RowIndex].Cells["BuyerQuantity"].Value;
+
+                    if (barcode != null && int.TryParse(quantityCell?.ToString(), out int newQuantity))
+                    {
+                        QuantityUpdated?.Invoke(barcode, newQuantity);
+                    }
+                }
+            }
+        }
+
+        public void DisplayProductList(List<ProductDto> productList)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ShowMessage(string message)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void barcodetxt_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        void ICashierView.AddRemoveButtonColumn()
+        {
+            AddRemoveButtonColumn();
         }
 
         

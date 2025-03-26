@@ -87,5 +87,10 @@ namespace ProjectForm
                 e.Graphics.DrawString(rowNumber, dgvProduct.Font, brush, e.RowBounds.Left + 10, e.RowBounds.Top + 4);
             }
         }
+
+        private void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
