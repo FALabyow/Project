@@ -62,28 +62,32 @@
             panel1.Controls.Add(btnAdd);
             panel1.Controls.Add(lblManageProduct);
             panel1.Dock = DockStyle.Bottom;
-            panel1.Location = new Point(0, 475);
+            panel1.Location = new Point(0, 357);
+            panel1.Margin = new Padding(3, 2, 3, 2);
             panel1.Name = "panel1";
-            panel1.Size = new Size(982, 78);
+            panel1.Size = new Size(859, 58);
             panel1.TabIndex = 2;
             // 
             // txtSearch
             // 
-            txtSearch.Location = new Point(283, 23);
+            txtSearch.Location = new Point(248, 17);
+            txtSearch.Margin = new Padding(3, 2, 3, 2);
             txtSearch.Name = "txtSearch";
             txtSearch.PlaceholderText = "Search...";
-            txtSearch.Size = new Size(415, 27);
+            txtSearch.Size = new Size(364, 23);
             txtSearch.TabIndex = 5;
+            txtSearch.TextChanged += txtSearch_TextChanged;
             // 
             // btnAdd
             // 
             btnAdd.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             btnAdd.FlatAppearance.BorderSize = 0;
             btnAdd.FlatStyle = FlatStyle.Popup;
-            btnAdd.Font = new Font("Century Gothic", 22.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnAdd.Location = new Point(891, 10);
+            btnAdd.Font = new Font("Microsoft Sans Serif", 22.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnAdd.Location = new Point(780, 8);
+            btnAdd.Margin = new Padding(3, 2, 3, 2);
             btnAdd.Name = "btnAdd";
-            btnAdd.Size = new Size(79, 56);
+            btnAdd.Size = new Size(69, 42);
             btnAdd.TabIndex = 4;
             btnAdd.Text = "+";
             btnAdd.UseVisualStyleBackColor = true;
@@ -92,10 +96,10 @@
             // lblManageProduct
             // 
             lblManageProduct.AutoSize = true;
-            lblManageProduct.Font = new Font("Century Gothic", 12F, FontStyle.Bold | FontStyle.Underline, GraphicsUnit.Point, 0);
-            lblManageProduct.Location = new Point(12, 23);
+            lblManageProduct.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold | FontStyle.Underline, GraphicsUnit.Point, 0);
+            lblManageProduct.Location = new Point(10, 17);
             lblManageProduct.Name = "lblManageProduct";
-            lblManageProduct.Size = new Size(172, 23);
+            lblManageProduct.Size = new Size(140, 20);
             lblManageProduct.TabIndex = 3;
             lblManageProduct.Text = "Manage Product";
             // 
@@ -106,7 +110,7 @@
             dgvProduct.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = Color.FromArgb(93, 64, 55);
-            dataGridViewCellStyle1.Font = new Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle1.Font = new Font("Microsoft Sans Serif", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             dataGridViewCellStyle1.ForeColor = Color.FromArgb(255, 236, 179);
             dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
@@ -119,6 +123,7 @@
             dgvProduct.EnableHeadersVisualStyles = false;
             dgvProduct.GridColor = Color.White;
             dgvProduct.Location = new Point(0, 0);
+            dgvProduct.Margin = new Padding(3, 2, 3, 2);
             dgvProduct.Name = "dgvProduct";
             dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle5.BackColor = SystemColors.Window;
@@ -130,7 +135,7 @@
             dgvProduct.RowHeadersDefaultCellStyle = dataGridViewCellStyle5;
             dgvProduct.RowHeadersVisible = false;
             dgvProduct.RowHeadersWidth = 51;
-            dgvProduct.Size = new Size(982, 475);
+            dgvProduct.Size = new Size(859, 357);
             dgvProduct.TabIndex = 6;
             dgvProduct.RowPostPaint += dgvProduct_RowPostPaint;
             // 
@@ -140,7 +145,7 @@
             rowNumber.HeaderText = "No.";
             rowNumber.MinimumWidth = 6;
             rowNumber.Name = "rowNumber";
-            rowNumber.Width = 67;
+            rowNumber.Width = 55;
             // 
             // productId
             // 
@@ -158,7 +163,7 @@
             productCode.HeaderText = "Pcode";
             productCode.MinimumWidth = 6;
             productCode.Name = "productCode";
-            productCode.Width = 96;
+            productCode.Width = 74;
             // 
             // productBarcode
             // 
@@ -167,7 +172,7 @@
             productBarcode.HeaderText = "Barcode";
             productBarcode.MinimumWidth = 6;
             productBarcode.Name = "productBarcode";
-            productBarcode.Width = 112;
+            productBarcode.Width = 87;
             // 
             // productDescription
             // 
@@ -186,7 +191,7 @@
             productCategory.HeaderText = "Category";
             productCategory.MinimumWidth = 6;
             productCategory.Name = "productCategory";
-            productCategory.Width = 123;
+            productCategory.Width = 91;
             // 
             // productCategoryId
             // 
@@ -206,7 +211,7 @@
             productPrice.HeaderText = "Price";
             productPrice.MinimumWidth = 6;
             productPrice.Name = "productPrice";
-            productPrice.Width = 80;
+            productPrice.Width = 65;
             // 
             // productQty
             // 
@@ -215,7 +220,7 @@
             productQty.HeaderText = "Qty";
             productQty.MinimumWidth = 6;
             productQty.Name = "productQty";
-            productQty.Width = 71;
+            productQty.Width = 54;
             // 
             // productReorder
             // 
@@ -226,7 +231,7 @@
             productReorder.HeaderText = "Reorder";
             productReorder.MinimumWidth = 6;
             productReorder.Name = "productReorder";
-            productReorder.Width = 106;
+            productReorder.Width = 85;
             // 
             // scannedAt
             // 
@@ -258,11 +263,12 @@
             // 
             // Product
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(982, 553);
+            ClientSize = new Size(859, 415);
             Controls.Add(dgvProduct);
             Controls.Add(panel1);
+            Margin = new Padding(3, 2, 3, 2);
             Name = "Product";
             Text = "Product";
             Load += Product_Load;
