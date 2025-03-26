@@ -24,6 +24,20 @@ namespace Project.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "SalesHistory",
+                columns: table => new
+                {
+                    SalesHistoryId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    InvoiceNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    SaleDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    TotalAmount = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SalesHistory", x => x.SalesHistoryId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Products",
                 columns: table => new
                 {
@@ -46,6 +60,29 @@ namespace Project.Infrastructure.Migrations
                         principalTable: "Categories",
                         principalColumn: "CategoryId",
                         onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "SalesDetails",
+                columns: table => new
+                {
+                    SalesDetailId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    SalesHistoryId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ProductId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ProductCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ProductName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    QuantitySold = table.Column<int>(type: "int", nullable: false),
+                    UnitPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SalesDetails", x => x.SalesDetailId);
+                    table.ForeignKey(
+                        name: "FK_SalesDetails_SalesHistory_SalesHistoryId",
+                        column: x => x.SalesHistoryId,
+                        principalTable: "SalesHistory",
+                        principalColumn: "SalesHistoryId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -93,6 +130,11 @@ namespace Project.Infrastructure.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_SalesDetails_SalesHistoryId",
+                table: "SalesDetails",
+                column: "SalesHistoryId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_StockRecords_ProductId",
                 table: "StockRecords",
                 column: "ProductId");
@@ -102,7 +144,13 @@ namespace Project.Infrastructure.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "SalesDetails");
+
+            migrationBuilder.DropTable(
                 name: "StockRecords");
+
+            migrationBuilder.DropTable(
+                name: "SalesHistory");
 
             migrationBuilder.DropTable(
                 name: "Products");

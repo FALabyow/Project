@@ -17,6 +17,8 @@ namespace Project.Infrastructure.Persistence
         public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories  { get; set; }
         public DbSet<StockRecord> StockRecords { get; set; }
+        public DbSet<SalesDetail> SalesDetails { get; set; }
+        public DbSet<SalesHistory> SalesHistory { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -46,6 +48,12 @@ namespace Project.Infrastructure.Persistence
                 .HasOne(s => s.Product)
                 .WithMany(p => p.StockRecords)
                 .HasForeignKey(s => s.ProductId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<SalesDetail>()
+                .HasOne(sd => sd.SalesHistory)
+                .WithMany(sh => sh.SalesDetails)
+                .HasForeignKey(sd => sd.SalesHistoryId)
                 .OnDelete(DeleteBehavior.Cascade);
 
             base.OnModelCreating(modelBuilder);
