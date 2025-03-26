@@ -30,10 +30,6 @@
         {
             components = new System.ComponentModel.Container();
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
             panel1 = new Panel();
             btnLogout = new Button();
             btnDailySales = new Button();
@@ -50,10 +46,10 @@
             panel4 = new Panel();
             picClose = new PictureBox();
             panel5 = new Panel();
+            barcodetxt = new TextBox();
             lblTimer = new Label();
             lblSalesTotal = new Label();
             label8 = new Label();
-            txtBarcode = new TextBox();
             label7 = new Label();
             lblDate = new Label();
             label6 = new Label();
@@ -63,17 +59,11 @@
             dgvCashier = new DataGridView();
             panel7 = new Panel();
             timer1 = new System.Windows.Forms.Timer(components);
-            Column1 = new DataGridViewTextBoxColumn();
-            Column8 = new DataGridViewTextBoxColumn();
-            Column2 = new DataGridViewTextBoxColumn();
-            Column4 = new DataGridViewTextBoxColumn();
-            price = new DataGridViewTextBoxColumn();
-            Column3 = new DataGridViewTextBoxColumn();
-            Column5 = new DataGridViewTextBoxColumn();
-            Column7 = new DataGridViewTextBoxColumn();
-            colAdd = new DataGridViewImageColumn();
-            colReduce = new DataGridViewImageColumn();
-            Delete = new DataGridViewImageColumn();
+            BarcodeData = new DataGridViewTextBoxColumn();
+            ProductName = new DataGridViewTextBoxColumn();
+            ProductPrice = new DataGridViewTextBoxColumn();
+            ProductQuantity = new DataGridViewTextBoxColumn();
+            CategoryName = new DataGridViewTextBoxColumn();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
@@ -107,7 +97,7 @@
             btnLogout.BackColor = Color.FromArgb(193, 135, 107);
             btnLogout.FlatAppearance.BorderSize = 0;
             btnLogout.FlatStyle = FlatStyle.Flat;
-            btnLogout.Font = new Font("Century Gothic", 10.8F);
+            btnLogout.Font = new Font("Microsoft Sans Serif", 10.8F);
             btnLogout.ForeColor = Color.Cornsilk;
             btnLogout.Image = Properties.Resources.logout1;
             btnLogout.ImageAlign = ContentAlignment.MiddleLeft;
@@ -126,7 +116,7 @@
             btnDailySales.Dock = DockStyle.Top;
             btnDailySales.FlatAppearance.BorderSize = 0;
             btnDailySales.FlatStyle = FlatStyle.Flat;
-            btnDailySales.Font = new Font("Century Gothic", 10.8F);
+            btnDailySales.Font = new Font("Microsoft Sans Serif", 10.8F);
             btnDailySales.ForeColor = Color.FromArgb(255, 245, 230);
             btnDailySales.Image = Properties.Resources.charts;
             btnDailySales.ImageAlign = ContentAlignment.MiddleLeft;
@@ -144,7 +134,7 @@
             btnClearCart.Dock = DockStyle.Top;
             btnClearCart.FlatAppearance.BorderSize = 0;
             btnClearCart.FlatStyle = FlatStyle.Flat;
-            btnClearCart.Font = new Font("Century Gothic", 10.8F);
+            btnClearCart.Font = new Font("Microsoft Sans Serif", 10.8F);
             btnClearCart.ForeColor = Color.FromArgb(255, 245, 230);
             btnClearCart.Image = Properties.Resources.clear;
             btnClearCart.ImageAlign = ContentAlignment.MiddleLeft;
@@ -162,7 +152,7 @@
             btnPayment.Dock = DockStyle.Top;
             btnPayment.FlatAppearance.BorderSize = 0;
             btnPayment.FlatStyle = FlatStyle.Flat;
-            btnPayment.Font = new Font("Century Gothic", 10.8F);
+            btnPayment.Font = new Font("Microsoft Sans Serif", 10.8F);
             btnPayment.ForeColor = Color.FromArgb(255, 245, 230);
             btnPayment.Image = Properties.Resources.payment_method;
             btnPayment.ImageAlign = ContentAlignment.MiddleLeft;
@@ -181,7 +171,7 @@
             btnDiscount.Dock = DockStyle.Top;
             btnDiscount.FlatAppearance.BorderSize = 0;
             btnDiscount.FlatStyle = FlatStyle.Flat;
-            btnDiscount.Font = new Font("Century Gothic", 10.8F);
+            btnDiscount.Font = new Font("Microsoft Sans Serif", 10.8F);
             btnDiscount.ForeColor = Color.FromArgb(255, 245, 230);
             btnDiscount.Image = Properties.Resources.discount;
             btnDiscount.ImageAlign = ContentAlignment.MiddleLeft;
@@ -201,7 +191,7 @@
             btnSearchProduct.Dock = DockStyle.Top;
             btnSearchProduct.FlatAppearance.BorderSize = 0;
             btnSearchProduct.FlatStyle = FlatStyle.Flat;
-            btnSearchProduct.Font = new Font("Century Gothic", 10.8F);
+            btnSearchProduct.Font = new Font("Microsoft Sans Serif", 10.8F);
             btnSearchProduct.ForeColor = Color.FromArgb(255, 245, 230);
             btnSearchProduct.Image = Properties.Resources.search_interface_symbol32;
             btnSearchProduct.ImageAlign = ContentAlignment.MiddleLeft;
@@ -220,7 +210,7 @@
             btnTransaction.Dock = DockStyle.Top;
             btnTransaction.FlatAppearance.BorderSize = 0;
             btnTransaction.FlatStyle = FlatStyle.Flat;
-            btnTransaction.Font = new Font("Century Gothic", 10.2F);
+            btnTransaction.Font = new Font("Microsoft Sans Serif", 10.2F);
             btnTransaction.ForeColor = Color.FromArgb(255, 245, 230);
             btnTransaction.Image = Properties.Resources.transaction1;
             btnTransaction.ImageAlign = ContentAlignment.MiddleLeft;
@@ -247,11 +237,11 @@
             // 
             label1.AutoSize = true;
             label1.BackColor = Color.Transparent;
-            label1.Font = new Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label1.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label1.ForeColor = Color.Black;
             label1.Location = new Point(55, 139);
             label1.Name = "label1";
-            label1.Size = new Size(82, 23);
+            label1.Size = new Size(63, 20);
             label1.TabIndex = 0;
             label1.Text = "Cashier";
             // 
@@ -309,10 +299,10 @@
             // panel5
             // 
             panel5.BackColor = Color.FromArgb(225, 215, 190);
+            panel5.Controls.Add(barcodetxt);
             panel5.Controls.Add(lblTimer);
             panel5.Controls.Add(lblSalesTotal);
             panel5.Controls.Add(label8);
-            panel5.Controls.Add(txtBarcode);
             panel5.Controls.Add(label7);
             panel5.Controls.Add(lblDate);
             panel5.Controls.Add(label6);
@@ -325,11 +315,19 @@
             panel5.Size = new Size(220, 650);
             panel5.TabIndex = 3;
             // 
+            // barcodetxt
+            // 
+            barcodetxt.Location = new Point(18, 280);
+            barcodetxt.Name = "barcodetxt";
+            barcodetxt.Size = new Size(190, 24);
+            barcodetxt.TabIndex = 10;
+            barcodetxt.TextChanged += barcodetxt_TextChanged;
+            // 
             // lblTimer
             // 
             lblTimer.BackColor = Color.Moccasin;
             lblTimer.Dock = DockStyle.Bottom;
-            lblTimer.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblTimer.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblTimer.Location = new Point(0, 600);
             lblTimer.Name = "lblTimer";
             lblTimer.Size = new Size(220, 50);
@@ -352,26 +350,17 @@
             label8.AutoSize = true;
             label8.Location = new Point(8, 380);
             label8.Name = "label8";
-            label8.Size = new Size(110, 21);
+            label8.Size = new Size(90, 18);
             label8.TabIndex = 7;
             label8.Text = "Sales Total :";
-            // 
-            // txtBarcode
-            // 
-            txtBarcode.Location = new Point(8, 279);
-            txtBarcode.Name = "txtBarcode";
-            txtBarcode.ReadOnly = true;
-            txtBarcode.Size = new Size(145, 30);
-            txtBarcode.TabIndex = 6;
-            txtBarcode.TextChanged += txtBarcode_TextChanged;
             // 
             // label7
             // 
             label7.AutoSize = true;
-            label7.Font = new Font("Century Gothic", 10.8F, FontStyle.Underline, GraphicsUnit.Point, 0);
+            label7.Font = new Font("Microsoft Sans Serif", 10.8F, FontStyle.Underline, GraphicsUnit.Point, 0);
             label7.Location = new Point(8, 247);
             label7.Name = "label7";
-            label7.Size = new Size(85, 21);
+            label7.Size = new Size(64, 18);
             label7.TabIndex = 5;
             label7.Text = "Barcode";
             // 
@@ -380,17 +369,17 @@
             lblDate.AutoSize = true;
             lblDate.Location = new Point(8, 204);
             lblDate.Name = "lblDate";
-            lblDate.Size = new Size(90, 21);
+            lblDate.Size = new Size(72, 18);
             lblDate.TabIndex = 4;
             lblDate.Text = "00000000";
             // 
             // label6
             // 
             label6.AutoSize = true;
-            label6.Font = new Font("Century Gothic", 10.8F, FontStyle.Underline, GraphicsUnit.Point, 0);
+            label6.Font = new Font("Microsoft Sans Serif", 10.8F, FontStyle.Underline, GraphicsUnit.Point, 0);
             label6.Location = new Point(8, 167);
             label6.Name = "label6";
-            label6.Size = new Size(54, 21);
+            label6.Size = new Size(39, 18);
             label6.TabIndex = 3;
             label6.Text = "Date";
             // 
@@ -399,17 +388,17 @@
             lblTranNo.AutoSize = true;
             lblTranNo.Location = new Point(6, 125);
             lblTranNo.Name = "lblTranNo";
-            lblTranNo.Size = new Size(100, 21);
+            lblTranNo.Size = new Size(80, 18);
             lblTranNo.TabIndex = 2;
             lblTranNo.Text = "000000000";
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Font = new Font("Century Gothic", 10.8F, FontStyle.Underline, GraphicsUnit.Point, 0);
+            label3.Font = new Font("Microsoft Sans Serif", 10.8F, FontStyle.Underline, GraphicsUnit.Point, 0);
             label3.Location = new Point(6, 88);
             label3.Name = "label3";
-            label3.Size = new Size(145, 21);
+            label3.Size = new Size(114, 18);
             label3.TabIndex = 1;
             label3.Text = "Transaction No.";
             // 
@@ -417,7 +406,7 @@
             // 
             lblDisplaytotal.BackColor = Color.FromArgb(141, 110, 98);
             lblDisplaytotal.Dock = DockStyle.Top;
-            lblDisplaytotal.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblDisplaytotal.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblDisplaytotal.Location = new Point(0, 0);
             lblDisplaytotal.Name = "lblDisplaytotal";
             lblDisplaytotal.Size = new Size(220, 31);
@@ -432,7 +421,7 @@
             dgvCashier.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = Color.FromArgb(93, 64, 55);
-            dataGridViewCellStyle1.Font = new Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle1.Font = new Font("Microsoft Sans Serif", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             dataGridViewCellStyle1.ForeColor = Color.FromArgb(255, 236, 179);
             dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
@@ -440,7 +429,7 @@
             dgvCashier.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dgvCashier.ColumnHeadersHeight = 40;
             dgvCashier.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dgvCashier.Columns.AddRange(new DataGridViewColumn[] { Column1, Column8, Column2, Column4, price, Column3, Column5, Column7, colAdd, colReduce, Delete });
+            dgvCashier.Columns.AddRange(new DataGridViewColumn[] { BarcodeData, ProductName, ProductPrice, ProductQuantity, CategoryName });
             dgvCashier.Dock = DockStyle.Fill;
             dgvCashier.EnableHeadersVisualStyles = false;
             dgvCashier.GridColor = Color.White;
@@ -450,6 +439,7 @@
             dgvCashier.RowHeadersWidth = 51;
             dgvCashier.Size = new Size(772, 650);
             dgvCashier.TabIndex = 5;
+            dgvCashier.CellContentClick += dgvCashier_CellContentClick;
             // 
             // panel7
             // 
@@ -464,110 +454,44 @@
             timer1.Enabled = true;
             timer1.Tick += timer1_Tick;
             // 
-            // Column1
+            // BarcodeData
             // 
-            Column1.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            Column1.HeaderText = "No.";
-            Column1.MinimumWidth = 6;
-            Column1.Name = "Column1";
-            Column1.Width = 67;
+            BarcodeData.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            BarcodeData.DataPropertyName = "BarcodeData";
+            BarcodeData.HeaderText = "Barcode";
+            BarcodeData.Name = "BarcodeData";
             // 
-            // Column8
+            // ProductName
             // 
-            Column8.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            Column8.HeaderText = "ID";
-            Column8.MinimumWidth = 6;
-            Column8.Name = "Column8";
-            Column8.Width = 55;
+            ProductName.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            ProductName.DataPropertyName = "ProductName";
+            ProductName.HeaderText = "Description";
+            ProductName.Name = "ProductName";
             // 
-            // Column2
+            // ProductPrice
             // 
-            Column2.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            Column2.HeaderText = "Pcode";
-            Column2.MinimumWidth = 6;
-            Column2.Name = "Column2";
-            Column2.Width = 96;
+            ProductPrice.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            ProductPrice.DataPropertyName = "ProductPrice";
+            ProductPrice.HeaderText = "Price";
+            ProductPrice.Name = "ProductPrice";
             // 
-            // Column4
+            // ProductQuantity
             // 
-            Column4.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            Column4.HeaderText = "Description";
-            Column4.MinimumWidth = 6;
-            Column4.Name = "Column4";
+            ProductQuantity.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            ProductQuantity.DataPropertyName = "ProductQuantity";
+            ProductQuantity.HeaderText = "Quantity";
+            ProductQuantity.Name = "ProductQuantity";
             // 
-            // price
+            // CategoryName
             // 
-            price.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleRight;
-            price.DefaultCellStyle = dataGridViewCellStyle2;
-            price.HeaderText = "Price";
-            price.MinimumWidth = 6;
-            price.Name = "price";
-            price.Width = 80;
-            // 
-            // Column3
-            // 
-            Column3.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            Column3.DefaultCellStyle = dataGridViewCellStyle3;
-            Column3.HeaderText = "Qty";
-            Column3.MinimumWidth = 6;
-            Column3.Name = "Column3";
-            Column3.Width = 71;
-            // 
-            // Column5
-            // 
-            Column5.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleRight;
-            Column5.DefaultCellStyle = dataGridViewCellStyle4;
-            Column5.HeaderText = "Discount";
-            Column5.MinimumWidth = 6;
-            Column5.Name = "Column5";
-            Column5.Width = 113;
-            // 
-            // Column7
-            // 
-            Column7.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleRight;
-            Column7.DefaultCellStyle = dataGridViewCellStyle5;
-            Column7.HeaderText = "Total";
-            Column7.MinimumWidth = 6;
-            Column7.Name = "Column7";
-            Column7.Width = 79;
-            // 
-            // colAdd
-            // 
-            colAdd.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            colAdd.HeaderText = "";
-            colAdd.Image = Properties.Resources.plus;
-            colAdd.ImageLayout = DataGridViewImageCellLayout.Zoom;
-            colAdd.MinimumWidth = 6;
-            colAdd.Name = "colAdd";
-            colAdd.Width = 6;
-            // 
-            // colReduce
-            // 
-            colReduce.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            colReduce.HeaderText = "";
-            colReduce.Image = Properties.Resources.minus_sign;
-            colReduce.ImageLayout = DataGridViewImageCellLayout.Zoom;
-            colReduce.MinimumWidth = 6;
-            colReduce.Name = "colReduce";
-            colReduce.Width = 6;
-            // 
-            // Delete
-            // 
-            Delete.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            Delete.HeaderText = "";
-            Delete.Image = Properties.Resources.bin;
-            Delete.ImageLayout = DataGridViewImageCellLayout.Zoom;
-            Delete.MinimumWidth = 6;
-            Delete.Name = "Delete";
-            Delete.Width = 6;
+            CategoryName.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            CategoryName.DataPropertyName = "CategoryName";
+            CategoryName.HeaderText = "Category";
+            CategoryName.Name = "CategoryName";
             // 
             // Cashier
             // 
-            AutoScaleDimensions = new SizeF(11F, 21F);
+            AutoScaleDimensions = new SizeF(8F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(225, 215, 190);
             ClientSize = new Size(1200, 700);
@@ -577,7 +501,7 @@
             Controls.Add(panel3);
             Controls.Add(panel1);
             Controls.Add(panel7);
-            Font = new Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            Font = new Font("Microsoft Sans Serif", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             FormBorderStyle = FormBorderStyle.None;
             Margin = new Padding(4, 3, 4, 3);
             Name = "Cashier";
@@ -619,7 +543,6 @@
         private Panel panel7;
         private Label label3;
         private Label label8;
-        private TextBox txtBarcode;
         private Label label7;
         private Label lblDate;
         private Label label6;
@@ -628,16 +551,11 @@
         private Label lblTimer;
         private System.Windows.Forms.Timer timer1;
         public Label lblDisplaytotal;
-        private DataGridViewTextBoxColumn Column1;
-        private DataGridViewTextBoxColumn Column8;
-        private DataGridViewTextBoxColumn Column2;
-        private DataGridViewTextBoxColumn Column4;
-        private DataGridViewTextBoxColumn price;
-        private DataGridViewTextBoxColumn Column3;
-        private DataGridViewTextBoxColumn Column5;
-        private DataGridViewTextBoxColumn Column7;
-        private DataGridViewImageColumn colAdd;
-        private DataGridViewImageColumn colReduce;
-        private DataGridViewImageColumn Delete;
+        private TextBox barcodetxt;
+        private DataGridViewTextBoxColumn BarcodeData;
+        private DataGridViewTextBoxColumn ProductName;
+        private DataGridViewTextBoxColumn ProductPrice;
+        private DataGridViewTextBoxColumn ProductQuantity;
+        private DataGridViewTextBoxColumn CategoryName;
     }
 }
