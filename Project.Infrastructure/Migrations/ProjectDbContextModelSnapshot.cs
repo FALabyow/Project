@@ -59,7 +59,7 @@ namespace Project.Infrastructure.Migrations
 
                     b.Property<string>("ProductName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("ProductPreOrder")
                         .HasColumnType("int");
@@ -80,7 +80,35 @@ namespace Project.Infrastructure.Migrations
                     b.HasIndex("ProductCode")
                         .IsUnique();
 
+                    b.HasIndex("ProductName")
+                        .IsUnique();
+
                     b.ToTable("Products");
+                });
+
+            modelBuilder.Entity("Project.Domain.Entities.StockRecord", b =>
+                {
+                    b.Property<Guid>("StockRecordId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("ProductId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("ReferenceNum")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateOnly>("StockInDate")
+                        .HasColumnType("date");
+
+                    b.Property<int>("StockInQty")
+                        .HasColumnType("int");
+
+                    b.HasKey("StockRecordId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("StockRecord");
                 });
 
             modelBuilder.Entity("Project.Domain.Entities.Product", b =>
@@ -94,9 +122,25 @@ namespace Project.Infrastructure.Migrations
                     b.Navigation("Category");
                 });
 
+            modelBuilder.Entity("Project.Domain.Entities.StockRecord", b =>
+                {
+                    b.HasOne("Project.Domain.Entities.Product", "Product")
+                        .WithMany("StockRecords")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+                });
+
             modelBuilder.Entity("Project.Domain.Entities.Category", b =>
                 {
                     b.Navigation("Products");
+                });
+
+            modelBuilder.Entity("Project.Domain.Entities.Product", b =>
+                {
+                    b.Navigation("StockRecords");
                 });
 #pragma warning restore 612, 618
         }

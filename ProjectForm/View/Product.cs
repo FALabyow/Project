@@ -74,10 +74,10 @@ namespace ProjectForm
         {
             ProductSearched?.Invoke(sender, e);
         }
-        private void Product_Load(object sender, EventArgs e)
+        private async void Product_Load(object sender, EventArgs e)
         {
             presenter = new ProductPresenter(this);
-            presenter.LoadProductList();
+            await presenter.LoadProductList();
         }
         private void dgvProduct_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {

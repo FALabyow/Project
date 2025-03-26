@@ -36,13 +36,13 @@
             tabPage3 = new TabPage();
             btnEntry = new Button();
             dgvStockIn = new DataGridView();
-            Column1 = new DataGridViewTextBoxColumn();
-            Column8 = new DataGridViewTextBoxColumn();
-            Column9 = new DataGridViewTextBoxColumn();
-            Column2 = new DataGridViewTextBoxColumn();
-            Column4 = new DataGridViewTextBoxColumn();
-            Column7 = new DataGridViewTextBoxColumn();
-            Column5 = new DataGridViewTextBoxColumn();
+            rowNumber = new DataGridViewTextBoxColumn();
+            ProductId = new DataGridViewTextBoxColumn();
+            referenceNum = new DataGridViewTextBoxColumn();
+            productCode = new DataGridViewTextBoxColumn();
+            productName = new DataGridViewTextBoxColumn();
+            productQty = new DataGridViewTextBoxColumn();
+            stockInDate = new DataGridViewTextBoxColumn();
             Delete = new DataGridViewImageColumn();
             panel2 = new Panel();
             LinProduct = new LinkLabel();
@@ -93,7 +93,7 @@
             lblManageProduct.Font = new Font("Century Gothic", 12F, FontStyle.Bold | FontStyle.Underline, GraphicsUnit.Point, 0);
             lblManageProduct.Location = new Point(14, 38);
             lblManageProduct.Name = "lblManageProduct";
-            lblManageProduct.Size = new Size(168, 23);
+            lblManageProduct.Size = new Size(131, 19);
             lblManageProduct.TabIndex = 3;
             lblManageProduct.Text = "Stock In Module";
             lblManageProduct.TextAlign = ContentAlignment.MiddleCenter;
@@ -115,10 +115,10 @@
             tabPage3.Controls.Add(btnEntry);
             tabPage3.Controls.Add(dgvStockIn);
             tabPage3.Controls.Add(panel2);
-            tabPage3.Location = new Point(4, 30);
+            tabPage3.Location = new Point(4, 28);
             tabPage3.Name = "tabPage3";
             tabPage3.Padding = new Padding(3);
-            tabPage3.Size = new Size(974, 732);
+            tabPage3.Size = new Size(974, 734);
             tabPage3.TabIndex = 2;
             tabPage3.Text = "Stock In";
             // 
@@ -151,7 +151,7 @@
             dgvStockIn.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dgvStockIn.ColumnHeadersHeight = 40;
             dgvStockIn.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dgvStockIn.Columns.AddRange(new DataGridViewColumn[] { Column1, Column8, Column9, Column2, Column4, Column7, Column5, Delete });
+            dgvStockIn.Columns.AddRange(new DataGridViewColumn[] { rowNumber, ProductId, referenceNum, productCode, productName, productQty, stockInDate, Delete });
             dgvStockIn.Dock = DockStyle.Top;
             dgvStockIn.EnableHeadersVisualStyles = false;
             dgvStockIn.GridColor = Color.White;
@@ -162,60 +162,60 @@
             dgvStockIn.Size = new Size(968, 437);
             dgvStockIn.TabIndex = 4;
             // 
-            // Column1
+            // rowNumber
             // 
-            Column1.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            Column1.HeaderText = "No.";
-            Column1.MinimumWidth = 6;
-            Column1.Name = "Column1";
-            Column1.Width = 67;
+            rowNumber.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            rowNumber.HeaderText = "No.";
+            rowNumber.MinimumWidth = 6;
+            rowNumber.Name = "rowNumber";
+            rowNumber.Width = 57;
             // 
-            // Column8
+            // ProductId
             // 
-            Column8.HeaderText = "Id";
-            Column8.MinimumWidth = 6;
-            Column8.Name = "Column8";
-            Column8.Visible = false;
-            Column8.Width = 125;
+            ProductId.HeaderText = "Id";
+            ProductId.MinimumWidth = 6;
+            ProductId.Name = "ProductId";
+            ProductId.Visible = false;
+            ProductId.Width = 125;
             // 
-            // Column9
+            // referenceNum
             // 
-            Column9.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            Column9.HeaderText = "ReferenceNo.";
-            Column9.MinimumWidth = 6;
-            Column9.Name = "Column9";
-            Column9.Width = 160;
+            referenceNum.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            referenceNum.HeaderText = "ReferenceNo.";
+            referenceNum.MinimumWidth = 6;
+            referenceNum.Name = "referenceNum";
+            referenceNum.Width = 135;
             // 
-            // Column2
+            // productCode
             // 
-            Column2.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            Column2.HeaderText = "Pcode";
-            Column2.MinimumWidth = 6;
-            Column2.Name = "Column2";
-            Column2.Width = 96;
+            productCode.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            productCode.HeaderText = "Pcode";
+            productCode.MinimumWidth = 6;
+            productCode.Name = "productCode";
+            productCode.Width = 81;
             // 
-            // Column4
+            // productName
             // 
-            Column4.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            Column4.HeaderText = "Description";
-            Column4.MinimumWidth = 6;
-            Column4.Name = "Column4";
+            productName.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            productName.HeaderText = "Description";
+            productName.MinimumWidth = 6;
+            productName.Name = "productName";
             // 
-            // Column7
+            // productQty
             // 
-            Column7.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            Column7.HeaderText = "Qty";
-            Column7.MinimumWidth = 6;
-            Column7.Name = "Column7";
-            Column7.Width = 71;
+            productQty.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            productQty.HeaderText = "Qty";
+            productQty.MinimumWidth = 6;
+            productQty.Name = "productQty";
+            productQty.Width = 58;
             // 
-            // Column5
+            // stockInDate
             // 
-            Column5.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            Column5.HeaderText = "Stock In Date";
-            Column5.MinimumWidth = 6;
-            Column5.Name = "Column5";
-            Column5.Width = 156;
+            stockInDate.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            stockInDate.HeaderText = "Stock In Date";
+            stockInDate.MinimumWidth = 6;
+            stockInDate.Name = "stockInDate";
+            stockInDate.Width = 130;
             // 
             // Delete
             // 
@@ -239,6 +239,7 @@
             panel2.Name = "panel2";
             panel2.Size = new Size(968, 164);
             panel2.TabIndex = 0;
+            panel2.Paint += panel2_Paint;
             // 
             // LinProduct
             // 
@@ -247,7 +248,7 @@
             LinProduct.LinkColor = Color.DimGray;
             LinProduct.Location = new Point(173, 122);
             LinProduct.Name = "LinProduct";
-            LinProduct.Size = new Size(196, 23);
+            LinProduct.Size = new Size(156, 21);
             LinProduct.TabIndex = 7;
             LinProduct.TabStop = true;
             LinProduct.Text = "[ Browse Products ]";
@@ -258,24 +259,24 @@
             LinGenerate.LinkColor = Color.DimGray;
             LinGenerate.Location = new Point(383, 31);
             LinGenerate.Name = "LinGenerate";
-            LinGenerate.Size = new Size(120, 21);
+            LinGenerate.Size = new Size(99, 20);
             LinGenerate.TabIndex = 6;
             LinGenerate.TabStop = true;
             LinGenerate.Text = "[ Generate ]";
-            LinGenerate.LinkClicked += LinGenerate_LinkClicked;
+            LinGenerate.LinkClicked += LinGenerate_LinkClicked_1;
             // 
             // dateTimePicker1
             // 
             dateTimePicker1.Location = new Point(173, 76);
             dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new Size(330, 30);
+            dateTimePicker1.Size = new Size(330, 25);
             dateTimePicker1.TabIndex = 5;
             // 
             // txtRefNo
             // 
             txtRefNo.Location = new Point(173, 25);
             txtRefNo.Name = "txtRefNo";
-            txtRefNo.Size = new Size(193, 30);
+            txtRefNo.Size = new Size(193, 25);
             txtRefNo.TabIndex = 3;
             // 
             // label3
@@ -283,7 +284,7 @@
             label3.AutoSize = true;
             label3.Location = new Point(7, 83);
             label3.Name = "label3";
-            label3.Size = new Size(139, 21);
+            label3.Size = new Size(115, 20);
             label3.TabIndex = 2;
             label3.Text = "Stock In Date :";
             // 
@@ -292,7 +293,7 @@
             label1.AutoSize = true;
             label1.Location = new Point(7, 28);
             label1.Name = "label1";
-            label1.Size = new Size(143, 21);
+            label1.Size = new Size(120, 20);
             label1.TabIndex = 0;
             label1.Text = "Reference No :";
             // 
@@ -300,10 +301,10 @@
             // 
             tabPage4.Controls.Add(dataStockIn);
             tabPage4.Controls.Add(panel3);
-            tabPage4.Location = new Point(4, 30);
+            tabPage4.Location = new Point(4, 24);
             tabPage4.Name = "tabPage4";
             tabPage4.Padding = new Padding(3);
-            tabPage4.Size = new Size(974, 732);
+            tabPage4.Size = new Size(974, 738);
             tabPage4.TabIndex = 3;
             tabPage4.Text = "Stock In Record";
             tabPage4.UseVisualStyleBackColor = true;
@@ -340,7 +341,7 @@
             dataGridViewTextBoxColumn1.HeaderText = "No.";
             dataGridViewTextBoxColumn1.MinimumWidth = 6;
             dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            dataGridViewTextBoxColumn1.Width = 67;
+            dataGridViewTextBoxColumn1.Width = 57;
             // 
             // dataGridViewTextBoxColumn2
             // 
@@ -356,7 +357,7 @@
             dataGridViewTextBoxColumn3.HeaderText = "ReferenceNo.";
             dataGridViewTextBoxColumn3.MinimumWidth = 6;
             dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            dataGridViewTextBoxColumn3.Width = 160;
+            dataGridViewTextBoxColumn3.Width = 135;
             // 
             // dataGridViewTextBoxColumn4
             // 
@@ -364,7 +365,7 @@
             dataGridViewTextBoxColumn4.HeaderText = "Pcode";
             dataGridViewTextBoxColumn4.MinimumWidth = 6;
             dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            dataGridViewTextBoxColumn4.Width = 96;
+            dataGridViewTextBoxColumn4.Width = 81;
             // 
             // dataGridViewTextBoxColumn5
             // 
@@ -379,7 +380,7 @@
             dataGridViewTextBoxColumn6.HeaderText = "Qty";
             dataGridViewTextBoxColumn6.MinimumWidth = 6;
             dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
-            dataGridViewTextBoxColumn6.Width = 71;
+            dataGridViewTextBoxColumn6.Width = 58;
             // 
             // dataGridViewTextBoxColumn7
             // 
@@ -387,7 +388,7 @@
             dataGridViewTextBoxColumn7.HeaderText = "Stock In Date";
             dataGridViewTextBoxColumn7.MinimumWidth = 6;
             dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
-            dataGridViewTextBoxColumn7.Width = 156;
+            dataGridViewTextBoxColumn7.Width = 130;
             // 
             // panel3
             // 
@@ -421,7 +422,7 @@
             // 
             dateTimePicker3.Location = new Point(482, 48);
             dateTimePicker3.Name = "dateTimePicker3";
-            dateTimePicker3.Size = new Size(250, 30);
+            dateTimePicker3.Size = new Size(250, 25);
             dateTimePicker3.TabIndex = 3;
             // 
             // label4
@@ -429,7 +430,7 @@
             label4.AutoSize = true;
             label4.Location = new Point(446, 53);
             label4.Name = "label4";
-            label4.Size = new Size(30, 21);
+            label4.Size = new Size(24, 20);
             label4.TabIndex = 2;
             label4.Text = "To";
             // 
@@ -437,7 +438,7 @@
             // 
             dateTimePicker2.Location = new Point(190, 48);
             dateTimePicker2.Name = "dateTimePicker2";
-            dateTimePicker2.Size = new Size(250, 30);
+            dateTimePicker2.Size = new Size(250, 25);
             dateTimePicker2.TabIndex = 1;
             // 
             // label2
@@ -445,13 +446,13 @@
             label2.AutoSize = true;
             label2.Location = new Point(7, 53);
             label2.Name = "label2";
-            label2.Size = new Size(177, 21);
+            label2.Size = new Size(146, 20);
             label2.TabIndex = 0;
             label2.Text = "Filter By Date: From";
             // 
             // StockEntry
             // 
-            AutoScaleDimensions = new SizeF(11F, 21F);
+            AutoScaleDimensions = new SizeF(8F, 19F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(982, 855);
             ControlBox = false;
@@ -463,6 +464,7 @@
             Name = "StockEntry";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Stock Entry";
+            Load += StockEntry_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             tabControl1.ResumeLayout(false);
@@ -507,13 +509,13 @@
         private DateTimePicker dateTimePicker2;
         private Label label2;
         private Button btnLoad;
-        private DataGridViewTextBoxColumn Column1;
-        private DataGridViewTextBoxColumn Column8;
-        private DataGridViewTextBoxColumn Column9;
-        private DataGridViewTextBoxColumn Column2;
-        private DataGridViewTextBoxColumn Column4;
-        private DataGridViewTextBoxColumn Column7;
-        private DataGridViewTextBoxColumn Column5;
+        private DataGridViewTextBoxColumn rowNumber;
+        private DataGridViewTextBoxColumn ProductId;
+        private DataGridViewTextBoxColumn referenceNum;
+        private DataGridViewTextBoxColumn productCode;
+        private DataGridViewTextBoxColumn productName;
+        private DataGridViewTextBoxColumn productQty;
+        private DataGridViewTextBoxColumn stockInDate;
         private DataGridViewImageColumn Delete;
     }
 }

@@ -41,6 +41,12 @@ namespace Project.Infrastructure.Persistence
                 .HasForeignKey(p => p.CategoryId)
                 .OnDelete(DeleteBehavior.Restrict);
 
+            modelBuilder.Entity<StockRecord>()
+                .HasOne(s => s.Product)
+                .WithMany(p => p.StockRecords)
+                .HasForeignKey(s => s.ProductId)
+                .OnDelete(DeleteBehavior.Cascade);
+
             base.OnModelCreating(modelBuilder);
         }
     }
