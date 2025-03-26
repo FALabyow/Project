@@ -479,7 +479,7 @@
             // 
             ProductQuantity.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             ProductQuantity.DataPropertyName = "ProductQuantity";
-            ProductQuantity.HeaderText = "Quantity";
+            ProductQuantity.HeaderText = "Stock";
             ProductQuantity.Name = "ProductQuantity";
             // 
             // CategoryName

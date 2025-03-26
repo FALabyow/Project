@@ -14,5 +14,6 @@ namespace ProjectForm.View.IView
         void ShowError(string message);
         void ClearProductList(); 
         void UpdateTotal(decimal total);
+        void AddRemoveButtonColumn();
     }
 }

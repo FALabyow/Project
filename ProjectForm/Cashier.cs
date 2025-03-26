@@ -67,7 +67,20 @@ namespace ProjectForm
 
 
 
-
+        private void AddRemoveButtonColumn()
+        {
+            if (!dgvCashier.Columns.Contains("Remove"))
+            {
+                DataGridViewButtonColumn btnColumn = new DataGridViewButtonColumn
+                {
+                    HeaderText = "Action",
+                    Text = "Remove",
+                    UseColumnTextForButtonValue = true,
+                    Name = "Remove"
+                };
+                dgvCashier.Columns.Add(btnColumn);
+            }
+        }
 
 
 
@@ -173,7 +186,14 @@ namespace ProjectForm
 
         private void dgvCashier_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-
+            if (e.ColumnIndex >= 0 && dgvCashier.Columns[e.ColumnIndex].Name == "Remove")
+            {
+                string barcode = dgvCashier.Rows[e.RowIndex].Cells["BarcodeData"].Value?.ToString();
+                if (!string.IsNullOrEmpty(barcode))
+                {
+                    _presenter.RemoveProduct(barcode);
+                }
+            }
         }
 
         public void DisplayProductList(List<ProductDto> productList)
@@ -189,6 +209,11 @@ namespace ProjectForm
         private void barcodetxt_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        void ICashierView.AddRemoveButtonColumn()
+        {
+            AddRemoveButtonColumn();
         }
     }
 }
