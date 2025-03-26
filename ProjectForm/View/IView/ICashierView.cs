@@ -15,5 +15,7 @@ namespace ProjectForm.View.IView
         void ClearProductList(); 
         void UpdateTotal(decimal total);
         void AddRemoveButtonColumn();
+        void AddQuantityColumn(); // New method to add editable quantity column
+        event Action<string, int> QuantityUpdated; // New event for quantity changes
     }
 }

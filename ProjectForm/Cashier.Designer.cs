@@ -64,6 +64,7 @@
             ProductPrice = new DataGridViewTextBoxColumn();
             ProductQuantity = new DataGridViewTextBoxColumn();
             CategoryName = new DataGridViewTextBoxColumn();
+            BuyerQuantity = new DataGridViewTextBoxColumn();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
@@ -429,7 +430,7 @@
             dgvCashier.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dgvCashier.ColumnHeadersHeight = 40;
             dgvCashier.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dgvCashier.Columns.AddRange(new DataGridViewColumn[] { BarcodeData, ProductName, ProductPrice, ProductQuantity, CategoryName });
+            dgvCashier.Columns.AddRange(new DataGridViewColumn[] { BarcodeData, ProductName, ProductPrice, ProductQuantity, CategoryName, BuyerQuantity });
             dgvCashier.Dock = DockStyle.Fill;
             dgvCashier.EnableHeadersVisualStyles = false;
             dgvCashier.GridColor = Color.White;
@@ -488,6 +489,12 @@
             CategoryName.DataPropertyName = "CategoryName";
             CategoryName.HeaderText = "Category";
             CategoryName.Name = "CategoryName";
+            // 
+            // BuyerQuantity
+            // 
+            BuyerQuantity.DataPropertyName = "BuyerQuantity";
+            BuyerQuantity.HeaderText = "Quantity";
+            BuyerQuantity.Name = "BuyerQuantity";
             // 
             // Cashier
             // 
@@ -557,5 +564,6 @@
         private DataGridViewTextBoxColumn ProductPrice;
         private DataGridViewTextBoxColumn ProductQuantity;
         private DataGridViewTextBoxColumn CategoryName;
+        private DataGridViewTextBoxColumn BuyerQuantity;
     }
 }

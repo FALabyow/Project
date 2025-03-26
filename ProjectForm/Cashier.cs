@@ -22,7 +22,7 @@ namespace ProjectForm
     {
 
         private readonly CashierPresenter _presenter;
-
+        public event Action<string, int> QuantityUpdated;
 
         public Cashier()
         {
@@ -82,7 +82,20 @@ namespace ProjectForm
             }
         }
 
-
+        public void AddQuantityColumn()
+        {
+            if (dgvCashier.Columns["BuyerQuantity"] == null)
+            {
+                DataGridViewTextBoxColumn quantityColumn = new DataGridViewTextBoxColumn
+                {
+                    Name = "BuyerQuantity",
+                    HeaderText = "Quantity",
+                    ValueType = typeof(int),
+                    DefaultCellStyle = { NullValue = 1 }
+                };
+                dgvCashier.Columns.Add(quantityColumn);
+            }
+        }
 
 
 
@@ -186,12 +199,30 @@ namespace ProjectForm
 
         private void dgvCashier_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex >= 0 && dgvCashier.Columns[e.ColumnIndex].Name == "Remove")
+            dgvCashier.EndEdit();
+
+            if (e.ColumnIndex >= 0)
             {
-                string barcode = dgvCashier.Rows[e.RowIndex].Cells["BarcodeData"].Value?.ToString();
-                if (!string.IsNullOrEmpty(barcode))
+                // Handle Remove button click
+                if (dgvCashier.Columns[e.ColumnIndex].Name == "Remove")
                 {
-                    _presenter.RemoveProduct(barcode);
+                    string barcode = dgvCashier.Rows[e.RowIndex].Cells["BarcodeData"].Value?.ToString();
+                    if (!string.IsNullOrEmpty(barcode))
+                    {
+                        _presenter.RemoveProduct(barcode);
+                    }
+                }
+
+                // Handle BuyerQuantity column changes
+                else if (e.ColumnIndex == dgvCashier.Columns["BuyerQuantity"].Index)
+                {
+                    var barcode = dgvCashier.Rows[e.RowIndex].Cells["BarcodeData"].Value?.ToString();
+                    var quantityCell = dgvCashier.Rows[e.RowIndex].Cells["BuyerQuantity"].Value;
+
+                    if (barcode != null && int.TryParse(quantityCell?.ToString(), out int newQuantity))
+                    {
+                        QuantityUpdated?.Invoke(barcode, newQuantity);
+                    }
                 }
             }
         }
@@ -215,5 +246,7 @@ namespace ProjectForm
         {
             AddRemoveButtonColumn();
         }
+
+        
     }
 }

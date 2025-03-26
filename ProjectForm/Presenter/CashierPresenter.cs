@@ -14,6 +14,7 @@ namespace ProjectForm.Presenter
         private List<ProductDto> _allProducts;
         private List<CategoryDto> _allCategories;
         private DataTable _dataTable;
+       
 
         public CashierPresenter(ICashierView view, CashierService cashierService)
         {
@@ -22,6 +23,8 @@ namespace ProjectForm.Presenter
             _dataTable = new DataTable();
             _view.DisplayProducts(_dataTable);
             _view.AddRemoveButtonColumn(); // Add the Remove button
+            _view.QuantityUpdated += UpdateQuantity;
+
         }
 
         public async Task InitializeAsync()
@@ -31,6 +34,7 @@ namespace ProjectForm.Presenter
             _dataTable.Columns.Add("ProductPrice", typeof(decimal));
             _dataTable.Columns.Add("ProductQuantity", typeof(int));
             _dataTable.Columns.Add("CategoryName", typeof(string));
+            _dataTable.Columns.Add("BuyerQuantity", typeof(int));
 
             try
             {
@@ -48,23 +52,25 @@ namespace ProjectForm.Presenter
         {
             if (_allProducts == null || _allCategories == null)
             {
-               // _view.ShowError("Product or category data is missing.");
                 return;
             }
 
-            if (_dataTable.AsEnumerable().Any(row => row.Field<string>("BarcodeData") == barcode))
+            var existingRow = _dataTable.AsEnumerable().FirstOrDefault(row => row.Field<string>("BarcodeData") == barcode);
+
+            if (existingRow != null)
             {
-                //_view.ShowError("This product is already added to the table.");
+                // If product exists, increment the BuyerQuantity by 0
+                int currentQuantity = existingRow.Field<int>("BuyerQuantity");
+                existingRow.SetField("BuyerQuantity", currentQuantity + 0);
+                UpdateTotal();
+                _view.DisplayProducts(_dataTable);
                 return;
             }
 
-            var matchedProducts = _allProducts
-                .Where(p => p.BarcodeData == barcode)
-                .ToList();
+            var matchedProducts = _allProducts.Where(p => p.BarcodeData == barcode).ToList();
 
             if (matchedProducts.Count == 0)
             {
-            
                 return;
             }
 
@@ -79,12 +85,13 @@ namespace ProjectForm.Presenter
 
             foreach (var product in productWithCategory)
             {
-                _dataTable.Rows.Add(product.BarcodeData, product.ProductName, product.ProductPrice, product.ProductQuantity, product.CategoryName);
+                _dataTable.Rows.Add(product.BarcodeData, product.ProductName, product.ProductPrice, product.ProductQuantity, product.CategoryName, 1);
             }
 
             _view.DisplayProducts(_dataTable);
-            _view.UpdateTotal(matchedProducts.Sum(p => p.ProductPrice));
+            UpdateTotal();
         }
+
 
         public void RemoveProduct(string barcode)
         {
@@ -111,5 +118,39 @@ namespace ProjectForm.Presenter
                 _view.UpdateTotal(remainingProducts.Sum(p => p.ProductPrice));
             }
         }
+
+        public void UpdateQuantity(string barcode, int newQuantity)
+        {
+            var product = _allProducts.FirstOrDefault(p => p.BarcodeData == barcode);
+            if (product == null) return;
+
+            var row = _dataTable.AsEnumerable()
+                                 .FirstOrDefault(r => r.Field<string>("BarcodeData") == barcode);
+
+            if (row != null)
+            {
+                row.SetField("BuyerQuantity", newQuantity);
+                UpdateTotal();
+                _view.DisplayProducts(_dataTable);
+            }
+        }
+
+
+        private void UpdateTotal()
+        {
+            decimal total = _dataTable.AsEnumerable()
+                     .Sum(row => (row["ProductPrice"] != DBNull.Value && row["BuyerQuantity"] != DBNull.Value)
+                                 ? Convert.ToDecimal(row["ProductPrice"]) * Convert.ToInt32(row["BuyerQuantity"])
+                                 : 0);
+
+
+
+            _view.UpdateTotal(total);
+            _view.DisplayProducts(_dataTable);
+
+        }
+
+
+
     }
 }
