@@ -16,7 +16,6 @@ namespace Project.Application.Services
         {
             _stockRecordRepository = stockRecordRepository;
         }
-
         public async Task<List<StockRecordDto>> GetAllStockRecordsAsync()
         {
             try

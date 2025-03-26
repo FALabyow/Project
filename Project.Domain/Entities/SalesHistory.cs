@@ -10,7 +10,7 @@ namespace Project.Domain.Entities
     public class SalesHistory
     {
         [Key]
-        public Guid SalesHistoryId { get; set; } = Guid.NewGuid(); 
+        public Guid SalesHistoryId { get; set; }
         public string InvoiceNumber { get; set; } = string.Empty; 
         public DateTime SaleDate { get; set; } = DateTime.Now;
         public decimal TotalAmount { get; set; } 

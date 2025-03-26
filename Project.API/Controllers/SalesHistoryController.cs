@@ -34,12 +34,13 @@ namespace Project.API.Controllers
         }
 
         [HttpPost("/SalesHistory/AddSalesHistory")]
-        public async Task<IActionResult> AddCategoryAsync([FromBody] SalesHistoryInfoDto salesHistoryInfoDto)
+        public async Task<IActionResult> AddSalesHistoryAsync([FromBody] SalesHistoryInfoDto salesHistoryInfoDto)
         {
             try
             {
                 await _salesHistoryService.AddSalesHistoryAsync(salesHistoryInfoDto);
-                return NoContent();
+                return Ok(salesHistoryInfoDto.SalesHistoryId);
+                
 
             }
             catch (InvalidOperationException ex)

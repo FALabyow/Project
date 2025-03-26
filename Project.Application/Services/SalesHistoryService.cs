@@ -47,6 +47,7 @@ namespace Project.Application.Services
             {
                 InvoiceNumber= salesHistoryInfoDto.InvoiceNumber,
                 TotalAmount= salesHistoryInfoDto.TotalAmount,
+                SalesHistoryId = salesHistoryInfoDto.SalesHistoryId
             };
 
             try
@@ -58,5 +59,7 @@ namespace Project.Application.Services
                 throw;
             }
         }
+
+
     }
 }

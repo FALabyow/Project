@@ -10,5 +10,6 @@ namespace Project.Application.DTOs
     {
         public string InvoiceNumber { get; set; } = string.Empty;
         public decimal TotalAmount { get; set; }
+        public Guid SalesHistoryId { get; set; } = Guid.NewGuid();
     }
 }

@@ -10,6 +10,7 @@ namespace Project.Application.Interfaces
     public interface ISalesHistoryRepository
     {
         Task<IEnumerable<SalesHistory>> GetAllSalesHistoryAsync();
+
         Task AddSalesHistoryAsync(SalesHistory salesHistory);
     }
 }
