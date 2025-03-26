@@ -16,6 +16,7 @@ namespace Project.Infrastructure.Persistence
 
         public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories  { get; set; }
+        public DbSet<StockRecord> StockRecords { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

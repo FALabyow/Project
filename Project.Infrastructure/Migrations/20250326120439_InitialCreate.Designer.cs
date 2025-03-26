@@ -12,7 +12,7 @@ using Project.Infrastructure.Persistence;
 namespace Project.Infrastructure.Migrations
 {
     [DbContext(typeof(ProjectDbContext))]
-    [Migration("20250325200257_InitialCreate")]
+    [Migration("20250326120439_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -99,6 +99,7 @@ namespace Project.Infrastructure.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("ReferenceNum")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateOnly>("StockInDate")
@@ -111,7 +112,7 @@ namespace Project.Infrastructure.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("StockRecord");
+                    b.ToTable("StockRecords");
                 });
 
             modelBuilder.Entity("Project.Domain.Entities.Product", b =>

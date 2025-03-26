@@ -12,10 +12,16 @@ namespace ProjectForm.View.IView
         //void DisplayProductList(List<StockInProductDto> productList);
         string ReferenceNum { get; set; }
         void DisplayReferenceNumber(string referenceNumber);
+        List<StockRecordInfoDto> GetStockRecordsFromGrid();
         void DisplayStockEntry(StockInProductDto stockInList);
+        void DisplayStockRecords(List<StockRecordInfoDto> filteredRecords);
+
         event Action? OnDateSelected;
         DateTimePicker DatePicker { get; }
+        DateOnly StartDate { get; }
+        DateOnly EndDate { get; }
         event EventHandler<DataGridViewCellEventArgs>? DeleteClicked;
+        event EventHandler? LoadFilteredRecordsClicked;
 
 
     }
