@@ -32,21 +32,10 @@
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
             panel1 = new Panel();
             picboxClose = new PictureBox();
             lblTitle = new Label();
             dgvCashier = new DataGridView();
-            Column1 = new DataGridViewTextBoxColumn();
-            Column8 = new DataGridViewTextBoxColumn();
-            Column9 = new DataGridViewTextBoxColumn();
-            Column2 = new DataGridViewTextBoxColumn();
-            Column4 = new DataGridViewTextBoxColumn();
-            Column6 = new DataGridViewTextBoxColumn();
-            Column3 = new DataGridViewTextBoxColumn();
-            Column5 = new DataGridViewTextBoxColumn();
-            Column7 = new DataGridViewTextBoxColumn();
-            Cancel = new DataGridViewImageColumn();
             dtFrom = new DateTimePicker();
             dtTo = new DateTimePicker();
             label2 = new Label();
@@ -54,6 +43,15 @@
             lblTotal = new Label();
             panel2 = new Panel();
             btnPrint = new Button();
+            Column1 = new DataGridViewTextBoxColumn();
+            Column8 = new DataGridViewTextBoxColumn();
+            Column9 = new DataGridViewTextBoxColumn();
+            Column2 = new DataGridViewTextBoxColumn();
+            Column4 = new DataGridViewTextBoxColumn();
+            Column6 = new DataGridViewTextBoxColumn();
+            Column3 = new DataGridViewTextBoxColumn();
+            Column7 = new DataGridViewTextBoxColumn();
+            Cancel = new DataGridViewImageColumn();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)picboxClose).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvCashier).BeginInit();
@@ -90,7 +88,7 @@
             lblTitle.Font = new Font("Century Gothic", 10.8F, FontStyle.Bold | FontStyle.Underline, GraphicsUnit.Point, 0);
             lblTitle.Location = new Point(12, 12);
             lblTitle.Name = "lblTitle";
-            lblTitle.Size = new Size(99, 22);
+            lblTitle.Size = new Size(82, 18);
             lblTitle.TabIndex = 1;
             lblTitle.Text = "Sold Items";
             lblTitle.Visible = false;
@@ -110,7 +108,7 @@
             dgvCashier.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dgvCashier.ColumnHeadersHeight = 40;
             dgvCashier.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dgvCashier.Columns.AddRange(new DataGridViewColumn[] { Column1, Column8, Column9, Column2, Column4, Column6, Column3, Column5, Column7, Cancel });
+            dgvCashier.Columns.AddRange(new DataGridViewColumn[] { Column1, Column8, Column9, Column2, Column4, Column6, Column3, Column7, Cancel });
             dgvCashier.Dock = DockStyle.Fill;
             dgvCashier.EnableHeadersVisualStyles = false;
             dgvCashier.GridColor = Color.White;
@@ -121,101 +119,13 @@
             dgvCashier.Size = new Size(1084, 763);
             dgvCashier.TabIndex = 8;
             // 
-            // Column1
-            // 
-            Column1.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            Column1.HeaderText = "No.";
-            Column1.MinimumWidth = 6;
-            Column1.Name = "Column1";
-            Column1.Width = 67;
-            // 
-            // Column8
-            // 
-            Column8.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            Column8.HeaderText = "ID";
-            Column8.MinimumWidth = 6;
-            Column8.Name = "Column8";
-            Column8.Width = 55;
-            // 
-            // Column9
-            // 
-            Column9.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            Column9.HeaderText = "Invoice#";
-            Column9.MinimumWidth = 6;
-            Column9.Name = "Column9";
-            Column9.Width = 116;
-            // 
-            // Column2
-            // 
-            Column2.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            Column2.HeaderText = "Pcode";
-            Column2.MinimumWidth = 6;
-            Column2.Name = "Column2";
-            Column2.Width = 96;
-            // 
-            // Column4
-            // 
-            Column4.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            Column4.HeaderText = "Description";
-            Column4.MinimumWidth = 6;
-            Column4.Name = "Column4";
-            // 
-            // Column6
-            // 
-            Column6.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleRight;
-            Column6.DefaultCellStyle = dataGridViewCellStyle2;
-            Column6.HeaderText = "Price";
-            Column6.MinimumWidth = 6;
-            Column6.Name = "Column6";
-            Column6.Width = 80;
-            // 
-            // Column3
-            // 
-            Column3.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            Column3.DefaultCellStyle = dataGridViewCellStyle3;
-            Column3.HeaderText = "Qty";
-            Column3.MinimumWidth = 6;
-            Column3.Name = "Column3";
-            Column3.Width = 71;
-            // 
-            // Column5
-            // 
-            Column5.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleRight;
-            Column5.DefaultCellStyle = dataGridViewCellStyle4;
-            Column5.HeaderText = "Discount";
-            Column5.MinimumWidth = 6;
-            Column5.Name = "Column5";
-            Column5.Width = 113;
-            // 
-            // Column7
-            // 
-            Column7.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleRight;
-            Column7.DefaultCellStyle = dataGridViewCellStyle5;
-            Column7.HeaderText = "Total";
-            Column7.MinimumWidth = 6;
-            Column7.Name = "Column7";
-            Column7.Width = 79;
-            // 
-            // Cancel
-            // 
-            Cancel.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            Cancel.HeaderText = "";
-            Cancel.Image = Properties.Resources.multiply;
-            Cancel.MinimumWidth = 6;
-            Cancel.Name = "Cancel";
-            Cancel.Width = 6;
-            // 
             // dtFrom
             // 
             dtFrom.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             dtFrom.Format = DateTimePickerFormat.Short;
             dtFrom.Location = new Point(202, 852);
             dtFrom.Name = "dtFrom";
-            dtFrom.Size = new Size(150, 30);
+            dtFrom.Size = new Size(150, 25);
             dtFrom.TabIndex = 9;
             // 
             // dtTo
@@ -224,7 +134,7 @@
             dtTo.Format = DateTimePickerFormat.Short;
             dtTo.Location = new Point(394, 853);
             dtTo.Name = "dtTo";
-            dtTo.Size = new Size(150, 30);
+            dtTo.Size = new Size(150, 25);
             dtTo.TabIndex = 10;
             // 
             // label2
@@ -235,7 +145,7 @@
             label2.ForeColor = Color.FromArgb(255, 245, 230);
             label2.Location = new Point(12, 857);
             label2.Name = "label2";
-            label2.Size = new Size(184, 21);
+            label2.Size = new Size(152, 20);
             label2.TabIndex = 11;
             label2.Text = "FIlter By Date : From";
             // 
@@ -247,7 +157,7 @@
             label3.ForeColor = Color.FromArgb(255, 245, 230);
             label3.Location = new Point(358, 857);
             label3.Name = "label3";
-            label3.Size = new Size(30, 21);
+            label3.Size = new Size(24, 20);
             label3.TabIndex = 12;
             label3.Text = "To";
             // 
@@ -287,9 +197,86 @@
             btnPrint.TabIndex = 2;
             btnPrint.UseVisualStyleBackColor = true;
             // 
+            // Column1
+            // 
+            Column1.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            Column1.HeaderText = "No.";
+            Column1.MinimumWidth = 6;
+            Column1.Name = "Column1";
+            Column1.Width = 57;
+            // 
+            // Column8
+            // 
+            Column8.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            Column8.HeaderText = "ID";
+            Column8.MinimumWidth = 6;
+            Column8.Name = "Column8";
+            Column8.Width = 48;
+            // 
+            // Column9
+            // 
+            Column9.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            Column9.HeaderText = "Invoice#";
+            Column9.MinimumWidth = 6;
+            Column9.Name = "Column9";
+            // 
+            // Column2
+            // 
+            Column2.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            Column2.HeaderText = "Pcode";
+            Column2.MinimumWidth = 6;
+            Column2.Name = "Column2";
+            Column2.Width = 81;
+            // 
+            // Column4
+            // 
+            Column4.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            Column4.HeaderText = "Description";
+            Column4.MinimumWidth = 6;
+            Column4.Name = "Column4";
+            // 
+            // Column6
+            // 
+            Column6.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleRight;
+            Column6.DefaultCellStyle = dataGridViewCellStyle2;
+            Column6.HeaderText = "Price";
+            Column6.MinimumWidth = 6;
+            Column6.Name = "Column6";
+            Column6.Width = 69;
+            // 
+            // Column3
+            // 
+            Column3.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            Column3.DefaultCellStyle = dataGridViewCellStyle3;
+            Column3.HeaderText = "Qty";
+            Column3.MinimumWidth = 6;
+            Column3.Name = "Column3";
+            Column3.Width = 58;
+            // 
+            // Column7
+            // 
+            Column7.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleRight;
+            Column7.DefaultCellStyle = dataGridViewCellStyle4;
+            Column7.HeaderText = "Total";
+            Column7.MinimumWidth = 6;
+            Column7.Name = "Column7";
+            Column7.Width = 65;
+            // 
+            // Cancel
+            // 
+            Cancel.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            Cancel.HeaderText = "";
+            Cancel.Image = Properties.Resources.multiply;
+            Cancel.MinimumWidth = 6;
+            Cancel.Name = "Cancel";
+            Cancel.Width = 6;
+            // 
             // DailySale
             // 
-            AutoScaleDimensions = new SizeF(11F, 21F);
+            AutoScaleDimensions = new SizeF(8F, 19F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             ClientSize = new Size(1084, 918);
@@ -321,16 +308,6 @@
 
         private Panel panel1;
         private DataGridView dgvCashier;
-        private DataGridViewTextBoxColumn Column1;
-        private DataGridViewTextBoxColumn Column8;
-        private DataGridViewTextBoxColumn Column9;
-        private DataGridViewTextBoxColumn Column2;
-        private DataGridViewTextBoxColumn Column4;
-        private DataGridViewTextBoxColumn Column6;
-        private DataGridViewTextBoxColumn Column3;
-        private DataGridViewTextBoxColumn Column5;
-        private DataGridViewTextBoxColumn Column7;
-        private DataGridViewImageColumn Cancel;
         private DateTimePicker dtFrom;
         private DateTimePicker dtTo;
         private Label label2;
@@ -340,5 +317,14 @@
         public Label lblTitle;
         private Panel panel2;
         private Button btnPrint;
+        private DataGridViewTextBoxColumn Column1;
+        private DataGridViewTextBoxColumn Column8;
+        private DataGridViewTextBoxColumn Column9;
+        private DataGridViewTextBoxColumn Column2;
+        private DataGridViewTextBoxColumn Column4;
+        private DataGridViewTextBoxColumn Column6;
+        private DataGridViewTextBoxColumn Column3;
+        private DataGridViewTextBoxColumn Column7;
+        private DataGridViewImageColumn Cancel;
     }
 }

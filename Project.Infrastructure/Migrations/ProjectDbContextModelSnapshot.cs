@@ -86,6 +86,60 @@ namespace Project.Infrastructure.Migrations
                     b.ToTable("Products");
                 });
 
+            modelBuilder.Entity("Project.Domain.Entities.SalesDetail", b =>
+                {
+                    b.Property<Guid>("SalesDetailId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("ProductCode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("ProductId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("ProductName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("QuantitySold")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("SalesHistoryId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<decimal>("UnitPrice")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("SalesDetailId");
+
+                    b.HasIndex("SalesHistoryId");
+
+                    b.ToTable("SalesDetails");
+                });
+
+            modelBuilder.Entity("Project.Domain.Entities.SalesHistory", b =>
+                {
+                    b.Property<Guid>("SalesHistoryId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("InvoiceNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("SaleDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal>("TotalAmount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("SalesHistoryId");
+
+                    b.ToTable("SalesHistory");
+                });
+
             modelBuilder.Entity("Project.Domain.Entities.StockRecord", b =>
                 {
                     b.Property<Guid>("StockRecordId")
@@ -123,6 +177,17 @@ namespace Project.Infrastructure.Migrations
                     b.Navigation("Category");
                 });
 
+            modelBuilder.Entity("Project.Domain.Entities.SalesDetail", b =>
+                {
+                    b.HasOne("Project.Domain.Entities.SalesHistory", "SalesHistory")
+                        .WithMany("SalesDetails")
+                        .HasForeignKey("SalesHistoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("SalesHistory");
+                });
+
             modelBuilder.Entity("Project.Domain.Entities.StockRecord", b =>
                 {
                     b.HasOne("Project.Domain.Entities.Product", "Product")
@@ -142,6 +207,11 @@ namespace Project.Infrastructure.Migrations
             modelBuilder.Entity("Project.Domain.Entities.Product", b =>
                 {
                     b.Navigation("StockRecords");
+                });
+
+            modelBuilder.Entity("Project.Domain.Entities.SalesHistory", b =>
+                {
+                    b.Navigation("SalesDetails");
                 });
 #pragma warning restore 612, 618
         }
