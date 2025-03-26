@@ -68,5 +68,24 @@ namespace Project.Application.Services
 
 
         }
+        public async Task AddStockRecordsAsync(IEnumerable<StockRecordInfoDto> stockRecordInfoDtos)
+        {
+            var stockRecords = stockRecordInfoDtos.Select(dto => new StockRecord
+            {
+                ProductId = dto.ProductId,
+                StockInQty = dto.StockInQty,
+                StockInDate = dto.StockInDate,
+                ReferenceNum = dto.ReferenceNum,
+            }).ToList();
+
+            try
+            {
+                await _stockRecordRepository.AddStockRecordsAsync(stockRecords);
+            }
+            catch (InvalidOperationException)
+            {
+                throw;
+            }
+        }
     }
 }

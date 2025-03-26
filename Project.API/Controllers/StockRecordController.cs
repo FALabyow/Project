@@ -48,5 +48,24 @@ namespace Project.API.Controllers
             }
 
         }
+        
+        [HttpPost("/StockRecord/AddMultipleRecords")]
+        public async Task<IActionResult> AddStockRecordsAsync([FromBody] List<StockRecordInfoDto> stockRecordInfoDtos)
+        {
+            if (stockRecordInfoDtos == null || !stockRecordInfoDtos.Any())
+            {
+                return BadRequest(new { error = "No stock records provided." });
+            }
+
+            try
+            {
+                await _stockRecordService.AddStockRecordsAsync(stockRecordInfoDtos);
+                return Ok(new { message = "Stock records added successfully." });
+            }
+            catch (InvalidOperationException ex)
+            {
+                return BadRequest(new { error = ex.Message });
+            }
+        }
     }
 }

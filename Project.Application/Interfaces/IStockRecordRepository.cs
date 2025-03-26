@@ -11,5 +11,6 @@ namespace Project.Application.Interfaces
     {
         Task<IEnumerable<StockRecord>> GetAllStockRecordsAsync();
         Task AddStockRecordAsync(StockRecord stockRecord);
+        Task AddStockRecordsAsync(IEnumerable<StockRecord> stockRecords);
     }
 }

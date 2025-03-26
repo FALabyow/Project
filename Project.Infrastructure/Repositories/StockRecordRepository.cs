@@ -62,5 +62,29 @@ namespace Project.Infrastructure.Repositories
             }
 
         }
+        public async Task AddStockRecordsAsync(IEnumerable<StockRecord> stockRecords)
+        {
+            try
+            {
+                await _context.StockRecords.AddRangeAsync(stockRecords); 
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateException ex)
+            {
+                if (ex.InnerException is SqlException sqlEx && (sqlEx.Number == 2601 || sqlEx.Number == 2627))
+                {
+                    throw new InvalidOperationException("Duplicate record error: " + ex.Message);
+                }
+            }
+            catch (InvalidOperationException ex) when (ex.InnerException is SqlException sqlEx && sqlEx.Number == 4060)
+            {
+                throw new InvalidOperationException("Database does not exist");
+            }
+            catch (Exception)
+            {
+                throw new InvalidOperationException("An error occurred while adding stock records.");
+            }
+        }
+
     }
 }
