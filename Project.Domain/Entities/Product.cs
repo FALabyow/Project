@@ -19,8 +19,8 @@ namespace Project.Domain.Entities
         public int ProductPreOrder {  get; set; }
         public DateTime ScannedAt { get; set; }  
         public Guid CategoryId { get; set; }
-        public Category Category { get; set; }
-        public ICollection<StockRecord> StockRecords { get; set; } = new List<StockRecord>();
+        public Category? Category { get; set; }
+        public ICollection<StockRecord?> StockRecords { get; set; } 
 
     }
 }

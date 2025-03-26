@@ -22,6 +22,8 @@ namespace Project.API
             builder.Services.AddScoped<CategoryService>();
             builder.Services.AddScoped<IProductRepository, ProductRepository>();
             builder.Services.AddScoped<ProductService>();
+            builder.Services.AddScoped<IStockRecordRepository, StockRecordRepository>();
+            builder.Services.AddScoped<StockRecordService>();
 
 
 

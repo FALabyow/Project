@@ -49,20 +49,20 @@ namespace Project.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "StockRecord",
+                name: "StockRecords",
                 columns: table => new
                 {
                     StockRecordId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ReferenceNum = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ReferenceNum = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     StockInQty = table.Column<int>(type: "int", nullable: false),
                     StockInDate = table.Column<DateOnly>(type: "date", nullable: false),
                     ProductId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_StockRecord", x => x.StockRecordId);
+                    table.PrimaryKey("PK_StockRecords", x => x.StockRecordId);
                     table.ForeignKey(
-                        name: "FK_StockRecord_Products_ProductId",
+                        name: "FK_StockRecords_Products_ProductId",
                         column: x => x.ProductId,
                         principalTable: "Products",
                         principalColumn: "ProductId",
@@ -93,8 +93,8 @@ namespace Project.Infrastructure.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_StockRecord_ProductId",
-                table: "StockRecord",
+                name: "IX_StockRecords_ProductId",
+                table: "StockRecords",
                 column: "ProductId");
         }
 
@@ -102,7 +102,7 @@ namespace Project.Infrastructure.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "StockRecord");
+                name: "StockRecords");
 
             migrationBuilder.DropTable(
                 name: "Products");
