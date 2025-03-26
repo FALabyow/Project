@@ -96,6 +96,7 @@ namespace Project.Infrastructure.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("ReferenceNum")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateOnly>("StockInDate")
@@ -108,7 +109,7 @@ namespace Project.Infrastructure.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("StockRecord");
+                    b.ToTable("StockRecords");
                 });
 
             modelBuilder.Entity("Project.Domain.Entities.Product", b =>
