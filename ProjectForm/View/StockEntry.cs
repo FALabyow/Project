@@ -22,27 +22,25 @@ namespace ProjectForm
         {
             InitializeComponent();
             LinProduct.LinkClicked += LinProduct_LinkClicked;
+            dataStockIn.AutoGenerateColumns = false;
             dateTimePicker1.ValueChanged += (s, e) => OnDateSelected?.Invoke();
             dgvStockIn.CellContentClick += DataGridProductView_CellContentClick;
+            btnLoad.Click += (s, e) => LoadFilteredRecordsClicked?.Invoke(this, EventArgs.Empty);
 
         }
 
         public event EventHandler<LinkLabelLinkClickedEventArgs>? LinkLabelLinkClicked;
         public event Action? OnDateSelected;
         public event EventHandler<DataGridViewCellEventArgs>? DeleteClicked;
+        public event EventHandler? LoadFilteredRecordsClicked;
         public DateTimePicker DatePicker => dateTimePicker1;
+        public DateOnly StartDate => DateOnly.FromDateTime(dateTimePicker2.Value);
+        public DateOnly EndDate => DateOnly.FromDateTime(dateTimePicker3.Value);
 
         public string ReferenceNum
         {
             get => txtRefNo.Text;
             set => txtRefNo.Text = value;
-        }
-
-        public void GetRefNo()
-        {
-            Random rnd = new Random();
-            txtRefNo.Clear();
-            txtRefNo.Text += rnd.Next();
         }
 
         private void StockEntry_Load(object sender, EventArgs e)
@@ -77,9 +75,14 @@ namespace ProjectForm
 
         public void DisplayStockEntry(StockInProductDto stockInList)
         {
-           
+
             dgvStockIn.Rows
                       .Add(dgvStockIn.Rows.Count + 1, stockInList.ProductId, stockInList.ReferenceNum, stockInList.ProductCode, stockInList.ProductName, stockInList.ProductQuantity, stockInList.StockInDate);
+        }
+        public void DisplayStockRecords(List<StockRecordInfoDto> filteredRecords)
+        {
+
+            dataStockIn.DataSource = filteredRecords;
         }
 
         private void DataGridProductView_CellContentClick(object? sender, DataGridViewCellEventArgs e)
@@ -93,15 +96,53 @@ namespace ProjectForm
 
             }
         }
-
-        private void panel2_Paint(object sender, PaintEventArgs e)
+        public List<StockRecordInfoDto> GetStockRecordsFromGrid()
         {
+            var stockRecords = new List<StockRecordInfoDto>();
+
+            foreach (DataGridViewRow row in dgvStockIn.Rows)
+            {
+                if (row.Cells["ProductId"].Value != null && row.Cells["productQty"].Value != null)
+                {
+                    DateOnly stockInDate = row.Cells["stockInDate"].Value != null &&
+                                           DateTime.TryParse(row.Cells["stockInDate"].Value.ToString(), out DateTime tempDate)
+                                           ? DateOnly.FromDateTime(tempDate)
+                                           : DateOnly.MinValue;
+
+                    stockRecords.Add(new StockRecordInfoDto
+                    {
+                        ProductId = Guid.TryParse(row.Cells["ProductId"].Value?.ToString(), out Guid productId)
+                            ? productId
+                            : Guid.Empty,
+
+                        StockInQty = Convert.ToInt32(row.Cells["productQty"].Value),
+
+                        StockInDate = stockInDate,
+
+                        ReferenceNum = row.Cells["referenceNum"].Value?.ToString() ?? string.Empty
+                    });
+                }
+            }
+
+            return stockRecords;
+        }
+
+        private async void btnEntry_Click(object sender, EventArgs e)
+        {
+            if (presenter != null)
+            {
+                await presenter.SendStockRecordsAsync();
+            }
 
         }
 
-        private void tabPage3_Click(object sender, EventArgs e)
+        private void dataStockIn_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
-
+            using (SolidBrush brush = new SolidBrush(dataStockIn.RowHeadersDefaultCellStyle.ForeColor))
+            {
+                string rowNumber = (e.RowIndex + 1).ToString();
+                e.Graphics.DrawString(rowNumber, dataStockIn.Font, brush, e.RowBounds.Left + 10, e.RowBounds.Top + 4);
+            }
         }
     }
 }
