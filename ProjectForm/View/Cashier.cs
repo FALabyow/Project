@@ -20,10 +20,8 @@ namespace ProjectForm
     //https://www.youtube.com/watch?v=iOc2_NeYF2g&t=490s
     public partial class Cashier : Form, ICashierView
     {
-
         private readonly CashierPresenter _presenter;
         public event Action<string, int> QuantityUpdated;
-
         public Cashier()
         {
             InitializeComponent();
@@ -38,8 +36,6 @@ namespace ProjectForm
 
             dgvCashier.Visible = true;
         }
-
-
         public void DisplayProducts(DataTable dataTable)
         {
             dgvCashier.DataSource = dataTable;
@@ -64,9 +60,6 @@ namespace ProjectForm
         {
             _presenter.SearchProduct(barcodetxt.Text);
         }
-
-
-
         private void AddRemoveButtonColumn()
         {
             if (!dgvCashier.Columns.Contains("Remove"))
@@ -96,23 +89,6 @@ namespace ProjectForm
                 dgvCashier.Columns.Add(quantityColumn);
             }
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         private void picClose_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("Are you sure you want to exit?", "Exit", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
@@ -194,9 +170,6 @@ namespace ProjectForm
             string transNo = sdate + "1001";
             lblTranNo.Text = transNo;
         }
-
-  
-
         private void dgvCashier_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             dgvCashier.EndEdit();
