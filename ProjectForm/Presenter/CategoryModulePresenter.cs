@@ -73,8 +73,7 @@ namespace ProjectForm.Presenter
             {
                 _categoryModuleView?.ShowMessage(ex.Message);
             }
-        }
-       
+        }       
         private void OnClearClicked(object? sender, EventArgs e)
         {
             _categoryModuleView.CategoryName = "";

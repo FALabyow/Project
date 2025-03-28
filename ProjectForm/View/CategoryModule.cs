@@ -24,13 +24,11 @@ namespace ProjectForm
         {
             InitializeComponent();
             btnSave.Click += (s, e) => SaveClicked?.Invoke(this, EventArgs.Empty);
-            btnUpdate.Click += (s, e) => UpdateClicked?.Invoke(this, EventArgs.Empty);
             btnClear.Click += (s, e) => ClearClicked?.Invoke(this, EventArgs.Empty);
             this.presenterPresenter = presenterPresenter;
         }
 
         public event EventHandler? SaveClicked;
-        public event EventHandler? UpdateClicked;
         public event EventHandler? ClearClicked;
 
         public string CategoryName
@@ -51,11 +49,6 @@ namespace ProjectForm
         private void pictureBox1_Click(object sender, EventArgs e)
         {
             this.Dispose();
-        }
-
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
         }
 
         private void CategoryModule_Load(object sender, EventArgs e)

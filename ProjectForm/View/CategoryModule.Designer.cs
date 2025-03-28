@@ -35,7 +35,6 @@
             btnSave = new Button();
             label2 = new Label();
             btnClear = new Button();
-            btnUpdate = new Button();
             showMessageLabel = new Label();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)picboxClose).BeginInit();
@@ -51,7 +50,6 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(881, 50);
             panel1.TabIndex = 0;
-            panel1.Paint += panel1_Paint;
             // 
             // label1
             // 
@@ -59,7 +57,7 @@
             label1.Font = new Font("Century Gothic", 10.8F, FontStyle.Bold | FontStyle.Underline, GraphicsUnit.Point, 0);
             label1.Location = new Point(12, 12);
             label1.Name = "label1";
-            label1.Size = new Size(170, 22);
+            label1.Size = new Size(143, 18);
             label1.TabIndex = 1;
             label1.Text = "Category  Module";
             // 
@@ -80,7 +78,7 @@
             // 
             txtCategoryName.Location = new Point(183, 102);
             txtCategoryName.Name = "txtCategoryName";
-            txtCategoryName.Size = new Size(642, 30);
+            txtCategoryName.Size = new Size(642, 25);
             txtCategoryName.TabIndex = 1;
             // 
             // btnSave
@@ -89,7 +87,7 @@
             btnSave.BackColor = Color.Peru;
             btnSave.FlatAppearance.BorderSize = 0;
             btnSave.FlatStyle = FlatStyle.Flat;
-            btnSave.Location = new Point(492, 185);
+            btnSave.Location = new Point(590, 185);
             btnSave.Name = "btnSave";
             btnSave.Size = new Size(107, 46);
             btnSave.TabIndex = 2;
@@ -101,7 +99,7 @@
             label2.AutoSize = true;
             label2.Location = new Point(12, 105);
             label2.Name = "label2";
-            label2.Size = new Size(165, 21);
+            label2.Size = new Size(135, 20);
             label2.TabIndex = 3;
             label2.Text = "Category Name :";
             // 
@@ -118,34 +116,20 @@
             btnClear.Text = "Clear";
             btnClear.UseVisualStyleBackColor = false;
             // 
-            // btnUpdate
-            // 
-            btnUpdate.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            btnUpdate.BackColor = Color.LightSalmon;
-            btnUpdate.FlatAppearance.BorderSize = 0;
-            btnUpdate.FlatStyle = FlatStyle.Flat;
-            btnUpdate.Location = new Point(605, 185);
-            btnUpdate.Name = "btnUpdate";
-            btnUpdate.Size = new Size(107, 46);
-            btnUpdate.TabIndex = 5;
-            btnUpdate.Text = "Update";
-            btnUpdate.UseVisualStyleBackColor = false;
-            // 
             // showMessageLabel
             // 
             showMessageLabel.AutoSize = true;
             showMessageLabel.Location = new Point(183, 140);
             showMessageLabel.Name = "showMessageLabel";
-            showMessageLabel.Size = new Size(0, 21);
+            showMessageLabel.Size = new Size(0, 20);
             showMessageLabel.TabIndex = 6;
             // 
             // CategoryModule
             // 
-            AutoScaleDimensions = new SizeF(11F, 21F);
+            AutoScaleDimensions = new SizeF(8F, 19F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(881, 243);
             Controls.Add(showMessageLabel);
-            Controls.Add(btnUpdate);
             Controls.Add(btnClear);
             Controls.Add(label2);
             Controls.Add(btnSave);
@@ -174,7 +158,6 @@
         private Button btnSave;
         private Label label2;
         private Button btnClear;
-        private Button btnUpdate;
         private Label showMessageLabel;
     }
 }
