@@ -35,12 +35,12 @@ namespace Project.API.Controllers
         }
 
         [HttpPost("/Category/AddCategory")]
-        public async Task<IActionResult> AddCategoryAsync([FromBody] CategoryInfoDto categoryInfoDto)
+        public async Task<IActionResult> AddCategoryAsync([FromBody] CategoryDto categoryDto)
         {
             try
             {
-                await _categoryService.AddCategoryAsync(categoryInfoDto);
-                return Ok(categoryInfoDto);
+                await _categoryService.AddCategoryAsync(categoryDto);
+                return NoContent();
 
             }
             catch(InvalidOperationException ex)

@@ -6,7 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Project.Domain.Entities
-{
+{   
+    //One to Many Relationships with Product
     public class Category
     {
         public Guid CategoryId { get; set; } = Guid.NewGuid();

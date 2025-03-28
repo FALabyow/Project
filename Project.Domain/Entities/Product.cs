@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 
 namespace Project.Domain.Entities
 {
+    //One-to-One Relationship with Category
+    //One-to-One Relationship with Stock
     public class Product
     {
         public Guid ProductId { get; set; } = Guid.NewGuid();

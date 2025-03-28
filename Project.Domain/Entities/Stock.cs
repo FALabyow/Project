@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Project.Domain.Entities
 {
+    //One-to-One Relationship with Product
     public class Stock
     {
         public Guid StockId { get; set; } = Guid.NewGuid();

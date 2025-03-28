@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace Project.Domain.Entities
 {
+    //One-to-One Relationship with SalesHistory
     public class SalesDetail
     {
         [Key]

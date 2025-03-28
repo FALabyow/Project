@@ -44,11 +44,11 @@ namespace Project.Application.Services
             }
         }
 
-        public async Task AddCategoryAsync(CategoryInfoDto categoryInfoDto)
+        public async Task AddCategoryAsync(CategoryDto categoryDto)
         {
             var category = new Category
             {
-                CategoryName = categoryInfoDto.CategoryName,
+                CategoryName = categoryDto.CategoryName,
             };
 
             try
@@ -63,7 +63,6 @@ namespace Project.Application.Services
 
 
         }
-
         public async Task DeleteCategoryAsync(Guid id)
         {
             try
@@ -76,7 +75,6 @@ namespace Project.Application.Services
                 throw;
             }
         }
-
         public async Task<CategoryDto> GetCategoryByIdAsync(Guid id)
         {
             try
