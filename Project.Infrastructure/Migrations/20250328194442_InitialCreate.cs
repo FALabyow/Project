@@ -16,7 +16,7 @@ namespace Project.Infrastructure.Migrations
                 columns: table => new
                 {
                     CategoryId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    CategoryName = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    CategoryName = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -28,7 +28,7 @@ namespace Project.Infrastructure.Migrations
                 columns: table => new
                 {
                     SalesHistoryId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    InvoiceNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    InvoiceNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     SaleDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     TotalAmount = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
                 },
@@ -38,16 +38,32 @@ namespace Project.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "StockRecords",
+                columns: table => new
+                {
+                    StockRecordId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ReferenceNum = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    StockInQty = table.Column<int>(type: "int", nullable: false),
+                    StockInDate = table.Column<DateOnly>(type: "date", nullable: false),
+                    ProductName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ProductCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ProductCategory = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_StockRecords", x => x.StockRecordId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Products",
                 columns: table => new
                 {
                     ProductId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ProductCode = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    BarcodeData = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ProductName = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    ProductCode = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    BarcodeData = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ProductName = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     ProductPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    ProductQuantity = table.Column<int>(type: "int", nullable: false),
-                    ProductPreOrder = table.Column<int>(type: "int", nullable: false),
+                    ProductReOrder = table.Column<int>(type: "int", nullable: false),
                     ScannedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CategoryId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
@@ -69,8 +85,8 @@ namespace Project.Infrastructure.Migrations
                     SalesDetailId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     SalesHistoryId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ProductId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ProductCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ProductName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ProductCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ProductName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     QuantitySold = table.Column<int>(type: "int", nullable: false),
                     UnitPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
                 },
@@ -86,31 +102,30 @@ namespace Project.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "StockRecords",
+                name: "Stock",
                 columns: table => new
                 {
-                    StockRecordId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ReferenceNum = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    StockInQty = table.Column<int>(type: "int", nullable: false),
-                    StockInDate = table.Column<DateOnly>(type: "date", nullable: false),
-                    ProductId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    StockId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ProductId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ProductQuantity = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_StockRecords", x => x.StockRecordId);
+                    table.PrimaryKey("PK_Stock", x => x.StockId);
                     table.ForeignKey(
-                        name: "FK_StockRecords_Products_ProductId",
+                        name: "FK_Stock_Products_ProductId",
                         column: x => x.ProductId,
                         principalTable: "Products",
                         principalColumn: "ProductId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Categories_CategoryName",
                 table: "Categories",
                 column: "CategoryName",
-                unique: true);
+                unique: true,
+                filter: "[CategoryName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Products_CategoryId",
@@ -121,13 +136,15 @@ namespace Project.Infrastructure.Migrations
                 name: "IX_Products_ProductCode",
                 table: "Products",
                 column: "ProductCode",
-                unique: true);
+                unique: true,
+                filter: "[ProductCode] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Products_ProductName",
                 table: "Products",
                 column: "ProductName",
-                unique: true);
+                unique: true,
+                filter: "[ProductName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_SalesDetails_SalesHistoryId",
@@ -135,9 +152,10 @@ namespace Project.Infrastructure.Migrations
                 column: "SalesHistoryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_StockRecords_ProductId",
-                table: "StockRecords",
-                column: "ProductId");
+                name: "IX_Stock_ProductId",
+                table: "Stock",
+                column: "ProductId",
+                unique: true);
         }
 
         /// <inheritdoc />
@@ -145,6 +163,9 @@ namespace Project.Infrastructure.Migrations
         {
             migrationBuilder.DropTable(
                 name: "SalesDetails");
+
+            migrationBuilder.DropTable(
+                name: "Stock");
 
             migrationBuilder.DropTable(
                 name: "StockRecords");

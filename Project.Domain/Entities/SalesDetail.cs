@@ -14,11 +14,11 @@ namespace Project.Domain.Entities
         public Guid SalesDetailId { get; set; } = Guid.NewGuid(); 
         public Guid SalesHistoryId { get; set; } 
         public Guid ProductId { get; set; }
-        public string ProductCode { get; set; } = string.Empty;
-        public string ProductName { get; set; } = string.Empty;
+        public string? ProductCode { get; set; } 
+        public string? ProductName { get; set; } 
         public int QuantitySold { get; set; }
         public decimal UnitPrice { get; set; }
         public decimal TotalAmount => QuantitySold * UnitPrice;
-        public SalesHistory SalesHistory { get; set; }
+        public SalesHistory? SalesHistory { get; set; }
     }
 }

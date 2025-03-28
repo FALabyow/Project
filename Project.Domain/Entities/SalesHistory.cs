@@ -11,9 +11,9 @@ namespace Project.Domain.Entities
     {
         [Key]
         public Guid SalesHistoryId { get; set; }
-        public string InvoiceNumber { get; set; } = string.Empty; 
+        public string? InvoiceNumber { get; set; }
         public DateTime SaleDate { get; set; } = DateTime.Now;
         public decimal TotalAmount { get; set; } 
-        public ICollection<SalesDetail> SalesDetails { get; set; }
+        public ICollection<SalesDetail>? SalesDetails { get; set; }
     }
 }

@@ -29,13 +29,13 @@ namespace Project.Infrastructure.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("CategoryName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("CategoryId");
 
                     b.HasIndex("CategoryName")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[CategoryName] IS NOT NULL");
 
                     b.ToTable("Categories");
                 });
@@ -47,27 +47,21 @@ namespace Project.Infrastructure.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("BarcodeData")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("CategoryId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("ProductCode")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProductName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("ProductPreOrder")
-                        .HasColumnType("int");
 
                     b.Property<decimal>("ProductPrice")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int>("ProductQuantity")
+                    b.Property<int>("ProductReOrder")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("ScannedAt")
@@ -78,10 +72,12 @@ namespace Project.Infrastructure.Migrations
                     b.HasIndex("CategoryId");
 
                     b.HasIndex("ProductCode")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[ProductCode] IS NOT NULL");
 
                     b.HasIndex("ProductName")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[ProductName] IS NOT NULL");
 
                     b.ToTable("Products");
                 });
@@ -93,14 +89,12 @@ namespace Project.Infrastructure.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("ProductCode")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("ProductId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("ProductName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("QuantitySold")
@@ -126,7 +120,6 @@ namespace Project.Infrastructure.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("InvoiceNumber")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("SaleDate")
@@ -140,17 +133,42 @@ namespace Project.Infrastructure.Migrations
                     b.ToTable("SalesHistory");
                 });
 
-            modelBuilder.Entity("Project.Domain.Entities.StockRecord", b =>
+            modelBuilder.Entity("Project.Domain.Entities.Stock", b =>
                 {
-                    b.Property<Guid>("StockRecordId")
+                    b.Property<Guid>("StockId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("ProductId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<int>("ProductQuantity")
+                        .HasColumnType("int");
+
+                    b.HasKey("StockId");
+
+                    b.HasIndex("ProductId")
+                        .IsUnique();
+
+                    b.ToTable("Stock");
+                });
+
+            modelBuilder.Entity("Project.Domain.Entities.StockRecord", b =>
+                {
+                    b.Property<Guid>("StockRecordId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("ProductCategory")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ProductCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ProductName")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("ReferenceNum")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateOnly>("StockInDate")
@@ -160,8 +178,6 @@ namespace Project.Infrastructure.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("StockRecordId");
-
-                    b.HasIndex("ProductId");
 
                     b.ToTable("StockRecords");
                 });
@@ -188,12 +204,12 @@ namespace Project.Infrastructure.Migrations
                     b.Navigation("SalesHistory");
                 });
 
-            modelBuilder.Entity("Project.Domain.Entities.StockRecord", b =>
+            modelBuilder.Entity("Project.Domain.Entities.Stock", b =>
                 {
                     b.HasOne("Project.Domain.Entities.Product", "Product")
-                        .WithMany("StockRecords")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .WithOne("Stock")
+                        .HasForeignKey("Project.Domain.Entities.Stock", "ProductId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Product");
@@ -206,7 +222,7 @@ namespace Project.Infrastructure.Migrations
 
             modelBuilder.Entity("Project.Domain.Entities.Product", b =>
                 {
-                    b.Navigation("StockRecords");
+                    b.Navigation("Stock");
                 });
 
             modelBuilder.Entity("Project.Domain.Entities.SalesHistory", b =>

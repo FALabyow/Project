@@ -11,16 +11,16 @@ namespace Project.Domain.Entities
     public class Product
     {
         public Guid ProductId { get; set; } = Guid.NewGuid();
-        public string ProductCode { get; set; }
-        public string BarcodeData {  get; set; }
-        public string ProductName { get; set; }
-        public decimal ProductPrice { get; set; }
-        public int ProductQuantity {  get; set; }
-        public int ProductPreOrder {  get; set; }
+        public string? ProductCode { get; set; }
+        public string? BarcodeData {  get; set; }
+        public string? ProductName { get; set; }
+        public decimal ProductPrice { get; set; }  
+        public int ProductReOrder {  get; set; }        
         public DateTime ScannedAt { get; set; }  
         public Guid CategoryId { get; set; }
-        public Category? Category { get; set; }
-        public ICollection<StockRecord?> StockRecords { get; set; } 
-
+        public virtual Stock? Stock { get; set; }
+        public virtual Category? Category { get; set; }
+       
+        
     }
 }

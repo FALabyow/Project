@@ -19,24 +19,24 @@ namespace Project.Infrastructure.Repositories
             _context = context;
         }
 
-        public async Task<IEnumerable<StockRecord>> GetAllStockRecordsAsync()
-        {
-            try
-            {
-                return await _context.StockRecords
-                        .Include(s => s.Product) 
-                        .ToListAsync();
+        //public async Task<IEnumerable<StockRecord>> GetAllStockRecordsAsync()
+        //{
+        //    try
+        //    {
+        //        return await _context.StockRecords
+        //                .Include(s => s.Product) 
+        //                .ToListAsync();
                 
-            }
-            catch (InvalidOperationException ex) when (ex.InnerException is SqlException sqlEx && sqlEx.Number == 4060)
-            {
-                throw new InvalidOperationException("Database does not exist or access denied!", ex);
-            }
-            catch (Exception ex)
-            {
-                throw new InvalidOperationException("An error occurred while fetching stock records." + ex.Message);
-            }
-        }
+        //    }
+        //    catch (InvalidOperationException ex) when (ex.InnerException is SqlException sqlEx && sqlEx.Number == 4060)
+        //    {
+        //        throw new InvalidOperationException("Database does not exist or access denied!", ex);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw new InvalidOperationException("An error occurred while fetching stock records." + ex.Message);
+        //    }
+        //}
         public async Task AddStockRecordAsync(StockRecord stockRecord)
         {
             try

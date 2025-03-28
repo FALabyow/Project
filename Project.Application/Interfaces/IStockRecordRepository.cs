@@ -9,7 +9,7 @@ namespace Project.Application.Interfaces
 {
     public interface IStockRecordRepository
     {
-        Task<IEnumerable<StockRecord>> GetAllStockRecordsAsync();
+        //Task<IEnumerable<StockRecord>> GetAllStockRecordsAsync();
         Task AddStockRecordAsync(StockRecord stockRecord);
         Task AddStockRecordsAsync(IEnumerable<StockRecord> stockRecords);
     }
