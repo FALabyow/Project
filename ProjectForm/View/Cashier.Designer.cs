@@ -440,7 +440,7 @@
             dgvCashier.RowHeadersWidth = 51;
             dgvCashier.Size = new Size(772, 650);
             dgvCashier.TabIndex = 5;
-            dgvCashier.CellContentClick += dgvCashier_CellContentClick;
+           
             // 
             // panel7
             // 
