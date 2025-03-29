@@ -63,7 +63,7 @@
             ReferenceNum1 = new DataGridViewTextBoxColumn();
             ProductCode1 = new DataGridViewTextBoxColumn();
             ProductName1 = new DataGridViewTextBoxColumn();
-            ProductCategory1 = new DataGridViewTextBoxColumn();
+            CategoryName = new DataGridViewTextBoxColumn();
             ProductQunatiy1 = new DataGridViewTextBoxColumn();
             StockInDate1 = new DataGridViewTextBoxColumn();
             Delete = new DataGridViewImageColumn();
@@ -153,7 +153,7 @@
             dgvStockIn.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dgvStockIn.ColumnHeadersHeight = 40;
             dgvStockIn.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dgvStockIn.Columns.AddRange(new DataGridViewColumn[] { RowNumber1, ProductId, ReferenceNum1, ProductCode1, ProductName1, ProductCategory1, ProductQunatiy1, StockInDate1, Delete });
+            dgvStockIn.Columns.AddRange(new DataGridViewColumn[] { RowNumber1, ProductId, ReferenceNum1, ProductCode1, ProductName1, CategoryName, ProductQunatiy1, StockInDate1, Delete });
             dgvStockIn.Dock = DockStyle.Top;
             dgvStockIn.EnableHeadersVisualStyles = false;
             dgvStockIn.GridColor = Color.White;
@@ -436,13 +436,13 @@
             ProductName1.MinimumWidth = 6;
             ProductName1.Name = "ProductName1";
             // 
-            // ProductCategory1
+            // CategoryName
             // 
-            ProductCategory1.DataPropertyName = "ProductCategory";
-            ProductCategory1.HeaderText = "Category";
-            ProductCategory1.MinimumWidth = 6;
-            ProductCategory1.Name = "ProductCategory1";
-            ProductCategory1.Width = 125;
+            CategoryName.DataPropertyName = "CategoryName";
+            CategoryName.HeaderText = "Category";
+            CategoryName.MinimumWidth = 6;
+            CategoryName.Name = "CategoryName";
+            CategoryName.Width = 125;
             // 
             // ProductQunatiy1
             // 
@@ -535,7 +535,7 @@
         private DataGridViewTextBoxColumn ReferenceNum1;
         private DataGridViewTextBoxColumn ProductCode1;
         private DataGridViewTextBoxColumn ProductName1;
-        private DataGridViewTextBoxColumn ProductCategory1;
+        private DataGridViewTextBoxColumn CategoryName;
         private DataGridViewTextBoxColumn ProductQunatiy1;
         private DataGridViewTextBoxColumn StockInDate1;
         private DataGridViewImageColumn Delete;

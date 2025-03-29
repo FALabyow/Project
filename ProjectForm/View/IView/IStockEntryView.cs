@@ -13,7 +13,7 @@ namespace ProjectForm.View.IView
         string ReferenceNum { get; set; }
         void DisplayReferenceNumber(string referenceNumber);
         List<StockRecordInfoDto> GetStockRecordsFromGrid();
-        void DisplayStockEntry(StockInDto stocksList);
+        void DisplayStockEntry(ProductDto stocksList);
         void DisplayStockRecords(List<StockRecordInfoDto> filteredRecords);
 
         event Action? OnDateSelected;

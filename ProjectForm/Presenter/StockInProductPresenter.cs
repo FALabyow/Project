@@ -29,7 +29,7 @@ namespace ProjectForm.Presenter
 
                 if (res.IsSuccessStatusCode)
                 {
-                    var products = await res.Content.ReadFromJsonAsync<List<StockInProductDto>>();
+                    var products = await res.Content.ReadFromJsonAsync<List<ProductDto>>();
                     
 
                     if (products == null)
@@ -37,12 +37,14 @@ namespace ProjectForm.Presenter
                         return;
                     }
 
-                    var _allProducts = products.Select(p => new StockInProductDto
+                    var _allProducts = products.Select(p => new ProductDto
                     {
                         ProductId = p.ProductId,
                         ProductName = p.ProductName,
                         ProductQuantity = p.ProductQuantity,
                         ProductCode = p.ProductCode,
+                        CategoryName = p.CategoryName,
+                        
                     }).ToList();
                     _view.DisplayProductList(_allProducts);
                 }
@@ -64,17 +66,19 @@ namespace ProjectForm.Presenter
             var productName = (string)gridView.Rows[e.RowIndex].Cells["ProductName"].Value;
             var productCode = (string)gridView.Rows[e.RowIndex].Cells["ProductCode"].Value;
             var productQty = (int)gridView.Rows[e.RowIndex].Cells["ProductQuantity"].Value;
+            var productCategory = (string)gridView.Rows[e.RowIndex].Cells["CategoryName"].Value;
 
             var confirmResult = MessageBox.Show($"Add this item?", "POS", MessageBoxButtons.YesNo);
 
             if (confirmResult != DialogResult.Yes) return;
 
-            var product = new StockInDto
+            var product = new ProductDto
             {
                 ProductId = productId,
                 ProductName = productName,
                 ProductCode =productCode,
                 ProductQuantity = productQty,
+                CategoryName = productCategory
                 
             };
 

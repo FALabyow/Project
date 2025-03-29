@@ -17,5 +17,8 @@ namespace ProjectForm.Model.DTOs
         public DateTime ScannedAt { get; set; }
         public Guid CategoryId { get; set; }
         public string? CategoryName { get; set; }
+        public int ProductQuantity { get; set; }
+        public string? ReferenceNum { get; set; }
+        public DateOnly StockInDate { get; set; }
     }
 }

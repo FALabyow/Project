@@ -73,11 +73,10 @@ namespace ProjectForm
             stockInProduct.ShowDialog();
         }
 
-        public void DisplayStockEntry(StockInDto stockList)
+        public void DisplayStockEntry(ProductDto stockList)
         {
-
             dgvStockIn.Rows
-                      .Add(dgvStockIn.Rows.Count + 1, stockList.ProductId, stockList.ReferenceNum, stockList.ProductCode, stockList.ProductName, stockList.ProductQuantity, stockList.StockInDate);
+                      .Add(dgvStockIn.Rows.Count + 1, stockList.ProductId, stockList.ReferenceNum, stockList.ProductCode, stockList.ProductName, stockList.CategoryName, stockList.ProductQuantity, stockList.StockInDate);
         }
         public void DisplayStockRecords(List<StockRecordInfoDto> filteredRecords)
         {

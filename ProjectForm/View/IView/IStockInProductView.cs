@@ -10,7 +10,7 @@ namespace ProjectForm.View.IView
     public interface IStockInProductView
     {
         event EventHandler<DataGridViewCellEventArgs>? SelectProductClicked;
-        void DisplayProductList(List<StockInProductDto> productsList);
+        void DisplayProductList(List<ProductDto> productsList);
         void ShowMessage(string message);
     }
 }

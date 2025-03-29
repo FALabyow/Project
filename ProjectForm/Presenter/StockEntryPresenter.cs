@@ -35,18 +35,19 @@ namespace ProjectForm.Presenter
             _view.DisplayReferenceNumber(newRef);
         }
 
-        public void AddStockEntry(StockInDto stockInDto)
+        public void AddStockEntry(ProductDto productList)
         {
             if(newRef != null)
             {
-                var stockEntry = new StockInDto
+                var stockEntry = new ProductDto
                 {
-                    ProductCode = stockInDto.ProductCode,
-                    ProductId = stockInDto.ProductId,
-                    ProductName = stockInDto.ProductName,
+                    ProductCode = productList.ProductCode,
+                    ProductId = productList.ProductId,
+                    ProductName = productList.ProductName,
                     ReferenceNum = newRef,
-                    ProductQuantity = stockInDto.ProductQuantity,
-                    StockInDate = DateOnly.FromDateTime(_view.DatePicker.Value)
+                    ProductQuantity = productList.ProductQuantity,
+                    StockInDate = DateOnly.FromDateTime(_view.DatePicker.Value),
+                    CategoryName = productList.CategoryName,
 
 
                 };
