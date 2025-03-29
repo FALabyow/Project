@@ -24,6 +24,7 @@ namespace Project.Infrastructure.Repositories
             {
                 var res = await _context.Products
                     .Include(p => p.Category)
+                    .Include(p => p.Stock)
                     .ToListAsync();
 
                 return res;

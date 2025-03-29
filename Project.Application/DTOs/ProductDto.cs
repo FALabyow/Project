@@ -14,6 +14,7 @@ namespace Project.Application.DTOs
         public string? ProductName { get; set; }
         public decimal ProductPrice { get; set; }
         public int ProductReOrder { get; set; }
+        public int ProductQuantity { get; set; }
         public DateTime ScannedAt { get; set; }
         public Guid CategoryId { get; set; }
         public string? CategoryName { get; set; }

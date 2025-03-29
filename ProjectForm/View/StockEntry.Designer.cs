@@ -45,20 +45,6 @@
             label1 = new Label();
             tabPage4 = new TabPage();
             dataStockIn = new DataGridView();
-            panel3 = new Panel();
-            btnLoad = new Button();
-            dateTimePicker3 = new DateTimePicker();
-            label4 = new Label();
-            dateTimePicker2 = new DateTimePicker();
-            label2 = new Label();
-            RowNumber1 = new DataGridViewTextBoxColumn();
-            ReferenceNum1 = new DataGridViewTextBoxColumn();
-            ProductCode1 = new DataGridViewTextBoxColumn();
-            ProductName1 = new DataGridViewTextBoxColumn();
-            ProductCategory1 = new DataGridViewTextBoxColumn();
-            ProductQunatiy1 = new DataGridViewTextBoxColumn();
-            StockInDate1 = new DataGridViewTextBoxColumn();
-            Delete = new DataGridViewImageColumn();
             RowNumber2 = new DataGridViewTextBoxColumn();
             ReferenceNum2 = new DataGridViewTextBoxColumn();
             ProductCode2 = new DataGridViewTextBoxColumn();
@@ -66,6 +52,21 @@
             ProductCategory2 = new DataGridViewTextBoxColumn();
             StockInQty = new DataGridViewTextBoxColumn();
             dataGridViewTextBoxColumn7 = new DataGridViewTextBoxColumn();
+            panel3 = new Panel();
+            btnLoad = new Button();
+            dateTimePicker3 = new DateTimePicker();
+            label4 = new Label();
+            dateTimePicker2 = new DateTimePicker();
+            label2 = new Label();
+            RowNumber1 = new DataGridViewTextBoxColumn();
+            ProductId = new DataGridViewTextBoxColumn();
+            ReferenceNum1 = new DataGridViewTextBoxColumn();
+            ProductCode1 = new DataGridViewTextBoxColumn();
+            ProductName1 = new DataGridViewTextBoxColumn();
+            ProductCategory1 = new DataGridViewTextBoxColumn();
+            ProductQunatiy1 = new DataGridViewTextBoxColumn();
+            StockInDate1 = new DataGridViewTextBoxColumn();
+            Delete = new DataGridViewImageColumn();
             panel1.SuspendLayout();
             tabControl1.SuspendLayout();
             tabPage3.SuspendLayout();
@@ -93,7 +94,7 @@
             lblManageProduct.Font = new Font("Century Gothic", 12F, FontStyle.Bold | FontStyle.Underline, GraphicsUnit.Point, 0);
             lblManageProduct.Location = new Point(14, 38);
             lblManageProduct.Name = "lblManageProduct";
-            lblManageProduct.Size = new Size(168, 23);
+            lblManageProduct.Size = new Size(131, 19);
             lblManageProduct.TabIndex = 3;
             lblManageProduct.Text = "Stock In Module";
             lblManageProduct.TextAlign = ContentAlignment.MiddleCenter;
@@ -115,10 +116,10 @@
             tabPage3.Controls.Add(btnEntry);
             tabPage3.Controls.Add(dgvStockIn);
             tabPage3.Controls.Add(panel2);
-            tabPage3.Location = new Point(4, 30);
+            tabPage3.Location = new Point(4, 28);
             tabPage3.Name = "tabPage3";
             tabPage3.Padding = new Padding(3);
-            tabPage3.Size = new Size(974, 732);
+            tabPage3.Size = new Size(974, 734);
             tabPage3.TabIndex = 2;
             tabPage3.Text = "Stock In";
             // 
@@ -152,7 +153,7 @@
             dgvStockIn.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dgvStockIn.ColumnHeadersHeight = 40;
             dgvStockIn.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dgvStockIn.Columns.AddRange(new DataGridViewColumn[] { RowNumber1, ReferenceNum1, ProductCode1, ProductName1, ProductCategory1, ProductQunatiy1, StockInDate1, Delete });
+            dgvStockIn.Columns.AddRange(new DataGridViewColumn[] { RowNumber1, ProductId, ReferenceNum1, ProductCode1, ProductName1, ProductCategory1, ProductQunatiy1, StockInDate1, Delete });
             dgvStockIn.Dock = DockStyle.Top;
             dgvStockIn.EnableHeadersVisualStyles = false;
             dgvStockIn.GridColor = Color.White;
@@ -184,7 +185,7 @@
             LinProduct.LinkColor = Color.DimGray;
             LinProduct.Location = new Point(173, 122);
             LinProduct.Name = "LinProduct";
-            LinProduct.Size = new Size(196, 23);
+            LinProduct.Size = new Size(156, 21);
             LinProduct.TabIndex = 7;
             LinProduct.TabStop = true;
             LinProduct.Text = "[ Browse Products ]";
@@ -195,7 +196,7 @@
             LinGenerate.LinkColor = Color.DimGray;
             LinGenerate.Location = new Point(383, 31);
             LinGenerate.Name = "LinGenerate";
-            LinGenerate.Size = new Size(120, 21);
+            LinGenerate.Size = new Size(99, 20);
             LinGenerate.TabIndex = 6;
             LinGenerate.TabStop = true;
             LinGenerate.Text = "[ Generate ]";
@@ -205,14 +206,14 @@
             // 
             dateTimePicker1.Location = new Point(173, 76);
             dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new Size(330, 30);
+            dateTimePicker1.Size = new Size(330, 25);
             dateTimePicker1.TabIndex = 5;
             // 
             // txtRefNo
             // 
             txtRefNo.Location = new Point(173, 25);
             txtRefNo.Name = "txtRefNo";
-            txtRefNo.Size = new Size(193, 30);
+            txtRefNo.Size = new Size(193, 25);
             txtRefNo.TabIndex = 3;
             // 
             // label3
@@ -220,7 +221,7 @@
             label3.AutoSize = true;
             label3.Location = new Point(7, 83);
             label3.Name = "label3";
-            label3.Size = new Size(139, 21);
+            label3.Size = new Size(115, 20);
             label3.TabIndex = 2;
             label3.Text = "Stock In Date :";
             // 
@@ -229,7 +230,7 @@
             label1.AutoSize = true;
             label1.Location = new Point(7, 28);
             label1.Name = "label1";
-            label1.Size = new Size(143, 21);
+            label1.Size = new Size(120, 20);
             label1.TabIndex = 0;
             label1.Text = "Reference No :";
             // 
@@ -237,10 +238,10 @@
             // 
             tabPage4.Controls.Add(dataStockIn);
             tabPage4.Controls.Add(panel3);
-            tabPage4.Location = new Point(4, 30);
+            tabPage4.Location = new Point(4, 24);
             tabPage4.Name = "tabPage4";
             tabPage4.Padding = new Padding(3);
-            tabPage4.Size = new Size(974, 732);
+            tabPage4.Size = new Size(974, 738);
             tabPage4.TabIndex = 3;
             tabPage4.Text = "Stock In Record";
             tabPage4.UseVisualStyleBackColor = true;
@@ -271,6 +272,67 @@
             dataStockIn.Size = new Size(968, 437);
             dataStockIn.TabIndex = 5;
             dataStockIn.RowPostPaint += dataStockIn_RowPostPaint;
+            // 
+            // RowNumber2
+            // 
+            RowNumber2.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            RowNumber2.DataPropertyName = "RowNumber";
+            RowNumber2.HeaderText = "No.";
+            RowNumber2.MinimumWidth = 6;
+            RowNumber2.Name = "RowNumber2";
+            RowNumber2.Width = 57;
+            // 
+            // ReferenceNum2
+            // 
+            ReferenceNum2.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            ReferenceNum2.DataPropertyName = "ReferenceNum";
+            ReferenceNum2.HeaderText = "ReferenceNo.";
+            ReferenceNum2.MinimumWidth = 6;
+            ReferenceNum2.Name = "ReferenceNum2";
+            ReferenceNum2.Width = 135;
+            // 
+            // ProductCode2
+            // 
+            ProductCode2.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            ProductCode2.DataPropertyName = "ProductCode";
+            ProductCode2.HeaderText = "Pcode";
+            ProductCode2.MinimumWidth = 6;
+            ProductCode2.Name = "ProductCode2";
+            ProductCode2.Width = 81;
+            // 
+            // ProductName2
+            // 
+            ProductName2.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            ProductName2.DataPropertyName = "ProductName";
+            ProductName2.HeaderText = "Description";
+            ProductName2.MinimumWidth = 6;
+            ProductName2.Name = "ProductName2";
+            // 
+            // ProductCategory2
+            // 
+            ProductCategory2.DataPropertyName = "ProductCategory";
+            ProductCategory2.HeaderText = "Category";
+            ProductCategory2.MinimumWidth = 6;
+            ProductCategory2.Name = "ProductCategory2";
+            ProductCategory2.Width = 125;
+            // 
+            // StockInQty
+            // 
+            StockInQty.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            StockInQty.DataPropertyName = "StockInQty";
+            StockInQty.HeaderText = "Qty";
+            StockInQty.MinimumWidth = 6;
+            StockInQty.Name = "StockInQty";
+            StockInQty.Width = 58;
+            // 
+            // dataGridViewTextBoxColumn7
+            // 
+            dataGridViewTextBoxColumn7.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridViewTextBoxColumn7.DataPropertyName = "StockInDate";
+            dataGridViewTextBoxColumn7.HeaderText = "Stock In Date";
+            dataGridViewTextBoxColumn7.MinimumWidth = 6;
+            dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
+            dataGridViewTextBoxColumn7.Width = 130;
             // 
             // panel3
             // 
@@ -304,7 +366,7 @@
             // 
             dateTimePicker3.Location = new Point(482, 48);
             dateTimePicker3.Name = "dateTimePicker3";
-            dateTimePicker3.Size = new Size(250, 30);
+            dateTimePicker3.Size = new Size(250, 25);
             dateTimePicker3.TabIndex = 3;
             // 
             // label4
@@ -312,7 +374,7 @@
             label4.AutoSize = true;
             label4.Location = new Point(446, 53);
             label4.Name = "label4";
-            label4.Size = new Size(30, 21);
+            label4.Size = new Size(24, 20);
             label4.TabIndex = 2;
             label4.Text = "To";
             // 
@@ -320,7 +382,7 @@
             // 
             dateTimePicker2.Location = new Point(190, 48);
             dateTimePicker2.Name = "dateTimePicker2";
-            dateTimePicker2.Size = new Size(250, 30);
+            dateTimePicker2.Size = new Size(250, 25);
             dateTimePicker2.TabIndex = 1;
             // 
             // label2
@@ -328,7 +390,7 @@
             label2.AutoSize = true;
             label2.Location = new Point(7, 53);
             label2.Name = "label2";
-            label2.Size = new Size(177, 21);
+            label2.Size = new Size(146, 20);
             label2.TabIndex = 0;
             label2.Text = "Filter By Date: From";
             // 
@@ -339,7 +401,14 @@
             RowNumber1.HeaderText = "No.";
             RowNumber1.MinimumWidth = 6;
             RowNumber1.Name = "RowNumber1";
-            RowNumber1.Width = 67;
+            RowNumber1.Width = 57;
+            // 
+            // ProductId
+            // 
+            ProductId.DataPropertyName = "ProductId1";
+            ProductId.HeaderText = "Id";
+            ProductId.Name = "ProductId";
+            ProductId.Visible = false;
             // 
             // ReferenceNum1
             // 
@@ -348,7 +417,7 @@
             ReferenceNum1.HeaderText = "ReferenceNo.";
             ReferenceNum1.MinimumWidth = 6;
             ReferenceNum1.Name = "ReferenceNum1";
-            ReferenceNum1.Width = 160;
+            ReferenceNum1.Width = 135;
             // 
             // ProductCode1
             // 
@@ -357,7 +426,7 @@
             ProductCode1.HeaderText = "Pcode";
             ProductCode1.MinimumWidth = 6;
             ProductCode1.Name = "ProductCode1";
-            ProductCode1.Width = 96;
+            ProductCode1.Width = 81;
             // 
             // ProductName1
             // 
@@ -382,7 +451,7 @@
             ProductQunatiy1.HeaderText = "Qty";
             ProductQunatiy1.MinimumWidth = 6;
             ProductQunatiy1.Name = "ProductQunatiy1";
-            ProductQunatiy1.Width = 71;
+            ProductQunatiy1.Width = 58;
             // 
             // StockInDate1
             // 
@@ -391,7 +460,7 @@
             StockInDate1.HeaderText = "Stock In Date";
             StockInDate1.MinimumWidth = 6;
             StockInDate1.Name = "StockInDate1";
-            StockInDate1.Width = 156;
+            StockInDate1.Width = 130;
             // 
             // Delete
             // 
@@ -402,70 +471,9 @@
             Delete.Name = "Delete";
             Delete.Width = 6;
             // 
-            // RowNumber2
-            // 
-            RowNumber2.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            RowNumber2.DataPropertyName = "RowNumber";
-            RowNumber2.HeaderText = "No.";
-            RowNumber2.MinimumWidth = 6;
-            RowNumber2.Name = "RowNumber2";
-            RowNumber2.Width = 67;
-            // 
-            // ReferenceNum2
-            // 
-            ReferenceNum2.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            ReferenceNum2.DataPropertyName = "ReferenceNum";
-            ReferenceNum2.HeaderText = "ReferenceNo.";
-            ReferenceNum2.MinimumWidth = 6;
-            ReferenceNum2.Name = "ReferenceNum2";
-            ReferenceNum2.Width = 160;
-            // 
-            // ProductCode2
-            // 
-            ProductCode2.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            ProductCode2.DataPropertyName = "ProductCode";
-            ProductCode2.HeaderText = "Pcode";
-            ProductCode2.MinimumWidth = 6;
-            ProductCode2.Name = "ProductCode2";
-            ProductCode2.Width = 96;
-            // 
-            // ProductName2
-            // 
-            ProductName2.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            ProductName2.DataPropertyName = "ProductName";
-            ProductName2.HeaderText = "Description";
-            ProductName2.MinimumWidth = 6;
-            ProductName2.Name = "ProductName2";
-            // 
-            // ProductCategory2
-            // 
-            ProductCategory2.DataPropertyName = "ProductCategory";
-            ProductCategory2.HeaderText = "Category";
-            ProductCategory2.MinimumWidth = 6;
-            ProductCategory2.Name = "ProductCategory2";
-            ProductCategory2.Width = 125;
-            // 
-            // StockInQty
-            // 
-            StockInQty.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            StockInQty.DataPropertyName = "StockInQty";
-            StockInQty.HeaderText = "Qty";
-            StockInQty.MinimumWidth = 6;
-            StockInQty.Name = "StockInQty";
-            StockInQty.Width = 71;
-            // 
-            // dataGridViewTextBoxColumn7
-            // 
-            dataGridViewTextBoxColumn7.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewTextBoxColumn7.DataPropertyName = "StockInDate";
-            dataGridViewTextBoxColumn7.HeaderText = "Stock In Date";
-            dataGridViewTextBoxColumn7.MinimumWidth = 6;
-            dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
-            dataGridViewTextBoxColumn7.Width = 156;
-            // 
             // StockEntry
             // 
-            AutoScaleDimensions = new SizeF(11F, 21F);
+            AutoScaleDimensions = new SizeF(8F, 19F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(982, 855);
             ControlBox = false;
@@ -515,14 +523,6 @@
         private DateTimePicker dateTimePicker2;
         private Label label2;
         private Button btnLoad;
-        private DataGridViewTextBoxColumn RowNumber1;
-        private DataGridViewTextBoxColumn ReferenceNum1;
-        private DataGridViewTextBoxColumn ProductCode1;
-        private DataGridViewTextBoxColumn ProductName1;
-        private DataGridViewTextBoxColumn ProductCategory1;
-        private DataGridViewTextBoxColumn ProductQunatiy1;
-        private DataGridViewTextBoxColumn StockInDate1;
-        private DataGridViewImageColumn Delete;
         private DataGridViewTextBoxColumn RowNumber2;
         private DataGridViewTextBoxColumn ReferenceNum2;
         private DataGridViewTextBoxColumn ProductCode2;
@@ -530,5 +530,14 @@
         private DataGridViewTextBoxColumn ProductCategory2;
         private DataGridViewTextBoxColumn StockInQty;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
+        private DataGridViewTextBoxColumn RowNumber1;
+        private DataGridViewTextBoxColumn ProductId;
+        private DataGridViewTextBoxColumn ReferenceNum1;
+        private DataGridViewTextBoxColumn ProductCode1;
+        private DataGridViewTextBoxColumn ProductName1;
+        private DataGridViewTextBoxColumn ProductCategory1;
+        private DataGridViewTextBoxColumn ProductQunatiy1;
+        private DataGridViewTextBoxColumn StockInDate1;
+        private DataGridViewImageColumn Delete;
     }
 }

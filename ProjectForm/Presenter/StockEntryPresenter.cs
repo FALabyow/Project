@@ -35,21 +35,23 @@ namespace ProjectForm.Presenter
             _view.DisplayReferenceNumber(newRef);
         }
 
-        public void AddStockEntry(StockInProductDto stockInProduct)
+        public void AddStockEntry(StockInDto stockInDto)
         {
-            var stockEntry = new StockInProductDto
+            if(newRef != null)
             {
-                ProductCode = stockInProduct.ProductCode,
-                ProductId = stockInProduct.ProductId,
-                ProductName = stockInProduct.ProductName,
-                ReferenceNum = newRef,
-                ProductQuantity = stockInProduct.ProductQuantity,
-                StockInDate = DateOnly.FromDateTime(_view.DatePicker.Value)
-                
-                
-            };
+                var stockEntry = new StockInDto
+                {
+                    ProductCode = stockInDto.ProductCode,
+                    ProductId = stockInDto.ProductId,
+                    ProductName = stockInDto.ProductName,
+                    ReferenceNum = newRef,
+                    ProductQuantity = stockInDto.ProductQuantity,
+                    StockInDate = DateOnly.FromDateTime(_view.DatePicker.Value)
 
-            _view.DisplayStockEntry(stockEntry);
+
+                };
+                _view.DisplayStockEntry(stockEntry);
+            }
         }
 
         private void OnDeleteClicked(object? sender, DataGridViewCellEventArgs e)

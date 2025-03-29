@@ -29,7 +29,8 @@ namespace ProjectForm.Presenter
 
                 if (res.IsSuccessStatusCode)
                 {
-                    var products = await res.Content.ReadFromJsonAsync<List<ProductDto>>();
+                    var products = await res.Content.ReadFromJsonAsync<List<StockInProductDto>>();
+                    
 
                     if (products == null)
                     {
@@ -40,7 +41,7 @@ namespace ProjectForm.Presenter
                     {
                         ProductId = p.ProductId,
                         ProductName = p.ProductName,
-                        //ProductQuantity = p.ProductQuantity,
+                        ProductQuantity = p.ProductQuantity,
                         ProductCode = p.ProductCode,
                     }).ToList();
                     _view.DisplayProductList(_allProducts);
@@ -68,7 +69,7 @@ namespace ProjectForm.Presenter
 
             if (confirmResult != DialogResult.Yes) return;
 
-            var product = new StockInProductDto
+            var product = new StockInDto
             {
                 ProductId = productId,
                 ProductName = productName,

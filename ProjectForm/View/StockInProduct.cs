@@ -51,9 +51,9 @@ namespace ProjectForm
 
             }
         }
-        public void DisplayProductList(List<StockInProductDto> productList)
+        public void DisplayProductList(List<StockInProductDto> productsList)
         {
-            _bindingSource.DataSource = productList;
+            _bindingSource.DataSource = productsList;
             foreach (DataGridViewRow row in dgvProduct.Rows)
             {
                 row.Cells["Select"].Value = Properties.Resources.add;

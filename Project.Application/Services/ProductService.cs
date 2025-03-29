@@ -18,6 +18,8 @@ namespace Project.Application.Services
                 var products = await _productRepository.GetAllProductAsync();
                 if (!products.Any())
                     throw new InvalidOperationException("No products found in the database!");
+
+                
                 return products.Select(b => new ProductDto
                 {
                     ProductId = b.ProductId,    
@@ -28,7 +30,8 @@ namespace Project.Application.Services
                     ProductReOrder = b.ProductReOrder,
                     ScannedAt = b.ScannedAt,
                     CategoryId = b.CategoryId,
-                    CategoryName = b.Category?.CategoryName
+                    CategoryName = b.Category?.CategoryName,
+                    ProductQuantity = b.Stock?.ProductQuantity ?? 0
                 }).ToList();
 
             }
