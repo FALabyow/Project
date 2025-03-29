@@ -12,7 +12,7 @@ using Project.Infrastructure.Persistence;
 namespace Project.Infrastructure.Migrations
 {
     [DbContext(typeof(ProjectDbContext))]
-    [Migration("20250328194442_InitialCreate")]
+    [Migration("20250329115013_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -153,7 +153,7 @@ namespace Project.Infrastructure.Migrations
                     b.HasIndex("ProductId")
                         .IsUnique();
 
-                    b.ToTable("Stock");
+                    b.ToTable("Stocks");
                 });
 
             modelBuilder.Entity("Project.Domain.Entities.StockRecord", b =>

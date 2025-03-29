@@ -102,7 +102,7 @@ namespace Project.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Stock",
+                name: "Stocks",
                 columns: table => new
                 {
                     StockId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -111,9 +111,9 @@ namespace Project.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Stock", x => x.StockId);
+                    table.PrimaryKey("PK_Stocks", x => x.StockId);
                     table.ForeignKey(
-                        name: "FK_Stock_Products_ProductId",
+                        name: "FK_Stocks_Products_ProductId",
                         column: x => x.ProductId,
                         principalTable: "Products",
                         principalColumn: "ProductId",
@@ -152,8 +152,8 @@ namespace Project.Infrastructure.Migrations
                 column: "SalesHistoryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Stock_ProductId",
-                table: "Stock",
+                name: "IX_Stocks_ProductId",
+                table: "Stocks",
                 column: "ProductId",
                 unique: true);
         }
@@ -165,10 +165,10 @@ namespace Project.Infrastructure.Migrations
                 name: "SalesDetails");
 
             migrationBuilder.DropTable(
-                name: "Stock");
+                name: "StockRecords");
 
             migrationBuilder.DropTable(
-                name: "StockRecords");
+                name: "Stocks");
 
             migrationBuilder.DropTable(
                 name: "SalesHistory");

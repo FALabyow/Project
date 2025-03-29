@@ -19,6 +19,7 @@ namespace Project.Infrastructure.Persistence
         public DbSet<StockRecord> StockRecords { get; set; }
         public DbSet<SalesDetail> SalesDetails { get; set; }
         public DbSet<SalesHistory> SalesHistory { get; set; }
+        public DbSet<Stock> Stocks { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

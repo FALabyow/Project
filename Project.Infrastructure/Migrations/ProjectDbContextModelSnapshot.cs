@@ -150,7 +150,7 @@ namespace Project.Infrastructure.Migrations
                     b.HasIndex("ProductId")
                         .IsUnique();
 
-                    b.ToTable("Stock");
+                    b.ToTable("Stocks");
                 });
 
             modelBuilder.Entity("Project.Domain.Entities.StockRecord", b =>
