@@ -40,7 +40,7 @@ namespace ProjectForm.Presenter
                     {
                         ProductId = p.ProductId,
                         ProductName = p.ProductName,
-                        ProductQuantity = p.ProductQuantity,
+                        //ProductQuantity = p.ProductQuantity,
                         ProductCode = p.ProductCode,
                     }).ToList();
                     _view.DisplayProductList(_allProducts);

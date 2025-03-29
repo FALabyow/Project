@@ -31,7 +31,6 @@
             panel1 = new Panel();
             picClose = new PictureBox();
             label1 = new Label();
-            btnUpdate = new Button();
             btnClear = new Button();
             label2 = new Label();
             btnSave = new Button();
@@ -47,8 +46,6 @@
             nudReorder = new NumericUpDown();
             txtPrice = new TextBox();
             categoryLoadingMessageLabel = new Label();
-            label8 = new Label();
-            textQty = new TextBox();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)picClose).BeginInit();
             ((System.ComponentModel.ISupportInitialize)nudReorder).BeginInit();
@@ -84,22 +81,9 @@
             label1.Font = new Font("Century Gothic", 10.8F, FontStyle.Bold | FontStyle.Underline, GraphicsUnit.Point, 0);
             label1.Location = new Point(12, 12);
             label1.Name = "label1";
-            label1.Size = new Size(155, 22);
+            label1.Size = new Size(129, 18);
             label1.TabIndex = 1;
             label1.Text = "Product  Module";
-            // 
-            // btnUpdate
-            // 
-            btnUpdate.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            btnUpdate.BackColor = Color.LightSalmon;
-            btnUpdate.FlatAppearance.BorderSize = 0;
-            btnUpdate.FlatStyle = FlatStyle.Flat;
-            btnUpdate.Location = new Point(616, 354);
-            btnUpdate.Name = "btnUpdate";
-            btnUpdate.Size = new Size(107, 46);
-            btnUpdate.TabIndex = 11;
-            btnUpdate.Text = "Update";
-            btnUpdate.UseVisualStyleBackColor = false;
             // 
             // btnClear
             // 
@@ -130,7 +114,7 @@
             btnSave.BackColor = Color.Peru;
             btnSave.FlatAppearance.BorderSize = 0;
             btnSave.FlatStyle = FlatStyle.Flat;
-            btnSave.Location = new Point(503, 354);
+            btnSave.Location = new Point(602, 354);
             btnSave.Name = "btnSave";
             btnSave.Size = new Size(107, 46);
             btnSave.TabIndex = 8;
@@ -142,7 +126,7 @@
             label3.AutoSize = true;
             label3.Location = new Point(457, 95);
             label3.Name = "label3";
-            label3.Size = new Size(95, 21);
+            label3.Size = new Size(81, 20);
             label3.TabIndex = 12;
             label3.Text = "Barcode :";
             // 
@@ -151,7 +135,7 @@
             label4.AutoSize = true;
             label4.Location = new Point(17, 149);
             label4.Name = "label4";
-            label4.Size = new Size(117, 21);
+            label4.Size = new Size(99, 20);
             label4.TabIndex = 13;
             label4.Text = "Description :";
             // 
@@ -160,7 +144,7 @@
             label5.AutoSize = true;
             label5.Location = new Point(17, 207);
             label5.Name = "label5";
-            label5.Size = new Size(106, 21);
+            label5.Size = new Size(87, 20);
             label5.TabIndex = 14;
             label5.Text = "Category :";
             // 
@@ -169,7 +153,7 @@
             label6.AutoSize = true;
             label6.Location = new Point(17, 264);
             label6.Name = "label6";
-            label6.Size = new Size(63, 21);
+            label6.Size = new Size(54, 20);
             label6.TabIndex = 15;
             label6.Text = "Price :";
             // 
@@ -178,7 +162,7 @@
             label7.AutoSize = true;
             label7.Location = new Point(506, 264);
             label7.Name = "label7";
-            label7.Size = new Size(89, 21);
+            label7.Size = new Size(76, 20);
             label7.TabIndex = 16;
             label7.Text = "Reorder :";
             // 
@@ -186,21 +170,21 @@
             // 
             txtPcode.Location = new Point(170, 90);
             txtPcode.Name = "txtPcode";
-            txtPcode.Size = new Size(240, 30);
+            txtPcode.Size = new Size(240, 25);
             txtPcode.TabIndex = 7;
             // 
             // txtBarcode
             // 
             txtBarcode.Location = new Point(558, 90);
             txtBarcode.Name = "txtBarcode";
-            txtBarcode.Size = new Size(254, 30);
+            txtBarcode.Size = new Size(254, 25);
             txtBarcode.TabIndex = 17;
             // 
             // txtDescription
             // 
             txtDescription.Location = new Point(170, 147);
             txtDescription.Name = "txtDescription";
-            txtDescription.Size = new Size(642, 30);
+            txtDescription.Size = new Size(642, 25);
             txtDescription.TabIndex = 18;
             // 
             // cmbCategory
@@ -208,7 +192,7 @@
             cmbCategory.FormattingEnabled = true;
             cmbCategory.Location = new Point(170, 204);
             cmbCategory.Name = "cmbCategory";
-            cmbCategory.Size = new Size(642, 29);
+            cmbCategory.Size = new Size(642, 27);
             cmbCategory.TabIndex = 19;
             // 
             // nudReorder
@@ -217,7 +201,7 @@
             nudReorder.Maximum = new decimal(new int[] { 1000, 0, 0, 0 });
             nudReorder.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             nudReorder.Name = "nudReorder";
-            nudReorder.Size = new Size(150, 30);
+            nudReorder.Size = new Size(150, 25);
             nudReorder.TabIndex = 21;
             nudReorder.TextAlign = HorizontalAlignment.Center;
             nudReorder.Value = new decimal(new int[] { 1, 0, 0, 0 });
@@ -226,7 +210,7 @@
             // 
             txtPrice.Location = new Point(170, 261);
             txtPrice.Name = "txtPrice";
-            txtPrice.Size = new Size(278, 30);
+            txtPrice.Size = new Size(278, 25);
             txtPrice.TabIndex = 22;
             // 
             // categoryLoadingMessageLabel
@@ -234,32 +218,14 @@
             categoryLoadingMessageLabel.AutoSize = true;
             categoryLoadingMessageLabel.Location = new Point(17, 379);
             categoryLoadingMessageLabel.Name = "categoryLoadingMessageLabel";
-            categoryLoadingMessageLabel.Size = new Size(0, 21);
+            categoryLoadingMessageLabel.Size = new Size(0, 20);
             categoryLoadingMessageLabel.TabIndex = 23;
-            // 
-            // label8
-            // 
-            label8.AutoSize = true;
-            label8.Location = new Point(17, 325);
-            label8.Name = "label8";
-            label8.Size = new Size(54, 21);
-            label8.TabIndex = 24;
-            label8.Text = "Qty :";
-            // 
-            // textQty
-            // 
-            textQty.Location = new Point(170, 316);
-            textQty.Name = "textQty";
-            textQty.Size = new Size(278, 30);
-            textQty.TabIndex = 25;
             // 
             // ProductModule
             // 
-            AutoScaleDimensions = new SizeF(11F, 21F);
+            AutoScaleDimensions = new SizeF(8F, 19F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(880, 412);
-            Controls.Add(textQty);
-            Controls.Add(label8);
             Controls.Add(categoryLoadingMessageLabel);
             Controls.Add(txtPrice);
             Controls.Add(nudReorder);
@@ -272,7 +238,6 @@
             Controls.Add(label4);
             Controls.Add(label3);
             Controls.Add(panel1);
-            Controls.Add(btnUpdate);
             Controls.Add(btnClear);
             Controls.Add(label2);
             Controls.Add(btnSave);
@@ -296,7 +261,6 @@
 
         private Panel panel1;
         private Label label1;
-        private Button btnUpdate;
         private Button btnClear;
         private Label label2;
         private Button btnSave;
@@ -313,7 +277,5 @@
         public ComboBox cmbCategory;
         public NumericUpDown nudReorder;
         private Label categoryLoadingMessageLabel;
-        private Label label8;
-        private TextBox textQty;
     }
 }

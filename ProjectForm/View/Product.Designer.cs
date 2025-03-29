@@ -46,7 +46,6 @@
             productCategory = new DataGridViewTextBoxColumn();
             productCategoryId = new DataGridViewTextBoxColumn();
             productPrice = new DataGridViewTextBoxColumn();
-            productQty = new DataGridViewTextBoxColumn();
             productReorder = new DataGridViewTextBoxColumn();
             scannedAt = new DataGridViewTextBoxColumn();
             Edit = new DataGridViewImageColumn();
@@ -76,7 +75,6 @@
             txtSearch.PlaceholderText = "Search...";
             txtSearch.Size = new Size(364, 23);
             txtSearch.TabIndex = 5;
-            txtSearch.TextChanged += txtSearch_TextChanged;
             // 
             // btnAdd
             // 
@@ -118,7 +116,7 @@
             dgvProduct.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dgvProduct.ColumnHeadersHeight = 40;
             dgvProduct.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dgvProduct.Columns.AddRange(new DataGridViewColumn[] { rowNumber, productId, productCode, productBarcode, productDescription, productCategory, productCategoryId, productPrice, productQty, productReorder, scannedAt, Edit, Delete });
+            dgvProduct.Columns.AddRange(new DataGridViewColumn[] { rowNumber, productId, productCode, productBarcode, productDescription, productCategory, productCategoryId, productPrice, productReorder, scannedAt, Edit, Delete });
             dgvProduct.Dock = DockStyle.Fill;
             dgvProduct.EnableHeadersVisualStyles = false;
             dgvProduct.GridColor = Color.White;
@@ -213,15 +211,6 @@
             productPrice.Name = "productPrice";
             productPrice.Width = 65;
             // 
-            // productQty
-            // 
-            productQty.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            productQty.DataPropertyName = "ProductQuantity";
-            productQty.HeaderText = "Qty";
-            productQty.MinimumWidth = 6;
-            productQty.Name = "productQty";
-            productQty.Width = 54;
-            // 
             // productReorder
             // 
             productReorder.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
@@ -292,7 +281,6 @@
         private DataGridViewTextBoxColumn productCategory;
         private DataGridViewTextBoxColumn productCategoryId;
         private DataGridViewTextBoxColumn productPrice;
-        private DataGridViewTextBoxColumn productQty;
         private DataGridViewTextBoxColumn productReorder;
         private DataGridViewTextBoxColumn scannedAt;
         private DataGridViewImageColumn Edit;

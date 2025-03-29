@@ -31,7 +31,6 @@ namespace ProjectForm
             _httpClient = new HttpClient { BaseAddress = new Uri("https://localhost:7014/api") };
             cmbCategory.SelectedIndexChanged += (s, e) => SelectedIndexCategoryCombo?.Invoke(this, EventArgs.Empty);
             btnSave.Click += (s, e) => SaveClicked?.Invoke(this, EventArgs.Empty);
-            btnUpdate.Click += (s, e) => UpdateClicked?.Invoke(this, EventArgs.Empty);
             btnClear.Click += (s, e) => ClearClicked?.Invoke(this, EventArgs.Empty);
             cmbCategory.Text = "Select Category";
             this.presenterPresenter = presenterPresenter;
@@ -50,7 +49,6 @@ namespace ProjectForm
         public event EventHandler? ClearClicked;
         public event EventHandler? SelectedIndexCategoryCombo;
         public event EventHandler? SaveClicked;
-        public event EventHandler? UpdateClicked;
         public Guid Selectedcategory
         {
             get
@@ -77,7 +75,7 @@ namespace ProjectForm
             get => txtDescription.Text;
             set => txtDescription.Text = value;
         }
-        public int Preorder
+        public int ReOrder
         {
             get
             {
@@ -106,27 +104,7 @@ namespace ProjectForm
             {
                 txtPrice.Text = value.ToString("0.00");
             }
-        }
-
-        public int Quantity
-        {
-            get
-            {
-                if(int.TryParse(textQty.Text, out int quantity))
-                {
-                    return quantity;
-                }
-                else
-                {
-                    return 0;
-                }
-            }
-
-            set
-            {
-                textQty.Text = value.ToString();
-            }
-        }
+        }        
         public void LoadCategory(List<CategoryDto> categoryDto)
         {
             categoryDto.Insert(0, new CategoryDto { CategoryId = Guid.Empty, CategoryName = "Select Category" });
@@ -136,7 +114,6 @@ namespace ProjectForm
             cmbCategory.SelectedIndex = 0;
 
         }
-
         public void ShowMessage(string message)
         {
             MessageBox.Show(message);
@@ -153,16 +130,11 @@ namespace ProjectForm
             txtDescription.Text = "";
             nudReorder.Value = 1;
             categoryLoadingMessageLabel.Text = "";
-            textQty.Text = "";
-            
         }
-
-
         private void pictureBox1_Click(object sender, EventArgs e)
         {
             this.Dispose();
         }
-
         private void btnCancel_Click(object sender, EventArgs e)
         {
             Clear();

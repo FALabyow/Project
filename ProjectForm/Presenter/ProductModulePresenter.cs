@@ -53,7 +53,11 @@ namespace ProjectForm.Presenter
                 else if(response.StatusCode == HttpStatusCode.BadRequest)
                 {
                     var errorRes = await response.Content.ReadFromJsonAsync<ApiErrorResponse>();
-                    _productModuleView.ShowMessage(errorRes.Error);
+                    if(errorRes != null)
+                    {
+                        _productModuleView.ShowMessage(errorRes.Error);
+                    }
+                   
                     
                 }
                 else
@@ -78,15 +82,14 @@ namespace ProjectForm.Presenter
         private async void OnSaveClicked(object? sender, EventArgs e)
         {
             Debug.WriteLine("Hey");
-            var product = new AddProductDto
+            var product = new ProductDto
             {
                 ProductName = _productModuleView.Description,
                 BarcodeData = _productModuleView.Barcode,
                 ScannedAt = DateTime.Now,
-                ProductPreOrder = _productModuleView.Preorder,
+                ProductReOrder = _productModuleView.ReOrder,
                 CategoryId = _productModuleView.Selectedcategory,
                 ProductPrice = _productModuleView.Price,
-                ProductQuantity = _productModuleView.Quantity,
                 ProductCode = _productModuleView.Pcode,
             };
 
@@ -105,12 +108,6 @@ namespace ProjectForm.Presenter
             if(product.ProductPrice < 0)
             {
                 _productModuleView.ShowMessage("Invalid price");
-                return;
-            }
-
-            if(product.ProductQuantity < 0)
-            {
-                _productModuleView.ShowMessage("Invalid Quantity");
                 return;
             }
 

@@ -110,15 +110,13 @@ namespace ProjectForm.Presenter
                 var productName = (string)gridView.Rows[e.RowIndex].Cells["productDescription"].Value;
                 var productPrice = (Decimal)gridView.Rows[e.RowIndex].Cells["productPrice"].Value;
                 var productReorder = (int)gridView.Rows[e.RowIndex].Cells["productReorder"].Value;
-                var productQty = (int)gridView.Rows[e.RowIndex].Cells["productQty"].Value;
 
                 var product = new ProductDto
                 {
                     ProductId = productId,
                     ProductName = productName,
                     ProductPrice = productPrice,
-                    ProductQuantity = productQty,
-                    ProductPreOrder = productReorder,
+                    ProductReOrder = productReorder,
                     
                 };
 
