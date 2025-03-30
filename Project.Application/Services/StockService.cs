@@ -31,6 +31,7 @@ namespace Project.Application.Services
                            ProductId = s.ProductId,
                            ProductName = s.Product?.ProductName,
                            ProductCode = s.Product?.ProductCode,
+                           ProductCategory = s.Product?.Category?.CategoryName,
                            ProductStatus = s.ProductStatus
                        })
                        .ToList();

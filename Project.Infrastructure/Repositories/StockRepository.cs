@@ -26,6 +26,7 @@ namespace Project.Infrastructure.Repositories
             {
                 var stocks = await _context.Stocks
                     .Include(p => p.Product)
+                    .ThenInclude(c => c.Category)
                     .ToListAsync();
                 return stocks;
             }

@@ -25,11 +25,11 @@ namespace ProjectForm.Presenter
         {
             try
             {
-                var res = await _httpClient.GetAsync($"/Products/All");
+                var res = await _httpClient.GetAsync($"/Stocks/All");
 
                 if (res.IsSuccessStatusCode)
                 {
-                    var products = await res.Content.ReadFromJsonAsync<List<ProductDto>>();
+                    var products = await res.Content.ReadFromJsonAsync<List<StockDto>>();
                     
 
                     if (products == null)
@@ -37,13 +37,14 @@ namespace ProjectForm.Presenter
                         return;
                     }
 
-                    var _allProducts = products.Select(p => new ProductDto
+                    var _allProducts = products.Select(p => new StockDto
                     {
                         ProductId = p.ProductId,
                         ProductName = p.ProductName,
                         ProductQuantity = p.ProductQuantity,
                         ProductCode = p.ProductCode,
-                        CategoryName = p.CategoryName,
+                        ProductCategory = p.ProductCategory,
+                        StockId = p.StockId,
                         
                     }).ToList();
                     _view.DisplayProductList(_allProducts);

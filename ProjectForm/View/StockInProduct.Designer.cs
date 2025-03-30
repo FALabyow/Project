@@ -35,9 +35,10 @@
             txtSearch = new TextBox();
             lblManageProduct = new Label();
             rowNumber = new DataGridViewTextBoxColumn();
+            StockId = new DataGridViewTextBoxColumn();
             ProductCode = new DataGridViewTextBoxColumn();
             ProductName = new DataGridViewTextBoxColumn();
-            CategoryName = new DataGridViewTextBoxColumn();
+            ProductCategory = new DataGridViewTextBoxColumn();
             ProductId = new DataGridViewTextBoxColumn();
             ProductQuantity = new DataGridViewTextBoxColumn();
             Select = new DataGridViewImageColumn();
@@ -60,7 +61,7 @@
             dgvProduct.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dgvProduct.ColumnHeadersHeight = 40;
             dgvProduct.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dgvProduct.Columns.AddRange(new DataGridViewColumn[] { rowNumber, ProductCode, ProductName, CategoryName, ProductId, ProductQuantity, Select });
+            dgvProduct.Columns.AddRange(new DataGridViewColumn[] { rowNumber, StockId, ProductCode, ProductName, ProductCategory, ProductId, ProductQuantity, Select });
             dgvProduct.Dock = DockStyle.Fill;
             dgvProduct.EnableHeadersVisualStyles = false;
             dgvProduct.GridColor = Color.White;
@@ -103,7 +104,7 @@
             txtSearch.Location = new Point(244, 25);
             txtSearch.Name = "txtSearch";
             txtSearch.PlaceholderText = "Search...";
-            txtSearch.Size = new Size(415, 25);
+            txtSearch.Size = new Size(415, 30);
             txtSearch.TabIndex = 5;
             // 
             // lblManageProduct
@@ -112,7 +113,7 @@
             lblManageProduct.Font = new Font("Century Gothic", 12F, FontStyle.Bold | FontStyle.Underline, GraphicsUnit.Point, 0);
             lblManageProduct.Location = new Point(21, 30);
             lblManageProduct.Name = "lblManageProduct";
-            lblManageProduct.Size = new Size(131, 19);
+            lblManageProduct.Size = new Size(168, 23);
             lblManageProduct.TabIndex = 3;
             lblManageProduct.Text = "Product Stock In";
             // 
@@ -122,7 +123,16 @@
             rowNumber.HeaderText = "No.";
             rowNumber.MinimumWidth = 6;
             rowNumber.Name = "rowNumber";
-            rowNumber.Width = 57;
+            rowNumber.Width = 67;
+            // 
+            // StockId
+            // 
+            StockId.DataPropertyName = "StockId";
+            StockId.HeaderText = "StockId";
+            StockId.MinimumWidth = 6;
+            StockId.Name = "StockId";
+            StockId.Visible = false;
+            StockId.Width = 125;
             // 
             // ProductCode
             // 
@@ -131,7 +141,7 @@
             ProductCode.HeaderText = "Pcode";
             ProductCode.MinimumWidth = 6;
             ProductCode.Name = "ProductCode";
-            ProductCode.Width = 81;
+            ProductCode.Width = 96;
             // 
             // ProductName
             // 
@@ -141,11 +151,13 @@
             ProductName.MinimumWidth = 6;
             ProductName.Name = "ProductName";
             // 
-            // CategoryName
+            // ProductCategory
             // 
-            CategoryName.DataPropertyName = "CategoryName";
-            CategoryName.HeaderText = "Category";
-            CategoryName.Name = "CategoryName";
+            ProductCategory.DataPropertyName = "ProductCategory";
+            ProductCategory.HeaderText = "Category";
+            ProductCategory.MinimumWidth = 6;
+            ProductCategory.Name = "ProductCategory";
+            ProductCategory.Width = 125;
             // 
             // ProductId
             // 
@@ -163,7 +175,7 @@
             ProductQuantity.HeaderText = "Qty";
             ProductQuantity.MinimumWidth = 6;
             ProductQuantity.Name = "ProductQuantity";
-            ProductQuantity.Width = 58;
+            ProductQuantity.Width = 71;
             // 
             // Select
             // 
@@ -177,7 +189,7 @@
             // 
             // StockInProduct
             // 
-            AutoScaleDimensions = new SizeF(8F, 19F);
+            AutoScaleDimensions = new SizeF(11F, 21F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(838, 569);
             ControlBox = false;
@@ -204,9 +216,10 @@
         private Label lblManageProduct;
         private Button btnClose;
         private DataGridViewTextBoxColumn rowNumber;
+        private DataGridViewTextBoxColumn StockId;
         private DataGridViewTextBoxColumn ProductCode;
         private DataGridViewTextBoxColumn ProductName;
-        private DataGridViewTextBoxColumn CategoryName;
+        private DataGridViewTextBoxColumn ProductCategory;
         private DataGridViewTextBoxColumn ProductId;
         private DataGridViewTextBoxColumn ProductQuantity;
         private DataGridViewImageColumn Select;

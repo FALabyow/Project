@@ -14,5 +14,6 @@ namespace ProjectForm.Model.DTOs
         public string? ProductName { get; set; }
         public string? ProductCode { get; set; }
         public string? ProductStatus { get; set; }
+        public string? ProductCategory { get; set; }
     }
 }
