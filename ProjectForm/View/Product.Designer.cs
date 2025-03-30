@@ -48,6 +48,7 @@
             productCategoryId = new DataGridViewTextBoxColumn();
             productPrice = new DataGridViewTextBoxColumn();
             productReorder = new DataGridViewTextBoxColumn();
+            ProductQuantity = new DataGridViewTextBoxColumn();
             scannedAt = new DataGridViewTextBoxColumn();
             Edit = new DataGridViewImageColumn();
             Delete = new DataGridViewImageColumn();
@@ -114,7 +115,7 @@
             dgvProduct.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dgvProduct.ColumnHeadersHeight = 40;
             dgvProduct.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dgvProduct.Columns.AddRange(new DataGridViewColumn[] { rowNumber, productId, productCode, productBarcode, productDescription, productCategory, productCategoryId, productPrice, productReorder, scannedAt, Edit, Delete });
+            dgvProduct.Columns.AddRange(new DataGridViewColumn[] { rowNumber, productId, productCode, productBarcode, productDescription, productCategory, productCategoryId, productPrice, productReorder, ProductQuantity, scannedAt, Edit, Delete });
             dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle5.BackColor = SystemColors.Window;
             dataGridViewCellStyle5.Font = new Font("Segoe UI", 9F);
@@ -227,6 +228,15 @@
             productReorder.Name = "productReorder";
             productReorder.Width = 102;
             // 
+            // ProductQuantity
+            // 
+            ProductQuantity.DataPropertyName = "ProductQuantity";
+            ProductQuantity.HeaderText = "Qty";
+            ProductQuantity.MinimumWidth = 6;
+            ProductQuantity.Name = "ProductQuantity";
+            ProductQuantity.Visible = false;
+            ProductQuantity.Width = 125;
+            // 
             // scannedAt
             // 
             scannedAt.DataPropertyName = "ScannedAt";
@@ -286,6 +296,7 @@
         private DataGridViewTextBoxColumn productCategoryId;
         private DataGridViewTextBoxColumn productPrice;
         private DataGridViewTextBoxColumn productReorder;
+        private DataGridViewTextBoxColumn ProductQuantity;
         private DataGridViewTextBoxColumn scannedAt;
         private DataGridViewImageColumn Edit;
         private DataGridViewImageColumn Delete;

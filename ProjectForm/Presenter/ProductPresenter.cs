@@ -62,10 +62,19 @@ namespace ProjectForm.Presenter
 
                 var productId = (Guid)gridView.Rows[e.RowIndex].Cells["productId"].Value;
                 var productName = gridView.Rows[e.RowIndex].Cells["productDescription"].Value;
-                Debug.WriteLine(productId);
+                var productQuantity = (int)gridView.Rows[e.RowIndex].Cells["ProductQuantity"].Value;
+
+                
+
                 var confirmResult = MessageBox.Show($"Do you want {productName} from this list?", "Confirm Delete", MessageBoxButtons.YesNo);
 
                 if (confirmResult != DialogResult.Yes) return;
+
+                if (productQuantity > 0)
+                {
+                    MessageBox.Show("This product can't be deleted because it is currently in stock.");
+                    return;
+                }
 
                 var res = await _httpClient.DeleteAsync($"/Product/Delete/{productId}");
                 if (res.IsSuccessStatusCode)
