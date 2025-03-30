@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 namespace Project.Domain.Entities
 {
     //One-to-One Relationship with SalesHistory
+    //each sold product is stored in database using this class
+    //the new instance of this class is created when the Checkout button is clicked in Cashier.cs
     public class SalesDetail
     {
         [Key]

@@ -67,13 +67,29 @@ namespace ProjectForm.Presenter
 
         public async Task SendStockRecordsAsync()
         {
-            var stockRecords = _view.GetStockRecordsFromGrid();
-            if (stockRecords == null || stockRecords.Count == 0)
+            var data = _view.GetStockRecordsFromGrid();
+            if (data == null || data.Count == 0)
             {
                 MessageBox.Show("No records to send.");
                 return;
             }
 
+            var stockRecords = data.Select(d => new StockRecordInfoDto
+            {
+                ReferenceNum = d.ReferenceNum,
+                StockInQty = d.StockInQty,  
+                StockInDate = d.StockInDate,
+                ProductName=d.ProductName,
+                ProductCode = d.ProductCode,
+                ProductCategory = d.ProductCategory 
+
+            }).ToList();
+
+            var productQty = data.Select(d => new StockInDto
+            {
+                ProductQuantity = d.StockInQty,
+                ProductId = d.ProductId,
+            }).ToList();
 
             try
             {
@@ -83,15 +99,18 @@ namespace ProjectForm.Presenter
 
                 
                 var response = await _httpClient.PostAsJsonAsync("/StockRecord/AddMultipleRecords", stockRecords);
+                var response1 = await _httpClient.PostAsJsonAsync("/Stocks/AddStocks", productQty);
 
-                if (response.IsSuccessStatusCode)
+                if (response.IsSuccessStatusCode && response1.IsSuccessStatusCode)
                 {
                     MessageBox.Show("Stock records added successfully!");
                 }
                 else
                 {
                     var errorMessage = await response.Content.ReadAsStringAsync();
-                    MessageBox.Show($"Failed to add records: {errorMessage}");
+                    var errorMessage2 = await response1.Content.ReadAsStringAsync();
+
+                    MessageBox.Show($"Failed to add records: {(string.IsNullOrWhiteSpace(errorMessage) ? errorMessage2 : errorMessage)}");
                 }
 
             }

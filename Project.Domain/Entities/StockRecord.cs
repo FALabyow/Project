@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Project.Domain.Entities
 {
+    //this instance is called when Entry button is clicked that can be found in StockEntry.cs
     public class StockRecord
     {
         public Guid StockRecordId { get; set; } = Guid.NewGuid();

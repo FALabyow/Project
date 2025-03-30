@@ -18,13 +18,13 @@ namespace Project.Application.Services
         {
             _stockRepository = stockRepository;
         }
-        public async Task<List<StockInDto>> GetAllStocksAsync()
+        public async Task<List<StockDto>> GetAllStocksAsync()
         {
             try
             {
                 var stocks = await _stockRepository.GetAllStocksAsync();
                 return stocks
-                       .Select(s => new StockInDto
+                       .Select(s => new StockDto
                        {
                            StockId = s.StockId,
                            ProductQuantity = s.ProductQuantity,
@@ -44,18 +44,17 @@ namespace Project.Application.Services
                 throw;
             }
         }
-        public async Task AddStocksAsync(List<StockInDto> stockInDto)
+        public async Task AddStocksAsync(StockDto stockDto)
         {
-            var stocks = stockInDto
-                .Select(s => new Stock
-                {
-                    ProductQuantity = s.ProductQuantity,
-                    ProductId = s.ProductId,
-                })
-                .ToList();
+            var stock = new Stock
+            {
+                ProductQuantity = stockDto.ProductQuantity,
+                ProductId = stockDto.ProductId,
+            };
+                
             try
             {
-                await _stockRepository.AddStocksAsync(stocks);
+                await _stockRepository.AddStockAsync(stock);
             }
             catch (InvalidOperationException) 
             {
@@ -65,6 +64,35 @@ namespace Project.Application.Services
             {
                 throw;
             }
+        }
+        public async Task UpdateStocksAsync(List<StockDto> stockDtos)
+        {
+            try
+            {
+                var stockIds = stockDtos.Select(s => s.StockId).ToList();
+                var stocks = await _stockRepository.GetStocksByIdsAsync(stockIds);
+
+                foreach (var stock in stocks)
+                {
+                    var dto = stockDtos.FirstOrDefault(s => s.StockId == stock.StockId);
+                    if (dto != null)
+                    {
+                        stock.ProductQuantity += dto.ProductQuantity;
+                    }
+                }
+
+                await _stockRepository.UpdateStocksAsync(stocks);
+            }
+            catch (ArgumentNullException)
+            {
+                throw;
+            }
+            catch (InvalidOperationException)
+            {
+                throw;
+            }
+            
+
         }
     }
 }

@@ -101,10 +101,10 @@ namespace ProjectForm
 
             foreach (DataGridViewRow row in dgvStockIn.Rows)
             {
-                if (row.Cells["ProductId"].Value != null && row.Cells["productQty"].Value != null)
+                if (row.Cells["ProductId"].Value != null && row.Cells["ProductQuantity1"].Value != null)
                 {
-                    DateOnly stockInDate = row.Cells["stockInDate"].Value != null &&
-                                           DateTime.TryParse(row.Cells["stockInDate"].Value.ToString(), out DateTime tempDate)
+                    DateOnly stockInDate = row.Cells["StockInDate1"].Value != null &&
+                                           DateTime.TryParse(row.Cells["StockInDate1"].Value.ToString(), out DateTime tempDate)
                                            ? DateOnly.FromDateTime(tempDate)
                                            : DateOnly.MinValue;
 
@@ -114,11 +114,11 @@ namespace ProjectForm
                             ? productId
                             : Guid.Empty,
 
-                        StockInQty = Convert.ToInt32(row.Cells["productQty"].Value),
+                        StockInQty = Convert.ToInt32(row.Cells["ProductQuantity1"].Value),
 
                         StockInDate = stockInDate,
 
-                        ReferenceNum = row.Cells["referenceNum"].Value?.ToString() ?? string.Empty
+                        ReferenceNum = row.Cells["ReferenceNum1"].Value?.ToString() ?? string.Empty
                     });
                 }
             }

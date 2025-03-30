@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Project.Application.DTOs
 {
-    public class StockInDto
+    public class StockDto
     {
         public Guid StockId { get; set; }
         public int ProductQuantity { get; set; }

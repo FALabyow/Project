@@ -64,7 +64,7 @@
             ProductCode1 = new DataGridViewTextBoxColumn();
             ProductName1 = new DataGridViewTextBoxColumn();
             CategoryName = new DataGridViewTextBoxColumn();
-            ProductQunatiy1 = new DataGridViewTextBoxColumn();
+            ProductQuantity1 = new DataGridViewTextBoxColumn();
             StockInDate1 = new DataGridViewTextBoxColumn();
             Delete = new DataGridViewImageColumn();
             panel1.SuspendLayout();
@@ -153,7 +153,7 @@
             dgvStockIn.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dgvStockIn.ColumnHeadersHeight = 40;
             dgvStockIn.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dgvStockIn.Columns.AddRange(new DataGridViewColumn[] { RowNumber1, ProductId, ReferenceNum1, ProductCode1, ProductName1, CategoryName, ProductQunatiy1, StockInDate1, Delete });
+            dgvStockIn.Columns.AddRange(new DataGridViewColumn[] { RowNumber1, ProductId, ReferenceNum1, ProductCode1, ProductName1, CategoryName, ProductQuantity1, StockInDate1, Delete });
             dgvStockIn.Dock = DockStyle.Top;
             dgvStockIn.EnableHeadersVisualStyles = false;
             dgvStockIn.GridColor = Color.White;
@@ -444,14 +444,14 @@
             CategoryName.Name = "CategoryName";
             CategoryName.Width = 125;
             // 
-            // ProductQunatiy1
+            // ProductQuantity1
             // 
-            ProductQunatiy1.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            ProductQunatiy1.DataPropertyName = "ProductQuantity";
-            ProductQunatiy1.HeaderText = "Qty";
-            ProductQunatiy1.MinimumWidth = 6;
-            ProductQunatiy1.Name = "ProductQunatiy1";
-            ProductQunatiy1.Width = 58;
+            ProductQuantity1.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            ProductQuantity1.DataPropertyName = "ProductQuantity";
+            ProductQuantity1.HeaderText = "Qty";
+            ProductQuantity1.MinimumWidth = 6;
+            ProductQuantity1.Name = "ProductQuantity1";
+            ProductQuantity1.Width = 58;
             // 
             // StockInDate1
             // 
@@ -536,7 +536,7 @@
         private DataGridViewTextBoxColumn ProductCode1;
         private DataGridViewTextBoxColumn ProductName1;
         private DataGridViewTextBoxColumn CategoryName;
-        private DataGridViewTextBoxColumn ProductQunatiy1;
+        private DataGridViewTextBoxColumn ProductQuantity1;
         private DataGridViewTextBoxColumn StockInDate1;
         private DataGridViewImageColumn Delete;
     }

@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 namespace Project.Domain.Entities
 {
     //One-to-Many Relationship with SalesDetail
+    //Each checkout transaction is stored in database using this class
+    //Similar to SalesDetail, the instance of this class is created every Checkout clicked.
     public class SalesHistory
     {
         [Key]

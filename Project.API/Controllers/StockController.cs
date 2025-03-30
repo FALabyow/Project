@@ -16,7 +16,7 @@ namespace Project.API.Controllers
         }
 
         [HttpGet("/Stocks/All")]
-        public async Task<ActionResult<IEnumerable<StockInDto>>> GetAllStocksAsync()
+        public async Task<ActionResult<IEnumerable<StockDto>>> GetAllStocksAsync()
         {
             try
             {
@@ -33,12 +33,12 @@ namespace Project.API.Controllers
             }
         }
 
-        [HttpPost("/Stocks/AddStocks")]
-        public async Task<IActionResult> AddStocksAsync([FromBody] List<StockInDto> stockInDto)
+        [HttpPost("/Stock/AddStock")]
+        public async Task<IActionResult> AddStocksAsync([FromBody] StockDto stockDto)
         {
             try
             {
-                await _stockService.AddStocksAsync(stockInDto);
+                await _stockService.AddStocksAsync(stockDto);
                 return NoContent();
 
             }
@@ -48,5 +48,29 @@ namespace Project.API.Controllers
             }
 
         }
+
+        [HttpPatch("/Stocks/UpdateStocks")]
+        public async Task<IActionResult> UpdateStocksAsync([FromBody] List<StockDto> stockDtos)
+        {
+            if(stockDtos == null || !stockDtos.Any())
+            {
+                return BadRequest("Stock list cannot be empty");
+            }
+
+            try
+            {
+                await _stockService.UpdateStocksAsync(stockDtos);
+                return NoContent();
+            }
+            catch (ArgumentNullException ex)
+            {
+                return StatusCode(500, new { error = ex.Message });
+            }
+            catch (InvalidOperationException ex)
+            {
+                return BadRequest(new { error = ex.Message });
+            }
+        }
+
     }
 }

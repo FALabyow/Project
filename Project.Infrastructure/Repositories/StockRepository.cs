@@ -38,30 +38,55 @@ namespace Project.Infrastructure.Repositories
                 throw new InvalidOperationException("An error occurred while fetching stocks.", ex);
             }
         }
-        public async Task AddStocksAsync(IEnumerable<Stock> stocks)
+        public async Task<IEnumerable<Stock>> GetStocksByIdAsync(IEnumerable<Guid> ids)
+        {
+            var stocks = await _context.Stocks
+                .Where(s => ids.Contains(s.StockId))
+                .ToListAsync();
+            return stocks;
+        }
+        public async Task AddStockAsync(Stock stock)
         {
             try
             {
-                await _context.Stocks.AddRangeAsync(stocks);
+                await _context.Stocks.AddAsync(stock);
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateException ex)
             {
-                if (ex.InnerException is SqlException sqlEx && (sqlEx.Number == 2601 || sqlEx.Number == 2627))
-                {
-                    throw new InvalidOperationException(ex.Message);
-                }
-
+                throw new InvalidOperationException("Duplicate product id detected!" + ex.Message);
             }
-            catch (InvalidOperationException ex) when (ex.InnerException is SqlException sqlEx && sqlEx.Number == 4060)
+            catch (Exception ex)
             {
-                throw new InvalidOperationException("Database does not exist");
-            }
-            catch (Exception)
-            {
-                throw new InvalidOperationException("An error occurred while adding stocks.");
+                throw new InvalidOperationException(ex.Message);
             }
         }
+        public async Task UpdateStocksAsync(IEnumerable<Stock> stocks)
+        {
+            try
+            {
+                if(stocks == null || !stocks.Any())
+                {
+                    throw new ArgumentNullException(nameof(stocks), "Stocks cannot be empty");
+                }
+
+                _context.Stocks.UpdateRange(stocks);
+                await _context.SaveChangesAsync();  
+            }
+            catch (DbUpdateException ex)
+            {
+                throw new InvalidOperationException("The stocks cannot be updated: " + ex.Message);
+            }
+        }
+        public async Task<List<Stock>> GetStocksByIdsAsync(IEnumerable<Guid> ids)
+        {
+            var stocks = await _context.Stocks
+                .Where(s => ids.Contains(s.StockId))
+                .ToListAsync();
+
+            return stocks;
+        }
+
 
 
     }

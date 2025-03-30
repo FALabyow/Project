@@ -1,0 +1,11 @@
+1. Add a category in CategoryModule.cs
+
+2. All Categories will be displayed in Category.cs
+
+3. Add a product in ProductModule.cs
+
+4. When adding a product, behind the scene, Stock is also added but with a default value of 0 for ProductQuantity(see Stock.cs in Project.Domain/Entities).
+
+5. All products will be displayed in Product.cs
+
+6. The search for product in Product.cs are filtered by its price, product name, and category name.(To add more search filter, please see OnProductSearched method in ProductPresenter.cs)
