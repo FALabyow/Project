@@ -81,7 +81,6 @@ namespace ProjectForm.Presenter
         }
         private async void OnSaveClicked(object? sender, EventArgs e)
         {
-            Debug.WriteLine("Hey");
             var product = new ProductDto
             {
                 ProductName = _productModuleView.Description,
@@ -91,6 +90,13 @@ namespace ProjectForm.Presenter
                 CategoryId = _productModuleView.Selectedcategory,
                 ProductPrice = _productModuleView.Price,
                 ProductCode = _productModuleView.Pcode,
+                ProductId = Guid.NewGuid(),
+            };
+
+            var stock = new StockDto
+            {
+                ProductId = product.ProductId,
+
             };
 
             if (string.IsNullOrEmpty(product.ProductName) || string.IsNullOrEmpty(product.BarcodeData))
@@ -114,17 +120,20 @@ namespace ProjectForm.Presenter
             try
             {
                 var json = JsonSerializer.Serialize(product);
+                var stockJson = JsonSerializer.Serialize(stock);
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
+                var stockContent = new StringContent(stockJson, Encoding.UTF8, "application/json");
                 var res = await _httpClient.PostAsync("/Product/AddProduct", content);
+                var stockRes = await _httpClient.PostAsync("/Stock/AddStock", content);
 
-                if (res.IsSuccessStatusCode)
+                if (res.IsSuccessStatusCode && stockRes.IsSuccessStatusCode)
                 {
                     if (Application.OpenForms["Product"] is Product)
                     {
                         await _presenter.LoadProductList();
                     }
                 }
-                else if(res.StatusCode == HttpStatusCode.BadRequest)
+                else if(res.StatusCode == HttpStatusCode.BadRequest )
                 {
                     var errorRes = await res.Content.ReadFromJsonAsync<ApiErrorResponse>();
                     if(errorRes != null)
@@ -133,6 +142,15 @@ namespace ProjectForm.Presenter
                         _productModuleView.ShowMessage(errorRes.Error);
                     }
 
+                }
+                else if(stockRes.StatusCode == HttpStatusCode.BadRequest)
+                {
+                    var errorRes = await stockRes.Content.ReadFromJsonAsync<ApiErrorResponse>();
+                    if (errorRes != null)
+                    {
+                        Debug.WriteLine(errorRes.Error);
+                        _productModuleView.ShowMessage(errorRes.Error);
+                    }
                 }
                 else
                 {

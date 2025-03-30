@@ -12,7 +12,7 @@ namespace Project.Domain.Entities
     //One-to-One Relationship with Stock
     public class Product
     {
-        public Guid ProductId { get; set; } = Guid.NewGuid();
+        public Guid ProductId { get; set; } 
         public string? ProductCode { get; set; }
         public string? BarcodeData {  get; set; }
         public string? ProductName { get; set; }

@@ -52,6 +52,7 @@ namespace Project.Application.Services
             {
                 var product = new Product
                 { 
+                    ProductId = productDto.ProductId,
                     ProductCode = productDto.ProductCode,
                     BarcodeData = productDto.BarcodeData,
                     ProductName = productDto.ProductName,

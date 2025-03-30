@@ -118,6 +118,7 @@ namespace ProjectForm.Presenter
                     ProductPrice = productPrice,
                     ProductReOrder = productReorder,
                     
+                    
                 };
 
                 if (string.IsNullOrWhiteSpace(productName))
