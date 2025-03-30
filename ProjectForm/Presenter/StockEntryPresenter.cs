@@ -28,13 +28,11 @@ namespace ProjectForm.Presenter
             _httpClient = new HttpClient { BaseAddress = new Uri("https://localhost:7014/api") };
 
         }
-
         public void GenerateReference()
         {
             newRef = _model.GenerateReferenceNumber();
             _view.DisplayReferenceNumber(newRef);
         }
-
         public void AddStockEntry(ProductDto productList)
         {
             if(newRef != null)
@@ -54,7 +52,6 @@ namespace ProjectForm.Presenter
                 _view.DisplayStockEntry(stockEntry);
             }
         }
-
         private void OnDeleteClicked(object? sender, DataGridViewCellEventArgs e)
         {
             var gridView = sender as DataGridView;
@@ -64,7 +61,6 @@ namespace ProjectForm.Presenter
             }
             gridView.Rows.RemoveAt(e.RowIndex);
         }
-
         public async Task SendStockRecordsAsync()
         {
             var data = _view.GetStockRecordsFromGrid();
@@ -121,7 +117,6 @@ namespace ProjectForm.Presenter
 
 
         }
-
         public async Task LoadStockRecords()
         {
             try

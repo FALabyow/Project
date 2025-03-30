@@ -32,7 +32,6 @@ namespace ProjectForm
         }
 
         public event EventHandler<DataGridViewCellEventArgs>? SelectProductClicked;
-
         private void btnClose_Click(object sender, EventArgs e)
         {
             this.Dispose();
