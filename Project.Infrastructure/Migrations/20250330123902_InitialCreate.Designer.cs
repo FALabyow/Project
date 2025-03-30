@@ -12,7 +12,7 @@ using Project.Infrastructure.Persistence;
 namespace Project.Infrastructure.Migrations
 {
     [DbContext(typeof(ProjectDbContext))]
-    [Migration("20250329115013_InitialCreate")]
+    [Migration("20250330123902_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -212,7 +212,7 @@ namespace Project.Infrastructure.Migrations
                     b.HasOne("Project.Domain.Entities.Product", "Product")
                         .WithOne("Stock")
                         .HasForeignKey("Project.Domain.Entities.Stock", "ProductId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Product");

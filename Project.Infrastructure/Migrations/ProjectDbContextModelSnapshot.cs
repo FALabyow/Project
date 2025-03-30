@@ -209,7 +209,7 @@ namespace Project.Infrastructure.Migrations
                     b.HasOne("Project.Domain.Entities.Product", "Product")
                         .WithOne("Stock")
                         .HasForeignKey("Project.Domain.Entities.Stock", "ProductId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Product");
