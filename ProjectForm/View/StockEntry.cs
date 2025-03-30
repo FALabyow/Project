@@ -76,7 +76,7 @@ namespace ProjectForm
         public void DisplayStockEntry(ProductDto stockList)
         {
             dgvStockIn.Rows
-                      .Add(dgvStockIn.Rows.Count + 1, stockList.ProductId, stockList.ReferenceNum, stockList.ProductCode, stockList.ProductName, stockList.CategoryName, stockList.ProductQuantity, stockList.StockInDate);
+                      .Add(dgvStockIn.Rows.Count + 1, stockList.StockId,stockList.ProductId, stockList.ReferenceNum, stockList.ProductCode, stockList.ProductName, stockList.CategoryName, stockList.ProductQuantity, stockList.StockInDate);
         }
         public void DisplayStockRecords(List<StockRecordInfoDto> filteredRecords)
         {
@@ -118,7 +118,10 @@ namespace ProjectForm
 
                         StockInDate = stockInDate,
 
-                        ReferenceNum = row.Cells["ReferenceNum1"].Value?.ToString() ?? string.Empty
+                        ReferenceNum = row.Cells["ReferenceNum1"].Value?.ToString() ?? string.Empty,
+                        StockId = Guid.TryParse(row.Cells["StockId"].Value?.ToString(), out Guid stockId)
+                            ? stockId
+                            : Guid.Empty,
                     });
                 }
             }

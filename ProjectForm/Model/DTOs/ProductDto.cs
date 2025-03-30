@@ -20,5 +20,6 @@ namespace ProjectForm.Model.DTOs
         public int ProductQuantity { get; set; }
         public string? ReferenceNum { get; set; }
         public DateOnly StockInDate { get; set; }
+        public Guid StockId { get; set; }
     }
 }

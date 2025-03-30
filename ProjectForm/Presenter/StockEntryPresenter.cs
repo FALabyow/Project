@@ -46,6 +46,7 @@ namespace ProjectForm.Presenter
                     ProductQuantity = productList.ProductQuantity,
                     StockInDate = DateOnly.FromDateTime(_view.DatePicker.Value),
                     CategoryName = productList.CategoryName,
+                    StockId = productList.StockId,
 
 
                 };
@@ -81,10 +82,10 @@ namespace ProjectForm.Presenter
 
             }).ToList();
 
-            var productQty = data.Select(d => new StockInDto
+            var productQty = data.Select(d => new StockDto
             {
                 ProductQuantity = d.StockInQty,
-                ProductId = d.ProductId,
+                StockId = d.StockId
             }).ToList();
 
             try
@@ -95,7 +96,7 @@ namespace ProjectForm.Presenter
 
                 
                 var response = await _httpClient.PostAsJsonAsync("/StockRecord/AddMultipleRecords", stockRecords);
-                var response1 = await _httpClient.PostAsJsonAsync("/Stocks/AddStocks", productQty);
+                var response1 = await _httpClient.PatchAsJsonAsync("/Stocks/UpdateStocks", productQty);
 
                 if (response.IsSuccessStatusCode && response1.IsSuccessStatusCode)
                 {

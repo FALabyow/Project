@@ -131,7 +131,6 @@
             StockId.HeaderText = "StockId";
             StockId.MinimumWidth = 6;
             StockId.Name = "StockId";
-            StockId.Visible = false;
             StockId.Width = 125;
             // 
             // ProductCode

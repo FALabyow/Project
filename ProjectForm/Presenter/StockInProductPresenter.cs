@@ -67,7 +67,8 @@ namespace ProjectForm.Presenter
             var productName = (string)gridView.Rows[e.RowIndex].Cells["ProductName"].Value;
             var productCode = (string)gridView.Rows[e.RowIndex].Cells["ProductCode"].Value;
             var productQty = (int)gridView.Rows[e.RowIndex].Cells["ProductQuantity"].Value;
-            var productCategory = (string)gridView.Rows[e.RowIndex].Cells["CategoryName"].Value;
+            var productCategory = (string)gridView.Rows[e.RowIndex].Cells["ProductCategory"].Value;
+            var stockId = (Guid)gridView.Rows[e.RowIndex].Cells["StockId"].Value;
 
             var confirmResult = MessageBox.Show($"Add this item?", "POS", MessageBoxButtons.YesNo);
 
@@ -79,8 +80,8 @@ namespace ProjectForm.Presenter
                 ProductName = productName,
                 ProductCode =productCode,
                 ProductQuantity = productQty,
-                CategoryName = productCategory
-                
+                CategoryName = productCategory,
+                StockId = stockId,  
             };
 
             if (Application.OpenForms["StockEntry"] is StockEntry entry)
