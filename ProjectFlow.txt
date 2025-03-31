@@ -1,11 +1,33 @@
-1. Add a category in CategoryModule.cs
+CategorModule.cs
+1. Add a category here.
 
-2. All Categories will be displayed in Category.cs
+Category.cs
+1. All Categories will be displayed here.
+2. The delete button is restricted if the Category has product linked to it.
 
-3. Add a product in ProductModule.cs
+ProductModule.cs
+1. Add a product here.
+2. The product code must be in this format: P01, P02, P03....
+3. When adding a product, behind the scene, Stock is also added but with a default value of 0 for ProductQuantity(see Stock.cs in Project.Domain/Entities).
 
-4. When adding a product, behind the scene, Stock is also added but with a default value of 0 for ProductQuantity(see Stock.cs in Project.Domain/Entities).
+Product.cs
+1. All products will be displayed here.
+2. Can update the product name, price, and reorder value. Edit it inside a grid then click update button.
+3. The delete button is restricted if the ProductQuantity in Stocks is more than 0.
+4. The search for product in Product.cs are filtered by its price, product name, and category name.(To add more search filter, please see OnProductSearched method in ProductPresenter.cs)
 
-5. All products will be displayed in Product.cs
+StockInProduct.cs
+1. The data displayed here are the in-stock products.
+2. Select the product you want to entry.
 
-6. The search for product in Product.cs are filtered by its price, product name, and category name.(To add more search filter, please see OnProductSearched method in ProductPresenter.cs)
+In-stock refers to products that are currently available in inventory or storage and are ready for sale or use.
+Each product is recorded.
+
+StockEntry.cs
+1. The data displayed here are the in-stock products.
+2. You can edit the product quantity that needs to be added to the stock.
+3. Once the Entry button is clicked, the product quantity stored in the database will be updated, and each in-stock entry will be recorded in the database.
+4. Recorded stocks entry are displayed in Stock In Record.
+
+
+
