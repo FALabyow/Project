@@ -18,7 +18,7 @@ namespace ProjectForm.Presenter
         private string? newRef;
         private readonly StockInProductDto? date;
         private readonly HttpClient _httpClient;
-        private List<StockRecordInfoDto>? _records;
+        private List<StockRecordDto>? _records;
         public StockEntryPresenter(IStockEntryView view)
         {
             _view = view;
@@ -71,13 +71,13 @@ namespace ProjectForm.Presenter
                 return;
             }
 
-            var stockRecords = data.Select(d => new StockRecordInfoDto
+            var stockRecords = data.Select(d => new StockRecordDto
             {
                 ReferenceNum = d.ReferenceNum,
                 StockInQty = d.StockInQty,  
                 StockInDate = d.StockInDate,
-                ProductName=d.ProductName,
                 ProductCode = d.ProductCode,
+                ProductName =d.ProductName,
                 ProductCategory = d.ProductCategory 
 
             }).ToList();
@@ -126,7 +126,7 @@ namespace ProjectForm.Presenter
 
                 if (res.IsSuccessStatusCode)
                 {
-                    var records = await res.Content.ReadFromJsonAsync<List<StockRecordInfoDto>> ();
+                    var records = await res.Content.ReadFromJsonAsync<List<StockRecordDto>> ();
 
                     if (records == null)
                     {

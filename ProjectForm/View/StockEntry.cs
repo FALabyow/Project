@@ -36,23 +36,24 @@ namespace ProjectForm
         public DateTimePicker DatePicker => dateTimePicker1;
         public DateOnly StartDate => DateOnly.FromDateTime(dateTimePicker2.Value);
         public DateOnly EndDate => DateOnly.FromDateTime(dateTimePicker3.Value);
-
         public string ReferenceNum
         {
             get => txtRefNo.Text;
             set => txtRefNo.Text = value;
         }
-
-        private void StockEntry_Load(object sender, EventArgs e)
+        private async void StockEntry_Load(object sender, EventArgs e)
         {
             presenter = new StockEntryPresenter(this);
+            if(presenter != null)
+            {
+                await presenter.LoadStockRecords();
+            }
+            
         }
-
         public void DisplayReferenceNumber(string referenceNumber)
         {
             txtRefNo.Text = referenceNumber;
         }
-
         private void LinGenerate_LinkClicked_1(object? sender, LinkLabelLinkClickedEventArgs e)
         {
             if (presenter != null)
@@ -61,7 +62,6 @@ namespace ProjectForm
             }
 
         }
-
         private void LinProduct_LinkClicked(object? sender, LinkLabelLinkClickedEventArgs e)
         {
             if (string.IsNullOrEmpty(txtRefNo.Text))
@@ -72,18 +72,16 @@ namespace ProjectForm
             var stockInProduct = new StockInProduct();
             stockInProduct.ShowDialog();
         }
-
         public void DisplayStockEntry(ProductDto stockList)
         {
             dgvStockIn.Rows
                       .Add(dgvStockIn.Rows.Count + 1, stockList.StockId,stockList.ProductId, stockList.ReferenceNum, stockList.ProductCode, stockList.ProductName, stockList.CategoryName, stockList.ProductQuantity, stockList.StockInDate);
         }
-        public void DisplayStockRecords(List<StockRecordInfoDto> filteredRecords)
+        public void DisplayStockRecords(List<StockRecordDto> filteredRecords)
         {
 
             dataStockIn.DataSource = filteredRecords;
         }
-
         private void DataGridProductView_CellContentClick(object? sender, DataGridViewCellEventArgs e)
         {
             var gridView = sender as DataGridView;
@@ -95,40 +93,37 @@ namespace ProjectForm
 
             }
         }
-        public List<StockRecordInfoDto> GetStockRecordsFromGrid()
+        public List<StockRecordDto> GetStockRecordsFromGrid()
         {
-            var stockRecords = new List<StockRecordInfoDto>();
+            var stockRecords = new List<StockRecordDto>();
 
             foreach (DataGridViewRow row in dgvStockIn.Rows)
             {
-                if (row.Cells["ProductId"].Value != null && row.Cells["ProductQuantity1"].Value != null)
+                if (row.Cells["ProductQuantity1"].Value != null)
                 {
                     DateOnly stockInDate = row.Cells["StockInDate1"].Value != null &&
                                            DateTime.TryParse(row.Cells["StockInDate1"].Value.ToString(), out DateTime tempDate)
                                            ? DateOnly.FromDateTime(tempDate)
                                            : DateOnly.MinValue;
 
-                    stockRecords.Add(new StockRecordInfoDto
+                    stockRecords.Add(new StockRecordDto
                     {
-                        ProductId = Guid.TryParse(row.Cells["ProductId"].Value?.ToString(), out Guid productId)
-                            ? productId
-                            : Guid.Empty,
-
-                        StockInQty = Convert.ToInt32(row.Cells["ProductQuantity1"].Value),
-
-                        StockInDate = stockInDate,
-
                         ReferenceNum = row.Cells["ReferenceNum1"].Value?.ToString() ?? string.Empty,
+                        StockInQty = Convert.ToInt32(row.Cells["ProductQuantity1"].Value),
+                        StockInDate = stockInDate,
+                        ProductCode = row.Cells["ProductCode1"].Value?.ToString() ?? string.Empty,
+                        ProductName = row.Cells["ProductName1"].Value?.ToString() ?? string.Empty,
+                        ProductCategory = row.Cells["CategoryName"].Value?.ToString() ?? string.Empty,
                         StockId = Guid.TryParse(row.Cells["StockId"].Value?.ToString(), out Guid stockId)
                             ? stockId
                             : Guid.Empty,
+
                     });
                 }
             }
 
             return stockRecords;
         }
-
         private async void btnEntry_Click(object sender, EventArgs e)
         {
             if (presenter != null)
@@ -137,7 +132,6 @@ namespace ProjectForm
             }
 
         }
-
         private void dataStockIn_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
             using (SolidBrush brush = new SolidBrush(dataStockIn.RowHeadersDefaultCellStyle.ForeColor))

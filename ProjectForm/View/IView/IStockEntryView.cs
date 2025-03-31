@@ -12,9 +12,9 @@ namespace ProjectForm.View.IView
         //void DisplayProductList(List<StockInProductDto> productList);
         string ReferenceNum { get; set; }
         void DisplayReferenceNumber(string referenceNumber);
-        List<StockRecordInfoDto> GetStockRecordsFromGrid();
+        List<StockRecordDto> GetStockRecordsFromGrid();
         void DisplayStockEntry(ProductDto stocksList);
-        void DisplayStockRecords(List<StockRecordInfoDto> filteredRecords);
+        void DisplayStockRecords(List<StockRecordDto> filteredRecords);
 
         event Action? OnDateSelected;
         DateTimePicker DatePicker { get; }
