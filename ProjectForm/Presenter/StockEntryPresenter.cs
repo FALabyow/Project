@@ -27,6 +27,7 @@ namespace ProjectForm.Presenter
             _view.LoadFilteredRecordsClicked += OnLoadFilteredRecordsClicked;
             //_view.StockEntryFormLoad += OnStockEntryLoad;
             _view.LinkReferenceClicked += OnLinkReferenceClicked;
+            _view.LinkProductClicked += OnLinkProductClicked;
             _httpClient = new HttpClient { BaseAddress = new Uri("https://localhost:7014/api") };
 
         }
@@ -206,6 +207,16 @@ namespace ProjectForm.Presenter
         private void OnLinkReferenceClicked(object? sender, LinkLabelLinkClickedEventArgs e)
         {
             GenerateReference();
+        }
+        private void OnLinkProductClicked(object? sender, LinkLabelLinkClickedEventArgs e)
+        {
+            if (string.IsNullOrEmpty(_view.ReferenceNum))
+            {
+                MessageBox.Show("Reference number is empty");
+                return;
+            }
+            var stockInProduct = new StockInProduct();
+            stockInProduct.ShowDialog();
         }
 
         //private async void OnStockEntryLoad(object? sender, EventArgs e)

@@ -38,6 +38,7 @@ namespace ProjectForm
         public event EventHandler<DataGridViewCellEventArgs>? DeleteClicked;
         public event EventHandler? LoadFilteredRecordsClicked;
         public event EventHandler<LinkLabelLinkClickedEventArgs>? LinkReferenceClicked;
+        public event EventHandler<LinkLabelLinkClickedEventArgs>? LinkProductClicked;
         //public event EventHandler? StockEntryFormLoad;
         public DateTimePicker DatePicker => dateTimePicker1;
         public DateOnly StartDate => DateOnly.FromDateTime(dateTimePicker2.Value);
@@ -57,13 +58,7 @@ namespace ProjectForm
         }
         private void LinProduct_LinkClicked(object? sender, LinkLabelLinkClickedEventArgs e)
         {
-            if (string.IsNullOrEmpty(txtRefNo.Text))
-            {
-                MessageBox.Show("Reference number is empty");
-                return;
-            }
-            var stockInProduct = new StockInProduct();
-            stockInProduct.ShowDialog();
+            LinkProductClicked?.Invoke(sender, e);
         }
         public void DisplayStockEntry(ProductDto stockList)
         {
