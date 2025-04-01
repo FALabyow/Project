@@ -24,7 +24,6 @@ namespace ProjectForm.Presenter
         private void OnSelectedItemCombo(object? sender, EventArgs e)
         {
             _selectedItem = _view.SelectedItem;
-            MessageBox.Show(_selectedItem);
         }    
         public async Task LoadStocksAsync()
         {
