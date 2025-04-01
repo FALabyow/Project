@@ -28,9 +28,6 @@ namespace ProjectForm
             dateTimePicker1.ValueChanged += (s, e) => OnDateSelected?.Invoke();
             dgvStockIn.CellContentClick += DataGridProductView_CellContentClick;
             btnLoad.Click += (s, e) => LoadFilteredRecordsClicked?.Invoke(this, EventArgs.Empty);
-
-
-
         }
 
         public event EventHandler<LinkLabelLinkClickedEventArgs>? LinkLabelLinkClicked;

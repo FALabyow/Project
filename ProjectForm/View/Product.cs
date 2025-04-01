@@ -30,7 +30,6 @@ namespace ProjectForm
         public event EventHandler<DataGridViewCellEventArgs>? DeleteClicked;
         public event EventHandler<DataGridViewCellEventArgs>? EditClicked;
         public event EventHandler? ProductSearched;
-
         public string SearchText => txtSearch.Text.ToLower();
         private void btnAdd_Click(object sender, EventArgs e)
         {

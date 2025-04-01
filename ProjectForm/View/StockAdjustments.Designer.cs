@@ -47,7 +47,7 @@
             dgvAdjustment = new DataGridView();
             Column1 = new DataGridViewTextBoxColumn();
             Column2 = new DataGridViewTextBoxColumn();
-            Column3 = new DataGridViewTextBoxColumn();
+            BarcodeData = new DataGridViewTextBoxColumn();
             Column4 = new DataGridViewTextBoxColumn();
             Column5 = new DataGridViewTextBoxColumn();
             Column6 = new DataGridViewTextBoxColumn();
@@ -226,7 +226,7 @@
             dgvAdjustment.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dgvAdjustment.ColumnHeadersHeight = 40;
             dgvAdjustment.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dgvAdjustment.Columns.AddRange(new DataGridViewColumn[] { Column1, Column2, Column3, Column4, Column5, Column6, Column7, Select });
+            dgvAdjustment.Columns.AddRange(new DataGridViewColumn[] { Column1, Column2, BarcodeData, Column4, Column5, Column6, Column7, Select });
             dgvAdjustment.Dock = DockStyle.Fill;
             dgvAdjustment.EnableHeadersVisualStyles = false;
             dgvAdjustment.GridColor = Color.White;
@@ -248,22 +248,24 @@
             // Column2
             // 
             Column2.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            Column2.DataPropertyName = "ProductCode";
             Column2.HeaderText = "Pcode";
             Column2.MinimumWidth = 6;
             Column2.Name = "Column2";
             Column2.Width = 96;
             // 
-            // Column3
+            // BarcodeData
             // 
-            Column3.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            Column3.HeaderText = "Bardcode";
-            Column3.MinimumWidth = 6;
-            Column3.Name = "Column3";
-            Column3.Width = 124;
+            BarcodeData.DataPropertyName = "BarcodeData";
+            BarcodeData.HeaderText = "Barcode";
+            BarcodeData.MinimumWidth = 6;
+            BarcodeData.Name = "BarcodeData";
+            BarcodeData.Width = 125;
             // 
             // Column4
             // 
             Column4.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            Column4.DataPropertyName = "ProductName";
             Column4.HeaderText = "Description";
             Column4.MinimumWidth = 6;
             Column4.Name = "Column4";
@@ -271,6 +273,7 @@
             // Column5
             // 
             Column5.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            Column5.DataPropertyName = "CategoryName";
             Column5.HeaderText = "Category";
             Column5.MinimumWidth = 6;
             Column5.Name = "Column5";
@@ -279,6 +282,7 @@
             // Column6
             // 
             Column6.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            Column6.DataPropertyName = "ProductPrice";
             Column6.HeaderText = "Price";
             Column6.MinimumWidth = 6;
             Column6.Name = "Column6";
@@ -287,6 +291,7 @@
             // Column7
             // 
             Column7.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            Column7.DataPropertyName = "ProductQuantity";
             Column7.HeaderText = "Stock On Hand";
             Column7.MinimumWidth = 6;
             Column7.Name = "Column7";
@@ -297,6 +302,7 @@
             Select.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             Select.HeaderText = "";
             Select.Image = Properties.Resources.check;
+            Select.ImageLayout = DataGridViewImageCellLayout.Zoom;
             Select.MinimumWidth = 6;
             Select.Name = "Select";
             Select.Width = 6;
@@ -316,6 +322,7 @@
             Name = "StockAdjustments";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "StockAdjustments";
+            Load += StockAdjustments_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             panel2.ResumeLayout(false);
@@ -344,7 +351,7 @@
         private DataGridView dgvAdjustment;
         private DataGridViewTextBoxColumn Column1;
         private DataGridViewTextBoxColumn Column2;
-        private DataGridViewTextBoxColumn Column3;
+        private DataGridViewTextBoxColumn BarcodeData;
         private DataGridViewTextBoxColumn Column4;
         private DataGridViewTextBoxColumn Column5;
         private DataGridViewTextBoxColumn Column6;

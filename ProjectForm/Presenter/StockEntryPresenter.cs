@@ -9,8 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace ProjectForm.Presenter
-{
-    
+{ 
     public class StockEntryPresenter
     {
         private readonly ReferenceModel _model;
@@ -65,7 +64,6 @@ namespace ProjectForm.Presenter
             }
             gridView.Rows.RemoveAt(e.RowIndex);
         }
-
         public List<StockRecordDto> GetStockRecords(DataGridView dgvStockIn)
         {
             var stockRecords = new List<StockRecordDto>();
@@ -222,10 +220,6 @@ namespace ProjectForm.Presenter
         //private async void OnStockEntryLoad(object? sender, EventArgs e)
         //{
         //    await LoadStockRecords();
-        //}
-
-        
-    }
-
-   
+        //}       
+    }   
 }

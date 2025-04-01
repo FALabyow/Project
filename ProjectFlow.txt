@@ -23,11 +23,26 @@ StockInProduct.cs
 In-stock refers to products that are currently available in inventory or storage and are ready for sale or use.
 Each product is recorded.
 
-StockEntry.cs
+StockEntry.cs - this is for added stocks
 1. The data displayed here are the in-stock products.
 2. You can edit the product quantity that needs to be added to the stock.
 3. Once the Entry button is clicked, the product quantity stored in the database will be updated, and each in-stock entry will be recorded in the database.
 4. Recorded stocks entry are displayed in Stock In Record.
+
+StockAdjustments.cs - this is for corrected stock quantity
+1. In-Stock products are displayed here.
+2. The product quantity can be updated here in case of damages or incorrect counts.
+3. Click the column, details will be displayed at the top.
+4. Update quantity in the quantity textbox.
+5. Choose action(Add to Inventory or Remove from inventory).
+6. Add to Inventory - this will add the updated product to the inventory, 
+7. Remove from Inventory - completely removes the product from the inventory
+
+--> The inventory contain the in-Stock products
+
+
+
+
 
 
 
