@@ -21,11 +21,15 @@ namespace ProjectForm
         public StockEntry()
         {
             InitializeComponent();
+            //this.Load += (s, e) => StockEntryFormLoad?.Invoke(this, EventArgs.Empty);
             LinProduct.LinkClicked += LinProduct_LinkClicked;
+            LinGenerate.LinkClicked += LinGenerate_LinkClicked;
             dataStockIn.AutoGenerateColumns = false;
             dateTimePicker1.ValueChanged += (s, e) => OnDateSelected?.Invoke();
             dgvStockIn.CellContentClick += DataGridProductView_CellContentClick;
             btnLoad.Click += (s, e) => LoadFilteredRecordsClicked?.Invoke(this, EventArgs.Empty);
+
+
 
         }
 
@@ -33,6 +37,8 @@ namespace ProjectForm
         public event Action? OnDateSelected;
         public event EventHandler<DataGridViewCellEventArgs>? DeleteClicked;
         public event EventHandler? LoadFilteredRecordsClicked;
+        public event EventHandler<LinkLabelLinkClickedEventArgs>? LinkReferenceClicked;
+        //public event EventHandler? StockEntryFormLoad;
         public DateTimePicker DatePicker => dateTimePicker1;
         public DateOnly StartDate => DateOnly.FromDateTime(dateTimePicker2.Value);
         public DateOnly EndDate => DateOnly.FromDateTime(dateTimePicker3.Value);
@@ -41,26 +47,13 @@ namespace ProjectForm
             get => txtRefNo.Text;
             set => txtRefNo.Text = value;
         }
-        private async void StockEntry_Load(object sender, EventArgs e)
-        {
-            presenter = new StockEntryPresenter(this);
-            if(presenter != null)
-            {
-                await presenter.LoadStockRecords();
-            }
-            
-        }
         public void DisplayReferenceNumber(string referenceNumber)
         {
             txtRefNo.Text = referenceNumber;
         }
-        private void LinGenerate_LinkClicked_1(object? sender, LinkLabelLinkClickedEventArgs e)
+        private void LinGenerate_LinkClicked(object? sender, LinkLabelLinkClickedEventArgs e)
         {
-            if (presenter != null)
-            {
-                presenter.GenerateReference();
-            }
-
+            LinkReferenceClicked?.Invoke(sender, e);
         }
         private void LinProduct_LinkClicked(object? sender, LinkLabelLinkClickedEventArgs e)
         {
@@ -75,11 +68,10 @@ namespace ProjectForm
         public void DisplayStockEntry(ProductDto stockList)
         {
             dgvStockIn.Rows
-                      .Add(dgvStockIn.Rows.Count + 1, stockList.StockId,stockList.ProductId, stockList.ReferenceNum, stockList.ProductCode, stockList.ProductName, stockList.CategoryName, stockList.ProductQuantity, stockList.StockInDate);
+                      .Add(dgvStockIn.Rows.Count + 1, stockList.StockId, stockList.ProductId, stockList.ReferenceNum, stockList.ProductCode, stockList.ProductName, stockList.CategoryName, stockList.ProductQuantity, stockList.StockInDate);
         }
         public void DisplayStockRecords(List<StockRecordDto> filteredRecords)
         {
-
             dataStockIn.DataSource = filteredRecords;
         }
         private void DataGridProductView_CellContentClick(object? sender, DataGridViewCellEventArgs e)
@@ -90,39 +82,19 @@ namespace ProjectForm
             if (gridView.Columns[e.ColumnIndex].Name == "Delete")
             {
                 DeleteClicked?.Invoke(sender, e);
-
             }
         }
         public List<StockRecordDto> GetStockRecordsFromGrid()
         {
-            var stockRecords = new List<StockRecordDto>();
-
-            foreach (DataGridViewRow row in dgvStockIn.Rows)
+            var dgv = dgvStockIn as DataGridView;
+            if (presenter != null)
             {
-                if (row.Cells["ProductQuantity1"].Value != null)
-                {
-                    DateOnly stockInDate = row.Cells["StockInDate1"].Value != null &&
-                                           DateTime.TryParse(row.Cells["StockInDate1"].Value.ToString(), out DateTime tempDate)
-                                           ? DateOnly.FromDateTime(tempDate)
-                                           : DateOnly.MinValue;
-
-                    stockRecords.Add(new StockRecordDto
-                    {
-                        ReferenceNum = row.Cells["ReferenceNum1"].Value?.ToString() ?? string.Empty,
-                        StockInQty = Convert.ToInt32(row.Cells["ProductQuantity1"].Value),
-                        StockInDate = stockInDate,
-                        ProductCode = row.Cells["ProductCode1"].Value?.ToString() ?? string.Empty,
-                        ProductName = row.Cells["ProductName1"].Value?.ToString() ?? string.Empty,
-                        ProductCategory = row.Cells["CategoryName"].Value?.ToString() ?? string.Empty,
-                        StockId = Guid.TryParse(row.Cells["StockId"].Value?.ToString(), out Guid stockId)
-                            ? stockId
-                            : Guid.Empty,
-
-                    });
-                }
+                var rec = presenter.GetStockRecords(dgv);
+                return rec;
             }
 
-            return stockRecords;
+            return new List<StockRecordDto>();
+
         }
         private async void btnEntry_Click(object sender, EventArgs e)
         {
@@ -138,6 +110,14 @@ namespace ProjectForm
             {
                 string rowNumber = (e.RowIndex + 1).ToString();
                 e.Graphics.DrawString(rowNumber, dataStockIn.Font, brush, e.RowBounds.Left + 10, e.RowBounds.Top + 4);
+            }
+        }
+        private async void StockEntry_Load(object sender, EventArgs e)
+        {
+            presenter = new StockEntryPresenter(this);
+            if (presenter != null)
+            {
+                await presenter.LoadStockRecords();
             }
         }
     }

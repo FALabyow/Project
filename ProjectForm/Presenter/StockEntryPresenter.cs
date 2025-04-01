@@ -25,6 +25,8 @@ namespace ProjectForm.Presenter
             _model = new ReferenceModel();
             _view.DeleteClicked += OnDeleteClicked;
             _view.LoadFilteredRecordsClicked += OnLoadFilteredRecordsClicked;
+            //_view.StockEntryFormLoad += OnStockEntryLoad;
+            _view.LinkReferenceClicked += OnLinkReferenceClicked;
             _httpClient = new HttpClient { BaseAddress = new Uri("https://localhost:7014/api") };
 
         }
@@ -61,6 +63,37 @@ namespace ProjectForm.Presenter
                 return;
             }
             gridView.Rows.RemoveAt(e.RowIndex);
+        }
+
+        public List<StockRecordDto> GetStockRecords(DataGridView dgvStockIn)
+        {
+            var stockRecords = new List<StockRecordDto>();
+            foreach (DataGridViewRow row in dgvStockIn.Rows)
+            {
+                if (row.Cells["ProductQuantity1"].Value != null)
+                {
+                    DateOnly stockInDate = row.Cells["StockInDate1"].Value != null &&
+                                           DateTime.TryParse(row.Cells["StockInDate1"].Value.ToString(), out DateTime tempDate)
+                                           ? DateOnly.FromDateTime(tempDate)
+                                           : DateOnly.MinValue;
+
+                    stockRecords.Add(new StockRecordDto
+                    {
+                        ReferenceNum = row.Cells["ReferenceNum1"].Value?.ToString() ?? string.Empty,
+                        StockInQty = Convert.ToInt32(row.Cells["ProductQuantity1"].Value),
+                        StockInDate = stockInDate,
+                        ProductCode = row.Cells["ProductCode1"].Value?.ToString() ?? string.Empty,
+                        ProductName = row.Cells["ProductName1"].Value?.ToString() ?? string.Empty,
+                        ProductCategory = row.Cells["CategoryName"].Value?.ToString() ?? string.Empty,
+                        StockId = Guid.TryParse(row.Cells["StockId"].Value?.ToString(), out Guid stockId)
+                            ? stockId
+                            : Guid.Empty,
+
+                    });
+                }
+            }
+
+            return stockRecords;
         }
         public async Task SendStockRecordsAsync()
         {
@@ -170,6 +203,17 @@ namespace ProjectForm.Presenter
 
             _view.DisplayStockRecords(filteredRecords);
         }
+        private void OnLinkReferenceClicked(object? sender, LinkLabelLinkClickedEventArgs e)
+        {
+            GenerateReference();
+        }
+
+        //private async void OnStockEntryLoad(object? sender, EventArgs e)
+        //{
+        //    await LoadStockRecords();
+        //}
+
+        
     }
 
    

@@ -21,7 +21,9 @@ namespace ProjectForm.View.IView
         DateOnly StartDate { get; }
         DateOnly EndDate { get; }
         event EventHandler<DataGridViewCellEventArgs>? DeleteClicked;
+        event EventHandler<LinkLabelLinkClickedEventArgs>? LinkReferenceClicked;
         event EventHandler? LoadFilteredRecordsClicked;
+        //event EventHandler? StockEntryFormLoad;
 
 
     }
