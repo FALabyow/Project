@@ -19,6 +19,7 @@ namespace ProjectForm.Presenter
             _view = view;
             _httpClient = new HttpClient { BaseAddress = new Uri("https://localhost:7014/api") };
             _view.SelectedItemCombo += OnSelectedItemCombo;
+            _view.SelectedClicked += OnSelectedClicked;
         }
         private void OnSelectedItemCombo(object? sender, EventArgs e)
         {
@@ -49,6 +50,25 @@ namespace ProjectForm.Presenter
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+        private void OnSelectedClicked(object? sender, DataGridViewCellEventArgs e)
+        {
+            var gridView = sender as DataGridView;
+
+            if (gridView == null || e.RowIndex < 0)
+            {
+                return;
+            }
+
+            string productName = (string)gridView.Rows[e.RowIndex].Cells["ProductName"].Value;
+            string barcode = (string)gridView.Rows[e.RowIndex].Cells["BarcodeData"].Value;
+            string productCode = (string)gridView.Rows[e.RowIndex].Cells["ProductCode1"].Value;
+            int productQuantity = (int)gridView.Rows[e.RowIndex].Cells["ProductQuantity1"].Value;
+
+            _view.ProductCode = productCode;
+            _view.Description = productName;
+            _view.Barcode = barcode;
+            _view.ProductQuantity = productQuantity;
         }
     }
 }

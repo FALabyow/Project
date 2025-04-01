@@ -41,17 +41,18 @@
             lblPcode = new Label();
             label3 = new Label();
             lblDescription = new Label();
-            lblRefNo = new Label();
+            lblBarcode = new Label();
             label2 = new Label();
             label1 = new Label();
             dgvAdjustment = new DataGridView();
             Column1 = new DataGridViewTextBoxColumn();
-            Column2 = new DataGridViewTextBoxColumn();
+            ProductReference = new DataGridViewTextBoxColumn();
+            ProductCode1 = new DataGridViewTextBoxColumn();
             BarcodeData = new DataGridViewTextBoxColumn();
-            Column4 = new DataGridViewTextBoxColumn();
+            ProductName = new DataGridViewTextBoxColumn();
             Column5 = new DataGridViewTextBoxColumn();
             Column6 = new DataGridViewTextBoxColumn();
-            Column7 = new DataGridViewTextBoxColumn();
+            ProductQuantity1 = new DataGridViewTextBoxColumn();
             Select = new DataGridViewImageColumn();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
@@ -114,7 +115,7 @@
             panel2.Controls.Add(lblPcode);
             panel2.Controls.Add(label3);
             panel2.Controls.Add(lblDescription);
-            panel2.Controls.Add(lblRefNo);
+            panel2.Controls.Add(lblBarcode);
             panel2.Controls.Add(label2);
             panel2.Controls.Add(label1);
             panel2.Dock = DockStyle.Top;
@@ -184,14 +185,14 @@
             lblDescription.TabIndex = 4;
             lblDescription.Text = "Product Description";
             // 
-            // lblRefNo
+            // lblBarcode
             // 
-            lblRefNo.AutoSize = true;
-            lblRefNo.Location = new Point(174, 35);
-            lblRefNo.Name = "lblRefNo";
-            lblRefNo.Size = new Size(64, 21);
-            lblRefNo.TabIndex = 3;
-            lblRefNo.Text = "RefNo";
+            lblBarcode.AutoSize = true;
+            lblBarcode.Location = new Point(174, 35);
+            lblBarcode.Name = "lblBarcode";
+            lblBarcode.Size = new Size(85, 21);
+            lblBarcode.TabIndex = 3;
+            lblBarcode.Text = "Barcode";
             // 
             // label2
             // 
@@ -207,9 +208,9 @@
             label1.AutoSize = true;
             label1.Location = new Point(25, 36);
             label1.Name = "label1";
-            label1.Size = new Size(143, 21);
+            label1.Size = new Size(90, 21);
             label1.TabIndex = 1;
-            label1.Text = "Reference No :";
+            label1.Text = "Barcode:";
             // 
             // dgvAdjustment
             // 
@@ -226,7 +227,7 @@
             dgvAdjustment.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dgvAdjustment.ColumnHeadersHeight = 40;
             dgvAdjustment.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dgvAdjustment.Columns.AddRange(new DataGridViewColumn[] { Column1, Column2, BarcodeData, Column4, Column5, Column6, Column7, Select });
+            dgvAdjustment.Columns.AddRange(new DataGridViewColumn[] { Column1, ProductReference, ProductCode1, BarcodeData, ProductName, Column5, Column6, ProductQuantity1, Select });
             dgvAdjustment.Dock = DockStyle.Fill;
             dgvAdjustment.EnableHeadersVisualStyles = false;
             dgvAdjustment.GridColor = Color.White;
@@ -245,14 +246,23 @@
             Column1.Name = "Column1";
             Column1.Width = 67;
             // 
-            // Column2
+            // ProductReference
             // 
-            Column2.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            Column2.DataPropertyName = "ProductCode";
-            Column2.HeaderText = "Pcode";
-            Column2.MinimumWidth = 6;
-            Column2.Name = "Column2";
-            Column2.Width = 96;
+            ProductReference.DataPropertyName = "ProductReference";
+            ProductReference.HeaderText = "ReferenceNum";
+            ProductReference.MinimumWidth = 6;
+            ProductReference.Name = "ProductReference";
+            ProductReference.Visible = false;
+            ProductReference.Width = 125;
+            // 
+            // ProductCode1
+            // 
+            ProductCode1.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            ProductCode1.DataPropertyName = "ProductCode";
+            ProductCode1.HeaderText = "Pcode";
+            ProductCode1.MinimumWidth = 6;
+            ProductCode1.Name = "ProductCode1";
+            ProductCode1.Width = 96;
             // 
             // BarcodeData
             // 
@@ -262,13 +272,13 @@
             BarcodeData.Name = "BarcodeData";
             BarcodeData.Width = 125;
             // 
-            // Column4
+            // ProductName
             // 
-            Column4.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            Column4.DataPropertyName = "ProductName";
-            Column4.HeaderText = "Description";
-            Column4.MinimumWidth = 6;
-            Column4.Name = "Column4";
+            ProductName.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            ProductName.DataPropertyName = "ProductName";
+            ProductName.HeaderText = "Description";
+            ProductName.MinimumWidth = 6;
+            ProductName.Name = "ProductName";
             // 
             // Column5
             // 
@@ -288,14 +298,14 @@
             Column6.Name = "Column6";
             Column6.Width = 80;
             // 
-            // Column7
+            // ProductQuantity1
             // 
-            Column7.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            Column7.DataPropertyName = "ProductQuantity";
-            Column7.HeaderText = "Stock On Hand";
-            Column7.MinimumWidth = 6;
-            Column7.Name = "Column7";
-            Column7.Width = 170;
+            ProductQuantity1.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            ProductQuantity1.DataPropertyName = "ProductQuantity";
+            ProductQuantity1.HeaderText = "Stock On Hand";
+            ProductQuantity1.MinimumWidth = 6;
+            ProductQuantity1.Name = "ProductQuantity1";
+            ProductQuantity1.Width = 170;
             // 
             // Select
             // 
@@ -344,18 +354,19 @@
         private Label lblPcode;
         private Label label3;
         private Label lblDescription;
-        private Label lblRefNo;
+        private Label lblBarcode;
         private Label label2;
         private TextBox txtQty;
         private ComboBox cmbAction;
         private DataGridView dgvAdjustment;
         private DataGridViewTextBoxColumn Column1;
-        private DataGridViewTextBoxColumn Column2;
+        private DataGridViewTextBoxColumn ProductReference;
+        private DataGridViewTextBoxColumn ProductCode1;
         private DataGridViewTextBoxColumn BarcodeData;
-        private DataGridViewTextBoxColumn Column4;
+        private DataGridViewTextBoxColumn ProductName;
         private DataGridViewTextBoxColumn Column5;
         private DataGridViewTextBoxColumn Column6;
-        private DataGridViewTextBoxColumn Column7;
+        private DataGridViewTextBoxColumn ProductQuantity1;
         private DataGridViewImageColumn Select;
     }
 }

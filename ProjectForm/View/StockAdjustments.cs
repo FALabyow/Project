@@ -25,6 +25,7 @@ namespace ProjectForm
             InitializeComponent();
             dgvAdjustment.AutoGenerateColumns = false;
             dgvAdjustment.DataSource = _bindingSource;
+            dgvAdjustment.CellContentClick += DataGridStockAdjustmentsView_CellContentClick;
             cmbAction.SelectedIndexChanged += (s, e) => SelectedItemCombo?.Invoke(this, EventArgs.Empty);
         }
         public string SelectedItem
@@ -34,8 +35,40 @@ namespace ProjectForm
                 return cmbAction.SelectedItem?.ToString() ?? string.Empty;
             }
         }
+        public string Barcode
+        {
+            get => lblBarcode.Text;
+            set => lblBarcode.Text = value;
+        }
+        public string Description
+        {
+            get => lblDescription.Text;
+            set => lblDescription.Text = value;
+        }
+        public string ProductCode
+        {
+            get => lblPcode.Text;
+            set => lblPcode.Text = value;
+        }
+        public int ProductQuantity
+        {
+            get
+            {
+                if(int.TryParse(txtQty.Text, out var quantity))
+                {
+                    return quantity;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+
+            set => txtQty.Text = value.ToString();
+        }
 
         public event EventHandler? SelectedItemCombo;
+        public event EventHandler<DataGridViewCellEventArgs>? SelectedClicked;
         private async void StockAdjustments_Load(object sender, EventArgs e)
         {
             var presenter = new StockAdjustmentsPresenter(this);
@@ -51,6 +84,19 @@ namespace ProjectForm
             {
                 row.Cells["Select"].Value = Properties.Resources.edit;
             }
+        }
+        private void DataGridStockAdjustmentsView_CellContentClick(object? sender, DataGridViewCellEventArgs e)
+        {
+            var gridView = sender as DataGridView;
+            
+            if (gridView == null || e.RowIndex < 0) return;
+
+            if (gridView.Columns[e.ColumnIndex].Name == "Select")
+            {
+                SelectedClicked?.Invoke(sender, e);
+
+            }
+
         }
     }
 }
