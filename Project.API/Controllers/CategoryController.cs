@@ -43,13 +43,52 @@ namespace Project.API.Controllers
                 return NoContent();
 
             }
-            catch(InvalidOperationException ex)
+            catch(ArgumentNullException ex)
+            {
+                return BadRequest(new { error = ex.Message });
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(new { error = ex.Message });
+            }
+            catch (InvalidOperationException ex)
             {
                 return BadRequest(new {error = ex.Message});
             }
-            
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { error = "An unexpected error occurred.", details = ex.Message });
+            }
+
         }
         
+        [HttpPut("/Category/Update/{id}")]
+        public async Task<IActionResult> UpdateCategoryAsync(Guid id, [FromBody] CategoryDto categoryDto)
+        {
+            if(id != categoryDto.CategoryId) return BadRequest(new {error = "Id doesn't match"});
+            try
+            {
+                await _categoryService.UpdateCategoryAsync(categoryDto);
+                return NoContent();
+            }
+            catch(KeyNotFoundException ex)
+            {
+                return BadRequest(new { error = ex.Message });
+            }
+            catch(ArgumentException ex)
+            {
+                return BadRequest(new { error = ex.Message });
+            }
+            catch(InvalidOperationException ex)
+            {
+                return BadRequest(new { error = ex.Message});
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { error = "An unexpected error occurred.", details = ex.Message });
+            }
+        }
+
         [HttpDelete("/Category/Delete/{id}")]
         public async Task<IActionResult> DeleteCategoryAsync(Guid id)
         {
@@ -59,11 +98,15 @@ namespace Project.API.Controllers
                 return NoContent();
 
             }
+            catch (KeyNotFoundException ex)
+            {
+                return BadRequest(new { error = ex.Message });
+            }
             catch (InvalidOperationException ex)
             {
                 return Conflict(new { error = ex.Message });
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return StatusCode(500, new
                 {
@@ -71,25 +114,6 @@ namespace Project.API.Controllers
                     Message = "An unexpected error occurred.",
                     Details = ex.Message
                 });
-            }
-        }
-
-        [HttpPut("/Category/Update/{id}")]
-        public async Task<IActionResult> UpdateCategoryAsync(Guid id, [FromBody] CategoryDto categoryDto)
-        {
-            if(id != categoryDto.CategoryId) return BadRequest();
-            try
-            {
-                await _categoryService.UpdateCategoryAsync(categoryDto);
-                return NoContent();
-            }
-            catch(ArgumentNullException ex)
-            {
-                return StatusCode(500, new {error = ex.Message});
-            }
-            catch(InvalidOperationException ex)
-            {
-                return BadRequest(new { error = ex.Message});
             }
         }
 

@@ -31,7 +31,7 @@ namespace Project.Application.Services
                 {
                     CategoryId = b.CategoryId,
                     CategoryName = b.CategoryName,
-                    
+
                 }).ToList();
             }
             catch (InvalidOperationException)
@@ -41,38 +41,6 @@ namespace Project.Application.Services
             catch (Exception ex)
             {
                 throw new InvalidOperationException("Unexpected error in service layer", ex);
-            }
-        }
-
-        public async Task AddCategoryAsync(CategoryDto categoryDto)
-        {
-            var category = new Category
-            {
-                CategoryName = categoryDto.CategoryName,
-            };
-
-            try
-            {
-                await _categoryRepository.AddCategoryAsync(category);
-            }
-            catch (InvalidOperationException)
-            {
-                throw;
-            }
-            
-
-
-        }
-        public async Task DeleteCategoryAsync(Guid id)
-        {
-            try
-            {
-
-                await _categoryRepository.DeleteCategoryAsync(id);
-            }
-            catch (InvalidOperationException)
-            {
-                throw;
             }
         }
         public async Task<CategoryDto> GetCategoryByIdAsync(Guid id)
@@ -89,18 +57,24 @@ namespace Project.Application.Services
             {
                 throw;
             }
-            
+
         }
-        public async Task UpdateCategoryAsync(CategoryDto categoryDto)
+        public async Task AddCategoryAsync(CategoryDto categoryDto)
         {
+            var category = new Category
+            {
+                CategoryName = categoryDto.CategoryName,
+            };
+
             try
             {
-                var category = await _categoryRepository.GetCategoryByIdAsync(categoryDto.CategoryId);
-                category.CategoryName = categoryDto.CategoryName;
-
-                await _categoryRepository.UpdateCategoryAsync(category);
+                await _categoryRepository.AddCategoryAsync(category);
             }
             catch(ArgumentNullException)
+            {
+                throw;
+            }
+            catch (ArgumentException)
             {
                 throw;
             }
@@ -108,6 +82,49 @@ namespace Project.Application.Services
             {
                 throw;
             }
+            
+
+
         }
+        public async Task UpdateCategoryAsync(CategoryDto categoryDto)
+        {
+            try
+            {
+                var category = await _categoryRepository.GetCategoryByIdAsync(categoryDto.CategoryId);
+
+                category.CategoryName = categoryDto.CategoryName;
+
+                await _categoryRepository.UpdateCategoryAsync(category);
+            }
+            catch (KeyNotFoundException)
+            {
+                throw;
+            }
+            catch (ArgumentException)
+            {
+                throw;
+            }
+            catch (InvalidOperationException)
+            {
+                throw;
+            }
+        }  
+        public async Task DeleteCategoryAsync(Guid id)
+        {
+            try
+            {
+
+                await _categoryRepository.DeleteCategoryAsync(id);
+            }
+            catch (KeyNotFoundException)
+            {
+                throw;
+            }
+            catch (InvalidOperationException)
+            {
+                throw;
+            }
+        }        
+        
     }
 }

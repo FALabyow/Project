@@ -27,6 +27,7 @@ namespace ProjectForm
             dgvAdjustment.DataSource = _bindingSource;
             dgvAdjustment.CellContentClick += DataGridStockAdjustmentsView_CellContentClick;
             cmbAction.SelectedIndexChanged += (s, e) => SelectedItemCombo?.Invoke(this, EventArgs.Empty);
+            btnAdd.Click += (s, e) => SaveClicked?.Invoke(this, EventArgs.Empty);
         }
         public string SelectedItem
         {
@@ -69,7 +70,8 @@ namespace ProjectForm
 
         public event EventHandler? SelectedItemCombo;
         public event EventHandler<DataGridViewCellEventArgs>? SelectedClicked;
-        private async void StockAdjustments_Load(object sender, EventArgs e)
+        public event EventHandler? SaveClicked;
+        private async void StockAdjustments_Load(object? sender, EventArgs e)
         {
             var presenter = new StockAdjustmentsPresenter(this);
             if(presenter != null)

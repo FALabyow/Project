@@ -20,6 +20,7 @@ namespace ProjectForm.Presenter
             _httpClient = new HttpClient { BaseAddress = new Uri("https://localhost:7014/api") };
             _view.SelectedItemCombo += OnSelectedItemCombo;
             _view.SelectedClicked += OnSelectedClicked;
+            _view.SaveClicked += OnSaveClicked;
         }
         private void OnSelectedItemCombo(object? sender, EventArgs e)
         {
@@ -68,6 +69,10 @@ namespace ProjectForm.Presenter
             _view.Description = productName;
             _view.Barcode = barcode;
             _view.ProductQuantity = productQuantity;
+        }
+        private async void OnSaveClicked(object? sender, EventArgs e)
+        {
+            
         }
     }
 }

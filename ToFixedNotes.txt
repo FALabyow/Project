@@ -1,0 +1,1 @@
+1. In CategoryRepository.cs, CategoryService.cs, CategoryController.cs under adding a category method no checking of null objects. (fixed)

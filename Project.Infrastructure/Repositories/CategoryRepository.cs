@@ -45,24 +45,43 @@ namespace Project.Infrastructure.Repositories
         {
             try
             {
+                if(category == null)
+                {
+                    throw new ArgumentNullException(nameof(category), "The object cannot be null or empty");
+                }
+
+                if (string.IsNullOrWhiteSpace(category.CategoryName))
+                {
+                    throw new ArgumentException("Category name cannot be null or empty.", nameof(category.CategoryName));
+                }
                 await _context.Categories.AddAsync(category);
                 await _context.SaveChangesAsync();
+            }
+            catch (ArgumentNullException)
+            {
+                throw;
+            }
+            catch (ArgumentException)
+            {
+                throw;
             }
             catch (DbUpdateException ex)
             {
                 if (ex.InnerException is SqlException sqlEx && (sqlEx.Number == 2601 || sqlEx.Number == 2627))
                 {
-                    throw new InvalidOperationException("Duplicate category name detected!");
+                    throw new InvalidOperationException("Duplicate category name detected!" + ex.Message);
                 }
+
+                throw new InvalidOperationException("Error saving categorty! " + ex.Message);
 
             }
             catch (InvalidOperationException ex) when (ex.InnerException is SqlException sqlEx && sqlEx.Number == 4060)
             {
-                throw new InvalidOperationException("Database does not exist");
+                throw new InvalidOperationException("Database does not exist: " + ex.Message);
             }
-            catch(Exception)
+            catch(Exception ex)
             {
-                throw new InvalidOperationException("An error occurred while adding category.");
+                throw new InvalidOperationException("An error occurred while adding category." + ex.Message);
             }
            
         }
@@ -70,9 +89,9 @@ namespace Project.Infrastructure.Repositories
         {
             try
             {
-                if(category == null)
+                if(string.IsNullOrEmpty(category.CategoryName))
                 {
-                    throw new ArgumentNullException(nameof(category), "Category cannot be empty");
+                    throw new ArgumentException(nameof(category), "Category cannot be empty");
                 }
 
                 _context.Categories.Update(category);
@@ -89,15 +108,21 @@ namespace Project.Infrastructure.Repositories
             try
             {
                 var category = await _context.Categories.FindAsync(id);
-                if (category != null)
+                if (category == null)
                 {
-                    _context.Categories.Remove(category);
-                    await _context.SaveChangesAsync();
+                    throw new KeyNotFoundException("Category name cannot be found!");
                 }
+
+                _context.Categories.Remove(category);
+                await _context.SaveChangesAsync();
             }
-            catch (DbUpdateException)
+            catch (KeyNotFoundException)
             {
-                throw new InvalidOperationException("Unable to delete the category because it has related products. Please delete or reassign the products before deleting the category.");
+                throw;
+            }
+            catch (DbUpdateException ex)
+            {
+                throw new InvalidOperationException("Unable to delete the category because it has related products. Please delete or reassign the products before deleting the category: " + ex.Message);
             }
         }
 

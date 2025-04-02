@@ -11,6 +11,7 @@ namespace Project.Application.Interfaces
     {
         Task<IEnumerable<Stock>> GetAllStocksAsync();
         Task<IEnumerable<Stock>> GetStocksByIdAsync(IEnumerable<Guid> ids);
+
         Task AddStockAsync(Stock stock);
         Task UpdateStocksAsync(IEnumerable<Stock> stocks);
         Task<List<Stock>> GetStocksByIdsAsync(IEnumerable<Guid> ids);
