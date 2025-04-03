@@ -75,7 +75,7 @@
             btnAdd.TabIndex = 1;
             btnAdd.Text = "+";
             btnAdd.UseVisualStyleBackColor = true;
-            btnAdd.Click += btnAdd_Click;
+            
             // 
             // dgvCategory
             // 

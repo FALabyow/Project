@@ -13,5 +13,6 @@ namespace ProjectForm.View.IView
         void ShowMessage(string message);
         event EventHandler<DataGridViewCellEventArgs>? DeleteClicked;
         event EventHandler<DataGridViewCellEventArgs>? EditClicked;
+        event EventHandler? AddClicked;
     }
 }

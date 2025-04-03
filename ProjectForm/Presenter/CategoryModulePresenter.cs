@@ -14,33 +14,33 @@ namespace ProjectForm.Presenter
 {
     public class CategoryModulePresenter
     {
-        private readonly ICategoryModuleView _categoryModuleView;
+        private readonly ICategoryModuleView _view;
         private readonly HttpClient _httpClient;
         private readonly CategoryPresenter _presenter;
-        public CategoryModulePresenter(ICategoryModuleView categoryModuleView, CategoryPresenter presenter)
+        public CategoryModulePresenter(ICategoryModuleView view, CategoryPresenter presenter)
         {
-            _categoryModuleView = categoryModuleView;
+            _view = view;
             _presenter = presenter;
             _httpClient = new HttpClient { BaseAddress = new Uri("https://localhost:7014/api") };
-            _categoryModuleView.SaveClicked += OnSaveClicked;  
-            _categoryModuleView.ClearClicked += OnClearClicked;
-            _categoryModuleView.CloseClicked += OnCloseClicked;
+            _view.SaveClicked += OnSaveClicked;  
+            _view.ClearClicked += OnClearClicked;
+            _view.CloseClicked += OnCloseClicked;
            
         }
         private async void OnSaveClicked(object? sender, EventArgs e)
         {
             var category = new CategoryDto
             {
-                CategoryName = char.ToUpper(_categoryModuleView.CategoryName[0]) + _categoryModuleView.CategoryName.Substring(1),
+                CategoryName = char.ToUpper(_view.CategoryName[0]) + _view.CategoryName.Substring(1),
             };
 
             if(category.CategoryName == "" )
             {
-                _categoryModuleView.ShowMessage("Field cannot be empty!");
+                _view.ShowMessage("Field cannot be empty!");
                 return;
             }
 
-            var confirmResult = MessageBox.Show("Are you sure you want to add category?", "Confirm Add", MessageBoxButtons.YesNo);
+            var confirmResult = MessageBox.Show("Are you sure you want to add this category?", "Confirm Add", MessageBoxButtons.YesNo);
 
             if (confirmResult != DialogResult.Yes) return;
 
@@ -62,7 +62,7 @@ namespace ProjectForm.Presenter
                     var errorRes = await response.Content.ReadFromJsonAsync<ApiErrorResponse>();
                     if(errorRes != null)
                     {
-                        _categoryModuleView.ShowMessage(errorRes.Error);
+                        _view.ShowMessage(errorRes.Error);
                     }
                     
                 }
@@ -72,17 +72,17 @@ namespace ProjectForm.Presenter
             }
             catch (Exception ex)
             {
-                _categoryModuleView?.ShowMessage(ex.Message);
+                _view?.ShowMessage(ex.Message);
             }
         }       
         private void OnClearClicked(object? sender, EventArgs e)
         {
-            _categoryModuleView.CategoryName = "";
-            _categoryModuleView.ClearMessage();
+            _view.CategoryName = "";
+            _view.ClearMessage();
         }
         private void OnCloseClicked(object? sender, EventArgs e)
         {
-            _categoryModuleView.CloseCategoryModule();
+            _view.CloseCategoryModule();
         }
 
     }

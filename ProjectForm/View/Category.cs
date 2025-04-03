@@ -27,8 +27,12 @@ namespace ProjectForm
         {
             InitializeComponent();
             dgvCategory.CellContentClick += DataGridCategoryView_CellContentClick;
+            btnAdd.Click += (s, e) => AddClicked?.Invoke(this, EventArgs.Empty);
         }
 
+        public event EventHandler<DataGridViewCellEventArgs>? DeleteClicked;
+        public event EventHandler<DataGridViewCellEventArgs>? EditClicked;
+        public event EventHandler? AddClicked;
         public void DisplayCategoryList(List<CategoryDto> categortList, int rowNumber)
         {
             dgvCategory.Rows.Clear();
@@ -43,31 +47,15 @@ namespace ProjectForm
                 dgvCategory.Rows[rowIndex].Cells["delete"].Value = Properties.Resources.delete;
             }
         }
-
         public void ShowMessage(string message)
         {
             MessageBox.Show(message);
         }
-
-        private void btnAdd_Click(object sender, EventArgs e)
-        {
-            if(presenter != null)
-            {
-                CategoryModule categoryModule = new CategoryModule(presenter);
-                //var presenter = new CategoryModulePresenter(categoryModule);
-                categoryModule.ShowDialog();
-            }
-        }
-
         private void Category_Load(object sender, EventArgs e)
         {
             presenter = new CategoryPresenter(this);
             presenter.LoadCategoryList();
         }
-
-        public event EventHandler<DataGridViewCellEventArgs>? DeleteClicked;
-        public event EventHandler<DataGridViewCellEventArgs>? EditClicked;
-
         private void DataGridCategoryView_CellContentClick(object? sender, DataGridViewCellEventArgs e)
         {
             var gridView = sender as DataGridView;

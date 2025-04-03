@@ -23,9 +23,8 @@ namespace ProjectForm.Presenter
             _httpClient = new HttpClient { BaseAddress = new Uri("https://localhost:7014/api")};
             _view.DeleteClicked += OnDeleteClicked;
             _view.EditClicked += OnEditClicked;
-
+            _view.AddClicked += OnAddClicked;
         }
-
         public async Task LoadCategoryList()
         {
             try
@@ -157,6 +156,11 @@ namespace ProjectForm.Presenter
                 _view.ShowMessage(ex.Message);
                 await LoadCategoryList();
             }
+        }
+        private void OnAddClicked(object? sender, EventArgs e)
+        {
+            var categoryModule = new CategoryModule(this);
+            categoryModule.Show();
         }
     }
 }
