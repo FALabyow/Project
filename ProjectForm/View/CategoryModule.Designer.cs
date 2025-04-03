@@ -72,7 +72,6 @@
             picboxClose.SizeMode = PictureBoxSizeMode.Zoom;
             picboxClose.TabIndex = 0;
             picboxClose.TabStop = false;
-            picboxClose.Click += pictureBox1_Click;
             // 
             // txtCategoryName
             // 

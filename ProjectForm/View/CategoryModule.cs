@@ -25,12 +25,13 @@ namespace ProjectForm
             InitializeComponent();
             btnSave.Click += (s, e) => SaveClicked?.Invoke(this, EventArgs.Empty);
             btnClear.Click += (s, e) => ClearClicked?.Invoke(this, EventArgs.Empty);
+            picboxClose.Click += (s, e) => CloseClicked?.Invoke(this, EventArgs.Empty);
             this.presenterPresenter = presenterPresenter;
         }
 
         public event EventHandler? SaveClicked;
         public event EventHandler? ClearClicked;
-
+        public event EventHandler? CloseClicked;
         public string CategoryName
         {
             get => txtCategoryName.Text;
@@ -45,12 +46,10 @@ namespace ProjectForm
         {
             showMessageLabel.Text = "";
         }
-
-        private void pictureBox1_Click(object sender, EventArgs e)
+        public void CloseCategoryModule()
         {
             this.Dispose();
         }
-
         private void CategoryModule_Load(object sender, EventArgs e)
         {
             presenter = new CategoryModulePresenter(this, presenterPresenter);

@@ -24,6 +24,7 @@ namespace ProjectForm.Presenter
             _httpClient = new HttpClient { BaseAddress = new Uri("https://localhost:7014/api") };
             _categoryModuleView.SaveClicked += OnSaveClicked;  
             _categoryModuleView.ClearClicked += OnClearClicked;
+            _categoryModuleView.CloseClicked += OnCloseClicked;
            
         }
         private async void OnSaveClicked(object? sender, EventArgs e)
@@ -78,6 +79,10 @@ namespace ProjectForm.Presenter
         {
             _categoryModuleView.CategoryName = "";
             _categoryModuleView.ClearMessage();
+        }
+        private void OnCloseClicked(object? sender, EventArgs e)
+        {
+            _categoryModuleView.CloseCategoryModule();
         }
 
     }
