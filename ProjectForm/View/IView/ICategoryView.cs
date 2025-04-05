@@ -9,7 +9,7 @@ namespace ProjectForm.View.IView
 {
     public interface ICategoryView
     {
-        void DisplayCategoryList (List<CategoryDto> categortList, int rowNumber);
+        void DisplayCategoryList (List<CategoryDto> categoryList, int rowNumber);
         void ShowMessage(string message);
         event EventHandler<DataGridViewCellEventArgs>? DeleteClicked;
         event EventHandler<DataGridViewCellEventArgs>? EditClicked;

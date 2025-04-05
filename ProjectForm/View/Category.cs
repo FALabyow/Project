@@ -22,21 +22,22 @@ namespace ProjectForm
     public partial class Category : Form, ICategoryView
     {
         
-        private CategoryPresenter? presenter;
+        private readonly CategoryPresenter? _presenter;
         public Category()
         {
             InitializeComponent();
             dgvCategory.CellContentClick += DataGridCategoryView_CellContentClick;
             btnAdd.Click += (s, e) => AddClicked?.Invoke(this, EventArgs.Empty);
+            _presenter = new CategoryPresenter(this);
         }
 
         public event EventHandler<DataGridViewCellEventArgs>? DeleteClicked;
         public event EventHandler<DataGridViewCellEventArgs>? EditClicked;
         public event EventHandler? AddClicked;
-        public void DisplayCategoryList(List<CategoryDto> categortList, int rowNumber)
+        public void DisplayCategoryList(List<CategoryDto> categoryList, int rowNumber)
         {
             dgvCategory.Rows.Clear();
-            foreach (var category in categortList)
+            foreach (var category in categoryList)
             {
                 rowNumber++;
                 int rowIndex = dgvCategory
@@ -51,10 +52,15 @@ namespace ProjectForm
         {
             MessageBox.Show(message);
         }
-        private void Category_Load(object sender, EventArgs e)
+        private async void Category_Load(object sender, EventArgs e)
         {
-            presenter = new CategoryPresenter(this);
-            presenter.LoadCategoryList();
+            
+            if(_presenter != null)
+            {
+                await _presenter.LoadCategoryList();
+            }
+            
+            
         }
         private void DataGridCategoryView_CellContentClick(object? sender, DataGridViewCellEventArgs e)
         {
