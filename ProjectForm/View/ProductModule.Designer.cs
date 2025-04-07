@@ -73,7 +73,7 @@
             picClose.SizeMode = PictureBoxSizeMode.Zoom;
             picClose.TabIndex = 12;
             picClose.TabStop = false;
-            picClose.Click += pictureBox1_Click;
+            
             // 
             // label1
             // 
@@ -97,7 +97,7 @@
             btnClear.TabIndex = 10;
             btnClear.Text = "Clear";
             btnClear.UseVisualStyleBackColor = false;
-            btnClear.Click += btnCancel_Click;
+            
             // 
             // label2
             // 

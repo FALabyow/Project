@@ -24,8 +24,8 @@ namespace Project.Application.Services
             try
             {
                 var categories = await _categoryRepository.GetAllCategoryAsync();
-                if (!categories.Any())
-                    throw new InvalidOperationException("No categories found in the database!");
+                //if (!categories.Any())
+                //    throw new InvalidOperationException("No categories found in the database!");
 
                 return categories.Select(b => new CategoryDto
                 {

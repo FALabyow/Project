@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 using Project.Application.DTOs;
 using Project.Application.Services;
 
@@ -16,11 +17,15 @@ namespace Project.API.Controllers
         }
 
         [HttpGet("/Products/All")]
-        public async Task<ActionResult<IEnumerable<ProductDto>>> GetAllCategoryAsync()
+        public async Task<ActionResult<IEnumerable<ProductDto>>> GetAllProductAsync()
         {
             try
             {
                 var products = await _productService.GetAllProductAsync();
+                //if(products.IsNullOrEmpty())
+                //{
+                //    return Ok(products);
+                //}
                 return Ok(products);
             }
             catch (InvalidOperationException ex)
@@ -35,28 +40,59 @@ namespace Project.API.Controllers
         }
 
         [HttpPost("/Product/AddProduct")]
-        public async Task<IActionResult> AddCategoryAsync([FromBody] ProductDto productDto)
+        public async Task<IActionResult> AddProductAsync([FromBody] ProductDto productDto)
         {
             try
             {
                 await _productService.AddProductAsync(productDto);
                 return NoContent();
             }
+            catch(ArgumentNullException ex)
+            {
+                return BadRequest(new { error = ex.Message });
+            }
             catch (InvalidOperationException ex)
             {
                 return BadRequest(new { error = ex.Message });
             }
 
+        }      
+
+        [HttpPut("/Product/Update/{id}")]
+        public async Task<IActionResult> UpdateProductAsync(Guid id, [FromBody] ProductDto productDto)
+        {
+            if (id != productDto.ProductId) return BadRequest(new {error = "Id does not match!"});
+            try
+            {
+                await _productService.UpdateProductAsync(productDto);
+                return NoContent();
+            }
+            catch(KeyNotFoundException ex)
+            {
+                return BadRequest(new { error = ex.Message });
+            }
+            catch (ArgumentNullException ex)
+            {
+                return StatusCode(500, new { error = ex.Message });
+            }
+            catch (InvalidOperationException ex)
+            {
+                return BadRequest(new { error = ex.Message });
+            }
         }
 
         [HttpDelete("/Product/Delete/{id}")]
-        public async Task<IActionResult> DeleteCategoryAsync(Guid id)
+        public async Task<IActionResult> DeleteProductSAsync(Guid id)
         {
             try
             {
                 await _productService.DeleteProductAsync(id);
                 return NoContent();
 
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return BadRequest(new { error = ex.Message });
             }
             catch (InvalidOperationException ex)
             {
@@ -70,25 +106,6 @@ namespace Project.API.Controllers
                     Message = "An unexpected error occurred.",
                     Details = ex.Message
                 });
-            }
-        }
-
-        [HttpPut("/Product/Update/{id}")]
-        public async Task<IActionResult> UpdateCategoryAsync(Guid id, [FromBody] ProductDto productDto)
-        {
-            if (id != productDto.ProductId) return BadRequest();
-            try
-            {
-                await _productService.UpdateProductAsync(productDto);
-                return NoContent();
-            }
-            catch (ArgumentNullException ex)
-            {
-                return StatusCode(500, new { error = ex.Message });
-            }
-            catch (InvalidOperationException ex)
-            {
-                return BadRequest(new { error = ex.Message });
             }
         }
     }

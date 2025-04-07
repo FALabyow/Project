@@ -15,25 +15,25 @@ namespace ProjectForm.Presenter
 {
     public class ProductModulePresenter
     {
-        private readonly IProductModuleView _productModuleView;
+        private readonly IProductModuleView _view;
         private readonly HttpClient _httpClient;
         private readonly ProductPresenter _presenter;
-        public ProductModulePresenter(IProductModuleView productModuleView, ProductPresenter presenter)
+        public ProductModulePresenter(IProductModuleView view, ProductPresenter presenter)
         {
-            _productModuleView = productModuleView;
+            _view = view;
             _presenter = presenter;
             _httpClient = new HttpClient { BaseAddress = new Uri("https://localhost:7014/api")};
-            _productModuleView.SelectedIndexCategoryCombo += OnSelectedIndexCategoryCombo;
-            _productModuleView.SaveClicked -= OnSaveClicked; //Unsubsccibe event
-            _productModuleView.SaveClicked += OnSaveClicked; //subscribe event  
-            
+            _view.SelectedIndexCategoryCombo += OnSelectedIndexCategoryCombo;
+            _view.SaveClicked -= OnSaveClicked; //Unsubsccibe event
+            _view.SaveClicked += OnSaveClicked; //subscribe event
+            _view.ModuleCloseClicked += OnModuleCloseClicked;         
         }
 
         public async Task LoadCategoryAsync()
         {  
             try
             {
-                _productModuleView.LoadingMessage("Waiting for category list...");
+                _view.LoadingMessage("Waiting for category list...");
                 var response = await _httpClient.GetAsync("/Categories/All");
                 if (response.IsSuccessStatusCode)
                 {
@@ -46,7 +46,7 @@ namespace ProjectForm.Presenter
                         
                     }
                     Debug.WriteLine("Categories is not empty");
-                    _productModuleView.LoadCategory(categories);
+                    _view.LoadCategory(categories);
                     
 
                 }
@@ -55,25 +55,25 @@ namespace ProjectForm.Presenter
                     var errorRes = await response.Content.ReadFromJsonAsync<ApiErrorResponse>();
                     if(errorRes != null)
                     {
-                        _productModuleView.ShowMessage(errorRes.Error);
+                        _view.ShowMessage(errorRes.Error);
                     }
                    
                     
                 }
                 else
                 {
-                    _productModuleView.ShowMessage("An expected error occured!");
+                    _view.ShowMessage("An expected error occured!");
                 }
-                _productModuleView.LoadingMessage("");
+                _view.LoadingMessage("");
             }
             catch(Exception ex)
             {
-                _productModuleView?.ShowMessage(ex.Message);
+                _view?.ShowMessage(ex.Message);
             }
         }
         private void OnSelectedIndexCategoryCombo(object? sender, EventArgs e)
         {
-            Guid selectedCategoryId = _productModuleView.Selectedcategory;
+            Guid selectedCategoryId = _view.Selectedcategory;
             if (selectedCategoryId != Guid.Empty)
             {
                 Debug.WriteLine($"Selected category: {selectedCategoryId}");
@@ -83,13 +83,13 @@ namespace ProjectForm.Presenter
         {
             var product = new ProductDto
             {
-                ProductName = _productModuleView.Description,
-                BarcodeData = _productModuleView.Barcode,
+                ProductName = _view.Description,
+                BarcodeData = _view.Barcode,
                 ScannedAt = DateTime.Now,
-                ProductReOrder = _productModuleView.ReOrder,
-                CategoryId = _productModuleView.Selectedcategory,
-                ProductPrice = _productModuleView.Price,
-                ProductCode = _productModuleView.Pcode,
+                ProductReOrder = _view.ReOrder,
+                CategoryId = _view.Selectedcategory,
+                ProductPrice = _view.Price,
+                ProductCode = _view.Pcode,
                 ProductId = Guid.NewGuid(),
             };
 
@@ -101,19 +101,19 @@ namespace ProjectForm.Presenter
 
             if (string.IsNullOrEmpty(product.ProductName) || string.IsNullOrEmpty(product.BarcodeData))
             {
-                _productModuleView.ShowMessage("Field cannot be empty!");
+                _view.ShowMessage("Field cannot be empty!");
                 return;
             }
 
             if(product.CategoryId == Guid.Empty)
             {
-                _productModuleView.ShowMessage("Please select category");
+                _view.ShowMessage("Please select category");
                 return;
             }
 
             if(product.ProductPrice < 0)
             {
-                _productModuleView.ShowMessage("Invalid price");
+                _view.ShowMessage("Invalid price");
                 return;
             }
 
@@ -139,7 +139,7 @@ namespace ProjectForm.Presenter
                     if(errorRes != null)
                     {
                         Debug.WriteLine(errorRes.Error);
-                        _productModuleView.ShowMessage(errorRes.Error);
+                        _view.ShowMessage(errorRes.Error);
                     }
 
                 }
@@ -149,20 +149,24 @@ namespace ProjectForm.Presenter
                     if (errorRes != null)
                     {
                         Debug.WriteLine(errorRes.Error);
-                        _productModuleView.ShowMessage(errorRes.Error);
+                        _view.ShowMessage(errorRes.Error);
                     }
                 }
                 else
                 {
                     Debug.WriteLine("Something went wrong");
-                    _productModuleView?.ShowMessage("Something went wrong");
+                    _view?.ShowMessage("Something went wrong");
                 }
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.Message);
-                _productModuleView?.ShowMessage("error2");
+                _view?.ShowMessage("error2");
             }
+        }
+        private void OnModuleCloseClicked(object? sender, EventArgs e)
+        {
+            _view.ModuleClose();
         }
     }
 }

@@ -34,7 +34,7 @@ namespace ProjectForm
         public event EventHandler? CloseClicked;
         public string CategoryName
         {
-            get => txtCategoryName.Text;
+            get => txtCategoryName.Text.ToUpper();
             set => txtCategoryName.Text = value;
         }
         public void ShowMessage(string message)

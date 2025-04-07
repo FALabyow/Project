@@ -16,10 +16,9 @@ namespace Project.Application.Services
             try
             {
                 var products = await _productRepository.GetAllProductAsync();
-                if (!products.Any())
-                    throw new InvalidOperationException("No products found in the database!");
-
-                
+                //if (!products.Any())
+                //    throw new InvalidOperationException("No products found in the database!");
+  
                 return products.Select(b => new ProductDto
                 {
                     ProductId = b.ProductId,    
@@ -39,9 +38,9 @@ namespace Project.Application.Services
             {
                 throw;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw new InvalidOperationException("Unexpected error in service layer", ex);
+                throw;
             }
 
 
@@ -63,6 +62,10 @@ namespace Project.Application.Services
                 };
 
                 await _productRepository.AddProductAsync(product);
+            }
+            catch (ArgumentNullException)
+            {
+                throw;
             }
             catch (InvalidOperationException)
             {
@@ -87,17 +90,6 @@ namespace Project.Application.Services
             }
 
         }
-        public async Task DeleteProductAsync(Guid id)
-        {
-            try
-            {
-               await _productRepository.DeleteProductAsync(id);
-            }
-            catch (InvalidOperationException)
-            {
-                throw;
-            }
-        }
         public async Task UpdateProductAsync(ProductDto productDto)
         {
             try
@@ -107,8 +99,12 @@ namespace Project.Application.Services
                 product.ProductName = productDto.ProductName;
                 product.ProductPrice = productDto.ProductPrice;
                 product.ProductReOrder = productDto.ProductReOrder;
- 
+
                 await _productRepository.UpdateProductAsync(product);
+            }
+            catch (KeyNotFoundException)
+            {
+                throw;
             }
             catch (ArgumentNullException)
             {
@@ -119,5 +115,21 @@ namespace Project.Application.Services
                 throw;
             }
         }
+        public async Task DeleteProductAsync(Guid id)
+        {
+            try
+            {
+               await _productRepository.DeleteProductAsync(id);
+            }
+            catch (KeyNotFoundException)
+            {
+                throw;
+            }
+            catch (InvalidOperationException)
+            {
+                throw;
+            }
+        }
+        
     }
 }

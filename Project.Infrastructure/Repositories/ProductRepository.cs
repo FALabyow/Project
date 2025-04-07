@@ -1,5 +1,6 @@
 ﻿using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Identity.Client;
 using Project.Application.Interfaces;
 using Project.Domain.Entities;
 using Project.Infrastructure.Persistence;
@@ -31,11 +32,11 @@ namespace Project.Infrastructure.Repositories
             }
             catch (InvalidOperationException ex) when (ex.InnerException is SqlException sqlEx && sqlEx.Number == 4060)
             {
-                throw new InvalidOperationException("Database does not exist or access denied!", ex);
+                throw new InvalidOperationException("Database does not exist or access denied! " + ex.Message);
             }
             catch (Exception ex)
             {
-                throw new InvalidOperationException("An error occurred while fetching categories.", ex);
+                throw new InvalidOperationException("An error occurred while fetching products. " + ex.Message);
             }
         }
         public async Task<Product> GetProductByIdAsync(Guid id)
@@ -47,14 +48,24 @@ namespace Project.Infrastructure.Repositories
         }
         public async Task AddProductAsync(Product product)
         {
+
             try
             {
+                if(product == null)
+                {
+                    throw new ArgumentNullException(nameof(product), "The data sent is empty");
+                }
+                
                 await _context.Products.AddAsync(product);
                 await _context.SaveChangesAsync();
             }
+            catch (ArgumentNullException)
+            {
+                throw;
+            }
             catch (DbUpdateException ex)
             {
-                throw new InvalidOperationException("Duplicate product code detected!" + ex.Message);
+                throw new InvalidOperationException("Duplicate product code detected! " + ex.Message);
             }
             catch(Exception ex)
             {
@@ -69,15 +80,23 @@ namespace Project.Infrastructure.Repositories
             {
                 if (product == null)
                 {
-                    throw new ArgumentNullException(nameof(product), "Product name cannot be empty");
+                    throw new ArgumentNullException(nameof(product), "The data requested is empty ");
                 }
 
                 _context.Products.Update(product);
                 await _context.SaveChangesAsync();
             }
+            catch (ArgumentNullException)
+            {
+                throw;
+            }
             catch (DbUpdateException ex)
             {
                 throw new InvalidOperationException("The product cannot be updated because the name already exists. " + ex.Message);
+            }
+            catch(Exception ex)
+            {
+                throw new InvalidOperationException(ex.Message);
             }
         }
         public async Task DeleteProductAsync(Guid id)
@@ -85,11 +104,17 @@ namespace Project.Infrastructure.Repositories
             try
             {
                 var product = await _context.Products.FindAsync(id);
-                if (product != null)
+                if (product == null)
                 {
-                    _context.Products.Remove(product);
-                    await _context.SaveChangesAsync();
+                    throw new KeyNotFoundException("Cannot delete this product because it does not exist!");
                 }
+
+                _context.Products.Remove(product);
+                await _context.SaveChangesAsync();
+            }
+            catch (KeyNotFoundException)
+            {
+                throw;
             }
             catch (DbUpdateException ex)
             {

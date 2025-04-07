@@ -18,8 +18,8 @@ namespace ProjectForm.Presenter
         private readonly ICategoryModuleView _view;
         private readonly HttpClient _httpClient;
         private readonly CategoryPresenter _presenter;
-        private TextInfo? _textInfo = CultureInfo.CurrentCulture.TextInfo;
-        private string? _categoryName;
+        //private TextInfo? _textInfo = CultureInfo.CurrentCulture.TextInfo;
+        //private string? _categoryName;
         public CategoryModulePresenter(ICategoryModuleView view, CategoryPresenter presenter)
         {
             _view = view;
@@ -32,15 +32,15 @@ namespace ProjectForm.Presenter
         }
         private async void OnSaveClicked(object? sender, EventArgs e)
         {
-            
-            if(_textInfo != null)
-            {
-                _categoryName = _textInfo.ToTitleCase(_view.CategoryName.ToLower());
-            }
+
+            //if(_textInfo != null)
+            //{
+            //    _categoryName = _textInfo.ToTitleCase(_view.CategoryName.ToLower());
+            //}
             var category = new CategoryDto
             {
                 //CategoryName = char.ToUpper(_view.CategoryName[0]) + _view.CategoryName.Substring(1),
-                CategoryName = _categoryName ?? "",
+                CategoryName = _view.CategoryName
             };
 
             if (category.CategoryName == "" )
@@ -75,9 +75,6 @@ namespace ProjectForm.Presenter
                     }
                     
                 }
-                
-
-
             }
             catch (Exception ex)
             {

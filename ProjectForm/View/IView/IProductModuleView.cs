@@ -17,11 +17,12 @@ namespace ProjectForm.View.IView
         Guid Selectedcategory { get; }
         void LoadCategory(List<CategoryDto> categoryDto);
         void Clear();
-        void ShowMessage(string message);   
+        void ShowMessage(string message);
+        void ModuleClose();
         void LoadingMessage(string message);
         event EventHandler? ClearClicked;
         event EventHandler? SelectedIndexCategoryCombo;
         event EventHandler? SaveClicked;
-        
+        event EventHandler? ModuleCloseClicked;       
     }
 }
