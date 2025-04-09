@@ -21,28 +21,24 @@ namespace ProjectForm
         //Part 3 of the tutorial
         //https://www.youtube.com/watch?v=9LdU5zA5agA&list=PLcDvtJ2MXvhy_YrXdO4VXqZBOADCRJhSc&index=4
         
-        private Guid _productId;
         private ProductModulePresenter? _presenter;
-        private readonly ProductPresenter presenterPresenter;
+        private readonly ProductPresenter _productPresenter;
 
-        public ProductModule(ProductPresenter presenterPresenter)
+        public ProductModule(ProductPresenter productPresenter)
         {
             InitializeComponent();
             cmbCategory.SelectedIndexChanged += (s, e) => SelectedIndexCategoryCombo?.Invoke(this, EventArgs.Empty);
             btnSave.Click += (s, e) => SaveClicked?.Invoke(this, EventArgs.Empty);
             btnClear.Click += (s, e) => ClearClicked?.Invoke(this, EventArgs.Empty);
             picClose.Click += (s, e) => ModuleCloseClicked?.Invoke(this, EventArgs.Empty);
-
             cmbCategory.Text = "Select Category";
-            this.presenterPresenter = presenterPresenter;
-
-
+            _productPresenter = productPresenter;
         }
         private async void ProductModule_Load(object sender, EventArgs e)
         {
             if (_presenter == null)
             {
-                _presenter = new ProductModulePresenter(this, presenterPresenter);
+                _presenter = new ProductModulePresenter(this, _productPresenter);
             }
             await _presenter.LoadCategoryAsync();
         }
@@ -51,7 +47,7 @@ namespace ProjectForm
         public event EventHandler? SelectedIndexCategoryCombo;
         public event EventHandler? SaveClicked;
         public event EventHandler? ModuleCloseClicked;
-        public Guid Selectedcategory
+        public Guid SelectedCategory
         {
             get
             {
@@ -136,10 +132,6 @@ namespace ProjectForm
         public void ModuleClose()
         {
             this.Dispose();
-        }
-        
-        
-
-        
+        }       
     }
 }

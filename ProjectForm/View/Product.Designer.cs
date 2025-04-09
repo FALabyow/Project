@@ -88,7 +88,6 @@
             btnAdd.TabIndex = 4;
             btnAdd.Text = "+";
             btnAdd.UseVisualStyleBackColor = true;
-            btnAdd.Click += btnAdd_Click;
             // 
             // lblManageProduct
             // 
@@ -141,7 +140,7 @@
             dgvProduct.RowHeadersWidth = 51;
             dgvProduct.Size = new Size(982, 476);
             dgvProduct.TabIndex = 6;
-            dgvProduct.RowPostPaint += dgvProduct_RowPostPaint;
+            
             // 
             // rowNumber
             // 

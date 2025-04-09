@@ -14,6 +14,8 @@ namespace ProjectForm.View.IView
         void ShowMessage(string message);
         event EventHandler<DataGridViewCellEventArgs>? DeleteClicked;
         event EventHandler<DataGridViewCellEventArgs>? EditClicked;
+        event EventHandler<DataGridViewRowPostPaintEventArgs>? RowNumber;
         event EventHandler? ProductSearched;
+        event EventHandler? AddClicked;
     }
 }

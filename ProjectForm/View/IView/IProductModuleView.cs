@@ -14,7 +14,7 @@ namespace ProjectForm.View.IView
         string Description { get; set; }
         int ReOrder { get; set; }
         decimal Price { get; set; } 
-        Guid Selectedcategory { get; }
+        Guid SelectedCategory { get; }
         void LoadCategory(List<CategoryDto> categoryDto);
         void Clear();
         void ShowMessage(string message);

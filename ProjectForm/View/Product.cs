@@ -17,29 +17,36 @@ namespace ProjectForm
     //https://www.youtube.com/watch?v=9LdU5zA5agA&list=PLcDvtJ2MXvhy_YrXdO4VXqZBOADCRJhSc&index=4
     public partial class Product : Form, IProductView
     {
-        private ProductPresenter? presenter;
-        private BindingSource _bindingSource = new BindingSource();
+        private readonly ProductPresenter? presenter;
+        private readonly BindingSource _bindingSource;
         public Product()
         {
             InitializeComponent();
+            _bindingSource = new BindingSource();
+            presenter = new ProductPresenter(this);
             dgvProduct.AutoGenerateColumns = false;
             dgvProduct.DataSource = _bindingSource;
             dgvProduct.CellContentClick += DataGridProductView_CellContentClick;
+            dgvProduct.RowPostPaint += DataGridProductView_RowPostPaint;    
+            btnAdd.Click += (s, e) => AddClicked?.Invoke(this, EventArgs.Empty);
             txtSearch.TextChanged += ProductSearched_TextChanged;
         }
+
         public event EventHandler<DataGridViewCellEventArgs>? DeleteClicked;
         public event EventHandler<DataGridViewCellEventArgs>? EditClicked;
+        public event EventHandler<DataGridViewRowPostPaintEventArgs>? RowNumber;
         public event EventHandler? ProductSearched;
+        public event EventHandler? AddClicked;
         public string SearchText => txtSearch.Text.ToLower();
-        private void btnAdd_Click(object sender, EventArgs e)
-        {
-            if (presenter != null)
-            {
-                ProductModule productModule = new ProductModule(presenter);
-                productModule.ShowDialog();
-            }
+        //private void btnAdd_Click(object sender, EventArgs e)
+        //{
+        //    if (presenter != null)
+        //    {
+        //        ProductModule productModule = new ProductModule(presenter);
+        //        productModule.ShowDialog();
+        //    }
 
-        }
+        //}
         public void DisplayProductList(List<ProductDto> productList)
         {
             _bindingSource.DataSource = productList;
@@ -75,16 +82,26 @@ namespace ProjectForm
         }
         private async void Product_Load(object sender, EventArgs e)
         {
-            presenter = new ProductPresenter(this);
-            await presenter.LoadProductList();
-        }
-        private void dgvProduct_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
-        {
-            using (SolidBrush brush = new SolidBrush(dgvProduct.RowHeadersDefaultCellStyle.ForeColor))
+            if(presenter != null)
             {
-                string rowNumber = (e.RowIndex + 1).ToString();
-                e.Graphics.DrawString(rowNumber, dgvProduct.Font, brush, e.RowBounds.Left + 10, e.RowBounds.Top + 4);
-            }
+                await presenter.LoadProductList();
+            }           
         }
+        private void DataGridProductView_RowPostPaint(object? sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            var gridView = sender as DataGridView;
+            if (gridView == null || e.RowIndex < 0) return;
+            RowNumber?.Invoke(sender, e);
+
+        }
+
+        //private void dgvProduct_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        //{
+        //    using (SolidBrush brush = new SolidBrush(dgvProduct.RowHeadersDefaultCellStyle.ForeColor))
+        //    {
+        //        string rowNumber = (e.RowIndex + 1).ToString();
+        //        e.Graphics.DrawString(rowNumber, dgvProduct.Font, brush, e.RowBounds.Left + 10, e.RowBounds.Top + 4);
+        //    }
+        //}
     }
 }

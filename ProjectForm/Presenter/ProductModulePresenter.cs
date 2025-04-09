@@ -28,7 +28,6 @@ namespace ProjectForm.Presenter
             _view.SaveClicked += OnSaveClicked; //subscribe event
             _view.ModuleCloseClicked += OnModuleCloseClicked;         
         }
-
         public async Task LoadCategoryAsync()
         {  
             try
@@ -41,11 +40,11 @@ namespace ProjectForm.Presenter
                     var categories = await response.Content.ReadFromJsonAsync<List<CategoryDto>>();
                     if(categories == null || categories.Count == 0)
                     {
-                        Debug.WriteLine("Categories is empty");
+                        _view.LoadingMessage("Category list is empty.");
                         return;
                         
                     }
-                    Debug.WriteLine("Categories is not empty");
+
                     _view.LoadCategory(categories);
                     
 
@@ -62,7 +61,7 @@ namespace ProjectForm.Presenter
                 }
                 else
                 {
-                    _view.ShowMessage("An expected error occured!");
+                    _view.ShowMessage("An unexpected error occured!");
                 }
                 _view.LoadingMessage("");
             }
@@ -73,7 +72,7 @@ namespace ProjectForm.Presenter
         }
         private void OnSelectedIndexCategoryCombo(object? sender, EventArgs e)
         {
-            Guid selectedCategoryId = _view.Selectedcategory;
+            Guid selectedCategoryId = _view.SelectedCategory;
             if (selectedCategoryId != Guid.Empty)
             {
                 Debug.WriteLine($"Selected category: {selectedCategoryId}");
@@ -87,7 +86,7 @@ namespace ProjectForm.Presenter
                 BarcodeData = _view.Barcode,
                 ScannedAt = DateTime.Now,
                 ProductReOrder = _view.ReOrder,
-                CategoryId = _view.Selectedcategory,
+                CategoryId = _view.SelectedCategory,
                 ProductPrice = _view.Price,
                 ProductCode = _view.Pcode,
                 ProductId = Guid.NewGuid(),
@@ -124,7 +123,7 @@ namespace ProjectForm.Presenter
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
                 var stockContent = new StringContent(stockJson, Encoding.UTF8, "application/json");
                 var res = await _httpClient.PostAsync("/Product/AddProduct", content);
-                var stockRes = await _httpClient.PostAsync("/Stock/AddStock", content);
+                var stockRes = await _httpClient.PostAsync("/Stock/AddStock", stockContent);
 
                 if (res.IsSuccessStatusCode && stockRes.IsSuccessStatusCode)
                 {
@@ -138,7 +137,6 @@ namespace ProjectForm.Presenter
                     var errorRes = await res.Content.ReadFromJsonAsync<ApiErrorResponse>();
                     if(errorRes != null)
                     {
-                        Debug.WriteLine(errorRes.Error);
                         _view.ShowMessage(errorRes.Error);
                     }
 
@@ -148,20 +146,17 @@ namespace ProjectForm.Presenter
                     var errorRes = await stockRes.Content.ReadFromJsonAsync<ApiErrorResponse>();
                     if (errorRes != null)
                     {
-                        Debug.WriteLine(errorRes.Error);
                         _view.ShowMessage(errorRes.Error);
                     }
                 }
                 else
                 {
-                    Debug.WriteLine("Something went wrong");
                     _view?.ShowMessage("Something went wrong");
                 }
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(ex.Message);
-                _view?.ShowMessage("error2");
+                _view?.ShowMessage(ex.Message);
             }
         }
         private void OnModuleCloseClicked(object? sender, EventArgs e)
