@@ -19,7 +19,6 @@ namespace Project.Infrastructure.Repositories
         {
             _context = context;
         }
-
         public async Task<IEnumerable<Stock>> GetAllStocksAsync()
         {
             try
@@ -38,13 +37,12 @@ namespace Project.Infrastructure.Repositories
             {
                 throw new InvalidOperationException("An error occurred while fetching stocks.", ex);
             }
-        }
-        public async Task<IEnumerable<Stock>> GetStocksByIdAsync(IEnumerable<Guid> ids)
+        }        
+        public async Task<Stock> GetStockByIdAsync(Guid id)
         {
-            var stocks = await _context.Stocks
-                .Where(s => ids.Contains(s.StockId))
-                .ToListAsync();
-            return stocks;
+            var stock = await _context.Stocks.FindAsync(id) ?? throw new KeyNotFoundException("Stock doesn't exist!");
+            
+            return stock;            
         }
         public async Task AddStockAsync(Stock stock)
         {
@@ -79,13 +77,25 @@ namespace Project.Infrastructure.Repositories
                 throw new InvalidOperationException("The stocks cannot be updated: " + ex.Message);
             }
         }
-        public async Task<List<Stock>> GetStocksByIdsAsync(IEnumerable<Guid> ids)
+        public async Task<IEnumerable<Stock>> GetStocksByIdsAsync(IEnumerable<Guid> ids)
         {
             var stocks = await _context.Stocks
                 .Where(s => ids.Contains(s.StockId))
                 .ToListAsync();
 
             return stocks;
+        }
+        public async Task UpdateStockAsync(Stock stock)
+        {
+            try
+            {
+                _context.Stocks.Update(stock);
+                await _context.SaveChangesAsync();  
+            }
+            catch(DbUpdateException ex)
+            {
+                throw new InvalidOperationException("This stock cannot be updated: " + ex.Message);
+            }
         }
 
 

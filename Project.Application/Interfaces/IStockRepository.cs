@@ -10,9 +10,10 @@ namespace Project.Application.Interfaces
     public interface IStockRepository
     {
         Task<IEnumerable<Stock>> GetAllStocksAsync();
-        Task<IEnumerable<Stock>> GetStocksByIdAsync(IEnumerable<Guid> ids);
+        Task<Stock> GetStockByIdAsync(Guid id);
         Task AddStockAsync(Stock stock);
         Task UpdateStocksAsync(IEnumerable<Stock> stocks);
-        Task<List<Stock>> GetStocksByIdsAsync(IEnumerable<Guid> ids);
+        Task UpdateStockAsync(Stock stock);
+        Task<IEnumerable<Stock>> GetStocksByIdsAsync(IEnumerable<Guid> ids);
     }
 }

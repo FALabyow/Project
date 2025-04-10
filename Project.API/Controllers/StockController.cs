@@ -95,5 +95,29 @@ namespace Project.API.Controllers
             }
         }
 
+        [HttpPut("/Stock/StockAdjustments/UpdateStock/{id}")]
+        public async Task<IActionResult> UpdateStockAsync(Guid id, StockAdjustmentsDto stockAdjustmentsDto)
+        {
+            if(id != stockAdjustmentsDto.StockId)
+            {
+                return BadRequest(new { error = "ID doesn't match" });
+            }
+
+            try
+            {
+                await _stockService.UpdateStockAsync(stockAdjustmentsDto);
+                return NoContent();
+            }
+            catch(KeyNotFoundException ex)
+            {
+                return BadRequest(new { error = ex.Message });
+            }
+            catch(InvalidOperationException ex)
+            {
+                return BadRequest(new { error = ex.Message });
+            }
+        }
+
+
     }
 }

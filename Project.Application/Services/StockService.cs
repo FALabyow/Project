@@ -118,6 +118,25 @@ namespace Project.Application.Services
             
 
         }
+        public async Task UpdateStockAsync(StockAdjustmentsDto stockAdjustmentsDto)
+        {
+            try
+            {
+                var stock = await _stockRepository.GetStockByIdAsync(stockAdjustmentsDto.StockId);
+
+                stock.ProductQuantity = stockAdjustmentsDto.ProductQuantity;
+
+                await _stockRepository.UpdateStockAsync(stock);
+            }
+            catch (KeyNotFoundException)
+            {
+                throw;
+            }
+            catch (InvalidOperationException)
+            {
+                throw;
+            }
+        }
         
     }
 }

@@ -1,10 +1,13 @@
-﻿using ProjectForm.Model.DTOs;
+﻿using ProjectForm.Error;
+using ProjectForm.Model.DTOs;
 using ProjectForm.View.IView;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Http.Json;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace ProjectForm.Presenter
@@ -14,6 +17,7 @@ namespace ProjectForm.Presenter
         private readonly IStockAdjustmentsView _view;
         private readonly HttpClient _httpClient;
         private string? _selectedItem;
+        private Guid _stockId = Guid.Empty;
         public StockAdjustmentsPresenter(IStockAdjustmentsView view)
         {
             _view = view;
@@ -22,7 +26,6 @@ namespace ProjectForm.Presenter
             _view.SelectedClicked += OnSelectedClicked;
             _view.SaveClicked += OnSaveClicked;
             _view.RowNumber += OnRowNumber;
-
         }
         private void OnSelectedItemCombo(object? sender, EventArgs e)
         {
@@ -66,6 +69,7 @@ namespace ProjectForm.Presenter
             string barcode = (string)gridView.Rows[e.RowIndex].Cells["ProductBarcode"].Value;
             string productCode = (string)gridView.Rows[e.RowIndex].Cells["ProductCode1"].Value;
             int productQuantity = (int)gridView.Rows[e.RowIndex].Cells["ProductQuantity1"].Value;
+            _stockId = (Guid)gridView.Rows[e.RowIndex].Cells["StockId"].Value;
 
             _view.ProductCode = productCode;
             _view.Description = productName;
@@ -74,7 +78,75 @@ namespace ProjectForm.Presenter
         }
         private async void OnSaveClicked(object? sender, EventArgs e)
         {
-            MessageBox.Show("Hello"); 
+            var stock = new StockAdjustmentsDto
+            {
+                StockId = _stockId,
+                ProductQuantity = _view.ProductQuantity,
+            };
+
+            if(stock.ProductQuantity < 0)
+            {
+                MessageBox.Show("Invalid Quantity Value!");
+                return;
+            }
+
+            if(stock.StockId == Guid.Empty)
+            {
+                MessageBox.Show("No stock id detected!");
+            }
+
+            try
+            {
+                if (_selectedItem == "Add to Inventory")
+                {
+                    var confirmResult = MessageBox.Show("Do you want to add this to the inventory?", "Confirm Action", MessageBoxButtons.YesNo);
+
+                    if (confirmResult != DialogResult.Yes) return;
+
+                    var json = JsonSerializer.Serialize(stock);
+                    var content = new StringContent(json, Encoding.UTF8, "application/json");
+                    var res = await _httpClient.PutAsync($"/Stock/StockAdjustments/UpdateStock/{stock.StockId}", content);
+
+                    if (res.IsSuccessStatusCode)
+                    {
+                        MessageBox.Show("Successfully Added to Inventory");
+                        await LoadStocksAsync();
+                    }
+                    else if(res.StatusCode == HttpStatusCode.BadRequest)
+                    {
+                        var errorRes = await res.Content.ReadFromJsonAsync<ApiErrorResponse>();
+                        if(errorRes != null)
+                        {
+                            MessageBox.Show(errorRes.Error);
+                            await LoadStocksAsync();
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Failed to add this to the inventory");
+                        await LoadStocksAsync();
+                    }
+                }
+                else if (_selectedItem == "Remove From Inventory")
+                {
+
+                }
+                else
+                {
+                    MessageBox.Show("Please select action!");
+                    return;
+                }
+            }
+            catch(HttpRequestException ex)
+            {
+                MessageBox.Show(ex.Message);    
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            
+            
         }
         private void OnRowNumber(object? sender, DataGridViewRowPostPaintEventArgs e)
         {
