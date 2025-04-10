@@ -97,6 +97,24 @@ namespace Project.Infrastructure.Repositories
                 throw new InvalidOperationException("This stock cannot be updated: " + ex.Message);
             }
         }
+        public async Task DeleteStockAsync(Guid id)
+        {
+            try
+            {
+                var stock = await _context.Stocks.FindAsync(id) ?? throw new KeyNotFoundException("This stock can't be deleted because it doesn't exist.");
+
+                _context.Remove(stock);
+                await _context.SaveChangesAsync();
+            }
+            catch(KeyNotFoundException)
+            {
+                throw;
+            }
+            catch(DbUpdateException ex)
+            {
+                throw new InvalidOperationException("Unable to delete stock item: " + ex.Message);
+            }
+        }
 
 
 

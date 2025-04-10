@@ -118,6 +118,30 @@ namespace Project.API.Controllers
             }
         }
 
+        [HttpDelete("/Stock/StockAdjustments/DeleteStock/{id}")]
+        public async Task<IActionResult> DeleteStockAsync(Guid id)
+        {
+            try
+            {
+                await _stockService.DeleteStockAsync(id);
+                return NoContent();
+            }
+            catch(KeyNotFoundException ex)
+            {
+                return BadRequest(new {error = ex.Message});    
+            }
+            catch(InvalidOperationException ex)
+            {
+                return BadRequest(new { error = ex.Message });
+            }
+            catch(Exception ex)
+            {
+                return StatusCode(500, new
+                {
+                    error = ex.Message,
+                });
+            }
+        }
 
     }
 }

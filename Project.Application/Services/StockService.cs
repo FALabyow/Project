@@ -137,6 +137,20 @@ namespace Project.Application.Services
                 throw;
             }
         }
-        
+        public async Task DeleteStockAsync(Guid id)
+        {
+            try
+            {
+                await _stockRepository.DeleteStockAsync(id);
+            }
+            catch (KeyNotFoundException)
+            {
+                throw;
+            }
+            catch (DbUpdateException)
+            {
+                throw;
+            }
+        }
     }
 }

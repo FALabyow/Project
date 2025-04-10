@@ -84,6 +84,11 @@ namespace ProjectForm.Presenter
                 ProductQuantity = _view.ProductQuantity,
             };
 
+            var stockId = new StockAdjustmentsDto
+            {
+                StockId = _stockId,
+            };
+
             if(stock.ProductQuantity < 0)
             {
                 MessageBox.Show("Invalid Quantity Value!");
@@ -129,7 +134,33 @@ namespace ProjectForm.Presenter
                 }
                 else if (_selectedItem == "Remove From Inventory")
                 {
+                    var confirmResult = MessageBox.Show("Do you want to remove this from the inventory?", "Confirm Action", MessageBoxButtons.YesNo);
 
+                    if (confirmResult != DialogResult.Yes) return;
+
+                    var json = JsonSerializer.Serialize(stockId);
+                    var content = new StringContent(json, Encoding .UTF8, "application/json");
+                    var res = await _httpClient.DeleteAsync($"/Stock/StockAdjustments/DeleteStock/{stockId.StockId}");
+
+                    if (res.IsSuccessStatusCode)
+                    {
+                        MessageBox.Show("Successfully Removed from Inventory");
+                        await LoadStocksAsync();
+                    }
+                    else if (res.StatusCode == HttpStatusCode.BadRequest)
+                    {
+                        var errorRes = await res.Content.ReadFromJsonAsync<ApiErrorResponse>();
+                        if (errorRes != null)
+                        {
+                            MessageBox.Show(errorRes.Error);
+                            await LoadStocksAsync();
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Failed to remove from inventory");
+                        await LoadStocksAsync();
+                    }
                 }
                 else
                 {

@@ -14,6 +14,7 @@ namespace Project.Application.Interfaces
         Task AddStockAsync(Stock stock);
         Task UpdateStocksAsync(IEnumerable<Stock> stocks);
         Task UpdateStockAsync(Stock stock);
+        Task DeleteStockAsync(Guid id);
         Task<IEnumerable<Stock>> GetStocksByIdsAsync(IEnumerable<Guid> ids);
     }
 }
