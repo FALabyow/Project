@@ -21,6 +21,8 @@ namespace ProjectForm.Presenter
             _view.SelectedItemCombo += OnSelectedItemCombo;
             _view.SelectedClicked += OnSelectedClicked;
             _view.SaveClicked += OnSaveClicked;
+            _view.RowNumber += OnRowNumber;
+
         }
         private void OnSelectedItemCombo(object? sender, EventArgs e)
         {
@@ -30,11 +32,11 @@ namespace ProjectForm.Presenter
         {
             try
             {
-                var res = await _httpClient.GetAsync($"/Products/All");
+                var res = await _httpClient.GetAsync("/Stocks/Adjustments/All");
 
                 if (res.IsSuccessStatusCode)
                 {
-                    var stocks = await res.Content.ReadFromJsonAsync<List<ProductDto>>();
+                    var stocks = await res.Content.ReadFromJsonAsync<List<StockAdjustmentsDto>>();
 
                     if(stocks == null)
                     {
@@ -61,7 +63,7 @@ namespace ProjectForm.Presenter
             }
 
             string productName = (string)gridView.Rows[e.RowIndex].Cells["ProductName"].Value;
-            string barcode = (string)gridView.Rows[e.RowIndex].Cells["BarcodeData"].Value;
+            string barcode = (string)gridView.Rows[e.RowIndex].Cells["ProductBarcode"].Value;
             string productCode = (string)gridView.Rows[e.RowIndex].Cells["ProductCode1"].Value;
             int productQuantity = (int)gridView.Rows[e.RowIndex].Cells["ProductQuantity1"].Value;
 
@@ -72,7 +74,18 @@ namespace ProjectForm.Presenter
         }
         private async void OnSaveClicked(object? sender, EventArgs e)
         {
-            
+            MessageBox.Show("Hello"); 
+        }
+        private void OnRowNumber(object? sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            var gridView = sender as DataGridView;
+            if (gridView == null || e.RowIndex < 0) return;
+
+            using (SolidBrush brush = new SolidBrush(gridView.RowHeadersDefaultCellStyle.ForeColor))
+            {
+                string rowNumber = (e.RowIndex + 1).ToString();
+                e.Graphics.DrawString(rowNumber, gridView.Font, brush, e.RowBounds.Left + 10, e.RowBounds.Top + 4);
+            }
         }
     }
 }

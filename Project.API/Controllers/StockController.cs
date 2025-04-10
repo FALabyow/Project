@@ -33,6 +33,29 @@ namespace Project.API.Controllers
             }
         }
 
+        [HttpGet("/Stocks/Adjustments/All")]
+        public async Task<ActionResult<IEnumerable<StockAdjustmentsDto>>> GetAllStocksForAdjustmentsAsync()
+        {
+            try
+            {
+                var stocks = await _stockService.GetAllStocksForAdjustmentsAsync();
+                return Ok(stocks);  
+            }
+            catch(InvalidOperationException ex)
+            {
+                return BadRequest(new { error = ex.Message });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new 
+                { 
+                    error = "An unexpected error occurred.", 
+                    details = ex.Message 
+                });
+            }
+
+        }
+
         [HttpPost("/Stock/AddStock")]
         public async Task<IActionResult> AddStocksAsync([FromBody] StockDto stockDto)
         {

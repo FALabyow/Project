@@ -23,24 +23,47 @@ namespace Project.Application.Services
             try
             {
                 var stocks = await _stockRepository.GetAllStocksAsync();
-                return stocks
-                       .Select(s => new StockDto
-                       {
-                           StockId = s.StockId,
-                           ProductQuantity = s.ProductQuantity,
-                           ProductId = s.ProductId,
-                           ProductName = s.Product?.ProductName,
-                           ProductCode = s.Product?.ProductCode,
-                           ProductCategory = s.Product?.Category?.CategoryName,
-                           ProductStatus = s.ProductStatus
-                       })
-                       .ToList();
+                return stocks.Select(s => new StockDto
+                {
+                    StockId = s.StockId,
+                    ProductQuantity = s.ProductQuantity,
+                    ProductId = s.ProductId,
+                    ProductName = s.Product?.ProductName,
+                    ProductCode = s.Product?.ProductCode,
+                    ProductCategory = s.Product?.Category?.CategoryName,
+
+                }).ToList();
             }
             catch (InvalidOperationException)
             {
                 throw;
             }
-            catch (Exception ex)
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public async Task<List<StockAdjustmentsDto>> GetAllStocksForAdjustmentsAsync()
+        {
+            try
+            {
+                var stocks = await _stockRepository.GetAllStocksAsync();
+                return stocks.Select(s => new StockAdjustmentsDto
+                {
+                    StockId = s.StockId,
+                    ProductQuantity = s.ProductQuantity,
+                    ProductBarcode = s.Product?.BarcodeData,
+                    ProductName = s.Product?.ProductName,
+                    ProductCode = s.Product?.ProductCode,
+                    ProductCategory= s.Product?.Category?.CategoryName,
+                    ProductPrice = s.Product?.ProductPrice ?? 0
+                }).ToList();
+            }
+            catch (InvalidOperationException)
+            {
+                throw;
+            }
+            catch (Exception)
             {
                 throw;
             }

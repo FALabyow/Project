@@ -17,7 +17,8 @@ namespace ProjectForm.View.IView
         
         event EventHandler SelectedItemCombo;
         event EventHandler<DataGridViewCellEventArgs>? SelectedClicked;
+        event EventHandler<DataGridViewRowPostPaintEventArgs>? RowNumber;
         event EventHandler? SaveClicked;
-        public void DisplayStocks(List<ProductDto> stocks);
+        public void DisplayStocks(List<StockAdjustmentsDto> stocks);
     }
 }

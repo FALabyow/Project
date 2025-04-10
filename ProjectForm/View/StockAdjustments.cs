@@ -26,9 +26,16 @@ namespace ProjectForm
             dgvAdjustment.AutoGenerateColumns = false;
             dgvAdjustment.DataSource = _bindingSource;
             dgvAdjustment.CellContentClick += DataGridStockAdjustmentsView_CellContentClick;
+            dgvAdjustment.RowPostPaint += DataGridStockAdjustmentsView_RowPostPaint;
             cmbAction.SelectedIndexChanged += (s, e) => SelectedItemCombo?.Invoke(this, EventArgs.Empty);
             btnAdd.Click += (s, e) => SaveClicked?.Invoke(this, EventArgs.Empty);
         }
+
+        private void DgvAdjustment_RowPostPaint(object? sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
         public string SelectedItem
         {
             get
@@ -71,6 +78,7 @@ namespace ProjectForm
         public event EventHandler? SelectedItemCombo;
         public event EventHandler<DataGridViewCellEventArgs>? SelectedClicked;
         public event EventHandler? SaveClicked;
+        public event EventHandler<DataGridViewRowPostPaintEventArgs>? RowNumber;
         private async void StockAdjustments_Load(object? sender, EventArgs e)
         {
             var presenter = new StockAdjustmentsPresenter(this);
@@ -79,7 +87,7 @@ namespace ProjectForm
                 await presenter.LoadStocksAsync();
             }
         }
-        public void DisplayStocks(List<ProductDto> stocks)
+        public void DisplayStocks(List<StockAdjustmentsDto> stocks)
         {
             _bindingSource.DataSource = stocks;
             foreach (DataGridViewRow row in dgvAdjustment.Rows)
@@ -98,6 +106,14 @@ namespace ProjectForm
                 SelectedClicked?.Invoke(sender, e);
 
             }
+
+        }
+        private void DataGridStockAdjustmentsView_RowPostPaint(object? sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            var gridView = sender as DataGridView;
+            if (gridView == null || e.RowIndex < 0) return;
+
+            RowNumber?.Invoke(sender, e);
 
         }
     }
