@@ -324,10 +324,10 @@
             // 
             tabPage2.Controls.Add(dgvSolditem);
             tabPage2.Controls.Add(panel3);
-            tabPage2.Location = new Point(4, 36);
+            tabPage2.Location = new Point(4, 35);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(974, 516);
+            tabPage2.Size = new Size(974, 517);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Sold Items";
             tabPage2.UseVisualStyleBackColor = true;
@@ -355,7 +355,7 @@
             dgvSolditem.Name = "dgvSolditem";
             dgvSolditem.RowHeadersVisible = false;
             dgvSolditem.RowHeadersWidth = 51;
-            dgvSolditem.Size = new Size(968, 394);
+            dgvSolditem.Size = new Size(968, 395);
             dgvSolditem.TabIndex = 9;
             // 
             // dataGridViewTextBoxColumn1
@@ -478,9 +478,9 @@
             // 
             tabPage3.BackColor = Color.White;
             tabPage3.Controls.Add(dgvCriticalitem);
-            tabPage3.Location = new Point(4, 36);
+            tabPage3.Location = new Point(4, 35);
             tabPage3.Name = "tabPage3";
-            tabPage3.Size = new Size(974, 516);
+            tabPage3.Size = new Size(974, 517);
             tabPage3.TabIndex = 2;
             tabPage3.Text = "Critical Stocks";
             // 
@@ -507,7 +507,7 @@
             dgvCriticalitem.Name = "dgvCriticalitem";
             dgvCriticalitem.RowHeadersVisible = false;
             dgvCriticalitem.RowHeadersWidth = 51;
-            dgvCriticalitem.Size = new Size(974, 516);
+            dgvCriticalitem.Size = new Size(974, 517);
             dgvCriticalitem.TabIndex = 7;
             // 
             // dataGridViewTextBoxColumn6
@@ -701,9 +701,9 @@
             // 
             tabPage5.Controls.Add(dgvStockin);
             tabPage5.Controls.Add(panel5);
-            tabPage5.Location = new Point(4, 36);
+            tabPage5.Location = new Point(4, 35);
             tabPage5.Name = "tabPage5";
-            tabPage5.Size = new Size(974, 516);
+            tabPage5.Size = new Size(974, 517);
             tabPage5.TabIndex = 4;
             tabPage5.Text = "Stock In History";
             tabPage5.UseVisualStyleBackColor = true;
@@ -731,7 +731,7 @@
             dgvStockin.Name = "dgvStockin";
             dgvStockin.RowHeadersVisible = false;
             dgvStockin.RowHeadersWidth = 51;
-            dgvStockin.Size = new Size(974, 400);
+            dgvStockin.Size = new Size(974, 401);
             dgvStockin.TabIndex = 9;
             // 
             // dataGridViewTextBoxColumn19

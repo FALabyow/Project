@@ -40,7 +40,9 @@ StockAdjustments.cs - this is for corrected stock quantity
 
 --> The inventory contain the in-Stock products
 
-
+DailySales.cs
+1. Each sold items are recorded and displayed here.
+2. The total items sold (for filtered dates) are calculated and displayed here.
 
 
 

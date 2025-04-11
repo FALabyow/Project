@@ -16,53 +16,58 @@ namespace Project.Application.Services
         {
             _salesDetailRepository = salesDetailRepository;
         }
-        public async Task<List<SalesDetailDto>> GetAllSalesDetailsAsync()
+        public async Task<List<GetAllSalesByDateDto>> GetAllSalesByDateAsync(DateTime startDate, DateTime endDate)
         {
             try
             {
-                var salesDetails = await _salesDetailRepository.GetAllSalesDetailAsync();
-                if (!salesDetails.Any())
-                    throw new InvalidOperationException("No sales details found in the database!");
+                var sales = await _salesDetailRepository.GetAllSalesByDateAsync(startDate, endDate);
 
-                return salesDetails.Select(sd => new SalesDetailDto
+                if(sales == null || !sales.Any())
                 {
-                    InvoiceNumber = sd.SalesHistory.InvoiceNumber,
-                    ProductCode = sd.ProductCode,
-                    ProductName = sd.ProductName,
-                    QuantitySold = sd.QuantitySold,
-                    SalesDetailId = sd.SalesDetailId,
-                    UnitPrice = sd.UnitPrice,
-                    TotalAmount = sd.TotalAmount,
-                    SaleDate = sd.SalesHistory.SaleDate,
+                    throw new InvalidOperationException("No sales found in the database");
+                }
 
+                return sales.Select(x => new GetAllSalesByDateDto
+                {
+                    SalesDetailId = x.SalesDetailId,
+                    ProductCode = x.ProductCode,
+                    ProductName = x.ProductName,
+                    ProductPrice = x.UnitPrice,
+                    ProductQuantity = x.QuantitySold,
+                    TotalAmount = x.TotalAmount,
                 }).ToList();
             }
             catch (InvalidOperationException)
             {
                 throw;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw new InvalidOperationException("Unexpected error in service layer", ex);
+                throw;
             }
         }
-        public async Task AddSalesDetailsAsync(IEnumerable<SalesDetailInfoDto> salesDetailInfoDtos)
-        {
-            var salesDetails = salesDetailInfoDtos.Select(sd => new SalesDetail
-            {
-                SalesHistoryId = sd.SalesHistoryId,
-                ProductCode = sd.ProductCode,
-                ProductName = sd.ProductName,
-                QuantitySold = sd.QuantitySold,
-                ProductId = sd.ProductId,
-                UnitPrice = sd.UnitPrice,
-            }).ToList();
 
+        public async Task AddSalesAsync(List<AddSalesDto> sales)
+        {
             try
             {
-                await _salesDetailRepository.AddSalesDetailAsync(salesDetails);
+                var salesData = sales.Select(s => new SalesDetail
+                {
+                    CreatedDate = DateTime.Now,
+                    ProductCode = s.ProductCode,
+                    ProductName = s.ProductName,
+                    QuantitySold = s.QuantitySold,
+                    UnitPrice = s.UnitPrice,
+                    SalesDetailId = s.SalesDetailId,
+                }).ToList();
+
+                await _salesDetailRepository.AddSalesAsync(salesData);
             }
             catch (InvalidOperationException)
+            {
+                throw;
+            }
+            catch (ArgumentException)
             {
                 throw;
             }

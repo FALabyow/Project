@@ -18,48 +18,51 @@ namespace Project.Infrastructure.Repositories
         {
             _context = context;
         }
-
-        public async Task<IEnumerable<SalesDetail>> GetAllSalesDetailAsync()
+        public async Task<IEnumerable<SalesDetail>> GetAllSalesByDateAsync(DateTime startDate, DateTime endDate)
         {
             try
             {
-                return await _context.SalesDetails
-                    .Include(sd => sd.SalesHistory)
-                    .ToListAsync();
+                var stocks = await _context.SalesDetails
+                .Where(x => x.CreatedDate >= startDate && x.CreatedDate <= endDate)
+                .ToListAsync();
 
+                return stocks;
             }
-            catch (InvalidOperationException ex) when (ex.InnerException is SqlException sqlEx && sqlEx.Number == 4060)
+            catch (InvalidOperationException ex) when (ex.InnerException is SqlException sqlEx && sqlEx.Number == 40060)
             {
-                throw new InvalidOperationException("Database does not exist or access denied!", ex);
+                throw new InvalidOperationException("Access Denied! " + ex.Message);
             }
             catch (Exception ex)
             {
-                throw new InvalidOperationException("An error occurred while fetching sales history." + ex.Message);
+                throw new InvalidOperationException("An error occured while fetching sales. " + ex.Message);
             }
+            
         }
-        public async Task AddSalesDetailAsync(IEnumerable<SalesDetail> salesDetails)
+        public async Task AddSalesAsync(IEnumerable<SalesDetail> sales)
         {
             try
             {
-                await _context.SalesDetails.AddRangeAsync(salesDetails);
+                if(!sales.Any())
+                {
+                    throw new ArgumentException("Data is empty");
+                }
+                await _context.SalesDetails.AddRangeAsync(sales);
                 await _context.SaveChangesAsync();
             }
-            catch (DbUpdateException ex)
+            catch (ArgumentException)
             {
-                if (ex.InnerException is SqlException sqlEx && (sqlEx.Number == 2601 || sqlEx.Number == 2627))
-                {
-                    throw new InvalidOperationException("Duplicate record error: " + ex.Message);
-                }
+                throw;
             }
-            catch (InvalidOperationException ex) when (ex.InnerException is SqlException sqlEx && sqlEx.Number == 4060)
+            catch(DbUpdateException ex)
             {
-                throw new InvalidOperationException("Database does not exist");
+                throw new InvalidOperationException("A problem occured while saving data: " + ex.Message);
             }
-            catch (Exception)
+            catch(Exception ex)
             {
-                throw new InvalidOperationException("An error occurred while adding sales detail.");
+                throw new InvalidOperationException(ex.Message);
             }
         }
-    
+
+
     }
 }
