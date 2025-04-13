@@ -19,7 +19,9 @@ namespace ProjectForm.Presenter
             _view = view;
             //_view.KeyDownPressed += OnKeyDownPressed;
             _view.CloseClicked += OnCloseClicked;
-            LoadSalesAsync();
+            _view.LoadSalesClicked += OnLoadSalesClicked;
+            _view.RowNumber += OnRowNumber;
+            //LoadSalesAsync();
         }
         private void OnCloseClicked(object? sender, EventArgs e)
         {
@@ -28,18 +30,47 @@ namespace ProjectForm.Presenter
                 dailySale.Dispose();
             }
         }
-
-        private void LoadSalesAsync()
+        private async Task LoadSalesAsync(string startDate, string endDate)
         {
-            //try
-            //{
-            //    var res = await _httpClient.GetFromJsonAsync<GetAllSalesByDateDto>($"/Sales/All/FilteredBy?startDate={_view.StartDate}endDate={_view.EndDate}");
+            try
+            {
+                var res = await _httpClient.GetAsync($"/Sales/All/FilteredBy?startDate={startDate}&endDate={endDate}");
 
-            //}
-            //catch(Exception ex) 
-            MessageBox.Show($"Start Date: {_view.StartDate}---End Date: {_view.EndDate}");  
+                res.EnsureSuccessStatusCode();
+
+                var sales = await res.Content.ReadFromJsonAsync<List<GetSalesDetailDto>>();
+
+                if (sales == null)
+                {
+                    return;
+                }
+
+                _view.DisplayDailySales(sales);
+
+            }
+            catch(HttpRequestException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
+        private async void OnLoadSalesClicked(object? sender, EventArgs e)
+        {
+            string dateFrom = _view.StartDate.ToString("MM-dd-yyyy");
+            string dateTo = _view.EndDate.ToString("MM-dd-yyyy");
+            await LoadSalesAsync(dateFrom, dateTo);
+        }
+        private void OnRowNumber(object? sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            var gridView = sender as DataGridView;
+            if (gridView == null || e.RowIndex < 0) return;
+
+            using(SolidBrush brush = new SolidBrush(gridView.RowHeadersDefaultCellStyle.ForeColor))
+            {
+                string rowNumber = (e.RowIndex + 1).ToString();
+                e.Graphics.DrawString(rowNumber, gridView.Font, brush, e.RowBounds.Left + 10, e.RowBounds.Top + 4);
+            }
+        }
 
         //private void OnKeyDownPressed(object? sender, KeyEventArgs e)
         //{

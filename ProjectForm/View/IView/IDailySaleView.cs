@@ -9,12 +9,13 @@ namespace ProjectForm.View.IView
 {
     public interface IDailySaleView
     {
-        void DisplayDailySales(List<GetAllSalesByDateDto> sales);
+        void DisplayDailySales(List<GetSalesDetailDto> sales);
         DateOnly StartDate { get; }
         DateOnly EndDate { get; }
 
         event EventHandler? LoadSalesClicked;
         event EventHandler? CloseClicked;
+        event EventHandler<DataGridViewRowPostPaintEventArgs>? RowNumber;
         //event EventHandler<KeyEventArgs>? KeyDownPressed;
     }
 }

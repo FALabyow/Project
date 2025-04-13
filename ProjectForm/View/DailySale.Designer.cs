@@ -42,15 +42,14 @@
             label3 = new Label();
             lblTotal = new Label();
             panel2 = new Panel();
-            btnPrint = new Button();
+            loadSalesBtn = new Button();
             Column1 = new DataGridViewTextBoxColumn();
-            Column9 = new DataGridViewTextBoxColumn();
-            Column2 = new DataGridViewTextBoxColumn();
-            Column4 = new DataGridViewTextBoxColumn();
-            Column6 = new DataGridViewTextBoxColumn();
-            Column3 = new DataGridViewTextBoxColumn();
-            Column7 = new DataGridViewTextBoxColumn();
-            Cancel = new DataGridViewImageColumn();
+            SalesHistoryId = new DataGridViewTextBoxColumn();
+            ProductCode = new DataGridViewTextBoxColumn();
+            ProductName = new DataGridViewTextBoxColumn();
+            ProductPrice = new DataGridViewTextBoxColumn();
+            ProductQuantity = new DataGridViewTextBoxColumn();
+            TotalAmount = new DataGridViewTextBoxColumn();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)picboxClose).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvCashier).BeginInit();
@@ -79,7 +78,6 @@
             picboxClose.SizeMode = PictureBoxSizeMode.Zoom;
             picboxClose.TabIndex = 13;
             picboxClose.TabStop = false;
-            picboxClose.Click += picboxClose_Click;
             // 
             // lblTitle
             // 
@@ -107,7 +105,7 @@
             dgvCashier.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dgvCashier.ColumnHeadersHeight = 40;
             dgvCashier.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dgvCashier.Columns.AddRange(new DataGridViewColumn[] { Column1, Column9, Column2, Column4, Column6, Column3, Column7, Cancel });
+            dgvCashier.Columns.AddRange(new DataGridViewColumn[] { Column1, SalesHistoryId, ProductCode, ProductName, ProductPrice, ProductQuantity, TotalAmount });
             dgvCashier.Dock = DockStyle.Fill;
             dgvCashier.EnableHeadersVisualStyles = false;
             dgvCashier.GridColor = Color.White;
@@ -176,25 +174,21 @@
             // panel2
             // 
             panel2.BackColor = Color.FromArgb(141, 110, 98);
-            panel2.Controls.Add(btnPrint);
+            panel2.Controls.Add(loadSalesBtn);
             panel2.Dock = DockStyle.Bottom;
             panel2.Location = new Point(0, 813);
             panel2.Name = "panel2";
             panel2.Size = new Size(1084, 105);
             panel2.TabIndex = 14;
             // 
-            // btnPrint
+            // loadSalesBtn
             // 
-            btnPrint.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            btnPrint.FlatAppearance.BorderSize = 0;
-            btnPrint.FlatStyle = FlatStyle.Popup;
-            btnPrint.Font = new Font("Century Gothic", 22.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnPrint.Image = Properties.Resources.printer1;
-            btnPrint.Location = new Point(571, 33);
-            btnPrint.Name = "btnPrint";
-            btnPrint.Size = new Size(61, 45);
-            btnPrint.TabIndex = 2;
-            btnPrint.UseVisualStyleBackColor = true;
+            loadSalesBtn.Location = new Point(578, 39);
+            loadSalesBtn.Name = "loadSalesBtn";
+            loadSalesBtn.Size = new Size(153, 34);
+            loadSalesBtn.TabIndex = 3;
+            loadSalesBtn.Text = "Load Sales";
+            loadSalesBtn.UseVisualStyleBackColor = true;
             // 
             // Column1
             // 
@@ -204,67 +198,64 @@
             Column1.Name = "Column1";
             Column1.Width = 67;
             // 
-            // Column9
+            // SalesHistoryId
             // 
-            Column9.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            Column9.HeaderText = "Invoice#";
-            Column9.MinimumWidth = 6;
-            Column9.Name = "Column9";
-            Column9.Width = 116;
+            SalesHistoryId.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            SalesHistoryId.DataPropertyName = "SalesHistoryId";
+            SalesHistoryId.HeaderText = "Invoice#";
+            SalesHistoryId.MinimumWidth = 6;
+            SalesHistoryId.Name = "SalesHistoryId";
+            SalesHistoryId.Width = 116;
             // 
-            // Column2
+            // ProductCode
             // 
-            Column2.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            Column2.HeaderText = "Pcode";
-            Column2.MinimumWidth = 6;
-            Column2.Name = "Column2";
-            Column2.Width = 96;
+            ProductCode.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            ProductCode.DataPropertyName = "ProductCode";
+            ProductCode.HeaderText = "Pcode";
+            ProductCode.MinimumWidth = 6;
+            ProductCode.Name = "ProductCode";
+            ProductCode.Width = 96;
             // 
-            // Column4
+            // ProductName
             // 
-            Column4.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            Column4.HeaderText = "Description";
-            Column4.MinimumWidth = 6;
-            Column4.Name = "Column4";
+            ProductName.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            ProductName.DataPropertyName = "ProductName";
+            ProductName.HeaderText = "Description";
+            ProductName.MinimumWidth = 6;
+            ProductName.Name = "ProductName";
             // 
-            // Column6
+            // ProductPrice
             // 
-            Column6.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            ProductPrice.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            ProductPrice.DataPropertyName = "ProductPrice";
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleRight;
-            Column6.DefaultCellStyle = dataGridViewCellStyle2;
-            Column6.HeaderText = "Price";
-            Column6.MinimumWidth = 6;
-            Column6.Name = "Column6";
-            Column6.Width = 80;
+            ProductPrice.DefaultCellStyle = dataGridViewCellStyle2;
+            ProductPrice.HeaderText = "Price";
+            ProductPrice.MinimumWidth = 6;
+            ProductPrice.Name = "ProductPrice";
+            ProductPrice.Width = 80;
             // 
-            // Column3
+            // ProductQuantity
             // 
-            Column3.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            ProductQuantity.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            ProductQuantity.DataPropertyName = "ProductQuantity";
             dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            Column3.DefaultCellStyle = dataGridViewCellStyle3;
-            Column3.HeaderText = "Qty";
-            Column3.MinimumWidth = 6;
-            Column3.Name = "Column3";
-            Column3.Width = 71;
+            ProductQuantity.DefaultCellStyle = dataGridViewCellStyle3;
+            ProductQuantity.HeaderText = "Qty";
+            ProductQuantity.MinimumWidth = 6;
+            ProductQuantity.Name = "ProductQuantity";
+            ProductQuantity.Width = 71;
             // 
-            // Column7
+            // TotalAmount
             // 
-            Column7.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            TotalAmount.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            TotalAmount.DataPropertyName = "TotalAmount";
             dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleRight;
-            Column7.DefaultCellStyle = dataGridViewCellStyle4;
-            Column7.HeaderText = "Total";
-            Column7.MinimumWidth = 6;
-            Column7.Name = "Column7";
-            Column7.Width = 79;
-            // 
-            // Cancel
-            // 
-            Cancel.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            Cancel.HeaderText = "";
-            Cancel.Image = Properties.Resources.multiply;
-            Cancel.MinimumWidth = 6;
-            Cancel.Name = "Cancel";
-            Cancel.Width = 6;
+            TotalAmount.DefaultCellStyle = dataGridViewCellStyle4;
+            TotalAmount.HeaderText = "Total";
+            TotalAmount.MinimumWidth = 6;
+            TotalAmount.Name = "TotalAmount";
+            TotalAmount.Width = 79;
             // 
             // DailySale
             // 
@@ -286,7 +277,6 @@
             Name = "DailySale";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Sale History";
-            KeyDown += DailySale_KeyDown;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)picboxClose).EndInit();
@@ -308,14 +298,13 @@
         private PictureBox picboxClose;
         public Label lblTitle;
         private Panel panel2;
-        private Button btnPrint;
+        private Button loadSalesBtn;
         private DataGridViewTextBoxColumn Column1;
-        private DataGridViewTextBoxColumn Column9;
-        private DataGridViewTextBoxColumn Column2;
-        private DataGridViewTextBoxColumn Column4;
-        private DataGridViewTextBoxColumn Column6;
-        private DataGridViewTextBoxColumn Column3;
-        private DataGridViewTextBoxColumn Column7;
-        private DataGridViewImageColumn Cancel;
+        private DataGridViewTextBoxColumn SalesHistoryId;
+        private DataGridViewTextBoxColumn ProductCode;
+        private DataGridViewTextBoxColumn ProductName;
+        private DataGridViewTextBoxColumn ProductPrice;
+        private DataGridViewTextBoxColumn ProductQuantity;
+        private DataGridViewTextBoxColumn TotalAmount;
     }
 }
