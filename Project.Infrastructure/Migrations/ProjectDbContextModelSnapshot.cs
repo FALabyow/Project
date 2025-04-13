@@ -91,9 +91,6 @@ namespace Project.Infrastructure.Migrations
                     b.Property<string>("ProductCode")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("ProductId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("ProductName")
                         .HasColumnType("nvarchar(max)");
 
@@ -118,9 +115,6 @@ namespace Project.Infrastructure.Migrations
                     b.Property<Guid>("SalesHistoryId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("InvoiceNumber")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("SaleDate")
                         .HasColumnType("datetime2");

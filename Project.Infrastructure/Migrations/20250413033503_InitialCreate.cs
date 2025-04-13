@@ -28,7 +28,6 @@ namespace Project.Infrastructure.Migrations
                 columns: table => new
                 {
                     SalesHistoryId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    InvoiceNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     SaleDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     TotalAmount = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
                 },
@@ -84,9 +83,8 @@ namespace Project.Infrastructure.Migrations
                 {
                     SalesDetailId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     SalesHistoryId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ProductId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ProductCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ProductName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ProductCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     QuantitySold = table.Column<int>(type: "int", nullable: false),
                     UnitPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
                 },

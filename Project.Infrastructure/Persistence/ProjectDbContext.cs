@@ -77,6 +77,12 @@ namespace Project.Infrastructure.Persistence
                 .HasForeignKey(sd => sd.SalesHistoryId)
                 .OnDelete(DeleteBehavior.Cascade);
 
+            modelBuilder.Entity<SalesHistory>()
+                .Property(e => e.SaleDate)
+                .HasConversion(
+                v => v.ToDateTime(TimeOnly.MinValue),
+                v => DateOnly.FromDateTime(v));
+
             base.OnModelCreating(modelBuilder);
         }
     }

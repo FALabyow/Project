@@ -13,10 +13,9 @@ namespace Project.Domain.Entities
     public class SalesHistory
     {
         [Key]
-        public Guid SalesHistoryId { get; set; }
-        public string? InvoiceNumber { get; set; }
-        public DateTime SaleDate { get; set; } = DateTime.Now;
-        public decimal TotalAmount { get; set; } 
+        public Guid SalesHistoryId { get; set; } //this is for Invoice number
+        public DateOnly SaleDate { get; set; } = DateOnly.FromDateTime(DateTime.Now);
+        public decimal TotalAmount { get; set; } // the total amount recorded for each transaction
         public ICollection<SalesDetail>? SalesDetails { get; set; }
     }
 }

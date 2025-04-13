@@ -14,15 +14,13 @@ namespace Project.Domain.Entities
     public class SalesDetail
     {
         [Key]
-        public Guid SalesDetailId { get; set; } //this is for invoice number
-        public Guid SalesHistoryId { get; set; } 
-        public Guid ProductId { get; set; }
-        public string? ProductCode { get; set; } 
+        public Guid SalesDetailId { get; set; } = Guid.NewGuid();
+        public Guid SalesHistoryId { get; set; } //this is for invoice number
         public string? ProductName { get; set; } 
+        public string? ProductCode { get; set; }
         public int QuantitySold { get; set; }
         public decimal UnitPrice { get; set; }
         public decimal TotalAmount => QuantitySold * UnitPrice;
-        public DateTime? CreatedDate { get; set; }  
         public SalesHistory? SalesHistory { get; set; }
     }
 }

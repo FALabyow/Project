@@ -13,6 +13,5 @@ namespace Project.Application.DTOs
         public string? ProductName { get; set; }
         public int QuantitySold { get; set; }
         public decimal UnitPrice { get; set; }
-        public DateTime? CreatedDate { get; set; }
     }
 }

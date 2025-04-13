@@ -16,49 +16,48 @@ namespace Project.Application.Services
         {
             _salesDetailRepository = salesDetailRepository;
         }
-        public async Task<List<GetAllSalesByDateDto>> GetAllSalesByDateAsync(DateTime startDate, DateTime endDate)
-        {
-            try
+            public async Task<List<GetSalesDetailDto>> GetAllSalesByDateAsync(DateOnly startDate, DateOnly endDate)
             {
-                var sales = await _salesDetailRepository.GetAllSalesByDateAsync(startDate, endDate);
-
-                if(sales == null || !sales.Any())
+                try
                 {
-                    throw new InvalidOperationException("No sales found in the database");
+                    var sales = await _salesDetailRepository.GetAllSalesByDateAsync(startDate, endDate);
+
+                    if(sales == null || !sales.Any())
+                    {
+                        throw new InvalidOperationException("No sales found in the database");
+                    }
+
+                    return sales.Select(x => new GetSalesDetailDto
+                    {
+                        SalesHistoryId = x.SalesHistoryId,
+                        ProductCode = x.ProductCode,
+                        ProductName = x.ProductName,
+                        ProductPrice = x.UnitPrice,
+                        ProductQuantity = x.QuantitySold,
+                        TotalAmount = x.TotalAmount,
+                    }).ToList();
                 }
-
-                return sales.Select(x => new GetAllSalesByDateDto
+                catch (InvalidOperationException)
                 {
-                    SalesDetailId = x.SalesDetailId,
-                    ProductCode = x.ProductCode,
-                    ProductName = x.ProductName,
-                    ProductPrice = x.UnitPrice,
-                    ProductQuantity = x.QuantitySold,
-                    TotalAmount = x.TotalAmount,
-                }).ToList();
-            }
-            catch (InvalidOperationException)
-            {
-                throw;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+                    throw;
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
         }
 
-        public async Task AddSalesAsync(List<AddSalesDto> sales)
+        public async Task AddSalesAsync(List<AddSalesDetailDto> sales)
         {
             try
             {
                 var salesData = sales.Select(s => new SalesDetail
                 {
-                    CreatedDate = DateTime.Now,
+                    SalesHistoryId= s.SalesHistoryId,
                     ProductCode = s.ProductCode,
                     ProductName = s.ProductName,
                     QuantitySold = s.QuantitySold,
                     UnitPrice = s.UnitPrice,
-                    SalesDetailId = s.SalesDetailId,
                 }).ToList();
 
                 await _salesDetailRepository.AddSalesAsync(salesData);

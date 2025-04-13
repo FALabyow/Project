@@ -9,7 +9,7 @@ namespace Project.Application.Interfaces
 {
     public interface ISalesDetailRepository
     {
-        Task<IEnumerable<SalesDetail>> GetAllSalesByDateAsync(DateTime startDate, DateTime endDate);
+        Task<IEnumerable<SalesDetail>> GetAllSalesByDateAsync(DateOnly startDate, DateOnly endDate);
         Task AddSalesAsync(IEnumerable<SalesDetail> sales);
     }
 }

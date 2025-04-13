@@ -12,7 +12,7 @@ using Project.Infrastructure.Persistence;
 namespace Project.Infrastructure.Migrations
 {
     [DbContext(typeof(ProjectDbContext))]
-    [Migration("20250330123902_InitialCreate")]
+    [Migration("20250413033503_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -94,9 +94,6 @@ namespace Project.Infrastructure.Migrations
                     b.Property<string>("ProductCode")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("ProductId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("ProductName")
                         .HasColumnType("nvarchar(max)");
 
@@ -121,9 +118,6 @@ namespace Project.Infrastructure.Migrations
                     b.Property<Guid>("SalesHistoryId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("InvoiceNumber")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("SaleDate")
                         .HasColumnType("datetime2");

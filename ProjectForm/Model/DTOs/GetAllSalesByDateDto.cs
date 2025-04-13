@@ -8,7 +8,7 @@ namespace Project.Application.DTOs
 {
     public class GetAllSalesByDateDto
     {
-        public Guid SalesDetailId { get; set; } //this if for Invoice#
+        public Guid SaledHistoryId { get; set; } //this if for Invoice#
         public string? ProductCode { get; set; }
         public string? ProductName { get; set; }
         public decimal ProductPrice { get; set; }

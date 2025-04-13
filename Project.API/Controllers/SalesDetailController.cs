@@ -16,7 +16,7 @@ namespace Project.API.Controllers
         }
         
         [HttpGet("/Sales/All/FilteredBy")]
-        public async Task<ActionResult<IEnumerable<GetAllSalesByDateDto>>> GetAllSalesByDateAsync(DateTime startDate, DateTime  endDate)
+        public async Task<ActionResult<IEnumerable<GetSalesDetailDto>>> GetAllSalesByDateAsync(DateOnly startDate, DateOnly  endDate)
         {
             try
             {
@@ -34,7 +34,7 @@ namespace Project.API.Controllers
         }
 
         [HttpPost("/Sales/AddSales")]
-        public async Task<IActionResult> AddSalesAsync([FromBody] List<AddSalesDto> sales)
+        public async Task<IActionResult> AddSalesAsync([FromBody] List<AddSalesDetailDto> sales)
         {
             try
             {

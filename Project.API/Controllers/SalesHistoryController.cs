@@ -16,30 +16,30 @@ namespace Project.API.Controllers
         }
 
         [HttpGet("/SalesHistory/All")]
-        public async Task<ActionResult<IEnumerable<SalesHistoryDto>>> GetAllSalesHistoryAsync()
-        {
-            try
-            {
-                var salesHistory = await _salesHistoryService.GetAllSalesHistoryAsync();
-                return Ok(salesHistory);
-            }
-            catch (InvalidOperationException ex)
-            {
-                return BadRequest(new { error = ex.Message });
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, new { error = "An unexpected error occurred.", details = ex.Message });
-            }
-        }
+        //public async Task<ActionResult<IEnumerable<GetSaleDto>>> GetAllSalesHistoryAsync()
+        //{
+        //    try
+        //    {
+        //        var salesHistory = await _salesHistoryService.GetAllSalesHistoryAsync();
+        //        return Ok(salesHistory);
+        //    }
+        //    catch (InvalidOperationException ex)
+        //    {
+        //        return BadRequest(new { error = ex.Message });
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return StatusCode(500, new { error = "An unexpected error occurred.", details = ex.Message });
+        //    }
+        //}
 
         [HttpPost("/SalesHistory/AddSalesHistory")]
-        public async Task<IActionResult> AddSalesHistoryAsync([FromBody] SalesHistoryInfoDto salesHistoryInfoDto)
+        public async Task<IActionResult> AddSalesHistoryAsync([FromBody] AddSalesHistoryDto salesHistory)
         {
             try
             {
-                await _salesHistoryService.AddSalesHistoryAsync(salesHistoryInfoDto);
-                return Ok(salesHistoryInfoDto.SalesHistoryId);
+                await _salesHistoryService.AddSalesHistoryAsync(salesHistory);
+                return Ok(salesHistory.SalesHistoryId);
                 
 
             }

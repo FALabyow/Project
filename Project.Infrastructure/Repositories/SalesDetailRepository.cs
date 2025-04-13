@@ -18,12 +18,12 @@ namespace Project.Infrastructure.Repositories
         {
             _context = context;
         }
-        public async Task<IEnumerable<SalesDetail>> GetAllSalesByDateAsync(DateTime startDate, DateTime endDate)
+        public async Task<IEnumerable<SalesDetail>> GetAllSalesByDateAsync(DateOnly startDate, DateOnly endDate)
         {
             try
             {
                 var stocks = await _context.SalesDetails
-                .Where(x => x.CreatedDate >= startDate && x.CreatedDate <= endDate)
+                .Where(x => x.SalesHistory.SaleDate >= startDate && x.SalesHistory.SaleDate <= endDate)
                 .ToListAsync();
 
                 return stocks;
@@ -62,7 +62,5 @@ namespace Project.Infrastructure.Repositories
                 throw new InvalidOperationException(ex.Message);
             }
         }
-
-
     }
 }
