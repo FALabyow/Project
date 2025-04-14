@@ -68,7 +68,7 @@ namespace Project.Application.Services
                            TotalAmount = sd.Sum(sd => sd.TotalAmount),
                        })
                        .OrderByDescending(x => x.ProductQuantity)
-                       .Take(1)
+                       .Take(10)
                        .ToList();
 
             }
@@ -102,7 +102,7 @@ namespace Project.Application.Services
                            TotalAmount = sd.Sum(sd => sd.TotalAmount),
                        })
                        .OrderByDescending(x => x.TotalAmount)
-                       .Take(1)
+                       .Take(10)
                        .ToList();
 
             }
@@ -115,7 +115,6 @@ namespace Project.Application.Services
                 throw;
             }
         }
-
         public async Task AddSalesAsync(List<AddSalesDetailDto> sales)
         {
             try

@@ -3,6 +3,7 @@ using ProjectForm.View.IView;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http.Json;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
@@ -13,8 +14,10 @@ namespace ProjectForm.Presenter
     {
         private readonly IPOSrecordView _view;
         private readonly POSrecord _pOSrecord;
+        private readonly HttpClient _httpClient;
         public POSrecordPresenter(IPOSrecordView view, POSrecord pOSrecord)
         {
+            _httpClient = new HttpClient { BaseAddress = new Uri("https://localhost:7014/api") };
             _view = view;
             _pOSrecord = pOSrecord;
         }
@@ -41,6 +44,8 @@ namespace ProjectForm.Presenter
             if (name == "btnLoad")
             {
                 //this is for top selling items
+                var data = await LoadTopSellingAsync(dateTo, dateFrom, newSelectedItem);
+                _view.DisplayTopSellingItems(data); 
                  _pOSrecord.selectedComboBox= string.Empty;
 
             }
@@ -56,9 +61,29 @@ namespace ProjectForm.Presenter
             }
         }
 
-        //public async Task<List<POSrecordDto1>> LoadTopSellingAsync(string startDate, string endDate, string selectedItem)
-        //{
-            
-        //}
+        public async Task<List<POSrecordDto1>> LoadTopSellingAsync(string startDate, string endDate, string selectedItem)
+        {
+            try
+            {
+                var res = await _httpClient.GetAsync($"/Sales/TopSelling/FilteredBY?startDate={startDate}&endDate={endDate}&action={selectedItem}");
+
+                res.EnsureSuccessStatusCode();
+
+                var sales = await res.Content.ReadFromJsonAsync<List<POSrecordDto1>>();
+
+                if (sales == null)
+                {
+                    return new List<POSrecordDto1>();
+                }
+
+                return sales;
+            }
+            catch (HttpRequestException ex)
+            {
+                MessageBox.Show(ex.Message);
+                return new List<POSrecordDto1>();
+                
+            }
+        }
     }
 }
