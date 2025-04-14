@@ -21,7 +21,6 @@ namespace ProjectForm.Presenter
             _view = view;
             _pOSrecord = pOSrecord;
         }
-
         public async Task LoadDataAsync(string name, DateOnly startDate, DateOnly endDate, string selecteditem)
         {
             
@@ -30,8 +29,6 @@ namespace ProjectForm.Presenter
                 MessageBox.Show("Invalid Date");
                 return;
             }
-
-            
 
             string dateTo = startDate.ToString("MM-dd-yyyy");
             string dateFrom = endDate.ToString("MM-dd-yyyy");
@@ -68,7 +65,6 @@ namespace ProjectForm.Presenter
                 _pOSrecord.selectedComboBox = string.Empty;
             }
         }
-
         public async Task<List<POSrecordDto1>> LoadTopSellingAsync(string startDate, string endDate, string selectedItem)
         {
             try
@@ -93,7 +89,6 @@ namespace ProjectForm.Presenter
                 
             }
         }
-
         public async Task<List<POSrecordDto1>> LoadSoldItemsAsync(string startDate, string endDate)
         {
             try
@@ -116,6 +111,30 @@ namespace ProjectForm.Presenter
             {
                 MessageBox.Show(ex.Message);
                 return new List<POSrecordDto1>();
+            }
+        }
+        public async Task<List<POSrecordDto2>> LoadCriticalItemAsync()
+        {
+            try
+            {
+                var res = await _httpClient.GetAsync($"/Products/Critical/all");
+
+                res.EnsureSuccessStatusCode();
+
+                var criticalProducts = await res.Content.ReadFromJsonAsync<List<POSrecordDto2>>();
+
+                if (criticalProducts == null)
+                {
+                    return new List<POSrecordDto2>();
+                }
+
+                return criticalProducts;
+
+            }
+            catch (HttpRequestException ex)
+            {
+                MessageBox.Show(ex.Message);
+                return new List<POSrecordDto2>();
             }
         }
     }

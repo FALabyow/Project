@@ -19,10 +19,12 @@ namespace ProjectForm
         private DateOnly dateFrom;
         private DateOnly dateTo;
         public string selectedComboBox = string.Empty;
+        private List<POSrecordDto2> criticalItems = new List<POSrecordDto2>();
         public POSrecord()
         {
             InitializeComponent();
             _presenter = new POSrecordPresenter(this, this);
+            
             cbTopsell.SelectedIndexChanged += ComboBox_SelectedIndexChanged;
             comboBox1.SelectedIndexChanged += ComboBox_SelectedIndexChanged;
             dtFromtopsell.ValueChanged += DatePickerFrom_ValueChanged;
@@ -43,6 +45,10 @@ namespace ProjectForm
         public void DisplaySoldItems(List<POSrecordDto1> sold)
         {
             dgvSolditem.DataSource = sold;
+        }
+        public void DisplayCriticalItems(List<POSrecordDto2> criticalItems)
+        {
+            dgvCriticalitem.DataSource = criticalItems;
         }
         public string SelectedItem(ComboBox comboBox)
         {
@@ -91,7 +97,7 @@ namespace ProjectForm
                 await _presenter.LoadDataAsync(buttonName, dateFrom, dateTo, selectedComboBox);
             }
         }
-        private void POSrecord_Load(object sender, EventArgs e)
+        private async void POSrecord_Load(object sender, EventArgs e)
         {
             dtFromtopsell.Format = DateTimePickerFormat.Custom;
             dtFromtopsell.CustomFormat = " ";
@@ -105,6 +111,12 @@ namespace ProjectForm
             dtFromstockin.CustomFormat= " ";
             dtTostockin.Format= DateTimePickerFormat.Custom;
             dtTostockin.CustomFormat = " ";
+
+            if(_presenter != null)
+            {
+                criticalItems = await _presenter.LoadCriticalItemAsync();
+                DisplayCriticalItems(criticalItems);
+            }
         }
     }
 }

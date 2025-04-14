@@ -45,6 +45,38 @@ namespace Project.Application.Services
 
 
         }
+        public async Task<List<ProductDto>> GetAllCriticalProductAsync()
+        {
+            try
+            {
+                var products = await _productRepository.GetAllProductAsync();
+                //if (!products.Any())
+                //    throw new InvalidOperationException("No products found in the database!");
+
+                return products
+                       .Where(b => b.Stock != null && b.Stock.ProductQuantity <= b.ProductReOrder)
+                       .Select(b=> new ProductDto
+                       {
+                           ProductCode = b.ProductCode,
+                           BarcodeData = b.BarcodeData,
+                           ProductName = b.ProductName,
+                           ProductPrice = b.ProductPrice,
+                           ProductReOrder = b.ProductReOrder,
+                           CategoryName = b.Category?.CategoryName,
+                           ProductQuantity = b.Stock?.ProductQuantity ?? 0
+                       })
+                       .ToList();   
+
+            }
+            catch (InvalidOperationException)
+            {
+                throw;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         public async Task AddProductAsync(ProductDto productDto)
         {
             try

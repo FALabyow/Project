@@ -12,19 +12,7 @@ namespace Project.Domain.Entities
     {
         public Guid StockId { get; set; } = Guid.NewGuid();
         public Guid ProductId { get; set; }
-        public int ProductQuantity { get; set; } = 0;
-        public string ProductStatus
-        {
-            get
-            {
-                if (ProductQuantity <= 0)
-                    return "Out of Stock";
-                else if (ProductQuantity <= Product?.ProductReOrder)
-                    return "Critical";
-                else
-                    return "Available";
-            }
-        }
+        public int ProductQuantity { get; set; } = 0;  
         public virtual Product? Product { get; set; }
     }
 }
