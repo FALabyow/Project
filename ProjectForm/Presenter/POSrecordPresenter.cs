@@ -31,11 +31,7 @@ namespace ProjectForm.Presenter
                 return;
             }
 
-            if (selecteditem == string.Empty)
-            {
-                MessageBox.Show("Please select sort type.");
-                return;
-            }
+            
 
             string dateTo = startDate.ToString("MM-dd-yyyy");
             string dateFrom = endDate.ToString("MM-dd-yyyy");
@@ -43,6 +39,11 @@ namespace ProjectForm.Presenter
             
             if (name == "btnLoad")
             {
+                if (selecteditem == string.Empty)
+                {
+                    MessageBox.Show("Please select sort type.");
+                    return;
+                }
                 //this is for top selling items
                 var data = await LoadTopSellingAsync(dateTo, dateFrom, newSelectedItem);
                 _view.DisplayTopSellingItems(data); 
@@ -52,10 +53,17 @@ namespace ProjectForm.Presenter
             else if(name == "btnLoadSolditem")
             {
                 //this is for sold items
+                var data = await LoadSoldItemsAsync(dateTo, dateFrom);
+                _view.DisplaySoldItems(data);
                 _pOSrecord.selectedComboBox = string.Empty;
             }
             else if(name == "btnLoadstockin")
             {
+                if (selecteditem == string.Empty)
+                {
+                    MessageBox.Show("Please select sort type.");
+                    return;
+                }
                 //this is for stock in history
                 _pOSrecord.selectedComboBox = string.Empty;
             }
@@ -83,6 +91,31 @@ namespace ProjectForm.Presenter
                 MessageBox.Show(ex.Message);
                 return new List<POSrecordDto1>();
                 
+            }
+        }
+
+        public async Task<List<POSrecordDto1>> LoadSoldItemsAsync(string startDate, string endDate)
+        {
+            try
+            {
+                var res = await _httpClient.GetAsync($"/Sales/All/FilteredBy?startDate={startDate}&endDate={endDate}");
+
+                res.EnsureSuccessStatusCode();
+
+                var sales = await res.Content.ReadFromJsonAsync<List<POSrecordDto1>>();
+
+                if (sales == null)
+                {
+                    return new List<POSrecordDto1>();
+                }
+
+                return sales;
+
+            }
+            catch (HttpRequestException ex)
+            {
+                MessageBox.Show(ex.Message);
+                return new List<POSrecordDto1>();
             }
         }
     }
