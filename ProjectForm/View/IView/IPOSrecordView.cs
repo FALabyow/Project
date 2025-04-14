@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProjectForm.Model.DTOs;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +9,17 @@ namespace ProjectForm.View.IView
 {
     public interface IPOSrecordView
     {
+        //Top Selling
+        //event EventHandler? LoadTopSoldItemClicked;
+        //event EventHandler<DataGridViewRowPostPaintEventArgs>? RowNumber;
+        //event EventHandler? SelectedItemCombo;
+        void DisplayTopSellingItems(List<POSrecordDto1> topSelling);
+        void DisplaySoldItems(List<POSrecordDto1> sold);
+        string SelectedItem(ComboBox comboBox);
+        DateOnly StartDate(DateTimePicker dateTimePicker);
+        DateOnly EndDate(DateTimePicker dateTimePicker);
+
+        //DateOnly StartDate { get; }
+        //DateOnly EndDate { get; }
     }
 }

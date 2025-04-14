@@ -4,14 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Project.Application.DTOs
+namespace ProjectForm.Model.DTOs
 {
-    public class GetAllSalesByDateDto
+    //DTOs for top selling and sold items
+    public class POSrecordDto1
     {
-        public Guid SaledHistoryId { get; set; } //this if for Invoice#
-        public string? ProductCode { get; set; }
+        public string? ProductCode {  get; set; }
         public string? ProductName { get; set; }
-        public decimal ProductPrice { get; set; }
         public int ProductQuantity { get; set; }
         public decimal TotalAmount { get; set; }
 
