@@ -1,6 +1,7 @@
 ﻿using Project.Application.DTOs;
 using Project.Application.Interfaces;
 using Project.Domain.Entities;
+using ProjectForm.Model.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +17,7 @@ namespace Project.Application.Services
         {
             _salesDetailRepository = salesDetailRepository;
         }
-            public async Task<List<GetSalesDetailDto>> GetAllSalesByDateAsync(DateOnly startDate, DateOnly endDate)
+        public async Task<List<GetSalesDetailDto>> GetAllSalesByDateAsync(DateOnly startDate, DateOnly endDate)
             {
                 try
                 {
@@ -45,6 +46,74 @@ namespace Project.Application.Services
                 {
                     throw;
                 }
+        }
+        public async Task<List<POSrecordDto1>> GetSalesByQtyAsync(DateOnly startDate, DateOnly endDate)
+        {
+            try
+            {
+                var sales = await _salesDetailRepository.GetAllSalesByDateAsync(startDate, endDate);
+
+                if (sales == null || !sales.Any())
+                {
+                    throw new InvalidOperationException("No sales found in the database");
+                }
+
+                return sales
+                       .GroupBy(sd => new { sd.ProductCode, sd.ProductName })
+                       .Select(sd => new POSrecordDto1
+                       {
+                           ProductCode = sd.Key.ProductCode,
+                           ProductName = sd.Key.ProductName,
+                           ProductQuantity = sd.Sum(sd => sd.QuantitySold),
+                           TotalAmount = sd.Sum(sd => sd.TotalAmount),
+                       })
+                       .OrderByDescending(x => x.ProductQuantity)
+                       .Take(1)
+                       .ToList();
+
+            }
+            catch (InvalidOperationException)
+            {
+                throw;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public async Task<List<POSrecordDto1>> GetSalesByTotalAmountAsync(DateOnly startDate, DateOnly endDate)
+        {
+            try
+            {
+                var sales = await _salesDetailRepository.GetAllSalesByDateAsync(startDate, endDate);
+
+                if (sales == null || !sales.Any())
+                {
+                    throw new InvalidOperationException("No sales found in the database");
+                }
+
+                return sales
+                       .GroupBy(sd => new { sd.ProductCode, sd.ProductName })
+                       .Select(sd => new POSrecordDto1
+                       {
+                           ProductCode = sd.Key.ProductCode,
+                           ProductName = sd.Key.ProductName,
+                           ProductQuantity = sd.Sum(sd => sd.QuantitySold),
+                           TotalAmount = sd.Sum(sd => sd.TotalAmount),
+                       })
+                       .OrderByDescending(x => x.TotalAmount)
+                       .Take(1)
+                       .ToList();
+
+            }
+            catch (InvalidOperationException)
+            {
+                throw;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public async Task AddSalesAsync(List<AddSalesDetailDto> sales)

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Project.Application.DTOs;
 using Project.Application.Services;
+using ProjectForm.Model.DTOs;
 
 namespace Project.API.Controllers
 {
@@ -24,6 +25,36 @@ namespace Project.API.Controllers
                 return Ok(sales);
             }
             catch(InvalidOperationException ex)
+            {
+                return BadRequest(new { error = ex.Message });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { error = ex.Message });
+            }
+        }
+
+        [HttpGet("/Sales/TopSelling/FilteredBY")]
+        public async Task<ActionResult<IEnumerable<POSrecordDto1>>> GetTopSellingProductAsync(DateOnly startDate, DateOnly endDate, string action)
+        {
+            try
+            {
+                if(action == "SortByQty")
+                {
+                    var sales = await _salesDetailService.GetSalesByQtyAsync(startDate, endDate);
+                    return Ok(sales);
+                }
+                else if(action == "SortByTotalAmount")
+                {
+                    var sales = await _salesDetailService.GetSalesByTotalAmountAsync(startDate, endDate);
+                    return Ok(sales);
+                }
+                
+                return NoContent();
+
+                
+            }
+            catch (InvalidOperationException ex)
             {
                 return BadRequest(new { error = ex.Message });
             }

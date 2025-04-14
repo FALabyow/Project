@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Project.Application.Interfaces;
 using Project.Domain.Entities;
 using Project.Infrastructure.Persistence;
+using ProjectForm.Model.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +24,9 @@ namespace Project.Infrastructure.Repositories
             try
             {
                 var stocks = await _context.SalesDetails
-                .Where(x => x.SalesHistory.SaleDate >= startDate && x.SalesHistory.SaleDate <= endDate)
+                .Where(x => x.SalesHistory!= null && 
+                            x.SalesHistory.SaleDate >= startDate &&  
+                            x.SalesHistory.SaleDate <= endDate)
                 .ToListAsync();
 
                 return stocks;
