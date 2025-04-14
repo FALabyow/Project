@@ -10,6 +10,7 @@ namespace ProjectForm.View.IView
     public interface IDailySaleView
     {
         void DisplayDailySales(List<GetSalesDetailDto> sales);
+        void TotalSales(string total);
         DateOnly StartDate { get; }
         DateOnly EndDate { get; }
 

@@ -39,6 +39,10 @@ namespace ProjectForm
         {
             _bindingSource.DataSource = sales;
         }
+        public void TotalSales(string total)
+        {
+            lblTotal.Text = total;
+        }
         private void DataGridCashierView_RowPostPaint(object? sender, DataGridViewRowPostPaintEventArgs e)
         {
             var gridView = sender as DataGridView;

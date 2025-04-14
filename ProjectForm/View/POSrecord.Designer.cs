@@ -601,9 +601,9 @@
             tabPage4.BackColor = Color.White;
             tabPage4.Controls.Add(dgvInventorylist);
             tabPage4.Controls.Add(panel4);
-            tabPage4.Location = new Point(4, 35);
+            tabPage4.Location = new Point(4, 36);
             tabPage4.Name = "tabPage4";
-            tabPage4.Size = new Size(974, 517);
+            tabPage4.Size = new Size(974, 516);
             tabPage4.TabIndex = 3;
             tabPage4.Text = "Inventory List";
             // 
@@ -630,7 +630,7 @@
             dgvInventorylist.Name = "dgvInventorylist";
             dgvInventorylist.RowHeadersVisible = false;
             dgvInventorylist.RowHeadersWidth = 51;
-            dgvInventorylist.Size = new Size(974, 450);
+            dgvInventorylist.Size = new Size(974, 449);
             dgvInventorylist.TabIndex = 8;
             // 
             // dataGridViewTextBoxColumn11
@@ -716,9 +716,9 @@
             // 
             tabPage5.Controls.Add(dgvStockin);
             tabPage5.Controls.Add(panel5);
-            tabPage5.Location = new Point(4, 35);
+            tabPage5.Location = new Point(4, 36);
             tabPage5.Name = "tabPage5";
-            tabPage5.Size = new Size(974, 517);
+            tabPage5.Size = new Size(974, 516);
             tabPage5.TabIndex = 4;
             tabPage5.Text = "Stock In History";
             tabPage5.UseVisualStyleBackColor = true;
@@ -746,7 +746,7 @@
             dgvStockin.Name = "dgvStockin";
             dgvStockin.RowHeadersVisible = false;
             dgvStockin.RowHeadersWidth = 51;
-            dgvStockin.Size = new Size(974, 401);
+            dgvStockin.Size = new Size(974, 400);
             dgvStockin.TabIndex = 9;
             // 
             // dataGridViewTextBoxColumn19

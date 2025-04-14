@@ -45,6 +45,11 @@ namespace ProjectForm.Presenter
                     return;
                 }
 
+                var total = sales
+                    .Sum(sd => sd.TotalAmount);
+
+                _view.TotalSales($"{total}");
+
                 _view.DisplayDailySales(sales);
 
             }
