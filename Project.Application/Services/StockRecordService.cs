@@ -1,6 +1,7 @@
 ﻿using Project.Application.DTOs;
 using Project.Application.Interfaces;
 using Project.Domain.Entities;
+using ProjectForm.Model.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,6 +34,33 @@ namespace Project.Application.Services
                     ProductName = b.ProductName,
                     ProductCode = b.ProductCode,
                     ProductCategory = b.ProductCategory,
+                }).ToList();
+            }
+            catch (InvalidOperationException)
+            {
+                throw;
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException("Unexpected error in service layer", ex);
+            }
+        }
+        public async Task<List<GetStockInHistoryDto>> GetStockInHistoryAsync()
+        {
+            try
+            {
+                var stockRecords = await _stockRecordRepository.GetAllStockRecordsAsync();
+                if (!stockRecords.Any())
+                    throw new InvalidOperationException("No stock records found in the database!");
+
+                return stockRecords.Select(b => new GetStockInHistoryDto
+                {                    
+                    ReferenceNum = b.ReferenceNum,
+                    ProductQuantity = b.StockInQty,
+                    StockInDate = b.StockInDate,
+                    ProductName = b.ProductName,
+                    ProductCode = b.ProductCode,
+                    CategoryName = b.ProductCategory,
                 }).ToList();
             }
             catch (InvalidOperationException)

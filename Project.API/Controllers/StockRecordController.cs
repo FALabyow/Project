@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Project.Application.DTOs;
 using Project.Application.Services;
+using ProjectForm.Model.DTOs;
 
 namespace Project.API.Controllers
 {
@@ -21,6 +22,24 @@ namespace Project.API.Controllers
             try
             {
                 var records = await _stockRecordService.GetAllStockRecordsAsync();
+                return Ok(records);
+            }
+            catch (InvalidOperationException ex)
+            {
+                return BadRequest(new { error = ex.Message });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { error = "An unexpected error occurred.", details = ex.Message });
+            }
+        }
+
+        [HttpGet("/StockRecords/History")]
+        public async Task<ActionResult<IEnumerable<GetStockInHistoryDto>>> GetStockInHistoryAsync()
+        {
+            try
+            {
+                var records = await _stockRecordService.GetStockInHistoryAsync();
                 return Ok(records);
             }
             catch (InvalidOperationException ex)
