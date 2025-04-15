@@ -17,9 +17,12 @@ namespace ProjectForm.View.IView
         void DisplaySoldItems(List<POSrecordDto1> sold);
         void DisplayCriticalItems(List<POSrecordDto2> criticalItems);
         void DisplayInventoryList(List<GetInventoryListDto> inventoryList);
+        void DisplayStockInHistory(List<GetStockInHistoryDto> stockInHistory);
         string SelectedItem(ComboBox comboBox);
         DateOnly StartDate(DateTimePicker dateTimePicker);
         DateOnly EndDate(DateTimePicker dateTimePicker);
+        event EventHandler<DataGridViewRowPostPaintEventArgs>? RowNumber;
+
 
         //DateOnly StartDate { get; }
         //DateOnly EndDate { get; }

@@ -12,7 +12,6 @@ namespace ProjectForm.Model.DTOs
         public string? ReferenceNum { get; set; }
         public string? ProductCode { get; set; }
         public string? ProductName { get; set; }
-        public string? CategoryName { get; set; }
         public int ProductQuantity { get; set; }
         public DateOnly StockInDate { get; set; }
         

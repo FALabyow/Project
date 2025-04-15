@@ -165,8 +165,8 @@ namespace Project.Infrastructure.Migrations
                     b.Property<string>("ReferenceNum")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateOnly>("StockInDate")
-                        .HasColumnType("date");
+                    b.Property<DateTime>("StockInDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("StockInQty")
                         .HasColumnType("int");

@@ -27,7 +27,7 @@ namespace ProjectForm
             _presenter = new POSrecordPresenter(this, this);
             
             cbTopsell.SelectedIndexChanged += ComboBox_SelectedIndexChanged;
-            comboBox1.SelectedIndexChanged += ComboBox_SelectedIndexChanged;
+            //comboBox1.SelectedIndexChanged += ComboBox_SelectedIndexChanged;
             dtFromtopsell.ValueChanged += DatePickerFrom_ValueChanged;
             dtFromSolditem.ValueChanged += DatePickerFrom_ValueChanged;
             dtFromstockin.ValueChanged += DatePickerFrom_ValueChanged;
@@ -37,7 +37,14 @@ namespace ProjectForm
             btnLoad.Click += ButtonLoad_Clicked;
             btnLoadSolditem.Click += ButtonLoad_Clicked;
             btnLoadstockin.Click += ButtonLoad_Clicked;
+            dgvTopselling.RowPostPaint += DataGridPOSrecordView_RowPostPaint;
+            dgvStockin.RowPostPaint += DataGridPOSrecordView_RowPostPaint;
+            dgvCriticalitem.RowPostPaint += DataGridPOSrecordView_RowPostPaint;
+            dgvInventorylist.RowPostPaint += DataGridPOSrecordView_RowPostPaint;
+            dgvSolditem.RowPostPaint += DataGridPOSrecordView_RowPostPaint;
         }
+
+        public event EventHandler<DataGridViewRowPostPaintEventArgs>? RowNumber;
 
         public void DisplayTopSellingItems(List<POSrecordDto1> topSelling)
         {
@@ -55,6 +62,11 @@ namespace ProjectForm
         {
             dgvInventorylist.DataSource = inventoryList;
         }
+        public void DisplayStockInHistory(List<GetStockInHistoryDto> stockInHistory)
+        {
+            dgvStockin.DataSource = stockInHistory;
+        }
+
         public string SelectedItem(ComboBox comboBox)
         {
             return comboBox.SelectedItem?.ToString() ?? string.Empty;
@@ -101,6 +113,13 @@ namespace ProjectForm
                 string buttonName = button.Name;
                 await _presenter.LoadDataAsync(buttonName, dateFrom, dateTo, selectedComboBox);
             }
+        }
+        private void DataGridPOSrecordView_RowPostPaint(object? sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            var gridView = sender as DataGridView;
+            if (gridView == null || e.RowIndex < 0) return;
+
+            RowNumber?.Invoke(sender, e);
         }
         private async void POSrecord_Load(object sender, EventArgs e)
         {

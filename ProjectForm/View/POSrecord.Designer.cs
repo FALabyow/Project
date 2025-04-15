@@ -101,19 +101,18 @@
             panel4 = new Panel();
             tabPage5 = new TabPage();
             dgvStockin = new DataGridView();
-            panel5 = new Panel();
-            btnLoadstockin = new Button();
-            comboBox1 = new ComboBox();
-            dtTostockin = new DateTimePicker();
-            label5 = new Label();
-            dtFromstockin = new DateTimePicker();
-            label6 = new Label();
             dataGridViewTextBoxColumn19 = new DataGridViewTextBoxColumn();
             dataGridViewTextBoxColumn26 = new DataGridViewTextBoxColumn();
             dataGridViewTextBoxColumn20 = new DataGridViewTextBoxColumn();
             dataGridViewTextBoxColumn22 = new DataGridViewTextBoxColumn();
             dataGridViewTextBoxColumn25 = new DataGridViewTextBoxColumn();
             Column9 = new DataGridViewTextBoxColumn();
+            panel5 = new Panel();
+            btnLoadstockin = new Button();
+            dtTostockin = new DateTimePicker();
+            label5 = new Label();
+            dtFromstockin = new DateTimePicker();
+            label6 = new Label();
             panel1.SuspendLayout();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
@@ -755,78 +754,6 @@
             dgvStockin.Size = new Size(974, 400);
             dgvStockin.TabIndex = 9;
             // 
-            // panel5
-            // 
-            panel5.Controls.Add(btnLoadstockin);
-            panel5.Controls.Add(comboBox1);
-            panel5.Controls.Add(dtTostockin);
-            panel5.Controls.Add(label5);
-            panel5.Controls.Add(dtFromstockin);
-            panel5.Controls.Add(label6);
-            panel5.Dock = DockStyle.Top;
-            panel5.Location = new Point(0, 0);
-            panel5.Name = "panel5";
-            panel5.Size = new Size(974, 116);
-            panel5.TabIndex = 1;
-            // 
-            // btnLoadstockin
-            // 
-            btnLoadstockin.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
-            btnLoadstockin.BackColor = Color.Peru;
-            btnLoadstockin.FlatAppearance.BorderSize = 0;
-            btnLoadstockin.FlatStyle = FlatStyle.Flat;
-            btnLoadstockin.Font = new Font("Century Gothic", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnLoadstockin.Location = new Point(684, 36);
-            btnLoadstockin.Name = "btnLoadstockin";
-            btnLoadstockin.Size = new Size(167, 31);
-            btnLoadstockin.TabIndex = 11;
-            btnLoadstockin.Text = "Load Record";
-            btnLoadstockin.UseVisualStyleBackColor = false;
-            // 
-            // comboBox1
-            // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Items.AddRange(new object[] { "Sort By Qty", "Sort By Total Amount", "" });
-            comboBox1.Location = new Point(482, 38);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(169, 29);
-            comboBox1.TabIndex = 4;
-            comboBox1.Text = "Select Sort Type";
-            // 
-            // dtTostockin
-            // 
-            dtTostockin.Format = DateTimePickerFormat.Short;
-            dtTostockin.Location = new Point(328, 37);
-            dtTostockin.Name = "dtTostockin";
-            dtTostockin.Size = new Size(129, 30);
-            dtTostockin.TabIndex = 3;
-            // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.Location = new Point(292, 42);
-            label5.Name = "label5";
-            label5.Size = new Size(30, 21);
-            label5.TabIndex = 2;
-            label5.Text = "To";
-            // 
-            // dtFromstockin
-            // 
-            dtFromstockin.Format = DateTimePickerFormat.Short;
-            dtFromstockin.Location = new Point(157, 37);
-            dtFromstockin.Name = "dtFromstockin";
-            dtFromstockin.Size = new Size(129, 30);
-            dtFromstockin.TabIndex = 1;
-            // 
-            // label6
-            // 
-            label6.AutoSize = true;
-            label6.Location = new Point(18, 42);
-            label6.Name = "label6";
-            label6.Size = new Size(133, 21);
-            label6.TabIndex = 0;
-            label6.Text = "Filter By : From";
-            // 
             // dataGridViewTextBoxColumn19
             // 
             dataGridViewTextBoxColumn19.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
@@ -882,6 +809,67 @@
             Column9.MinimumWidth = 6;
             Column9.Name = "Column9";
             Column9.Width = 156;
+            // 
+            // panel5
+            // 
+            panel5.Controls.Add(btnLoadstockin);
+            panel5.Controls.Add(dtTostockin);
+            panel5.Controls.Add(label5);
+            panel5.Controls.Add(dtFromstockin);
+            panel5.Controls.Add(label6);
+            panel5.Dock = DockStyle.Top;
+            panel5.Location = new Point(0, 0);
+            panel5.Name = "panel5";
+            panel5.Size = new Size(974, 116);
+            panel5.TabIndex = 1;
+            // 
+            // btnLoadstockin
+            // 
+            btnLoadstockin.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
+            btnLoadstockin.BackColor = Color.Peru;
+            btnLoadstockin.FlatAppearance.BorderSize = 0;
+            btnLoadstockin.FlatStyle = FlatStyle.Flat;
+            btnLoadstockin.Font = new Font("Century Gothic", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnLoadstockin.Location = new Point(492, 36);
+            btnLoadstockin.Name = "btnLoadstockin";
+            btnLoadstockin.Size = new Size(167, 31);
+            btnLoadstockin.TabIndex = 11;
+            btnLoadstockin.Text = "Load Record";
+            btnLoadstockin.UseVisualStyleBackColor = false;
+            // 
+            // dtTostockin
+            // 
+            dtTostockin.Format = DateTimePickerFormat.Short;
+            dtTostockin.Location = new Point(328, 37);
+            dtTostockin.Name = "dtTostockin";
+            dtTostockin.Size = new Size(129, 30);
+            dtTostockin.TabIndex = 3;
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new Point(292, 42);
+            label5.Name = "label5";
+            label5.Size = new Size(30, 21);
+            label5.TabIndex = 2;
+            label5.Text = "To";
+            // 
+            // dtFromstockin
+            // 
+            dtFromstockin.Format = DateTimePickerFormat.Short;
+            dtFromstockin.Location = new Point(157, 37);
+            dtFromstockin.Name = "dtFromstockin";
+            dtFromstockin.Size = new Size(129, 30);
+            dtFromstockin.TabIndex = 1;
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Location = new Point(18, 42);
+            label6.Name = "label6";
+            label6.Size = new Size(133, 21);
+            label6.TabIndex = 0;
+            label6.Text = "Filter By : From";
             // 
             // POSrecord
             // 
@@ -951,7 +939,6 @@
         private Panel panel4;
         private Panel panel5;
         private Button btnLoadstockin;
-        private ComboBox comboBox1;
         private DateTimePicker dtTostockin;
         private Label label5;
         private DateTimePicker dtFromstockin;

@@ -43,7 +43,7 @@ namespace Project.Infrastructure.Migrations
                     StockRecordId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ReferenceNum = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     StockInQty = table.Column<int>(type: "int", nullable: false),
-                    StockInDate = table.Column<DateOnly>(type: "date", nullable: false),
+                    StockInDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ProductName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ProductCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ProductCategory = table.Column<string>(type: "nvarchar(max)", nullable: true)

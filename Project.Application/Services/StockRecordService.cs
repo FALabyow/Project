@@ -45,11 +45,11 @@ namespace Project.Application.Services
                 throw new InvalidOperationException("Unexpected error in service layer", ex);
             }
         }
-        public async Task<List<GetStockInHistoryDto>> GetStockInHistoryAsync()
+        public async Task<List<GetStockInHistoryDto>> GetStockInHistoryAsync(DateOnly startDate, DateOnly endDate)
         {
             try
             {
-                var stockRecords = await _stockRecordRepository.GetAllStockRecordsAsync();
+                var stockRecords = await _stockRecordRepository.GetAllStockRecordsAsyncByDate(startDate, endDate);
                 if (!stockRecords.Any())
                     throw new InvalidOperationException("No stock records found in the database!");
 
@@ -60,7 +60,7 @@ namespace Project.Application.Services
                     StockInDate = b.StockInDate,
                     ProductName = b.ProductName,
                     ProductCode = b.ProductCode,
-                    CategoryName = b.ProductCategory,
+                    
                 }).ToList();
             }
             catch (InvalidOperationException)

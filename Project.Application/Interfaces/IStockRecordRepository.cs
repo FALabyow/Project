@@ -10,6 +10,7 @@ namespace Project.Application.Interfaces
     public interface IStockRecordRepository
     {
         Task<IEnumerable<StockRecord>> GetAllStockRecordsAsync();
+        Task<IEnumerable<StockRecord>> GetAllStockRecordsAsyncByDate(DateOnly startDate, DateOnly endDate);
         Task AddStockRecordsAsync(IEnumerable<StockRecord> stockRecords);
     }
 }

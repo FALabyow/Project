@@ -83,6 +83,12 @@ namespace Project.Infrastructure.Persistence
                 v => v.ToDateTime(TimeOnly.MinValue),
                 v => DateOnly.FromDateTime(v));
 
+            modelBuilder.Entity<StockRecord>()
+                .Property(e => e.StockInDate)
+                .HasConversion(
+                v => v.ToDateTime(TimeOnly.MinValue),
+                v => DateOnly.FromDateTime(v));
+
             base.OnModelCreating(modelBuilder);
         }
     }

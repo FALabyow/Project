@@ -34,12 +34,12 @@ namespace Project.API.Controllers
             }
         }
 
-        [HttpGet("/StockRecords/History")]
-        public async Task<ActionResult<IEnumerable<GetStockInHistoryDto>>> GetStockInHistoryAsync()
+        [HttpGet("/StockRecords/History/FilteredBy")]
+        public async Task<ActionResult<IEnumerable<GetStockInHistoryDto>>> GetStockInHistoryAsync(DateOnly startDate, DateOnly endDate)
         {
             try
             {
-                var records = await _stockRecordService.GetStockInHistoryAsync();
+                var records = await _stockRecordService.GetStockInHistoryAsync(startDate, endDate);
                 return Ok(records);
             }
             catch (InvalidOperationException ex)

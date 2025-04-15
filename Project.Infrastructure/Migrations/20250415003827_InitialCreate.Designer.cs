@@ -12,7 +12,7 @@ using Project.Infrastructure.Persistence;
 namespace Project.Infrastructure.Migrations
 {
     [DbContext(typeof(ProjectDbContext))]
-    [Migration("20250414090908_InitialCreate")]
+    [Migration("20250415003827_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -168,8 +168,8 @@ namespace Project.Infrastructure.Migrations
                     b.Property<string>("ReferenceNum")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateOnly>("StockInDate")
-                        .HasColumnType("date");
+                    b.Property<DateTime>("StockInDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("StockInQty")
                         .HasColumnType("int");

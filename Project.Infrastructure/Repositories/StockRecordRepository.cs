@@ -33,6 +33,26 @@ namespace Project.Infrastructure.Repositories
                 throw new InvalidOperationException("An error occurred while fetching stock records." + ex.Message);
             }
         }
+        public async Task<IEnumerable<StockRecord>> GetAllStockRecordsAsyncByDate(DateOnly startDate, DateOnly endDate)
+        {
+            try
+            {
+                var stocks = await _context.StockRecords
+                .Where(x => x.StockInDate >= startDate &&
+                            x.StockInDate <= endDate)
+                .ToListAsync();
+
+                return stocks;
+            }
+            catch (InvalidOperationException ex) when (ex.InnerException is SqlException sqlEx && sqlEx.Number == 4060)
+            {
+                throw new InvalidOperationException("Database does not exist or access denied!", ex);
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException("An error occurred while fetching stock records." + ex.Message);
+            }
+        }
         public async Task AddStockRecordsAsync(IEnumerable<StockRecord> stockRecords)
         {
             try

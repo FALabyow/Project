@@ -20,6 +20,7 @@ namespace ProjectForm.Presenter
             _httpClient = new HttpClient { BaseAddress = new Uri("https://localhost:7014/api") };
             _view = view;
             _pOSrecord = pOSrecord;
+            _view.RowNumber += OnRowNumber;
         }
         public async Task LoadDataAsync(string name, DateOnly startDate, DateOnly endDate, string selecteditem)
         {
@@ -56,12 +57,9 @@ namespace ProjectForm.Presenter
             }
             else if(name == "btnLoadstockin")
             {
-                if (selecteditem == string.Empty)
-                {
-                    MessageBox.Show("Please select sort type.");
-                    return;
-                }
                 //this is for stock in history
+                var data =  await LoadStockInHistoryAsync(dateTo, dateFrom);
+                _view.DisplayStockInHistory(data);
                 _pOSrecord.selectedComboBox = string.Empty;
             }
         }
@@ -159,6 +157,42 @@ namespace ProjectForm.Presenter
             {
                 MessageBox.Show(ex.Message);
                 return new List<GetInventoryListDto>();
+            }
+        }
+        public async Task<List<GetStockInHistoryDto>> LoadStockInHistoryAsync(string startDate, string endDate)
+        {
+            try
+            {
+                var res = await _httpClient.GetAsync($"/StockRecords/History/FilteredBy?startDate={startDate}&endDate={endDate}");
+
+                res.EnsureSuccessStatusCode();
+
+                var sales = await res.Content.ReadFromJsonAsync<List<GetStockInHistoryDto>>();
+
+                if (sales == null)
+                {
+                    MessageBox.Show("No data");
+                    return new List<GetStockInHistoryDto>();
+                }
+
+                return sales;
+
+            }
+            catch (HttpRequestException ex)
+            {
+                MessageBox.Show(ex.Message);
+                return new List<GetStockInHistoryDto>();
+            }
+        }
+        private void OnRowNumber(object? sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            var gridView = sender as DataGridView;
+            if (gridView == null || e.RowIndex < 0) return;
+
+            using (SolidBrush brush = new SolidBrush(gridView.RowHeadersDefaultCellStyle.ForeColor))
+            {
+                string rowNumber = (e.RowIndex + 1).ToString();
+                e.Graphics.DrawString(rowNumber, gridView.Font, brush, e.RowBounds.Left + 10, e.RowBounds.Top + 4);
             }
         }
 
