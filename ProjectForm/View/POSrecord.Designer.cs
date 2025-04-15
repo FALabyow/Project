@@ -40,13 +40,13 @@
             DataGridViewCellStyle dataGridViewCellStyle10 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle11 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle12 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle17 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle18 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle19 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle13 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle14 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle15 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle16 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle17 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle18 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle19 = new DataGridViewCellStyle();
             panel1 = new Panel();
             lblManageRecord = new Label();
             tabControl1 = new TabControl();
@@ -90,14 +90,6 @@
             Column7 = new DataGridViewTextBoxColumn();
             tabPage4 = new TabPage();
             dgvInventorylist = new DataGridView();
-            dataGridViewTextBoxColumn11 = new DataGridViewTextBoxColumn();
-            dataGridViewTextBoxColumn12 = new DataGridViewTextBoxColumn();
-            dataGridViewTextBoxColumn13 = new DataGridViewTextBoxColumn();
-            dataGridViewTextBoxColumn14 = new DataGridViewTextBoxColumn();
-            dataGridViewTextBoxColumn15 = new DataGridViewTextBoxColumn();
-            dataGridViewTextBoxColumn16 = new DataGridViewTextBoxColumn();
-            dataGridViewTextBoxColumn18 = new DataGridViewTextBoxColumn();
-            dataGridViewTextBoxColumn17 = new DataGridViewTextBoxColumn();
             panel4 = new Panel();
             tabPage5 = new TabPage();
             dgvStockin = new DataGridView();
@@ -115,6 +107,14 @@
             label5 = new Label();
             dtFromstockin = new DateTimePicker();
             label6 = new Label();
+            dataGridViewTextBoxColumn11 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn12 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn13 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn14 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn15 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn16 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn18 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn17 = new DataGridViewTextBoxColumn();
             panel1.SuspendLayout();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
@@ -633,77 +633,6 @@
             dgvInventorylist.Size = new Size(974, 449);
             dgvInventorylist.TabIndex = 8;
             // 
-            // dataGridViewTextBoxColumn11
-            // 
-            dataGridViewTextBoxColumn11.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewTextBoxColumn11.HeaderText = "No.";
-            dataGridViewTextBoxColumn11.MinimumWidth = 6;
-            dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
-            dataGridViewTextBoxColumn11.Width = 67;
-            // 
-            // dataGridViewTextBoxColumn12
-            // 
-            dataGridViewTextBoxColumn12.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewTextBoxColumn12.HeaderText = "Pcode";
-            dataGridViewTextBoxColumn12.MinimumWidth = 6;
-            dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
-            dataGridViewTextBoxColumn12.Width = 96;
-            // 
-            // dataGridViewTextBoxColumn13
-            // 
-            dataGridViewTextBoxColumn13.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewTextBoxColumn13.HeaderText = "Barcode";
-            dataGridViewTextBoxColumn13.MinimumWidth = 6;
-            dataGridViewTextBoxColumn13.Name = "dataGridViewTextBoxColumn13";
-            dataGridViewTextBoxColumn13.Width = 112;
-            // 
-            // dataGridViewTextBoxColumn14
-            // 
-            dataGridViewTextBoxColumn14.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewTextBoxColumn14.HeaderText = "Description";
-            dataGridViewTextBoxColumn14.MinimumWidth = 6;
-            dataGridViewTextBoxColumn14.Name = "dataGridViewTextBoxColumn14";
-            // 
-            // dataGridViewTextBoxColumn15
-            // 
-            dataGridViewTextBoxColumn15.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle13.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewTextBoxColumn15.DefaultCellStyle = dataGridViewCellStyle13;
-            dataGridViewTextBoxColumn15.HeaderText = "Category";
-            dataGridViewTextBoxColumn15.MinimumWidth = 6;
-            dataGridViewTextBoxColumn15.Name = "dataGridViewTextBoxColumn15";
-            dataGridViewTextBoxColumn15.Width = 123;
-            // 
-            // dataGridViewTextBoxColumn16
-            // 
-            dataGridViewTextBoxColumn16.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle14.Alignment = DataGridViewContentAlignment.MiddleRight;
-            dataGridViewTextBoxColumn16.DefaultCellStyle = dataGridViewCellStyle14;
-            dataGridViewTextBoxColumn16.HeaderText = "Price";
-            dataGridViewTextBoxColumn16.MinimumWidth = 6;
-            dataGridViewTextBoxColumn16.Name = "dataGridViewTextBoxColumn16";
-            dataGridViewTextBoxColumn16.Width = 80;
-            // 
-            // dataGridViewTextBoxColumn18
-            // 
-            dataGridViewTextBoxColumn18.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle15.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewTextBoxColumn18.DefaultCellStyle = dataGridViewCellStyle15;
-            dataGridViewTextBoxColumn18.HeaderText = "Qty";
-            dataGridViewTextBoxColumn18.MinimumWidth = 6;
-            dataGridViewTextBoxColumn18.Name = "dataGridViewTextBoxColumn18";
-            dataGridViewTextBoxColumn18.Width = 71;
-            // 
-            // dataGridViewTextBoxColumn17
-            // 
-            dataGridViewTextBoxColumn17.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle16.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewTextBoxColumn17.DefaultCellStyle = dataGridViewCellStyle16;
-            dataGridViewTextBoxColumn17.HeaderText = "Reorder";
-            dataGridViewTextBoxColumn17.MinimumWidth = 6;
-            dataGridViewTextBoxColumn17.Name = "dataGridViewTextBoxColumn17";
-            dataGridViewTextBoxColumn17.Width = 106;
-            // 
             // panel4
             // 
             panel4.Dock = DockStyle.Top;
@@ -716,9 +645,9 @@
             // 
             tabPage5.Controls.Add(dgvStockin);
             tabPage5.Controls.Add(panel5);
-            tabPage5.Location = new Point(4, 36);
+            tabPage5.Location = new Point(4, 35);
             tabPage5.Name = "tabPage5";
-            tabPage5.Size = new Size(974, 516);
+            tabPage5.Size = new Size(974, 517);
             tabPage5.TabIndex = 4;
             tabPage5.Text = "Stock In History";
             tabPage5.UseVisualStyleBackColor = true;
@@ -746,7 +675,7 @@
             dgvStockin.Name = "dgvStockin";
             dgvStockin.RowHeadersVisible = false;
             dgvStockin.RowHeadersWidth = 51;
-            dgvStockin.Size = new Size(974, 400);
+            dgvStockin.Size = new Size(974, 401);
             dgvStockin.TabIndex = 9;
             // 
             // dataGridViewTextBoxColumn19
@@ -880,6 +809,84 @@
             label6.TabIndex = 0;
             label6.Text = "Filter By : From";
             // 
+            // dataGridViewTextBoxColumn11
+            // 
+            dataGridViewTextBoxColumn11.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridViewTextBoxColumn11.HeaderText = "No.";
+            dataGridViewTextBoxColumn11.MinimumWidth = 6;
+            dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
+            dataGridViewTextBoxColumn11.Width = 67;
+            // 
+            // dataGridViewTextBoxColumn12
+            // 
+            dataGridViewTextBoxColumn12.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridViewTextBoxColumn12.DataPropertyName = "ProductCode";
+            dataGridViewTextBoxColumn12.HeaderText = "Pcode";
+            dataGridViewTextBoxColumn12.MinimumWidth = 6;
+            dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
+            dataGridViewTextBoxColumn12.Width = 96;
+            // 
+            // dataGridViewTextBoxColumn13
+            // 
+            dataGridViewTextBoxColumn13.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridViewTextBoxColumn13.DataPropertyName = "BarcodeData";
+            dataGridViewTextBoxColumn13.HeaderText = "Barcode";
+            dataGridViewTextBoxColumn13.MinimumWidth = 6;
+            dataGridViewTextBoxColumn13.Name = "dataGridViewTextBoxColumn13";
+            dataGridViewTextBoxColumn13.Width = 112;
+            // 
+            // dataGridViewTextBoxColumn14
+            // 
+            dataGridViewTextBoxColumn14.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewTextBoxColumn14.DataPropertyName = "ProductName";
+            dataGridViewTextBoxColumn14.HeaderText = "Description";
+            dataGridViewTextBoxColumn14.MinimumWidth = 6;
+            dataGridViewTextBoxColumn14.Name = "dataGridViewTextBoxColumn14";
+            // 
+            // dataGridViewTextBoxColumn15
+            // 
+            dataGridViewTextBoxColumn15.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridViewTextBoxColumn15.DataPropertyName = "CategoryName";
+            dataGridViewCellStyle13.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewTextBoxColumn15.DefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewTextBoxColumn15.HeaderText = "Category";
+            dataGridViewTextBoxColumn15.MinimumWidth = 6;
+            dataGridViewTextBoxColumn15.Name = "dataGridViewTextBoxColumn15";
+            dataGridViewTextBoxColumn15.Width = 123;
+            // 
+            // dataGridViewTextBoxColumn16
+            // 
+            dataGridViewTextBoxColumn16.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridViewTextBoxColumn16.DataPropertyName = "ProductPrice";
+            dataGridViewCellStyle14.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dataGridViewTextBoxColumn16.DefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewTextBoxColumn16.HeaderText = "Price";
+            dataGridViewTextBoxColumn16.MinimumWidth = 6;
+            dataGridViewTextBoxColumn16.Name = "dataGridViewTextBoxColumn16";
+            dataGridViewTextBoxColumn16.Width = 80;
+            // 
+            // dataGridViewTextBoxColumn18
+            // 
+            dataGridViewTextBoxColumn18.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridViewTextBoxColumn18.DataPropertyName = "ProductQuantity";
+            dataGridViewCellStyle15.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewTextBoxColumn18.DefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewTextBoxColumn18.HeaderText = "Qty";
+            dataGridViewTextBoxColumn18.MinimumWidth = 6;
+            dataGridViewTextBoxColumn18.Name = "dataGridViewTextBoxColumn18";
+            dataGridViewTextBoxColumn18.Width = 71;
+            // 
+            // dataGridViewTextBoxColumn17
+            // 
+            dataGridViewTextBoxColumn17.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridViewTextBoxColumn17.DataPropertyName = "ProductReOrder";
+            dataGridViewCellStyle16.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewTextBoxColumn17.DefaultCellStyle = dataGridViewCellStyle16;
+            dataGridViewTextBoxColumn17.HeaderText = "Reorder";
+            dataGridViewTextBoxColumn17.MinimumWidth = 6;
+            dataGridViewTextBoxColumn17.Name = "dataGridViewTextBoxColumn17";
+            dataGridViewTextBoxColumn17.Width = 106;
+            // 
             // POSrecord
             // 
             AutoScaleDimensions = new SizeF(11F, 21F);
@@ -945,14 +952,6 @@
         private Label lblTotal;
         private DataGridView dgvCriticalitem;
         private DataGridView dgvInventorylist;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn11;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn12;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn13;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn14;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn15;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn16;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn18;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn17;
         private Panel panel4;
         private Panel panel5;
         private Button btnLoadstockin;
@@ -987,5 +986,13 @@
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn10;
         private DataGridViewTextBoxColumn Column5;
         private DataGridViewTextBoxColumn Column7;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn11;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn12;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn13;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn14;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn15;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn16;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn18;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn17;
     }
 }

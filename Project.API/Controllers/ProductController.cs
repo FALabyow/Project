@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using Project.Application.DTOs;
 using Project.Application.Services;
+using ProjectForm.Model.DTOs;
 
 namespace Project.API.Controllers
 {
@@ -45,6 +46,28 @@ namespace Project.API.Controllers
             try
             {
                 var products = await _productService.GetAllCriticalProductAsync();
+                //if(products.IsNullOrEmpty())
+                //{
+                //    return Ok(products);
+                //}
+                return Ok(products);
+            }
+            catch (InvalidOperationException ex)
+            {
+                return BadRequest(new { error = ex.Message });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { error = "An unexpected error occurred.", details = ex.Message });
+            }
+        }
+
+        [HttpGet("/Products/Inventory")]
+        public async Task<ActionResult<IEnumerable<GetInventoryListDto>>> GetAllInventoryListAsync()
+        {
+            try
+            {
+                var products = await _productService.GetAllInventoryListAsync();
                 //if(products.IsNullOrEmpty())
                 //{
                 //    return Ok(products);

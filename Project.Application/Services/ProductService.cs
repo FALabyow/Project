@@ -1,6 +1,7 @@
 ﻿using Project.Application.DTOs;
 using Project.Application.Interfaces;
 using Project.Domain.Entities;
+using ProjectForm.Model.DTOs;
 
 namespace Project.Application.Services
 {
@@ -66,6 +67,38 @@ namespace Project.Application.Services
                            ProductQuantity = b.Stock?.ProductQuantity ?? 0
                        })
                        .ToList();   
+
+            }
+            catch (InvalidOperationException)
+            {
+                throw;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public async Task<List<GetInventoryListDto>> GetAllInventoryListAsync()
+        {
+            try
+            {
+                var products = await _productRepository.GetAllProductAsync();
+                //if (!products.Any())
+                //    throw new InvalidOperationException("No products found in the database!");
+
+                return products
+                       .Where(b => b.Stock != null && b.Stock.ProductQuantity >= 1)
+                       .Select(b => new GetInventoryListDto
+                       {
+                           ProductCode = b.ProductCode,
+                           BarcodeData = b.BarcodeData,
+                           ProductName = b.ProductName,
+                           ProductPrice = b.ProductPrice,
+                           ProductReOrder = b.ProductReOrder,
+                           CategoryName = b.Category?.CategoryName,
+                           ProductQuantity = b.Stock?.ProductQuantity ?? 0
+                       })
+                       .ToList();
 
             }
             catch (InvalidOperationException)

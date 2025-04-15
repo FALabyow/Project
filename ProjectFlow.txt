@@ -44,7 +44,12 @@ DailySales.cs
 1. Each sold items are recorded and displayed here.
 2. The total items sold (for filtered dates) are calculated and displayed here.
 
-
+POSrecord.cs
+1. Top Selling Tab - displays all the top 10 selling products
+2. Sold Items Tab - displays the data the same from DailySale.cs
+3. Critical items Tab - display items with product quantity of equal or less than the pre order value.
+4. Inventory List Tab - display items with product quantity of more than 0.
+5. Stock In History Tab - display items the same from Stock In Record Tab in StockEntry.cs
 
 
 
