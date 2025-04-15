@@ -17,110 +17,109 @@ namespace ProjectForm
 {
     //part 6 of the tutorial
     //https://www.youtube.com/watch?v=iOc2_NeYF2g&t=490s
-    public partial class Cashier : Form
+    public partial class Cashier : Form, ICashierView
     {
-        
+        private readonly CashierPresenter _presenter;
         public Cashier()
         {
             InitializeComponent();
-           
+            _presenter = new CashierPresenter(this);
+            picClose.Click += (s, e) => CloseClicked?.Invoke(this, EventArgs.Empty);
+            timer1.Tick += (s, e) => TimerTicked?.Invoke(this, EventArgs.Empty);
+            btnTransaction.Click += Transaction_Click;
+            btnSearchProduct.Click += SearchProduct_Click;
+            btnPayment.Click += Payment_Click;
+            btnLogout.Click += Logout_Click;
+            btnDailySales.Click += DailySales_Click;
+            btnClearCart.Click += ClearCart_Click;
         }
-       
         
-
-       
-        private void picClose_Click(object sender, EventArgs e)
+        public event EventHandler? CloseClicked;
+        public event EventHandler? TimerTicked;
+        public event EventHandler<Button>? TransactionClicked;
+        public event EventHandler<Button>? SearchProductClicked;
+        public event EventHandler<Button>? PaymentClicked;
+        public event EventHandler<Button>? DailySalesClicked;
+        public event EventHandler<Button>? LogoutClicked;
+        public event EventHandler<Button>? ClearCartClicked;
+        public string TransactionNumber
         {
-            if (MessageBox.Show("Are you sure you want to exit?", "Exit", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-            {
-                Application.Exit();
-            }
+            get => lblTranNo.Text;
+            set => lblTranNo.Text = value;
         }
-
+        public string Timer
+        {
+            get => lblTimer.Text;
+            set => lblTimer.Text = value;
+        }
+        public string DisplayTotal
+        {
+            get => lblDisplaytotal.Text;
+            set => lblDisplaytotal.Text = value;
+        }
+        public void Slider(Button button)
+        {
+            pnlSlide.BackColor = Color.SaddleBrown;
+            pnlSlide.Height = button.Height;
+            pnlSlide.Top = button.Top;
+        }
         public void slide(Button button)
         {
             pnlSlide.BackColor = Color.SaddleBrown;
             pnlSlide.Height = button.Height;
             pnlSlide.Top = button.Top;
         }
-
-        private void btnTransaction_Click(object sender, EventArgs e)
+        private void Transaction_Click(object? sender, EventArgs e)
         {
-            slide(btnTransaction);
-            GetTranNo();
-        }
-
-        private void btnSearchProduct_Click(object sender, EventArgs e)
-        {
-            slide(btnSearchProduct);
-            SearchProducts searchProducts = new SearchProducts();
-            searchProducts.ShowDialog();
-        }
-
-        private void btnDiscount_Click(object sender, EventArgs e)
-        {
-            slide(btnDiscount);
-            Discount discount = new Discount();
-            discount.ShowDialog();
-        }
-
-        private void btnPayment_Click(object sender, EventArgs e)
-        {
-            slide(btnPayment);
-            SettlePayment settlepayment = new SettlePayment();
-            settlepayment.txtSale.Text = lblDisplaytotal.Text;
-            settlepayment.ShowDialog();
-        }
-
-        private void btnClearCart_Click(object sender, EventArgs e)
-        {
-            slide(btnClearCart);
-        }
-
-        private void btnDailySales_Click(object sender, EventArgs e)
-        {
-            slide(btnDailySales);
-            DailySale dailySale = new DailySale();
-            dailySale.ShowDialog();
-        }
-
-        private void btnLogout_Click(object sender, EventArgs e)
-        {
-            slide(btnLogout);
-            if (MessageBox.Show("Are you sure you want to exit?", "Exit", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if(sender is Button button)
             {
-                Application.Exit();
+                TransactionClicked?.Invoke(this, button);
             }
-
         }
-
-        private void lblTimer_Click(object sender, EventArgs e)
+        private void SearchProduct_Click(object? sender, EventArgs e)
         {
-
+            if(sender is Button button)
+            {
+                SearchProductClicked?.Invoke(this, button);
+            }
         }
-
-        private void timer1_Tick(object sender, EventArgs e)
+        private void Payment_Click(object? sender, EventArgs e)
         {
-            lblTimer.Text = DateTime.Now.ToString("hh:mm:ss tt");
+            if(sender is Button button)
+            {
+                PaymentClicked?.Invoke(this, button);
+            }
         }
-
-        public void GetTranNo()
+        private void ClearCart_Click(object? sender, EventArgs e)
         {
-            string sdate = DateTime.Now.ToString("yyyyMMdd");
-            string transNo = sdate + "1001";
-            lblTranNo.Text = transNo;
+            if(sender is Button button)
+            {
+                ClearCartClicked?.Invoke(this, button);
+            }
         }
-        
-
-       
-
+        private void DailySales_Click(object? sender, EventArgs e)
+        {
+            if(sender is Button button)
+            {
+                DailySalesClicked?.Invoke(this, button);
+            }
+        }
+        private void Logout_Click(object? sender, EventArgs e)
+        {
+            if( sender is Button button)
+            {
+                LogoutClicked?.Invoke(this, button);
+            }
+        }
         private void barcodetxt_TextChanged(object sender, EventArgs e)
         {
 
         }
-
-       
-
-        
+        private void adminBtn_Click(object sender, EventArgs e)
+        {
+            slide(adminBtn);
+            Form1 form = new Form1();
+            form.ShowDialog();
+        }
     }
 }

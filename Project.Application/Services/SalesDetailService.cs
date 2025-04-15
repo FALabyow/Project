@@ -121,7 +121,7 @@ namespace Project.Application.Services
             {
                 var salesData = sales.Select(s => new SalesDetail
                 {
-                    SalesHistoryId= s.SalesHistoryId,
+                    SalesHistoryId= s.SalesHistoryId, //transaction id
                     ProductCode = s.ProductCode,
                     ProductName = s.ProductName,
                     QuantitySold = s.QuantitySold,

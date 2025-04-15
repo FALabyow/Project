@@ -31,11 +31,11 @@
             components = new System.ComponentModel.Container();
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             panel1 = new Panel();
+            adminBtn = new Button();
             btnLogout = new Button();
             btnDailySales = new Button();
             btnClearCart = new Button();
             btnPayment = new Button();
-            btnDiscount = new Button();
             btnSearchProduct = new Button();
             btnTransaction = new Button();
             panel2 = new Panel();
@@ -46,6 +46,11 @@
             panel4 = new Panel();
             picClose = new PictureBox();
             panel5 = new Panel();
+            checkOutBtn = new Button();
+            label9 = new Label();
+            label5 = new Label();
+            label4 = new Label();
+            label2 = new Label();
             barcodetxt = new TextBox();
             lblTimer = new Label();
             lblSalesTotal = new Label();
@@ -57,14 +62,14 @@
             label3 = new Label();
             lblDisplaytotal = new Label();
             dgvCashier = new DataGridView();
-            panel7 = new Panel();
-            timer1 = new System.Windows.Forms.Timer(components);
             BarcodeData = new DataGridViewTextBoxColumn();
             ProductName = new DataGridViewTextBoxColumn();
             ProductPrice = new DataGridViewTextBoxColumn();
             ProductQuantity = new DataGridViewTextBoxColumn();
             CategoryName = new DataGridViewTextBoxColumn();
             BuyerQuantity = new DataGridViewTextBoxColumn();
+            panel7 = new Panel();
+            timer1 = new System.Windows.Forms.Timer(components);
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
@@ -78,11 +83,11 @@
             // panel1
             // 
             panel1.BackColor = Color.FromArgb(141, 110, 98);
+            panel1.Controls.Add(adminBtn);
             panel1.Controls.Add(btnLogout);
             panel1.Controls.Add(btnDailySales);
             panel1.Controls.Add(btnClearCart);
             panel1.Controls.Add(btnPayment);
-            panel1.Controls.Add(btnDiscount);
             panel1.Controls.Add(btnSearchProduct);
             panel1.Controls.Add(btnTransaction);
             panel1.Controls.Add(panel2);
@@ -91,6 +96,24 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(200, 700);
             panel1.TabIndex = 0;
+            // 
+            // adminBtn
+            // 
+            adminBtn.BackColor = Color.FromArgb(193, 135, 107);
+            adminBtn.Dock = DockStyle.Top;
+            adminBtn.FlatAppearance.BorderSize = 0;
+            adminBtn.FlatStyle = FlatStyle.Flat;
+            adminBtn.Font = new Font("Microsoft Sans Serif", 10.8F);
+            adminBtn.ForeColor = Color.FromArgb(255, 245, 230);
+            adminBtn.Image = Properties.Resources.server_person_24dp_1F1F1F_FILL0_wght400_GRAD0_opsz24;
+            adminBtn.ImageAlign = ContentAlignment.MiddleLeft;
+            adminBtn.Location = new Point(0, 430);
+            adminBtn.Name = "adminBtn";
+            adminBtn.Size = new Size(200, 50);
+            adminBtn.TabIndex = 12;
+            adminBtn.Text = "Admin";
+            adminBtn.UseVisualStyleBackColor = false;
+            adminBtn.Click += adminBtn_Click;
             // 
             // btnLogout
             // 
@@ -109,7 +132,6 @@
             btnLogout.Text = " Logout";
             btnLogout.TextImageRelation = TextImageRelation.ImageBeforeText;
             btnLogout.UseVisualStyleBackColor = false;
-            btnLogout.Click += btnLogout_Click;
             // 
             // btnDailySales
             // 
@@ -121,13 +143,12 @@
             btnDailySales.ForeColor = Color.FromArgb(255, 245, 230);
             btnDailySales.Image = Properties.Resources.charts;
             btnDailySales.ImageAlign = ContentAlignment.MiddleLeft;
-            btnDailySales.Location = new Point(0, 430);
+            btnDailySales.Location = new Point(0, 380);
             btnDailySales.Name = "btnDailySales";
             btnDailySales.Size = new Size(200, 50);
             btnDailySales.TabIndex = 10;
             btnDailySales.Text = "Daily Sales";
             btnDailySales.UseVisualStyleBackColor = false;
-            btnDailySales.Click += btnDailySales_Click;
             // 
             // btnClearCart
             // 
@@ -139,13 +160,12 @@
             btnClearCart.ForeColor = Color.FromArgb(255, 245, 230);
             btnClearCart.Image = Properties.Resources.clear;
             btnClearCart.ImageAlign = ContentAlignment.MiddleLeft;
-            btnClearCart.Location = new Point(0, 380);
+            btnClearCart.Location = new Point(0, 330);
             btnClearCart.Name = "btnClearCart";
             btnClearCart.Size = new Size(200, 50);
             btnClearCart.TabIndex = 9;
             btnClearCart.Text = "Clear Cart";
             btnClearCart.UseVisualStyleBackColor = false;
-            btnClearCart.Click += btnClearCart_Click;
             // 
             // btnPayment
             // 
@@ -157,34 +177,14 @@
             btnPayment.ForeColor = Color.FromArgb(255, 245, 230);
             btnPayment.Image = Properties.Resources.payment_method;
             btnPayment.ImageAlign = ContentAlignment.MiddleLeft;
-            btnPayment.Location = new Point(0, 330);
+            btnPayment.Location = new Point(0, 280);
             btnPayment.Name = "btnPayment";
             btnPayment.Size = new Size(200, 50);
             btnPayment.TabIndex = 8;
             btnPayment.Text = "Settle Payment";
             btnPayment.TextAlign = ContentAlignment.MiddleRight;
             btnPayment.UseVisualStyleBackColor = false;
-            btnPayment.Click += btnPayment_Click;
-            // 
-            // btnDiscount
-            // 
-            btnDiscount.BackColor = Color.FromArgb(193, 135, 107);
-            btnDiscount.Dock = DockStyle.Top;
-            btnDiscount.FlatAppearance.BorderSize = 0;
-            btnDiscount.FlatStyle = FlatStyle.Flat;
-            btnDiscount.Font = new Font("Microsoft Sans Serif", 10.8F);
-            btnDiscount.ForeColor = Color.FromArgb(255, 245, 230);
-            btnDiscount.Image = Properties.Resources.discount;
-            btnDiscount.ImageAlign = ContentAlignment.MiddleLeft;
-            btnDiscount.Location = new Point(0, 280);
-            btnDiscount.Name = "btnDiscount";
-            btnDiscount.Size = new Size(200, 50);
-            btnDiscount.TabIndex = 7;
-            btnDiscount.Text = "   Add Discount";
-            btnDiscount.TextAlign = ContentAlignment.MiddleRight;
-            btnDiscount.TextImageRelation = TextImageRelation.ImageBeforeText;
-            btnDiscount.UseVisualStyleBackColor = false;
-            btnDiscount.Click += btnDiscount_Click;
+            
             // 
             // btnSearchProduct
             // 
@@ -203,7 +203,6 @@
             btnSearchProduct.Text = "Search Product";
             btnSearchProduct.TextAlign = ContentAlignment.MiddleRight;
             btnSearchProduct.UseVisualStyleBackColor = false;
-            btnSearchProduct.Click += btnSearchProduct_Click;
             // 
             // btnTransaction
             // 
@@ -222,7 +221,6 @@
             btnTransaction.Text = "New Transaction";
             btnTransaction.TextAlign = ContentAlignment.MiddleRight;
             btnTransaction.UseVisualStyleBackColor = false;
-            btnTransaction.Click += btnTransaction_Click;
             // 
             // panel2
             // 
@@ -242,7 +240,7 @@
             label1.ForeColor = Color.Black;
             label1.Location = new Point(55, 139);
             label1.Name = "label1";
-            label1.Size = new Size(63, 20);
+            label1.Size = new Size(80, 25);
             label1.TabIndex = 0;
             label1.Text = "Cashier";
             // 
@@ -281,7 +279,7 @@
             panel4.Dock = DockStyle.Top;
             panel4.Location = new Point(208, 0);
             panel4.Name = "panel4";
-            panel4.Size = new Size(992, 50);
+            panel4.Size = new Size(983, 50);
             panel4.TabIndex = 2;
             // 
             // picClose
@@ -289,17 +287,21 @@
             picClose.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             picClose.BackColor = Color.FromArgb(255, 128, 128);
             picClose.Image = Properties.Resources.close1;
-            picClose.Location = new Point(947, 8);
+            picClose.Location = new Point(938, 8);
             picClose.Name = "picClose";
             picClose.Size = new Size(39, 33);
             picClose.SizeMode = PictureBoxSizeMode.Zoom;
             picClose.TabIndex = 13;
             picClose.TabStop = false;
-            picClose.Click += picClose_Click;
             // 
             // panel5
             // 
             panel5.BackColor = Color.FromArgb(225, 215, 190);
+            panel5.Controls.Add(checkOutBtn);
+            panel5.Controls.Add(label9);
+            panel5.Controls.Add(label5);
+            panel5.Controls.Add(label4);
+            panel5.Controls.Add(label2);
             panel5.Controls.Add(barcodetxt);
             panel5.Controls.Add(lblTimer);
             panel5.Controls.Add(lblSalesTotal);
@@ -311,16 +313,64 @@
             panel5.Controls.Add(label3);
             panel5.Controls.Add(lblDisplaytotal);
             panel5.Dock = DockStyle.Right;
-            panel5.Location = new Point(980, 50);
+            panel5.Location = new Point(971, 50);
             panel5.Name = "panel5";
             panel5.Size = new Size(220, 650);
             panel5.TabIndex = 3;
             // 
+            // checkOutBtn
+            // 
+            checkOutBtn.BackColor = Color.Red;
+            checkOutBtn.Font = new Font("Microsoft Sans Serif", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            checkOutBtn.ForeColor = SystemColors.ButtonHighlight;
+            checkOutBtn.Location = new Point(0, 551);
+            checkOutBtn.Name = "checkOutBtn";
+            checkOutBtn.Size = new Size(220, 46);
+            checkOutBtn.TabIndex = 15;
+            checkOutBtn.Text = "Checkout";
+            checkOutBtn.UseVisualStyleBackColor = false;
+            // 
+            // label9
+            // 
+            label9.Location = new Point(124, 455);
+            label9.Name = "label9";
+            label9.Size = new Size(84, 21);
+            label9.TabIndex = 14;
+            label9.Text = "0.00";
+            label9.TextAlign = ContentAlignment.MiddleRight;
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new Point(8, 454);
+            label5.Name = "label5";
+            label5.Size = new Size(78, 22);
+            label5.TabIndex = 13;
+            label5.Text = "Change ";
+            // 
+            // label4
+            // 
+            label4.Location = new Point(124, 420);
+            label4.Name = "label4";
+            label4.Size = new Size(84, 21);
+            label4.TabIndex = 12;
+            label4.Text = "0.00";
+            label4.TextAlign = ContentAlignment.MiddleRight;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(8, 419);
+            label2.Name = "label2";
+            label2.Size = new Size(52, 22);
+            label2.TabIndex = 11;
+            label2.Text = "Cash";
+            // 
             // barcodetxt
             // 
-            barcodetxt.Location = new Point(18, 280);
+            barcodetxt.Location = new Point(8, 280);
             barcodetxt.Name = "barcodetxt";
-            barcodetxt.Size = new Size(190, 24);
+            barcodetxt.Size = new Size(190, 28);
             barcodetxt.TabIndex = 10;
             barcodetxt.TextChanged += barcodetxt_TextChanged;
             // 
@@ -335,7 +385,6 @@
             lblTimer.TabIndex = 9;
             lblTimer.Text = "00:00:00";
             lblTimer.TextAlign = ContentAlignment.MiddleCenter;
-            lblTimer.Click += lblTimer_Click;
             // 
             // lblSalesTotal
             // 
@@ -351,9 +400,9 @@
             label8.AutoSize = true;
             label8.Location = new Point(8, 380);
             label8.Name = "label8";
-            label8.Size = new Size(90, 18);
+            label8.Size = new Size(93, 22);
             label8.TabIndex = 7;
-            label8.Text = "Sales Total :";
+            label8.Text = "Sub Total ";
             // 
             // label7
             // 
@@ -361,7 +410,7 @@
             label7.Font = new Font("Microsoft Sans Serif", 10.8F, FontStyle.Underline, GraphicsUnit.Point, 0);
             label7.Location = new Point(8, 247);
             label7.Name = "label7";
-            label7.Size = new Size(64, 18);
+            label7.Size = new Size(77, 22);
             label7.TabIndex = 5;
             label7.Text = "Barcode";
             // 
@@ -370,7 +419,7 @@
             lblDate.AutoSize = true;
             lblDate.Location = new Point(8, 204);
             lblDate.Name = "lblDate";
-            lblDate.Size = new Size(72, 18);
+            lblDate.Size = new Size(90, 22);
             lblDate.TabIndex = 4;
             lblDate.Text = "00000000";
             // 
@@ -380,7 +429,7 @@
             label6.Font = new Font("Microsoft Sans Serif", 10.8F, FontStyle.Underline, GraphicsUnit.Point, 0);
             label6.Location = new Point(8, 167);
             label6.Name = "label6";
-            label6.Size = new Size(39, 18);
+            label6.Size = new Size(48, 22);
             label6.TabIndex = 3;
             label6.Text = "Date";
             // 
@@ -389,7 +438,7 @@
             lblTranNo.AutoSize = true;
             lblTranNo.Location = new Point(6, 125);
             lblTranNo.Name = "lblTranNo";
-            lblTranNo.Size = new Size(80, 18);
+            lblTranNo.Size = new Size(100, 22);
             lblTranNo.TabIndex = 2;
             lblTranNo.Text = "000000000";
             // 
@@ -399,7 +448,7 @@
             label3.Font = new Font("Microsoft Sans Serif", 10.8F, FontStyle.Underline, GraphicsUnit.Point, 0);
             label3.Location = new Point(6, 88);
             label3.Name = "label3";
-            label3.Size = new Size(114, 18);
+            label3.Size = new Size(138, 22);
             label3.TabIndex = 1;
             label3.Text = "Transaction No.";
             // 
@@ -438,28 +487,15 @@
             dgvCashier.Name = "dgvCashier";
             dgvCashier.RowHeadersVisible = false;
             dgvCashier.RowHeadersWidth = 51;
-            dgvCashier.Size = new Size(772, 650);
+            dgvCashier.Size = new Size(763, 650);
             dgvCashier.TabIndex = 5;
-           
-            // 
-            // panel7
-            // 
-            panel7.Dock = DockStyle.Fill;
-            panel7.Location = new Point(0, 0);
-            panel7.Name = "panel7";
-            panel7.Size = new Size(1200, 700);
-            panel7.TabIndex = 0;
-            // 
-            // timer1
-            // 
-            timer1.Enabled = true;
-            timer1.Tick += timer1_Tick;
             // 
             // BarcodeData
             // 
             BarcodeData.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             BarcodeData.DataPropertyName = "BarcodeData";
             BarcodeData.HeaderText = "Barcode";
+            BarcodeData.MinimumWidth = 6;
             BarcodeData.Name = "BarcodeData";
             // 
             // ProductName
@@ -467,6 +503,7 @@
             ProductName.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             ProductName.DataPropertyName = "ProductName";
             ProductName.HeaderText = "Description";
+            ProductName.MinimumWidth = 6;
             ProductName.Name = "ProductName";
             // 
             // ProductPrice
@@ -474,6 +511,7 @@
             ProductPrice.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             ProductPrice.DataPropertyName = "ProductPrice";
             ProductPrice.HeaderText = "Price";
+            ProductPrice.MinimumWidth = 6;
             ProductPrice.Name = "ProductPrice";
             // 
             // ProductQuantity
@@ -481,6 +519,7 @@
             ProductQuantity.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             ProductQuantity.DataPropertyName = "ProductQuantity";
             ProductQuantity.HeaderText = "Stock";
+            ProductQuantity.MinimumWidth = 6;
             ProductQuantity.Name = "ProductQuantity";
             // 
             // CategoryName
@@ -488,20 +527,35 @@
             CategoryName.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             CategoryName.DataPropertyName = "CategoryName";
             CategoryName.HeaderText = "Category";
+            CategoryName.MinimumWidth = 6;
             CategoryName.Name = "CategoryName";
             // 
             // BuyerQuantity
             // 
             BuyerQuantity.DataPropertyName = "BuyerQuantity";
             BuyerQuantity.HeaderText = "Quantity";
+            BuyerQuantity.MinimumWidth = 6;
             BuyerQuantity.Name = "BuyerQuantity";
+            BuyerQuantity.Width = 125;
+            // 
+            // panel7
+            // 
+            panel7.Dock = DockStyle.Fill;
+            panel7.Location = new Point(0, 0);
+            panel7.Name = "panel7";
+            panel7.Size = new Size(1191, 700);
+            panel7.TabIndex = 0;
+            // 
+            // timer1
+            // 
+            timer1.Enabled = true;
             // 
             // Cashier
             // 
-            AutoScaleDimensions = new SizeF(8F, 17F);
+            AutoScaleDimensions = new SizeF(10F, 22F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(225, 215, 190);
-            ClientSize = new Size(1200, 700);
+            ClientSize = new Size(1191, 700);
             Controls.Add(dgvCashier);
             Controls.Add(panel5);
             Controls.Add(panel4);
@@ -538,7 +592,6 @@
         private Button btnTransaction;
         private Button btnClearCart;
         private Button btnPayment;
-        private Button btnDiscount;
         private Button btnSearchProduct;
         private Button btnDailySales;
         private Label label1;
@@ -565,5 +618,11 @@
         private DataGridViewTextBoxColumn ProductQuantity;
         private DataGridViewTextBoxColumn CategoryName;
         private DataGridViewTextBoxColumn BuyerQuantity;
+        private Label label4;
+        private Label label2;
+        private Button checkOutBtn;
+        private Label label9;
+        private Label label5;
+        private Button adminBtn;
     }
 }
