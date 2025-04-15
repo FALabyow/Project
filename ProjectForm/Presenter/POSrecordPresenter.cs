@@ -137,5 +137,30 @@ namespace ProjectForm.Presenter
                 return new List<POSrecordDto2>();
             }
         }
+        public async Task<List<GetInventoryListDto>> LoadInventoryListAsync()
+        {
+            try
+            {
+                var res = await _httpClient.GetAsync($"/Products/Inventory");
+
+                res.EnsureSuccessStatusCode();
+
+                var criticalProducts = await res.Content.ReadFromJsonAsync<List<GetInventoryListDto>>();
+
+                if (criticalProducts == null)
+                {
+                    return new List<GetInventoryListDto>();
+                }
+
+                return criticalProducts;
+
+            }
+            catch (HttpRequestException ex)
+            {
+                MessageBox.Show(ex.Message);
+                return new List<GetInventoryListDto>();
+            }
+        }
+
     }
 }

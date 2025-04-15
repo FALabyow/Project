@@ -20,6 +20,7 @@ namespace ProjectForm
         private DateOnly dateTo;
         public string selectedComboBox = string.Empty;
         private List<POSrecordDto2> criticalItems = new List<POSrecordDto2>();
+        private List<GetInventoryListDto> inventoryList = new List<GetInventoryListDto>();
         public POSrecord()
         {
             InitializeComponent();
@@ -49,6 +50,10 @@ namespace ProjectForm
         public void DisplayCriticalItems(List<POSrecordDto2> criticalItems)
         {
             dgvCriticalitem.DataSource = criticalItems;
+        }
+        public void DisplayInventoryList(List<GetInventoryListDto> inventoryList)
+        {
+            dgvInventorylist.DataSource = inventoryList;
         }
         public string SelectedItem(ComboBox comboBox)
         {
@@ -115,6 +120,8 @@ namespace ProjectForm
             if(_presenter != null)
             {
                 criticalItems = await _presenter.LoadCriticalItemAsync();
+                inventoryList = await _presenter.LoadInventoryListAsync();
+                DisplayInventoryList(inventoryList);
                 DisplayCriticalItems(criticalItems);
             }
         }

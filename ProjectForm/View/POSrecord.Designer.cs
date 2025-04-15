@@ -40,13 +40,13 @@
             DataGridViewCellStyle dataGridViewCellStyle10 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle11 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle12 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle17 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle18 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle19 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle13 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle14 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle15 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle16 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle17 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle18 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle19 = new DataGridViewCellStyle();
             panel1 = new Panel();
             lblManageRecord = new Label();
             tabControl1 = new TabControl();
@@ -90,23 +90,6 @@
             Column7 = new DataGridViewTextBoxColumn();
             tabPage4 = new TabPage();
             dgvInventorylist = new DataGridView();
-            panel4 = new Panel();
-            tabPage5 = new TabPage();
-            dgvStockin = new DataGridView();
-            dataGridViewTextBoxColumn19 = new DataGridViewTextBoxColumn();
-            dataGridViewTextBoxColumn21 = new DataGridViewTextBoxColumn();
-            dataGridViewTextBoxColumn26 = new DataGridViewTextBoxColumn();
-            dataGridViewTextBoxColumn20 = new DataGridViewTextBoxColumn();
-            dataGridViewTextBoxColumn22 = new DataGridViewTextBoxColumn();
-            dataGridViewTextBoxColumn25 = new DataGridViewTextBoxColumn();
-            Column9 = new DataGridViewTextBoxColumn();
-            panel5 = new Panel();
-            btnLoadstockin = new Button();
-            comboBox1 = new ComboBox();
-            dtTostockin = new DateTimePicker();
-            label5 = new Label();
-            dtFromstockin = new DateTimePicker();
-            label6 = new Label();
             dataGridViewTextBoxColumn11 = new DataGridViewTextBoxColumn();
             dataGridViewTextBoxColumn12 = new DataGridViewTextBoxColumn();
             dataGridViewTextBoxColumn13 = new DataGridViewTextBoxColumn();
@@ -115,6 +98,22 @@
             dataGridViewTextBoxColumn16 = new DataGridViewTextBoxColumn();
             dataGridViewTextBoxColumn18 = new DataGridViewTextBoxColumn();
             dataGridViewTextBoxColumn17 = new DataGridViewTextBoxColumn();
+            panel4 = new Panel();
+            tabPage5 = new TabPage();
+            dgvStockin = new DataGridView();
+            panel5 = new Panel();
+            btnLoadstockin = new Button();
+            comboBox1 = new ComboBox();
+            dtTostockin = new DateTimePicker();
+            label5 = new Label();
+            dtFromstockin = new DateTimePicker();
+            label6 = new Label();
+            dataGridViewTextBoxColumn19 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn26 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn20 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn22 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn25 = new DataGridViewTextBoxColumn();
+            Column9 = new DataGridViewTextBoxColumn();
             panel1.SuspendLayout();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
@@ -486,9 +485,9 @@
             // 
             tabPage3.BackColor = Color.White;
             tabPage3.Controls.Add(dgvCriticalitem);
-            tabPage3.Location = new Point(4, 36);
+            tabPage3.Location = new Point(4, 35);
             tabPage3.Name = "tabPage3";
-            tabPage3.Size = new Size(974, 516);
+            tabPage3.Size = new Size(974, 517);
             tabPage3.TabIndex = 2;
             tabPage3.Text = "Critical Stocks";
             // 
@@ -515,7 +514,7 @@
             dgvCriticalitem.Name = "dgvCriticalitem";
             dgvCriticalitem.RowHeadersVisible = false;
             dgvCriticalitem.RowHeadersWidth = 51;
-            dgvCriticalitem.Size = new Size(974, 516);
+            dgvCriticalitem.Size = new Size(974, 517);
             dgvCriticalitem.TabIndex = 7;
             // 
             // dataGridViewTextBoxColumn6
@@ -601,9 +600,9 @@
             tabPage4.BackColor = Color.White;
             tabPage4.Controls.Add(dgvInventorylist);
             tabPage4.Controls.Add(panel4);
-            tabPage4.Location = new Point(4, 36);
+            tabPage4.Location = new Point(4, 35);
             tabPage4.Name = "tabPage4";
-            tabPage4.Size = new Size(974, 516);
+            tabPage4.Size = new Size(974, 517);
             tabPage4.TabIndex = 3;
             tabPage4.Text = "Inventory List";
             // 
@@ -630,184 +629,8 @@
             dgvInventorylist.Name = "dgvInventorylist";
             dgvInventorylist.RowHeadersVisible = false;
             dgvInventorylist.RowHeadersWidth = 51;
-            dgvInventorylist.Size = new Size(974, 449);
+            dgvInventorylist.Size = new Size(974, 450);
             dgvInventorylist.TabIndex = 8;
-            // 
-            // panel4
-            // 
-            panel4.Dock = DockStyle.Top;
-            panel4.Location = new Point(0, 0);
-            panel4.Name = "panel4";
-            panel4.Size = new Size(974, 67);
-            panel4.TabIndex = 0;
-            // 
-            // tabPage5
-            // 
-            tabPage5.Controls.Add(dgvStockin);
-            tabPage5.Controls.Add(panel5);
-            tabPage5.Location = new Point(4, 35);
-            tabPage5.Name = "tabPage5";
-            tabPage5.Size = new Size(974, 517);
-            tabPage5.TabIndex = 4;
-            tabPage5.Text = "Stock In History";
-            tabPage5.UseVisualStyleBackColor = true;
-            // 
-            // dgvStockin
-            // 
-            dgvStockin.AllowUserToAddRows = false;
-            dgvStockin.BackgroundColor = Color.White;
-            dgvStockin.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle17.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle17.BackColor = Color.FromArgb(93, 64, 55);
-            dataGridViewCellStyle17.Font = new Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle17.ForeColor = Color.FromArgb(255, 236, 179);
-            dataGridViewCellStyle17.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle17.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle17.WrapMode = DataGridViewTriState.True;
-            dgvStockin.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle17;
-            dgvStockin.ColumnHeadersHeight = 40;
-            dgvStockin.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dgvStockin.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn19, dataGridViewTextBoxColumn21, dataGridViewTextBoxColumn26, dataGridViewTextBoxColumn20, dataGridViewTextBoxColumn22, dataGridViewTextBoxColumn25, Column9 });
-            dgvStockin.Dock = DockStyle.Fill;
-            dgvStockin.EnableHeadersVisualStyles = false;
-            dgvStockin.GridColor = Color.White;
-            dgvStockin.Location = new Point(0, 116);
-            dgvStockin.Name = "dgvStockin";
-            dgvStockin.RowHeadersVisible = false;
-            dgvStockin.RowHeadersWidth = 51;
-            dgvStockin.Size = new Size(974, 401);
-            dgvStockin.TabIndex = 9;
-            // 
-            // dataGridViewTextBoxColumn19
-            // 
-            dataGridViewTextBoxColumn19.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewTextBoxColumn19.HeaderText = "No.";
-            dataGridViewTextBoxColumn19.MinimumWidth = 6;
-            dataGridViewTextBoxColumn19.Name = "dataGridViewTextBoxColumn19";
-            dataGridViewTextBoxColumn19.Width = 67;
-            // 
-            // dataGridViewTextBoxColumn21
-            // 
-            dataGridViewTextBoxColumn21.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewTextBoxColumn21.HeaderText = "ID";
-            dataGridViewTextBoxColumn21.MinimumWidth = 6;
-            dataGridViewTextBoxColumn21.Name = "dataGridViewTextBoxColumn21";
-            dataGridViewTextBoxColumn21.Width = 55;
-            // 
-            // dataGridViewTextBoxColumn26
-            // 
-            dataGridViewTextBoxColumn26.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle18.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewTextBoxColumn26.DefaultCellStyle = dataGridViewCellStyle18;
-            dataGridViewTextBoxColumn26.HeaderText = "Reference#";
-            dataGridViewTextBoxColumn26.MinimumWidth = 6;
-            dataGridViewTextBoxColumn26.Name = "dataGridViewTextBoxColumn26";
-            dataGridViewTextBoxColumn26.Width = 143;
-            // 
-            // dataGridViewTextBoxColumn20
-            // 
-            dataGridViewTextBoxColumn20.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewTextBoxColumn20.HeaderText = "Pcode";
-            dataGridViewTextBoxColumn20.MinimumWidth = 6;
-            dataGridViewTextBoxColumn20.Name = "dataGridViewTextBoxColumn20";
-            dataGridViewTextBoxColumn20.Width = 96;
-            // 
-            // dataGridViewTextBoxColumn22
-            // 
-            dataGridViewTextBoxColumn22.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewTextBoxColumn22.HeaderText = "Description";
-            dataGridViewTextBoxColumn22.MinimumWidth = 6;
-            dataGridViewTextBoxColumn22.Name = "dataGridViewTextBoxColumn22";
-            // 
-            // dataGridViewTextBoxColumn25
-            // 
-            dataGridViewTextBoxColumn25.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle19.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewTextBoxColumn25.DefaultCellStyle = dataGridViewCellStyle19;
-            dataGridViewTextBoxColumn25.HeaderText = "Qty";
-            dataGridViewTextBoxColumn25.MinimumWidth = 6;
-            dataGridViewTextBoxColumn25.Name = "dataGridViewTextBoxColumn25";
-            dataGridViewTextBoxColumn25.Width = 71;
-            // 
-            // Column9
-            // 
-            Column9.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            Column9.HeaderText = "Stock In Date";
-            Column9.MinimumWidth = 6;
-            Column9.Name = "Column9";
-            Column9.Width = 156;
-            // 
-            // panel5
-            // 
-            panel5.Controls.Add(btnLoadstockin);
-            panel5.Controls.Add(comboBox1);
-            panel5.Controls.Add(dtTostockin);
-            panel5.Controls.Add(label5);
-            panel5.Controls.Add(dtFromstockin);
-            panel5.Controls.Add(label6);
-            panel5.Dock = DockStyle.Top;
-            panel5.Location = new Point(0, 0);
-            panel5.Name = "panel5";
-            panel5.Size = new Size(974, 116);
-            panel5.TabIndex = 1;
-            // 
-            // btnLoadstockin
-            // 
-            btnLoadstockin.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
-            btnLoadstockin.BackColor = Color.Peru;
-            btnLoadstockin.FlatAppearance.BorderSize = 0;
-            btnLoadstockin.FlatStyle = FlatStyle.Flat;
-            btnLoadstockin.Font = new Font("Century Gothic", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnLoadstockin.Location = new Point(684, 36);
-            btnLoadstockin.Name = "btnLoadstockin";
-            btnLoadstockin.Size = new Size(167, 31);
-            btnLoadstockin.TabIndex = 11;
-            btnLoadstockin.Text = "Load Record";
-            btnLoadstockin.UseVisualStyleBackColor = false;
-            // 
-            // comboBox1
-            // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Items.AddRange(new object[] { "Sort By Qty", "Sort By Total Amount", "" });
-            comboBox1.Location = new Point(482, 38);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(169, 29);
-            comboBox1.TabIndex = 4;
-            comboBox1.Text = "Select Sort Type";
-            // 
-            // dtTostockin
-            // 
-            dtTostockin.Format = DateTimePickerFormat.Short;
-            dtTostockin.Location = new Point(328, 37);
-            dtTostockin.Name = "dtTostockin";
-            dtTostockin.Size = new Size(129, 30);
-            dtTostockin.TabIndex = 3;
-            // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.Location = new Point(292, 42);
-            label5.Name = "label5";
-            label5.Size = new Size(30, 21);
-            label5.TabIndex = 2;
-            label5.Text = "To";
-            // 
-            // dtFromstockin
-            // 
-            dtFromstockin.Format = DateTimePickerFormat.Short;
-            dtFromstockin.Location = new Point(157, 37);
-            dtFromstockin.Name = "dtFromstockin";
-            dtFromstockin.Size = new Size(129, 30);
-            dtFromstockin.TabIndex = 1;
-            // 
-            // label6
-            // 
-            label6.AutoSize = true;
-            label6.Location = new Point(18, 42);
-            label6.Name = "label6";
-            label6.Size = new Size(133, 21);
-            label6.TabIndex = 0;
-            label6.Text = "Filter By : From";
             // 
             // dataGridViewTextBoxColumn11
             // 
@@ -887,6 +710,179 @@
             dataGridViewTextBoxColumn17.Name = "dataGridViewTextBoxColumn17";
             dataGridViewTextBoxColumn17.Width = 106;
             // 
+            // panel4
+            // 
+            panel4.Dock = DockStyle.Top;
+            panel4.Location = new Point(0, 0);
+            panel4.Name = "panel4";
+            panel4.Size = new Size(974, 67);
+            panel4.TabIndex = 0;
+            // 
+            // tabPage5
+            // 
+            tabPage5.Controls.Add(dgvStockin);
+            tabPage5.Controls.Add(panel5);
+            tabPage5.Location = new Point(4, 36);
+            tabPage5.Name = "tabPage5";
+            tabPage5.Size = new Size(974, 516);
+            tabPage5.TabIndex = 4;
+            tabPage5.Text = "Stock In History";
+            tabPage5.UseVisualStyleBackColor = true;
+            // 
+            // dgvStockin
+            // 
+            dgvStockin.AllowUserToAddRows = false;
+            dgvStockin.BackgroundColor = Color.White;
+            dgvStockin.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle17.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle17.BackColor = Color.FromArgb(93, 64, 55);
+            dataGridViewCellStyle17.Font = new Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle17.ForeColor = Color.FromArgb(255, 236, 179);
+            dataGridViewCellStyle17.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle17.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle17.WrapMode = DataGridViewTriState.True;
+            dgvStockin.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle17;
+            dgvStockin.ColumnHeadersHeight = 40;
+            dgvStockin.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            dgvStockin.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn19, dataGridViewTextBoxColumn26, dataGridViewTextBoxColumn20, dataGridViewTextBoxColumn22, dataGridViewTextBoxColumn25, Column9 });
+            dgvStockin.Dock = DockStyle.Fill;
+            dgvStockin.EnableHeadersVisualStyles = false;
+            dgvStockin.GridColor = Color.White;
+            dgvStockin.Location = new Point(0, 116);
+            dgvStockin.Name = "dgvStockin";
+            dgvStockin.RowHeadersVisible = false;
+            dgvStockin.RowHeadersWidth = 51;
+            dgvStockin.Size = new Size(974, 400);
+            dgvStockin.TabIndex = 9;
+            // 
+            // panel5
+            // 
+            panel5.Controls.Add(btnLoadstockin);
+            panel5.Controls.Add(comboBox1);
+            panel5.Controls.Add(dtTostockin);
+            panel5.Controls.Add(label5);
+            panel5.Controls.Add(dtFromstockin);
+            panel5.Controls.Add(label6);
+            panel5.Dock = DockStyle.Top;
+            panel5.Location = new Point(0, 0);
+            panel5.Name = "panel5";
+            panel5.Size = new Size(974, 116);
+            panel5.TabIndex = 1;
+            // 
+            // btnLoadstockin
+            // 
+            btnLoadstockin.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
+            btnLoadstockin.BackColor = Color.Peru;
+            btnLoadstockin.FlatAppearance.BorderSize = 0;
+            btnLoadstockin.FlatStyle = FlatStyle.Flat;
+            btnLoadstockin.Font = new Font("Century Gothic", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnLoadstockin.Location = new Point(684, 36);
+            btnLoadstockin.Name = "btnLoadstockin";
+            btnLoadstockin.Size = new Size(167, 31);
+            btnLoadstockin.TabIndex = 11;
+            btnLoadstockin.Text = "Load Record";
+            btnLoadstockin.UseVisualStyleBackColor = false;
+            // 
+            // comboBox1
+            // 
+            comboBox1.FormattingEnabled = true;
+            comboBox1.Items.AddRange(new object[] { "Sort By Qty", "Sort By Total Amount", "" });
+            comboBox1.Location = new Point(482, 38);
+            comboBox1.Name = "comboBox1";
+            comboBox1.Size = new Size(169, 29);
+            comboBox1.TabIndex = 4;
+            comboBox1.Text = "Select Sort Type";
+            // 
+            // dtTostockin
+            // 
+            dtTostockin.Format = DateTimePickerFormat.Short;
+            dtTostockin.Location = new Point(328, 37);
+            dtTostockin.Name = "dtTostockin";
+            dtTostockin.Size = new Size(129, 30);
+            dtTostockin.TabIndex = 3;
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new Point(292, 42);
+            label5.Name = "label5";
+            label5.Size = new Size(30, 21);
+            label5.TabIndex = 2;
+            label5.Text = "To";
+            // 
+            // dtFromstockin
+            // 
+            dtFromstockin.Format = DateTimePickerFormat.Short;
+            dtFromstockin.Location = new Point(157, 37);
+            dtFromstockin.Name = "dtFromstockin";
+            dtFromstockin.Size = new Size(129, 30);
+            dtFromstockin.TabIndex = 1;
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Location = new Point(18, 42);
+            label6.Name = "label6";
+            label6.Size = new Size(133, 21);
+            label6.TabIndex = 0;
+            label6.Text = "Filter By : From";
+            // 
+            // dataGridViewTextBoxColumn19
+            // 
+            dataGridViewTextBoxColumn19.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridViewTextBoxColumn19.HeaderText = "No.";
+            dataGridViewTextBoxColumn19.MinimumWidth = 6;
+            dataGridViewTextBoxColumn19.Name = "dataGridViewTextBoxColumn19";
+            dataGridViewTextBoxColumn19.Width = 67;
+            // 
+            // dataGridViewTextBoxColumn26
+            // 
+            dataGridViewTextBoxColumn26.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridViewTextBoxColumn26.DataPropertyName = "ReferenceNum";
+            dataGridViewCellStyle18.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewTextBoxColumn26.DefaultCellStyle = dataGridViewCellStyle18;
+            dataGridViewTextBoxColumn26.HeaderText = "Reference#";
+            dataGridViewTextBoxColumn26.MinimumWidth = 6;
+            dataGridViewTextBoxColumn26.Name = "dataGridViewTextBoxColumn26";
+            dataGridViewTextBoxColumn26.Width = 143;
+            // 
+            // dataGridViewTextBoxColumn20
+            // 
+            dataGridViewTextBoxColumn20.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridViewTextBoxColumn20.DataPropertyName = "ProductCode";
+            dataGridViewTextBoxColumn20.HeaderText = "Pcode";
+            dataGridViewTextBoxColumn20.MinimumWidth = 6;
+            dataGridViewTextBoxColumn20.Name = "dataGridViewTextBoxColumn20";
+            dataGridViewTextBoxColumn20.Width = 96;
+            // 
+            // dataGridViewTextBoxColumn22
+            // 
+            dataGridViewTextBoxColumn22.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewTextBoxColumn22.DataPropertyName = "ProductName";
+            dataGridViewTextBoxColumn22.HeaderText = "Description";
+            dataGridViewTextBoxColumn22.MinimumWidth = 6;
+            dataGridViewTextBoxColumn22.Name = "dataGridViewTextBoxColumn22";
+            // 
+            // dataGridViewTextBoxColumn25
+            // 
+            dataGridViewTextBoxColumn25.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridViewTextBoxColumn25.DataPropertyName = "ProductQuantity";
+            dataGridViewCellStyle19.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewTextBoxColumn25.DefaultCellStyle = dataGridViewCellStyle19;
+            dataGridViewTextBoxColumn25.HeaderText = "Qty";
+            dataGridViewTextBoxColumn25.MinimumWidth = 6;
+            dataGridViewTextBoxColumn25.Name = "dataGridViewTextBoxColumn25";
+            dataGridViewTextBoxColumn25.Width = 71;
+            // 
+            // Column9
+            // 
+            Column9.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            Column9.DataPropertyName = "StockInDate";
+            Column9.HeaderText = "Stock In Date";
+            Column9.MinimumWidth = 6;
+            Column9.Name = "Column9";
+            Column9.Width = 156;
+            // 
             // POSrecord
             // 
             AutoScaleDimensions = new SizeF(11F, 21F);
@@ -961,13 +957,6 @@
         private DateTimePicker dtFromstockin;
         private Label label6;
         private DataGridView dgvStockin;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn19;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn21;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn26;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn20;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn22;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn25;
-        private DataGridViewTextBoxColumn Column9;
         private DataGridViewTextBoxColumn Column1;
         private DataGridViewTextBoxColumn ProductCode;
         private DataGridViewTextBoxColumn ProductName;
@@ -994,5 +983,11 @@
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn16;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn18;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn17;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn19;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn26;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn20;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn22;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn25;
+        private DataGridViewTextBoxColumn Column9;
     }
 }

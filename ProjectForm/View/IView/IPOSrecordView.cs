@@ -16,6 +16,7 @@ namespace ProjectForm.View.IView
         void DisplayTopSellingItems(List<POSrecordDto1> topSelling);
         void DisplaySoldItems(List<POSrecordDto1> sold);
         void DisplayCriticalItems(List<POSrecordDto2> criticalItems);
+        void DisplayInventoryList(List<GetInventoryListDto> inventoryList);
         string SelectedItem(ComboBox comboBox);
         DateOnly StartDate(DateTimePicker dateTimePicker);
         DateOnly EndDate(DateTimePicker dateTimePicker);
