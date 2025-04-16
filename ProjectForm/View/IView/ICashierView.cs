@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Project.Application.DTOs;
+using ProjectForm.Model.DTOs;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -20,7 +22,17 @@ namespace ProjectForm.View.IView
         event EventHandler<Button>? LogoutClicked;
         event EventHandler<Button>? ClearCartClicked;
         event EventHandler<Button>? AdminClicked;
+        event EventHandler? BarcodeTextChanged;
         string Timer { get; set; }
+        string Barcode { get; }
+        string Date { get; set; }
         void Slider(Button button);
+        void DisplayProducts(DisplayAvailableProductsDto products);
+        bool ProductExistsInGrid(string barcode);
+        void UpdateProductQuantityInGrid(string barcode, int newQuantity);
+        int GetProductQuantityFromGrid(string barcode);
+        void ClearBarcode();
+
+
     }
 }

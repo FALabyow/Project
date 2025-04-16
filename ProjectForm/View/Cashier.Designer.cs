@@ -62,14 +62,14 @@
             label3 = new Label();
             lblDisplaytotal = new Label();
             dgvCashier = new DataGridView();
-            BarcodeData = new DataGridViewTextBoxColumn();
-            ProductName = new DataGridViewTextBoxColumn();
-            ProductPrice = new DataGridViewTextBoxColumn();
-            ProductQuantity = new DataGridViewTextBoxColumn();
-            CategoryName = new DataGridViewTextBoxColumn();
-            BuyerQuantity = new DataGridViewTextBoxColumn();
             panel7 = new Panel();
             timer1 = new System.Windows.Forms.Timer(components);
+            BarcodeData = new DataGridViewTextBoxColumn();
+            Column2 = new DataGridViewTextBoxColumn();
+            ProductName = new DataGridViewTextBoxColumn();
+            ProductPrice = new DataGridViewTextBoxColumn();
+            BuyerQuantity = new DataGridViewTextBoxColumn();
+            Column1 = new DataGridViewTextBoxColumn();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
@@ -113,7 +113,6 @@
             adminBtn.TabIndex = 12;
             adminBtn.Text = "Admin";
             adminBtn.UseVisualStyleBackColor = false;
-            
             // 
             // btnLogout
             // 
@@ -184,7 +183,6 @@
             btnPayment.Text = "Settle Payment";
             btnPayment.TextAlign = ContentAlignment.MiddleRight;
             btnPayment.UseVisualStyleBackColor = false;
-            
             // 
             // btnSearchProduct
             // 
@@ -372,7 +370,6 @@
             barcodetxt.Name = "barcodetxt";
             barcodetxt.Size = new Size(190, 28);
             barcodetxt.TabIndex = 10;
-            barcodetxt.TextChanged += barcodetxt_TextChanged;
             // 
             // lblTimer
             // 
@@ -479,7 +476,7 @@
             dgvCashier.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dgvCashier.ColumnHeadersHeight = 40;
             dgvCashier.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dgvCashier.Columns.AddRange(new DataGridViewColumn[] { BarcodeData, ProductName, ProductPrice, ProductQuantity, CategoryName, BuyerQuantity });
+            dgvCashier.Columns.AddRange(new DataGridViewColumn[] { BarcodeData, Column2, ProductName, ProductPrice, BuyerQuantity, Column1 });
             dgvCashier.Dock = DockStyle.Fill;
             dgvCashier.EnableHeadersVisualStyles = false;
             dgvCashier.GridColor = Color.White;
@@ -490,6 +487,18 @@
             dgvCashier.Size = new Size(763, 650);
             dgvCashier.TabIndex = 5;
             // 
+            // panel7
+            // 
+            panel7.Dock = DockStyle.Fill;
+            panel7.Location = new Point(0, 0);
+            panel7.Name = "panel7";
+            panel7.Size = new Size(1191, 700);
+            panel7.TabIndex = 0;
+            // 
+            // timer1
+            // 
+            timer1.Enabled = true;
+            // 
             // BarcodeData
             // 
             BarcodeData.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
@@ -497,6 +506,15 @@
             BarcodeData.HeaderText = "Barcode";
             BarcodeData.MinimumWidth = 6;
             BarcodeData.Name = "BarcodeData";
+            // 
+            // Column2
+            // 
+            Column2.DataPropertyName = "StockId";
+            Column2.HeaderText = "StockId";
+            Column2.MinimumWidth = 6;
+            Column2.Name = "Column2";
+            Column2.Visible = false;
+            Column2.Width = 125;
             // 
             // ProductName
             // 
@@ -514,41 +532,21 @@
             ProductPrice.MinimumWidth = 6;
             ProductPrice.Name = "ProductPrice";
             // 
-            // ProductQuantity
-            // 
-            ProductQuantity.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            ProductQuantity.DataPropertyName = "ProductQuantity";
-            ProductQuantity.HeaderText = "Stock";
-            ProductQuantity.MinimumWidth = 6;
-            ProductQuantity.Name = "ProductQuantity";
-            // 
-            // CategoryName
-            // 
-            CategoryName.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            CategoryName.DataPropertyName = "CategoryName";
-            CategoryName.HeaderText = "Category";
-            CategoryName.MinimumWidth = 6;
-            CategoryName.Name = "CategoryName";
-            // 
             // BuyerQuantity
             // 
             BuyerQuantity.DataPropertyName = "BuyerQuantity";
-            BuyerQuantity.HeaderText = "Quantity";
+            BuyerQuantity.HeaderText = "Qty";
             BuyerQuantity.MinimumWidth = 6;
             BuyerQuantity.Name = "BuyerQuantity";
             BuyerQuantity.Width = 125;
             // 
-            // panel7
+            // Column1
             // 
-            panel7.Dock = DockStyle.Fill;
-            panel7.Location = new Point(0, 0);
-            panel7.Name = "panel7";
-            panel7.Size = new Size(1191, 700);
-            panel7.TabIndex = 0;
-            // 
-            // timer1
-            // 
-            timer1.Enabled = true;
+            Column1.DataPropertyName = "SubTotal";
+            Column1.HeaderText = "Sub Total";
+            Column1.MinimumWidth = 6;
+            Column1.Name = "Column1";
+            Column1.Width = 125;
             // 
             // Cashier
             // 
@@ -569,6 +567,7 @@
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Cashier";
             WindowState = FormWindowState.Maximized;
+            Load += Cashier_Load;
             panel1.ResumeLayout(false);
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
@@ -612,17 +611,17 @@
         private System.Windows.Forms.Timer timer1;
         public Label lblDisplaytotal;
         private TextBox barcodetxt;
-        private DataGridViewTextBoxColumn BarcodeData;
-        private DataGridViewTextBoxColumn ProductName;
-        private DataGridViewTextBoxColumn ProductPrice;
-        private DataGridViewTextBoxColumn ProductQuantity;
-        private DataGridViewTextBoxColumn CategoryName;
-        private DataGridViewTextBoxColumn BuyerQuantity;
         private Label label4;
         private Label label2;
         private Button checkOutBtn;
         private Label label9;
         private Label label5;
         private Button adminBtn;
+        private DataGridViewTextBoxColumn BarcodeData;
+        private DataGridViewTextBoxColumn Column2;
+        private DataGridViewTextBoxColumn ProductName;
+        private DataGridViewTextBoxColumn ProductPrice;
+        private DataGridViewTextBoxColumn BuyerQuantity;
+        private DataGridViewTextBoxColumn Column1;
     }
 }

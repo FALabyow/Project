@@ -35,6 +35,7 @@
             DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             dgvProduct = new DataGridView();
             panel1 = new Panel();
+            btnClose = new Button();
             txtSearch = new TextBox();
             lblManageProduct = new Label();
             Column1 = new DataGridViewTextBoxColumn();
@@ -45,7 +46,6 @@
             Column6 = new DataGridViewTextBoxColumn();
             Column5 = new DataGridViewTextBoxColumn();
             Select = new DataGridViewImageColumn();
-            btnClose = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvProduct).BeginInit();
             panel1.SuspendLayout();
             SuspendLayout();
@@ -96,6 +96,20 @@
             panel1.Size = new Size(986, 78);
             panel1.TabIndex = 7;
             // 
+            // btnClose
+            // 
+            btnClose.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            btnClose.BackColor = Color.SandyBrown;
+            btnClose.FlatAppearance.BorderSize = 0;
+            btnClose.FlatStyle = FlatStyle.Flat;
+            btnClose.Location = new Point(867, 20);
+            btnClose.Name = "btnClose";
+            btnClose.Size = new Size(107, 46);
+            btnClose.TabIndex = 11;
+            btnClose.Text = "Close";
+            btnClose.UseVisualStyleBackColor = false;
+            btnClose.Click += btnClose_Click;
+            // 
             // txtSearch
             // 
             txtSearch.Location = new Point(283, 23);
@@ -125,6 +139,7 @@
             // Column2
             // 
             Column2.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            Column2.DataPropertyName = "ProductCode";
             Column2.HeaderText = "Pcode";
             Column2.MinimumWidth = 6;
             Column2.Name = "Column2";
@@ -133,6 +148,7 @@
             // Column8
             // 
             Column8.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            Column8.DataPropertyName = "BarcodeData";
             Column8.HeaderText = "Barcode";
             Column8.MinimumWidth = 6;
             Column8.Name = "Column8";
@@ -141,6 +157,7 @@
             // Column4
             // 
             Column4.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            Column4.DataPropertyName = "ProductName";
             Column4.HeaderText = "Description";
             Column4.MinimumWidth = 6;
             Column4.Name = "Column4";
@@ -148,6 +165,7 @@
             // Column3
             // 
             Column3.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            Column3.DataPropertyName = "ProductCategory";
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
             Column3.DefaultCellStyle = dataGridViewCellStyle2;
             Column3.HeaderText = "Category";
@@ -158,6 +176,7 @@
             // Column6
             // 
             Column6.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            Column6.DataPropertyName = "ProductPrice";
             dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleRight;
             Column6.DefaultCellStyle = dataGridViewCellStyle3;
             Column6.HeaderText = "Price";
@@ -168,6 +187,7 @@
             // Column5
             // 
             Column5.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            Column5.DataPropertyName = "ProductQuantity";
             dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleCenter;
             Column5.DefaultCellStyle = dataGridViewCellStyle4;
             Column5.HeaderText = "Qty";
@@ -183,20 +203,6 @@
             Select.MinimumWidth = 6;
             Select.Name = "Select";
             Select.Width = 6;
-            // 
-            // btnClose
-            // 
-            btnClose.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            btnClose.BackColor = Color.SandyBrown;
-            btnClose.FlatAppearance.BorderSize = 0;
-            btnClose.FlatStyle = FlatStyle.Flat;
-            btnClose.Location = new Point(867, 20);
-            btnClose.Name = "btnClose";
-            btnClose.Size = new Size(107, 46);
-            btnClose.TabIndex = 11;
-            btnClose.Text = "Close";
-            btnClose.UseVisualStyleBackColor = false;
-            btnClose.Click += btnClose_Click;
             // 
             // SearchProducts
             // 
@@ -220,6 +226,10 @@
         #endregion
 
         private DataGridView dgvProduct;
+        private Panel panel1;
+        private TextBox txtSearch;
+        private Label lblManageProduct;
+        private Button btnClose;
         private DataGridViewTextBoxColumn Column1;
         private DataGridViewTextBoxColumn Column2;
         private DataGridViewTextBoxColumn Column8;
@@ -228,9 +238,5 @@
         private DataGridViewTextBoxColumn Column6;
         private DataGridViewTextBoxColumn Column5;
         private DataGridViewImageColumn Select;
-        private Panel panel1;
-        private TextBox txtSearch;
-        private Label lblManageProduct;
-        private Button btnClose;
     }
 }
