@@ -95,6 +95,30 @@ namespace Project.API.Controllers
             }
         }
 
+        [HttpPatch("/Stocks/UpdateStocks/Quantity")]
+        public async Task<IActionResult> UpdateStocksQtyAsync([FromBody] List<StockDto> stockDtos)
+        {
+            if (stockDtos == null || !stockDtos.Any())
+            {
+                return BadRequest("Stock list cannot be empty");
+            }
+
+            try
+            {
+                await _stockService.UpdateStocksQtyAsync(stockDtos);
+                return NoContent();
+            }
+            catch (ArgumentNullException ex)
+            {
+                return StatusCode(500, new { error = ex.Message });
+            }
+            catch (InvalidOperationException ex)
+            {
+                return BadRequest(new { error = ex.Message });
+            }
+        }
+
+
         [HttpPut("/Stock/StockAdjustments/UpdateStock/{id}")]
         public async Task<IActionResult> UpdateStockAsync(Guid id, StockAdjustmentsDto stockAdjustmentsDto)
         {

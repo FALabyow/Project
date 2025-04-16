@@ -19,6 +19,7 @@ namespace ProjectForm.Presenter
             _view.SearchProductClicked += OnSearchProductClicked;
             _view.DailySalesClicked += OnDailySalesClicked;
             _view.PaymentClicked += OnPaymentClicked;
+            _view.AdminClicked += OnAdminClicked;
         }
         private void OnCloseClicked(object? sender, EventArgs e)
         {
@@ -66,6 +67,12 @@ namespace ProjectForm.Presenter
             {
                 Application.Exit();
             }
+        }
+        private void OnAdminClicked(object? sender, Button e)
+        {
+            _view.Slider(e);
+            Form1 form = new Form1();
+            form.ShowDialog();
         }
         public void GetTranNo()
         {

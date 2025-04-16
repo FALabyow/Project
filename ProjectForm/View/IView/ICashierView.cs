@@ -19,6 +19,7 @@ namespace ProjectForm.View.IView
         event EventHandler<Button>? DailySalesClicked;
         event EventHandler<Button>? LogoutClicked;
         event EventHandler<Button>? ClearCartClicked;
+        event EventHandler<Button>? AdminClicked;
         string Timer { get; set; }
         void Slider(Button button);
     }

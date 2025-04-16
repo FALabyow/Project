@@ -113,7 +113,7 @@
             adminBtn.TabIndex = 12;
             adminBtn.Text = "Admin";
             adminBtn.UseVisualStyleBackColor = false;
-            adminBtn.Click += adminBtn_Click;
+            
             // 
             // btnLogout
             // 

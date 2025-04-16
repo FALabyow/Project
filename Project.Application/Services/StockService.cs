@@ -118,6 +118,33 @@ namespace Project.Application.Services
             
 
         }
+        public async Task UpdateStocksQtyAsync(List<StockDto> stockDtos)
+        {
+            try
+            {
+                var stockIds = stockDtos.Select(s => s.StockId).ToList();
+                var stocks = await _stockRepository.GetStocksByIdsAsync(stockIds);
+
+                foreach (var stock in stocks)
+                {
+                    var dto = stockDtos.FirstOrDefault(s => s.StockId == stock.StockId);
+                    if (dto != null)
+                    {
+                        stock.ProductQuantity -= dto.ProductQuantity;
+                    }
+                }
+
+                await _stockRepository.UpdateStocksAsync(stocks);
+            }
+            catch (ArgumentNullException)
+            {
+                throw;
+            }
+            catch (InvalidOperationException)
+            {
+                throw;
+            }
+        }
         public async Task UpdateStockAsync(StockAdjustmentsDto stockAdjustmentsDto)
         {
             try

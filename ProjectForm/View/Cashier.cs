@@ -32,6 +32,7 @@ namespace ProjectForm
             btnLogout.Click += Logout_Click;
             btnDailySales.Click += DailySales_Click;
             btnClearCart.Click += ClearCart_Click;
+            adminBtn.Click += Admin_Click;
         }
         
         public event EventHandler? CloseClicked;
@@ -42,6 +43,7 @@ namespace ProjectForm
         public event EventHandler<Button>? DailySalesClicked;
         public event EventHandler<Button>? LogoutClicked;
         public event EventHandler<Button>? ClearCartClicked;
+        public event EventHandler<Button>? AdminClicked;
         public string TransactionNumber
         {
             get => lblTranNo.Text;
@@ -58,12 +60,6 @@ namespace ProjectForm
             set => lblDisplaytotal.Text = value;
         }
         public void Slider(Button button)
-        {
-            pnlSlide.BackColor = Color.SaddleBrown;
-            pnlSlide.Height = button.Height;
-            pnlSlide.Top = button.Top;
-        }
-        public void slide(Button button)
         {
             pnlSlide.BackColor = Color.SaddleBrown;
             pnlSlide.Height = button.Height;
@@ -104,6 +100,13 @@ namespace ProjectForm
                 DailySalesClicked?.Invoke(this, button);
             }
         }
+        private void Admin_Click(object? sender, EventArgs e)
+        {
+            if (sender is Button button)
+            {
+                AdminClicked?.Invoke(this, button);
+            }
+        }
         private void Logout_Click(object? sender, EventArgs e)
         {
             if( sender is Button button)
@@ -115,11 +118,6 @@ namespace ProjectForm
         {
 
         }
-        private void adminBtn_Click(object sender, EventArgs e)
-        {
-            slide(adminBtn);
-            Form1 form = new Form1();
-            form.ShowDialog();
-        }
+        
     }
 }

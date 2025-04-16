@@ -110,6 +110,7 @@ namespace Project.Application.Services
                 throw;
             }
         }
+        public async Task<List<GetAvailableProduct>>
         public async Task AddProductAsync(ProductDto productDto)
         {
             try
