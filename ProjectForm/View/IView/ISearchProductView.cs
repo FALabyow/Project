@@ -1,0 +1,17 @@
+﻿using Project.Application.DTOs;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ProjectForm.View.IView
+{
+    public interface ISearchProductView
+    {
+        event EventHandler? RefreshClicked;
+        event EventHandler<DataGridViewRowPostPaintEventArgs>? RowNumber;
+        event EventHandler<DataGridViewCellEventArgs>? AddToCartClicked;
+        void DisplayProducts(List<GetAllAvailableProductsDto> _products);
+    }
+}

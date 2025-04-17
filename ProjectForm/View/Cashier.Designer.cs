@@ -62,14 +62,14 @@
             label3 = new Label();
             lblDisplaytotal = new Label();
             dgvCashier = new DataGridView();
-            panel7 = new Panel();
-            timer1 = new System.Windows.Forms.Timer(components);
             BarcodeData = new DataGridViewTextBoxColumn();
             Column2 = new DataGridViewTextBoxColumn();
             ProductName = new DataGridViewTextBoxColumn();
             ProductPrice = new DataGridViewTextBoxColumn();
             BuyerQuantity = new DataGridViewTextBoxColumn();
             Column1 = new DataGridViewTextBoxColumn();
+            panel7 = new Panel();
+            timer1 = new System.Windows.Forms.Timer(components);
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
@@ -397,9 +397,9 @@
             label8.AutoSize = true;
             label8.Location = new Point(8, 380);
             label8.Name = "label8";
-            label8.Size = new Size(93, 22);
+            label8.Size = new Size(56, 22);
             label8.TabIndex = 7;
-            label8.Text = "Sub Total ";
+            label8.Text = "Total ";
             // 
             // label7
             // 
@@ -487,18 +487,6 @@
             dgvCashier.Size = new Size(763, 650);
             dgvCashier.TabIndex = 5;
             // 
-            // panel7
-            // 
-            panel7.Dock = DockStyle.Fill;
-            panel7.Location = new Point(0, 0);
-            panel7.Name = "panel7";
-            panel7.Size = new Size(1191, 700);
-            panel7.TabIndex = 0;
-            // 
-            // timer1
-            // 
-            timer1.Enabled = true;
-            // 
             // BarcodeData
             // 
             BarcodeData.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
@@ -547,6 +535,18 @@
             Column1.MinimumWidth = 6;
             Column1.Name = "Column1";
             Column1.Width = 125;
+            // 
+            // panel7
+            // 
+            panel7.Dock = DockStyle.Fill;
+            panel7.Location = new Point(0, 0);
+            panel7.Name = "panel7";
+            panel7.Size = new Size(1191, 700);
+            panel7.TabIndex = 0;
+            // 
+            // timer1
+            // 
+            timer1.Enabled = true;
             // 
             // Cashier
             // 

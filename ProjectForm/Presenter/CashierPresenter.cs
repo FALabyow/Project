@@ -13,7 +13,7 @@ namespace ProjectForm.Presenter
     {
         private readonly ICashierView _view;
         private readonly HttpClient _httpClient;
-        private List<GetAllAvailableProductsDto> _availableProducts = new();
+        public List<GetAllAvailableProductsDto> _availableProducts = new();
         private DataTable _dataTable;
         
         public CashierPresenter(ICashierView view)
@@ -49,11 +49,11 @@ namespace ProjectForm.Presenter
             _view.Slider(e);
             GetTranNo();
         }
-        private async void OnSearchProductClicked(object? sender, Button e)
+        private void OnSearchProductClicked(object? sender, Button e)
         {
             _view.Slider(e);
-            SearchProducts searchProducts = new SearchProducts(_availableProducts);
-            await LoadAllAvailableProducts();
+            SearchProducts searchProducts = new SearchProducts(this, _view);
+            //await LoadAllAvailableProducts();
             searchProducts.ShowDialog();
         }
         private void OnPaymentClicked(object? sender, Button e)

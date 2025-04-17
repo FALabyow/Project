@@ -35,16 +35,17 @@
             DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             dgvProduct = new DataGridView();
             panel1 = new Panel();
+            refreshBtn = new Button();
             btnClose = new Button();
             txtSearch = new TextBox();
-            lblManageProduct = new Label();
             Column1 = new DataGridViewTextBoxColumn();
-            Column2 = new DataGridViewTextBoxColumn();
-            Column8 = new DataGridViewTextBoxColumn();
-            Column4 = new DataGridViewTextBoxColumn();
+            StockId = new DataGridViewTextBoxColumn();
+            ProductCode = new DataGridViewTextBoxColumn();
+            BarcodeData = new DataGridViewTextBoxColumn();
+            ProductName = new DataGridViewTextBoxColumn();
             Column3 = new DataGridViewTextBoxColumn();
-            Column6 = new DataGridViewTextBoxColumn();
-            Column5 = new DataGridViewTextBoxColumn();
+            ProductPrice = new DataGridViewTextBoxColumn();
+            ProductQuantity = new DataGridViewTextBoxColumn();
             Select = new DataGridViewImageColumn();
             ((System.ComponentModel.ISupportInitialize)dgvProduct).BeginInit();
             panel1.SuspendLayout();
@@ -65,7 +66,7 @@
             dgvProduct.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dgvProduct.ColumnHeadersHeight = 40;
             dgvProduct.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dgvProduct.Columns.AddRange(new DataGridViewColumn[] { Column1, Column2, Column8, Column4, Column3, Column6, Column5, Select });
+            dgvProduct.Columns.AddRange(new DataGridViewColumn[] { Column1, StockId, ProductCode, BarcodeData, ProductName, Column3, ProductPrice, ProductQuantity, Select });
             dgvProduct.Dock = DockStyle.Fill;
             dgvProduct.EnableHeadersVisualStyles = false;
             dgvProduct.GridColor = Color.White;
@@ -87,14 +88,24 @@
             // panel1
             // 
             panel1.BackColor = Color.FromArgb(121, 85, 72);
+            panel1.Controls.Add(refreshBtn);
             panel1.Controls.Add(btnClose);
             panel1.Controls.Add(txtSearch);
-            panel1.Controls.Add(lblManageProduct);
             panel1.Dock = DockStyle.Bottom;
             panel1.Location = new Point(0, 566);
             panel1.Name = "panel1";
             panel1.Size = new Size(986, 78);
             panel1.TabIndex = 7;
+            // 
+            // refreshBtn
+            // 
+            refreshBtn.BackColor = Color.Lime;
+            refreshBtn.Location = new Point(12, 20);
+            refreshBtn.Name = "refreshBtn";
+            refreshBtn.Size = new Size(94, 46);
+            refreshBtn.TabIndex = 12;
+            refreshBtn.Text = "Refresh";
+            refreshBtn.UseVisualStyleBackColor = false;
             // 
             // btnClose
             // 
@@ -118,16 +129,6 @@
             txtSearch.Size = new Size(415, 30);
             txtSearch.TabIndex = 5;
             // 
-            // lblManageProduct
-            // 
-            lblManageProduct.AutoSize = true;
-            lblManageProduct.Font = new Font("Century Gothic", 12F, FontStyle.Bold | FontStyle.Underline, GraphicsUnit.Point, 0);
-            lblManageProduct.Location = new Point(12, 23);
-            lblManageProduct.Name = "lblManageProduct";
-            lblManageProduct.Size = new Size(157, 23);
-            lblManageProduct.TabIndex = 3;
-            lblManageProduct.Text = "Search Product";
-            // 
             // Column1
             // 
             Column1.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
@@ -136,31 +137,40 @@
             Column1.Name = "Column1";
             Column1.Width = 67;
             // 
-            // Column2
+            // StockId
             // 
-            Column2.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            Column2.DataPropertyName = "ProductCode";
-            Column2.HeaderText = "Pcode";
-            Column2.MinimumWidth = 6;
-            Column2.Name = "Column2";
-            Column2.Width = 96;
+            StockId.DataPropertyName = "StockId";
+            StockId.HeaderText = "StockId";
+            StockId.MinimumWidth = 6;
+            StockId.Name = "StockId";
+            StockId.Visible = false;
+            StockId.Width = 125;
             // 
-            // Column8
+            // ProductCode
             // 
-            Column8.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            Column8.DataPropertyName = "BarcodeData";
-            Column8.HeaderText = "Barcode";
-            Column8.MinimumWidth = 6;
-            Column8.Name = "Column8";
-            Column8.Width = 112;
+            ProductCode.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            ProductCode.DataPropertyName = "ProductCode";
+            ProductCode.HeaderText = "Pcode";
+            ProductCode.MinimumWidth = 6;
+            ProductCode.Name = "ProductCode";
+            ProductCode.Width = 96;
             // 
-            // Column4
+            // BarcodeData
             // 
-            Column4.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            Column4.DataPropertyName = "ProductName";
-            Column4.HeaderText = "Description";
-            Column4.MinimumWidth = 6;
-            Column4.Name = "Column4";
+            BarcodeData.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            BarcodeData.DataPropertyName = "BarcodeData";
+            BarcodeData.HeaderText = "Barcode";
+            BarcodeData.MinimumWidth = 6;
+            BarcodeData.Name = "BarcodeData";
+            BarcodeData.Width = 112;
+            // 
+            // ProductName
+            // 
+            ProductName.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            ProductName.DataPropertyName = "ProductName";
+            ProductName.HeaderText = "Description";
+            ProductName.MinimumWidth = 6;
+            ProductName.Name = "ProductName";
             // 
             // Column3
             // 
@@ -173,33 +183,33 @@
             Column3.Name = "Column3";
             Column3.Width = 123;
             // 
-            // Column6
+            // ProductPrice
             // 
-            Column6.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            Column6.DataPropertyName = "ProductPrice";
+            ProductPrice.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            ProductPrice.DataPropertyName = "ProductPrice";
             dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleRight;
-            Column6.DefaultCellStyle = dataGridViewCellStyle3;
-            Column6.HeaderText = "Price";
-            Column6.MinimumWidth = 6;
-            Column6.Name = "Column6";
-            Column6.Width = 80;
+            ProductPrice.DefaultCellStyle = dataGridViewCellStyle3;
+            ProductPrice.HeaderText = "Price";
+            ProductPrice.MinimumWidth = 6;
+            ProductPrice.Name = "ProductPrice";
+            ProductPrice.Width = 80;
             // 
-            // Column5
+            // ProductQuantity
             // 
-            Column5.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            Column5.DataPropertyName = "ProductQuantity";
+            ProductQuantity.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            ProductQuantity.DataPropertyName = "ProductQuantity";
             dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            Column5.DefaultCellStyle = dataGridViewCellStyle4;
-            Column5.HeaderText = "Qty";
-            Column5.MinimumWidth = 6;
-            Column5.Name = "Column5";
-            Column5.Width = 71;
+            ProductQuantity.DefaultCellStyle = dataGridViewCellStyle4;
+            ProductQuantity.HeaderText = "Qty";
+            ProductQuantity.MinimumWidth = 6;
+            ProductQuantity.Name = "ProductQuantity";
+            ProductQuantity.Width = 71;
             // 
             // Select
             // 
             Select.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             Select.HeaderText = "";
-            Select.Image = Properties.Resources.check;
+            Select.Image = Properties.Resources.shopping_cart_24dp_1F1F1F_FILL0_wght400_GRAD0_opsz24;
             Select.MinimumWidth = 6;
             Select.Name = "Select";
             Select.Width = 6;
@@ -228,15 +238,16 @@
         private DataGridView dgvProduct;
         private Panel panel1;
         private TextBox txtSearch;
-        private Label lblManageProduct;
         private Button btnClose;
+        private Button refreshBtn;
         private DataGridViewTextBoxColumn Column1;
-        private DataGridViewTextBoxColumn Column2;
-        private DataGridViewTextBoxColumn Column8;
-        private DataGridViewTextBoxColumn Column4;
+        private DataGridViewTextBoxColumn StockId;
+        private DataGridViewTextBoxColumn ProductCode;
+        private DataGridViewTextBoxColumn BarcodeData;
+        private DataGridViewTextBoxColumn ProductName;
         private DataGridViewTextBoxColumn Column3;
-        private DataGridViewTextBoxColumn Column6;
-        private DataGridViewTextBoxColumn Column5;
+        private DataGridViewTextBoxColumn ProductPrice;
+        private DataGridViewTextBoxColumn ProductQuantity;
         private DataGridViewImageColumn Select;
     }
 }

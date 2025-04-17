@@ -36,6 +36,7 @@ namespace ProjectForm
             btnClearCart.Click += ClearCart_Click;
             adminBtn.Click += Admin_Click;
             barcodetxt.TextChanged += Barcode_TextChanged;
+            barcodetxt.Select();
 
         }
 
@@ -122,6 +123,7 @@ namespace ProjectForm
             if (sender is Button button)
             {
                 TransactionClicked?.Invoke(this, button);
+                barcodetxt.Select();
             }
         }
         private void SearchProduct_Click(object? sender, EventArgs e)
@@ -129,6 +131,7 @@ namespace ProjectForm
             if (sender is Button button)
             {
                 SearchProductClicked?.Invoke(this, button);
+                barcodetxt.Select();
             }
         }
         private void Payment_Click(object? sender, EventArgs e)
@@ -136,6 +139,7 @@ namespace ProjectForm
             if (sender is Button button)
             {
                 PaymentClicked?.Invoke(this, button);
+                barcodetxt.Select();
             }
         }
         private void ClearCart_Click(object? sender, EventArgs e)
@@ -143,6 +147,7 @@ namespace ProjectForm
             if (sender is Button button)
             {
                 ClearCartClicked?.Invoke(this, button);
+                barcodetxt.Select();
             }
         }
         private void DailySales_Click(object? sender, EventArgs e)
@@ -150,6 +155,7 @@ namespace ProjectForm
             if (sender is Button button)
             {
                 DailySalesClicked?.Invoke(this, button);
+                barcodetxt.Select();
             }
         }
         private void Admin_Click(object? sender, EventArgs e)
@@ -157,6 +163,7 @@ namespace ProjectForm
             if (sender is Button button)
             {
                 AdminClicked?.Invoke(this, button);
+                barcodetxt.Select();
             }
         }
         private void Logout_Click(object? sender, EventArgs e)

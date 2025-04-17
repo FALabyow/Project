@@ -15,7 +15,7 @@ namespace Project.Application.DTOs
         public string? ProductCategory { get; set; }
         public decimal ProductPrice { get; set; }
         public int ProductQuantity  { get; set; }
-        public decimal SubTotal { get; set; } = 0;
+        public decimal SubTotal { get; set; }
 
     }
 }
