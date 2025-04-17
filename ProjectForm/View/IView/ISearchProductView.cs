@@ -12,6 +12,8 @@ namespace ProjectForm.View.IView
         event EventHandler? RefreshClicked;
         event EventHandler<DataGridViewRowPostPaintEventArgs>? RowNumber;
         event EventHandler<DataGridViewCellEventArgs>? AddToCartClicked;
+        event EventHandler? ProductSearchTextChanged;  
         void DisplayProducts(List<GetAllAvailableProductsDto> _products);
+        string SearchText {  get; }
     }
 }

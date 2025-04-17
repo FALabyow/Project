@@ -29,15 +29,18 @@ namespace ProjectForm
             dgvProduct.RowPostPaint += DataGridSearchProductView_RowPostPaint;
             dgvProduct.CellContentClick += DataGridSearchProductView_CellContentClick;
             refreshBtn.Click += (s, e) => RefreshClicked?.Invoke(this, EventArgs.Empty);
+            txtSearch.TextChanged += (s, e) => ProductSearchTextChanged?.Invoke(this, EventArgs.Empty);
         }
 
         public event EventHandler? RefreshClicked;
         public event EventHandler<DataGridViewRowPostPaintEventArgs>? RowNumber;
         public event EventHandler<DataGridViewCellEventArgs>? AddToCartClicked;
+        public event EventHandler? ProductSearchTextChanged;
         public void DisplayProducts(List<GetAllAvailableProductsDto> _products)
         {
             dgvProduct.DataSource = _products;
         }
+        public string SearchText => txtSearch.Text.ToLower();
         private void btnClose_Click(object sender, EventArgs e)
         {
             this.Dispose();

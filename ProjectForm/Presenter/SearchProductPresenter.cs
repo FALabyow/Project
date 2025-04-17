@@ -21,6 +21,7 @@ namespace ProjectForm.Presenter
             _view.RowNumber += OnRowNumber;
             _view.AddToCartClicked += OnAddToCartClicked;
             _cashierView = cashierView;
+            _view.ProductSearchTextChanged += OnProductSearchTextChanged;
              
         }
 
@@ -79,6 +80,27 @@ namespace ProjectForm.Presenter
             
 
            
+        }
+        private void OnProductSearchTextChanged(object? sender, EventArgs e)
+        {
+            string searchText = _view.SearchText;
+            var filteredList = _cashierPresenter._availableProducts;
+
+            if (decimal.TryParse(searchText, out decimal price))
+            {
+                filteredList = _cashierPresenter._availableProducts.Where(c => c.ProductPrice == price).ToList();
+            }
+            else
+            {
+                filteredList = _cashierPresenter._availableProducts
+                    .Where(
+                        c => c.ProductName != null && c.ProductName.ToLower().Contains(searchText) ||
+                        c.ProductCode != null && c.ProductCode.ToLower().Contains(searchText)
+                    )
+                    .ToList();
+            }
+
+            _view.DisplayProducts(filteredList);
         }
     }
 }
