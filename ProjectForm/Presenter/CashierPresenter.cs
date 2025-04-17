@@ -14,8 +14,7 @@ namespace ProjectForm.Presenter
         private readonly ICashierView _view;
         private readonly HttpClient _httpClient;
         public List<GetAllAvailableProductsDto> _availableProducts = new();
-        private DataTable _dataTable;
-        
+        private DataTable _dataTable;     
         public CashierPresenter(ICashierView view)
         {
             _httpClient = new HttpClient { BaseAddress = new Uri("https://localhost:7014/api") };
@@ -31,6 +30,7 @@ namespace ProjectForm.Presenter
             _view.PaymentClicked += OnPaymentClicked;
             _view.AdminClicked += OnAdminClicked;
             _view.BarcodeTextChanged += OnBarcodeTextChanged;   
+            _view.RemoveClicked += OnRemoveClicked;
             _view.Date = DateOnly.FromDateTime(DateTime.Now).ToString("MM-dd-yyyy");
         }
         private void OnCloseClicked(object? sender, EventArgs e)
@@ -59,7 +59,7 @@ namespace ProjectForm.Presenter
         private void OnPaymentClicked(object? sender, Button e)
         {
             _view.Slider(e);
-            SettlePayment settlepayment = new SettlePayment();
+            SettlePayment settlepayment = new SettlePayment(_view);
             settlepayment.txtSale.Text = _view.DisplayTotal;
             settlepayment.ShowDialog();
         }
@@ -91,6 +91,13 @@ namespace ProjectForm.Presenter
         {
             string barcode = _view.Barcode;
             SearchProduct(barcode);
+        }
+        private void OnRemoveClicked(object? sender, DataGridViewCellEventArgs e)
+        {
+            var gridView = sender as DataGridView;
+            if (gridView == null || e.RowIndex < 0) return;
+
+            gridView.Rows.RemoveAt(e.RowIndex);
         }
         private void GetTranNo()
         {

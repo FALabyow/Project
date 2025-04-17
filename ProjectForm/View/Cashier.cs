@@ -37,6 +37,7 @@ namespace ProjectForm
             adminBtn.Click += Admin_Click;
             barcodetxt.TextChanged += Barcode_TextChanged;
             barcodetxt.Select();
+            dgvCashier.CellContentClick += DataGridCashierView_CellContentClick;
 
         }
 
@@ -50,6 +51,7 @@ namespace ProjectForm
         public event EventHandler<Button>? ClearCartClicked;
         public event EventHandler<Button>? AdminClicked;
         public event EventHandler? BarcodeTextChanged;
+        public event EventHandler<DataGridViewCellEventArgs>? RemoveClicked;
         public string TransactionNumber
         {
             get => lblTranNo.Text;
@@ -69,6 +71,21 @@ namespace ProjectForm
         {
             get => lblDisplaytotal.Text;
             set => lblDisplaytotal.Text = value;
+        }
+        public string Total
+        {
+            get => lblSalesTotal.Text;  
+            set => lblSalesTotal.Text = value;  
+        }
+        public string Cash
+        {
+            get => lblCash.Text;    
+            set => lblCash.Text = value;
+        }
+        public string Change
+        {
+            get => lblChange.Text;
+            set => lblChange.Text = value;
         }
         public string Barcode => barcodetxt.Text;
         public void Slider(Button button)
@@ -180,6 +197,16 @@ namespace ProjectForm
         private async void Cashier_Load(object sender, EventArgs e)
         {
             await _presenter.LoadAllAvailableProducts();
+        }
+        private void DataGridCashierView_CellContentClick(object? sender, DataGridViewCellEventArgs e)
+        {
+            var gridView = sender as DataGridView;
+            if(gridView == null || e.RowIndex < 0) return;
+
+            if (gridView.Columns[e.ColumnIndex].Name == "Remove")
+            {
+                RemoveClicked?.Invoke(sender, e);
+            }
         }
 
     }

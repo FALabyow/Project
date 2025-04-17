@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             panel1 = new Panel();
             adminBtn = new Button();
             btnLogout = new Button();
@@ -47,9 +47,9 @@
             picClose = new PictureBox();
             panel5 = new Panel();
             checkOutBtn = new Button();
-            label9 = new Label();
+            lblChange = new Label();
             label5 = new Label();
-            label4 = new Label();
+            lblCash = new Label();
             label2 = new Label();
             barcodetxt = new TextBox();
             lblTimer = new Label();
@@ -68,6 +68,7 @@
             ProductPrice = new DataGridViewTextBoxColumn();
             BuyerQuantity = new DataGridViewTextBoxColumn();
             Column1 = new DataGridViewTextBoxColumn();
+            Remove = new DataGridViewImageColumn();
             panel7 = new Panel();
             timer1 = new System.Windows.Forms.Timer(components);
             panel1.SuspendLayout();
@@ -296,9 +297,9 @@
             // 
             panel5.BackColor = Color.FromArgb(225, 215, 190);
             panel5.Controls.Add(checkOutBtn);
-            panel5.Controls.Add(label9);
+            panel5.Controls.Add(lblChange);
             panel5.Controls.Add(label5);
-            panel5.Controls.Add(label4);
+            panel5.Controls.Add(lblCash);
             panel5.Controls.Add(label2);
             panel5.Controls.Add(barcodetxt);
             panel5.Controls.Add(lblTimer);
@@ -328,14 +329,14 @@
             checkOutBtn.Text = "Checkout";
             checkOutBtn.UseVisualStyleBackColor = false;
             // 
-            // label9
+            // lblChange
             // 
-            label9.Location = new Point(124, 455);
-            label9.Name = "label9";
-            label9.Size = new Size(84, 21);
-            label9.TabIndex = 14;
-            label9.Text = "0.00";
-            label9.TextAlign = ContentAlignment.MiddleRight;
+            lblChange.Location = new Point(124, 455);
+            lblChange.Name = "lblChange";
+            lblChange.Size = new Size(84, 21);
+            lblChange.TabIndex = 14;
+            lblChange.Text = "0.00";
+            lblChange.TextAlign = ContentAlignment.MiddleRight;
             // 
             // label5
             // 
@@ -346,14 +347,14 @@
             label5.TabIndex = 13;
             label5.Text = "Change ";
             // 
-            // label4
+            // lblCash
             // 
-            label4.Location = new Point(124, 420);
-            label4.Name = "label4";
-            label4.Size = new Size(84, 21);
-            label4.TabIndex = 12;
-            label4.Text = "0.00";
-            label4.TextAlign = ContentAlignment.MiddleRight;
+            lblCash.Location = new Point(124, 420);
+            lblCash.Name = "lblCash";
+            lblCash.Size = new Size(84, 21);
+            lblCash.TabIndex = 12;
+            lblCash.Text = "0.00";
+            lblCash.TextAlign = ContentAlignment.MiddleRight;
             // 
             // label2
             // 
@@ -466,17 +467,17 @@
             dgvCashier.AllowUserToAddRows = false;
             dgvCashier.BackgroundColor = Color.White;
             dgvCashier.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = Color.FromArgb(93, 64, 55);
-            dataGridViewCellStyle1.Font = new Font("Microsoft Sans Serif", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle1.ForeColor = Color.FromArgb(255, 236, 179);
-            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-            dgvCashier.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = Color.FromArgb(93, 64, 55);
+            dataGridViewCellStyle2.Font = new Font("Microsoft Sans Serif", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle2.ForeColor = Color.FromArgb(255, 236, 179);
+            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
+            dgvCashier.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             dgvCashier.ColumnHeadersHeight = 40;
             dgvCashier.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dgvCashier.Columns.AddRange(new DataGridViewColumn[] { BarcodeData, Column2, ProductName, ProductPrice, BuyerQuantity, Column1 });
+            dgvCashier.Columns.AddRange(new DataGridViewColumn[] { BarcodeData, Column2, ProductName, ProductPrice, BuyerQuantity, Column1, Remove });
             dgvCashier.Dock = DockStyle.Fill;
             dgvCashier.EnableHeadersVisualStyles = false;
             dgvCashier.GridColor = Color.White;
@@ -535,6 +536,15 @@
             Column1.MinimumWidth = 6;
             Column1.Name = "Column1";
             Column1.Width = 125;
+            // 
+            // Remove
+            // 
+            Remove.HeaderText = "";
+            Remove.Image = Properties.Resources.remove_28dp_EA3323_FILL0_wght400_GRAD0_opsz24;
+            Remove.ImageLayout = DataGridViewImageCellLayout.Zoom;
+            Remove.MinimumWidth = 6;
+            Remove.Name = "Remove";
+            Remove.Width = 50;
             // 
             // panel7
             // 
@@ -611,10 +621,10 @@
         private System.Windows.Forms.Timer timer1;
         public Label lblDisplaytotal;
         private TextBox barcodetxt;
-        private Label label4;
+        private Label lblCash;
         private Label label2;
         private Button checkOutBtn;
-        private Label label9;
+        private Label lblChange;
         private Label label5;
         private Button adminBtn;
         private DataGridViewTextBoxColumn BarcodeData;
@@ -623,5 +633,6 @@
         private DataGridViewTextBoxColumn ProductPrice;
         private DataGridViewTextBoxColumn BuyerQuantity;
         private DataGridViewTextBoxColumn Column1;
+        private DataGridViewImageColumn Remove;
     }
 }

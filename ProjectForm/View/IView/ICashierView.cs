@@ -23,9 +23,13 @@ namespace ProjectForm.View.IView
         event EventHandler<Button>? ClearCartClicked;
         event EventHandler<Button>? AdminClicked;
         event EventHandler? BarcodeTextChanged;
+        event EventHandler<DataGridViewCellEventArgs>? RemoveClicked;
         string Timer { get; set; }
         string Barcode { get; }
         string Date { get; set; }
+        string Total { get; set; }
+        string Cash { get; set; }    
+        string Change { get; set; }
         void Slider(Button button);
         void DisplayProducts(DisplayAvailableProductsDto products);
         bool ProductExistsInGrid(string barcode);

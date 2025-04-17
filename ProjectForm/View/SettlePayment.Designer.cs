@@ -50,6 +50,7 @@
             txtSale.Name = "txtSale";
             txtSale.Size = new Size(412, 30);
             txtSale.TabIndex = 1;
+            txtSale.Text = "0.00";
             // 
             // txtCash
             // 
@@ -58,8 +59,6 @@
             txtCash.Name = "txtCash";
             txtCash.Size = new Size(412, 30);
             txtCash.TabIndex = 2;
-            txtCash.TextChanged += txtCash_TextChanged;
-            txtCash.KeyPress += txtCash_KeyPress;
             // 
             // txtChange
             // 
@@ -69,6 +68,7 @@
             txtChange.Name = "txtChange";
             txtChange.Size = new Size(412, 30);
             txtChange.TabIndex = 3;
+            txtChange.Text = "0.00";
             // 
             // btnEnter
             // 
