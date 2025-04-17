@@ -8,8 +8,8 @@ namespace ProjectForm.Model.DTOs
 {
     public class SalesHistoryInfoDto
     {
-        public string InvoiceNumber { get; set; } = string.Empty;
+        
         public decimal TotalAmount { get; set; }
-        public Guid SalesHistoryId { get; set; } = Guid.NewGuid();
+        public string? SalesHistoryId { get; set; } 
     }
 }

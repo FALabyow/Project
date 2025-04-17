@@ -97,8 +97,8 @@ namespace Project.Infrastructure.Migrations
                     b.Property<int>("QuantitySold")
                         .HasColumnType("int");
 
-                    b.Property<Guid>("SalesHistoryId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("SalesHistoryId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<decimal>("UnitPrice")
                         .HasColumnType("decimal(18,2)");
@@ -112,9 +112,8 @@ namespace Project.Infrastructure.Migrations
 
             modelBuilder.Entity("Project.Domain.Entities.SalesHistory", b =>
                 {
-                    b.Property<Guid>("SalesHistoryId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("SalesHistoryId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("SaleDate")
                         .HasColumnType("datetime2");
@@ -192,8 +191,7 @@ namespace Project.Infrastructure.Migrations
                     b.HasOne("Project.Domain.Entities.SalesHistory", "SalesHistory")
                         .WithMany("SalesDetails")
                         .HasForeignKey("SalesHistoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("SalesHistory");
                 });

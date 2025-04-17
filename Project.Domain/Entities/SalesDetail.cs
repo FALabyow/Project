@@ -15,7 +15,7 @@ namespace Project.Domain.Entities
     {
         [Key]
         public Guid SalesDetailId { get; set; } = Guid.NewGuid();
-        public Guid SalesHistoryId { get; set; } //this is for invoice number
+        public string? SalesHistoryId { get; set; } //this is for invoice number
         public string? ProductName { get; set; } 
         public string? ProductCode { get; set; }
         public int QuantitySold { get; set; }

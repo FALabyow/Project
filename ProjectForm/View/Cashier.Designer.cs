@@ -65,12 +65,13 @@
             panel7 = new Panel();
             timer1 = new System.Windows.Forms.Timer(components);
             BarcodeData = new DataGridViewTextBoxColumn();
-            Column2 = new DataGridViewTextBoxColumn();
+            StockId = new DataGridViewTextBoxColumn();
             ProductName = new DataGridViewTextBoxColumn();
             ProductPrice = new DataGridViewTextBoxColumn();
             BuyerQuantity = new DataGridViewTextBoxColumn();
             Column1 = new DataGridViewTextBoxColumn();
             ProductQuantity = new DataGridViewTextBoxColumn();
+            ProductCode = new DataGridViewTextBoxColumn();
             Remove = new DataGridViewImageColumn();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
@@ -478,7 +479,7 @@
             dgvCashier.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dgvCashier.ColumnHeadersHeight = 40;
             dgvCashier.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dgvCashier.Columns.AddRange(new DataGridViewColumn[] { BarcodeData, Column2, ProductName, ProductPrice, BuyerQuantity, Column1, ProductQuantity, Remove });
+            dgvCashier.Columns.AddRange(new DataGridViewColumn[] { BarcodeData, StockId, ProductName, ProductPrice, BuyerQuantity, Column1, ProductQuantity, ProductCode, Remove });
             dgvCashier.Dock = DockStyle.Fill;
             dgvCashier.EnableHeadersVisualStyles = false;
             dgvCashier.GridColor = Color.White;
@@ -509,14 +510,14 @@
             BarcodeData.MinimumWidth = 6;
             BarcodeData.Name = "BarcodeData";
             // 
-            // Column2
+            // StockId
             // 
-            Column2.DataPropertyName = "StockId";
-            Column2.HeaderText = "StockId";
-            Column2.MinimumWidth = 6;
-            Column2.Name = "Column2";
-            Column2.Visible = false;
-            Column2.Width = 125;
+            StockId.DataPropertyName = "StockId";
+            StockId.HeaderText = "StockId";
+            StockId.MinimumWidth = 6;
+            StockId.Name = "StockId";
+            StockId.Visible = false;
+            StockId.Width = 125;
             // 
             // ProductName
             // 
@@ -558,6 +559,15 @@
             ProductQuantity.Name = "ProductQuantity";
             ProductQuantity.Visible = false;
             ProductQuantity.Width = 125;
+            // 
+            // ProductCode
+            // 
+            ProductCode.DataPropertyName = "ProductCode";
+            ProductCode.HeaderText = "ProductCode";
+            ProductCode.MinimumWidth = 6;
+            ProductCode.Name = "ProductCode";
+            ProductCode.Visible = false;
+            ProductCode.Width = 125;
             // 
             // Remove
             // 
@@ -638,12 +648,13 @@
         private Label label5;
         private Button adminBtn;
         private DataGridViewTextBoxColumn BarcodeData;
-        private DataGridViewTextBoxColumn Column2;
+        private DataGridViewTextBoxColumn StockId;
         private DataGridViewTextBoxColumn ProductName;
         private DataGridViewTextBoxColumn ProductPrice;
         private DataGridViewTextBoxColumn BuyerQuantity;
         private DataGridViewTextBoxColumn Column1;
         private DataGridViewTextBoxColumn ProductQuantity;
+        private DataGridViewTextBoxColumn ProductCode;
         private DataGridViewImageColumn Remove;
     }
 }

@@ -6,12 +6,11 @@ using System.Threading.Tasks;
 
 namespace ProjectForm.Model.DTOs
 {
-    public class SalesDetailInfoDto
+    public class SalesDetail
     {
-        public Guid ProductId { get; set; }
-        public string ProductCode { get; set; } = string.Empty;
-        public string ProductName { get; set; } = string.Empty;
-        public Guid SalesHistoryId { get; set; }
+        public string? ProductCode { get; set; } 
+        public string? ProductName { get; set; }
+        public string? SalesHistoryId { get; set; }
         public int QuantitySold { get; set; }
         public decimal UnitPrice { get; set; }
     }

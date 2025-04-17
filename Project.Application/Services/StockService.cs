@@ -130,7 +130,7 @@ namespace Project.Application.Services
                     var dto = stockDtos.FirstOrDefault(s => s.StockId == stock.StockId);
                     if (dto != null)
                     {
-                        stock.ProductQuantity -= dto.ProductQuantity;
+                        stock.ProductQuantity = dto.ProductQuantity;
                     }
                 }
 

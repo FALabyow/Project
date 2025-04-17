@@ -5,6 +5,8 @@ using ProjectForm.View.IView;
 using System.Data;
 using System.Linq;
 using System.Net.Http.Json;
+using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace ProjectForm.Presenter
@@ -31,6 +33,7 @@ namespace ProjectForm.Presenter
             _view.AdminClicked += OnAdminClicked;
             _view.BarcodeTextChanged += OnBarcodeTextChanged;   
             _view.RemoveClicked += OnRemoveClicked;
+            _view.CheckoutClicked += OnCheckoutClicked;
             _view.Date = DateOnly.FromDateTime(DateTime.Now).ToString("MM-dd-yyyy");
         }
         private void OnCloseClicked(object? sender, EventArgs e)
@@ -99,6 +102,13 @@ namespace ProjectForm.Presenter
 
             gridView.Rows.RemoveAt(e.RowIndex);
         }
+        private async void OnCheckoutClicked(object? sender, EventArgs e)
+        {
+            await SendSalesHistory(_view.TransactionNumber, decimal.Parse(_view.Total));
+            await SendSalesDetail();
+            await SendStockQuantity();
+            
+        }
         private void GetTranNo()
         {
             string sdate = DateTime.Now.ToString("yyyyMMdd");
@@ -165,6 +175,8 @@ namespace ProjectForm.Presenter
                     BuyersQuantity = 1,
                     SubTotal = product.ProductPrice,
                     ProductQuantity = product.ProductQuantity,
+                    ProductCode = product.ProductCode,
+                    
                 };
 
                 _view.DisplayProducts(productToDisplay);
@@ -183,6 +195,85 @@ namespace ProjectForm.Presenter
             }
 
             _view.DisplayTotal = $"{grandTotal}";
+        }
+        private async Task SendSalesHistory(string salesHistoryId, decimal totalAmount)
+        {
+            if(totalAmount == 0)
+            {
+                MessageBox.Show("Please settle the payment");
+                return;
+            }
+            var salesHistory = new SalesHistoryInfoDto
+            {
+                SalesHistoryId = salesHistoryId,
+                TotalAmount = totalAmount,
+            };
+
+            if (salesHistoryId == "000000000")
+            {
+                MessageBox.Show("No transaction number is generated");
+                return;
+            }
+
+            try
+            {
+                var json = JsonSerializer.Serialize(salesHistory);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+                var res = await _httpClient.PostAsync("/SalesHistory/AddSalesHistory", content);
+
+                res.EnsureSuccessStatusCode();
+
+            }catch(HttpRequestException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+
+
+        }
+        private async Task SendSalesDetail()
+        {
+            if(_view.Sales.Count < 0)
+            {
+                MessageBox.Show("Transaction is empty");
+                return;
+            }
+
+            try
+            {
+                var json = JsonSerializer.Serialize(_view.Sales);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+                var res = await _httpClient.PostAsync("/Sales/AddSales", content);
+
+                res.EnsureSuccessStatusCode();
+
+            }
+            catch (HttpRequestException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        private async Task SendStockQuantity()
+        {
+            if (_view.Stocks.Count < 0)
+            {
+                MessageBox.Show("Transaction is empty");
+                return;
+            }
+
+            try
+            {
+                var json = JsonSerializer.Serialize(_view.Stocks);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+                var res = await _httpClient.PatchAsync("/Stocks/UpdateStocks/Quantity", content);
+
+                res.EnsureSuccessStatusCode();
+
+            }
+            catch (HttpRequestException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

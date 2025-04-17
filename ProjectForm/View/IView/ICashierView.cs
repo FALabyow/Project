@@ -24,12 +24,15 @@ namespace ProjectForm.View.IView
         event EventHandler<Button>? AdminClicked;
         event EventHandler? BarcodeTextChanged;
         event EventHandler<DataGridViewCellEventArgs>? RemoveClicked;
+        event EventHandler? CheckoutClicked;
         string Timer { get; set; }
         string Barcode { get; }
         string Date { get; set; }
         string Total { get; set; }
         string Cash { get; set; }    
         string Change { get; set; }
+        List<SalesDetail> Sales { get;}
+        List<StockDto> Stocks { get; }
         void Slider(Button button);
         void DisplayProducts(DisplayAvailableProductsDto products);
         bool ProductExistsInGrid(string barcode);

@@ -28,6 +28,7 @@ namespace ProjectForm
             dgvCashier.AutoGenerateColumns = false;
             picClose.Click += (s, e) => CloseClicked?.Invoke(this, EventArgs.Empty);
             timer1.Tick += (s, e) => TimerTicked?.Invoke(this, EventArgs.Empty);
+            checkOutBtn.Click += (s, e) => CheckoutClicked?.Invoke(this, EventArgs.Empty);
             btnTransaction.Click += Transaction_Click;
             btnSearchProduct.Click += SearchProduct_Click;
             btnPayment.Click += Payment_Click;
@@ -52,6 +53,7 @@ namespace ProjectForm
         public event EventHandler<Button>? AdminClicked;
         public event EventHandler? BarcodeTextChanged;
         public event EventHandler<DataGridViewCellEventArgs>? RemoveClicked;
+        public event EventHandler? CheckoutClicked;
         public string TransactionNumber
         {
             get => lblTranNo.Text;
@@ -88,6 +90,50 @@ namespace ProjectForm
             set => lblChange.Text = value;
         }
         public string Barcode => barcodetxt.Text;
+        public List<SalesDetail> Sales
+        {
+            get
+            {
+                var sales = new List<SalesDetail>();
+                foreach (DataGridViewRow row in dgvCashier.Rows)
+                {
+                    if (row.IsNewRow) continue;
+
+                    sales.Add(new SalesDetail
+                    {
+                        ProductCode = row.Cells["ProductCode"].Value?.ToString(),
+                        ProductName = row.Cells["ProductName"].Value?.ToString(),
+                        SalesHistoryId = lblTranNo.Text,
+                        QuantitySold = (int)row.Cells["BuyerQuantity"].Value,
+                        UnitPrice = (decimal)row.Cells["ProductPrice"].Value
+                    });
+
+
+                }
+
+                return sales;
+            }
+        }
+        public List<StockDto> Stocks
+        {
+            get
+            {
+                var stocks = new List<StockDto>();
+                foreach (DataGridViewRow row in dgvCashier.Rows)
+                {
+                    if (row.IsNewRow) continue;
+
+                    stocks.Add(new StockDto
+                    {
+                        StockId = (Guid)row.Cells["StockId"].Value,
+                        ProductQuantity = (int)row.Cells["ProductQuantity"].Value,
+                    });
+
+
+                }
+                return stocks;
+            }
+        }
         public void Slider(Button button)
         {
             pnlSlide.BackColor = Color.SaddleBrown;
@@ -129,7 +175,7 @@ namespace ProjectForm
         public void DisplayProducts(DisplayAvailableProductsDto products)
         {
 
-            dgvCashier.Rows.Add(products.BarcodeData, products.StockId, products.ProductName, products.ProductPrice, products.BuyersQuantity, products.SubTotal, products.ProductQuantity = products.ProductQuantity - 1);
+            dgvCashier.Rows.Add(products.BarcodeData, products.StockId, products.ProductName, products.ProductPrice, products.BuyersQuantity, products.SubTotal, products.ProductQuantity = products.ProductQuantity - 1, products.ProductCode);
             ClearBarcode();
             _presenter.CalculateTotal(dgvCashier);
         }

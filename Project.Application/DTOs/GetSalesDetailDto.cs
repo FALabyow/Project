@@ -8,7 +8,7 @@ namespace Project.Application.DTOs
 {
     public class GetSalesDetailDto
     {
-        public Guid SalesHistoryId { get; set; } //this is for invoice number
+        public string? SalesHistoryId { get; set; } //this is for invoice number
         public string? ProductName { get; set; }
         public string? ProductCode { get; set; }
         public int ProductQuantity { get; set; } //total quantity sold for each item
