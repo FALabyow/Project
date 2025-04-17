@@ -34,7 +34,6 @@
             adminBtn = new Button();
             btnLogout = new Button();
             btnDailySales = new Button();
-            btnClearCart = new Button();
             btnPayment = new Button();
             btnSearchProduct = new Button();
             btnTransaction = new Button();
@@ -62,8 +61,6 @@
             label3 = new Label();
             lblDisplaytotal = new Label();
             dgvCashier = new DataGridView();
-            panel7 = new Panel();
-            timer1 = new System.Windows.Forms.Timer(components);
             BarcodeData = new DataGridViewTextBoxColumn();
             StockId = new DataGridViewTextBoxColumn();
             ProductName = new DataGridViewTextBoxColumn();
@@ -73,6 +70,8 @@
             ProductQuantity = new DataGridViewTextBoxColumn();
             ProductCode = new DataGridViewTextBoxColumn();
             Remove = new DataGridViewImageColumn();
+            panel7 = new Panel();
+            timer1 = new System.Windows.Forms.Timer(components);
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
@@ -89,7 +88,6 @@
             panel1.Controls.Add(adminBtn);
             panel1.Controls.Add(btnLogout);
             panel1.Controls.Add(btnDailySales);
-            panel1.Controls.Add(btnClearCart);
             panel1.Controls.Add(btnPayment);
             panel1.Controls.Add(btnSearchProduct);
             panel1.Controls.Add(btnTransaction);
@@ -110,7 +108,7 @@
             adminBtn.ForeColor = Color.FromArgb(255, 245, 230);
             adminBtn.Image = Properties.Resources.server_person_24dp_1F1F1F_FILL0_wght400_GRAD0_opsz24;
             adminBtn.ImageAlign = ContentAlignment.MiddleLeft;
-            adminBtn.Location = new Point(0, 430);
+            adminBtn.Location = new Point(0, 380);
             adminBtn.Name = "adminBtn";
             adminBtn.Size = new Size(200, 50);
             adminBtn.TabIndex = 12;
@@ -145,29 +143,12 @@
             btnDailySales.ForeColor = Color.FromArgb(255, 245, 230);
             btnDailySales.Image = Properties.Resources.charts;
             btnDailySales.ImageAlign = ContentAlignment.MiddleLeft;
-            btnDailySales.Location = new Point(0, 380);
+            btnDailySales.Location = new Point(0, 330);
             btnDailySales.Name = "btnDailySales";
             btnDailySales.Size = new Size(200, 50);
             btnDailySales.TabIndex = 10;
             btnDailySales.Text = "Daily Sales";
             btnDailySales.UseVisualStyleBackColor = false;
-            // 
-            // btnClearCart
-            // 
-            btnClearCart.BackColor = Color.FromArgb(193, 135, 107);
-            btnClearCart.Dock = DockStyle.Top;
-            btnClearCart.FlatAppearance.BorderSize = 0;
-            btnClearCart.FlatStyle = FlatStyle.Flat;
-            btnClearCart.Font = new Font("Microsoft Sans Serif", 10.8F);
-            btnClearCart.ForeColor = Color.FromArgb(255, 245, 230);
-            btnClearCart.Image = Properties.Resources.clear;
-            btnClearCart.ImageAlign = ContentAlignment.MiddleLeft;
-            btnClearCart.Location = new Point(0, 330);
-            btnClearCart.Name = "btnClearCart";
-            btnClearCart.Size = new Size(200, 50);
-            btnClearCart.TabIndex = 9;
-            btnClearCart.Text = "Clear Cart";
-            btnClearCart.UseVisualStyleBackColor = false;
             // 
             // btnPayment
             // 
@@ -490,18 +471,6 @@
             dgvCashier.Size = new Size(763, 650);
             dgvCashier.TabIndex = 5;
             // 
-            // panel7
-            // 
-            panel7.Dock = DockStyle.Fill;
-            panel7.Location = new Point(0, 0);
-            panel7.Name = "panel7";
-            panel7.Size = new Size(1191, 700);
-            panel7.TabIndex = 0;
-            // 
-            // timer1
-            // 
-            timer1.Enabled = true;
-            // 
             // BarcodeData
             // 
             BarcodeData.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
@@ -578,6 +547,18 @@
             Remove.Name = "Remove";
             Remove.Width = 50;
             // 
+            // panel7
+            // 
+            panel7.Dock = DockStyle.Fill;
+            panel7.Location = new Point(0, 0);
+            panel7.Name = "panel7";
+            panel7.Size = new Size(1191, 700);
+            panel7.TabIndex = 0;
+            // 
+            // timer1
+            // 
+            timer1.Enabled = true;
+            // 
             // Cashier
             // 
             AutoScaleDimensions = new SizeF(10F, 22F);
@@ -619,7 +600,6 @@
         private Panel panel4;
         private Panel panel5;
         private Button btnTransaction;
-        private Button btnClearCart;
         private Button btnPayment;
         private Button btnSearchProduct;
         private Button btnDailySales;

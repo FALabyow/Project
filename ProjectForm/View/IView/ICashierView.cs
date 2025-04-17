@@ -20,7 +20,6 @@ namespace ProjectForm.View.IView
         event EventHandler<Button>? PaymentClicked;
         event EventHandler<Button>? DailySalesClicked;
         event EventHandler<Button>? LogoutClicked;
-        event EventHandler<Button>? ClearCartClicked;
         event EventHandler<Button>? AdminClicked;
         event EventHandler? BarcodeTextChanged;
         event EventHandler<DataGridViewCellEventArgs>? RemoveClicked;
@@ -39,6 +38,7 @@ namespace ProjectForm.View.IView
         void UpdateProductQuantityInGrid(string barcode, int newQuantity);
         int GetProductQuantityFromGrid(string barcode);
         void ClearBarcode();
+        void ClearTable();
 
 
     }

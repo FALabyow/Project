@@ -34,12 +34,10 @@ namespace ProjectForm
             btnPayment.Click += Payment_Click;
             btnLogout.Click += Logout_Click;
             btnDailySales.Click += DailySales_Click;
-            btnClearCart.Click += ClearCart_Click;
             adminBtn.Click += Admin_Click;
             barcodetxt.TextChanged += Barcode_TextChanged;
             barcodetxt.Select();
             dgvCashier.CellContentClick += DataGridCashierView_CellContentClick;
-
         }
 
         public event EventHandler? CloseClicked;
@@ -49,7 +47,6 @@ namespace ProjectForm
         public event EventHandler<Button>? PaymentClicked;
         public event EventHandler<Button>? DailySalesClicked;
         public event EventHandler<Button>? LogoutClicked;
-        public event EventHandler<Button>? ClearCartClicked;
         public event EventHandler<Button>? AdminClicked;
         public event EventHandler? BarcodeTextChanged;
         public event EventHandler<DataGridViewCellEventArgs>? RemoveClicked;
@@ -105,7 +102,7 @@ namespace ProjectForm
                         ProductName = row.Cells["ProductName"].Value?.ToString(),
                         SalesHistoryId = lblTranNo.Text,
                         QuantitySold = (int)row.Cells["BuyerQuantity"].Value,
-                        UnitPrice = (decimal)row.Cells["ProductPrice"].Value
+                        UnitPrice = (decimal)row.Cells["ProductPrice"].Value, 
                     });
 
 
@@ -133,6 +130,14 @@ namespace ProjectForm
                 }
                 return stocks;
             }
+        }
+        public void ClearTable()
+        {
+            dgvCashier.Rows.Clear();
+            lblCash.Text = "0.00";
+            lblChange.Text = "0.00";
+            lblSalesTotal.Text = "0.00";
+            lblDisplaytotal.Text = "0.00";
         }
         public void Slider(Button button)
         {
@@ -204,14 +209,6 @@ namespace ProjectForm
             if (sender is Button button)
             {
                 PaymentClicked?.Invoke(this, button);
-                barcodetxt.Select();
-            }
-        }
-        private void ClearCart_Click(object? sender, EventArgs e)
-        {
-            if (sender is Button button)
-            {
-                ClearCartClicked?.Invoke(this, button);
                 barcodetxt.Select();
             }
         }

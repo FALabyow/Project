@@ -301,7 +301,6 @@
             pnlLogo.Name = "pnlLogo";
             pnlLogo.Size = new Size(191, 170);
             pnlLogo.TabIndex = 1;
-            pnlLogo.Paint += pnlLogo_Paint;
             // 
             // lblName
             // 

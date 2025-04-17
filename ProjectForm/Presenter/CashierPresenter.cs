@@ -26,7 +26,6 @@ namespace ProjectForm.Presenter
             _view.TimerTicked += OnTimerClicked;
             _view.TransactionClicked += OnTransactionClicked;
             _view.LogoutClicked += OnLogoutClicked;
-            _view.ClearCartClicked += OnClearCartClicked;
             _view.SearchProductClicked += OnSearchProductClicked;
             _view.DailySalesClicked += OnDailySalesClicked;
             _view.PaymentClicked += OnPaymentClicked;
@@ -66,10 +65,6 @@ namespace ProjectForm.Presenter
             settlepayment.txtSale.Text = _view.DisplayTotal;
             settlepayment.ShowDialog();
         }
-        private void OnClearCartClicked(object? sender, Button e)
-        {
-            _view.Slider(e);
-        }
         private void OnDailySalesClicked(object? sender, Button e)
         {
             _view.Slider(e);
@@ -104,10 +99,29 @@ namespace ProjectForm.Presenter
         }
         private async void OnCheckoutClicked(object? sender, EventArgs e)
         {
+            if (_view.TransactionNumber == "000000000")
+            {
+                MessageBox.Show("No transaction number is generated");
+                return;
+            }
+
+            if (_view.Sales.Count <= 0)
+            {
+                MessageBox.Show("Transaction is empty");
+                return;
+            }
+
+            if(decimal.Parse(_view.Total) == 0)
+            {
+                MessageBox.Show("Please settle the payment.");
+                return;
+            }
+
             await SendSalesHistory(_view.TransactionNumber, decimal.Parse(_view.Total));
             await SendSalesDetail();
             await SendStockQuantity();
-            
+            GetTranNo();
+            _view.ClearTable();
         }
         private void GetTranNo()
         {
@@ -198,22 +212,12 @@ namespace ProjectForm.Presenter
         }
         private async Task SendSalesHistory(string salesHistoryId, decimal totalAmount)
         {
-            if(totalAmount == 0)
-            {
-                MessageBox.Show("Please settle the payment");
-                return;
-            }
+            
             var salesHistory = new SalesHistoryInfoDto
             {
                 SalesHistoryId = salesHistoryId,
                 TotalAmount = totalAmount,
             };
-
-            if (salesHistoryId == "000000000")
-            {
-                MessageBox.Show("No transaction number is generated");
-                return;
-            }
 
             try
             {
@@ -233,12 +237,6 @@ namespace ProjectForm.Presenter
         }
         private async Task SendSalesDetail()
         {
-            if(_view.Sales.Count < 0)
-            {
-                MessageBox.Show("Transaction is empty");
-                return;
-            }
-
             try
             {
                 var json = JsonSerializer.Serialize(_view.Sales);
@@ -255,12 +253,6 @@ namespace ProjectForm.Presenter
         }
         private async Task SendStockQuantity()
         {
-            if (_view.Stocks.Count < 0)
-            {
-                MessageBox.Show("Transaction is empty");
-                return;
-            }
-
             try
             {
                 var json = JsonSerializer.Serialize(_view.Stocks);
