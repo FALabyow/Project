@@ -15,5 +15,6 @@ namespace ProjectForm.Model.DTOs
         public decimal ProductPrice { get; set; }
         public int BuyersQuantity { get; set; }
         public decimal SubTotal { get; set; } = 0;
+        public int ProductQuantity { get; set; }
     }
 }

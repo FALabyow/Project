@@ -111,6 +111,7 @@ namespace ProjectForm
                 {
                     row.Cells[4].Value = newQuantity;
                     row.Cells[5].Value = newQuantity * (decimal)row.Cells[3].Value;
+                    row.Cells[6].Value = (int)row.Cells[6].Value - 1;   
                     break;
                 }
             }
@@ -127,7 +128,8 @@ namespace ProjectForm
         }
         public void DisplayProducts(DisplayAvailableProductsDto products)
         {
-            dgvCashier.Rows.Add(products.BarcodeData, products.StockId, products.ProductName, products.ProductPrice, products.BuyersQuantity, products.SubTotal);
+
+            dgvCashier.Rows.Add(products.BarcodeData, products.StockId, products.ProductName, products.ProductPrice, products.BuyersQuantity, products.SubTotal, products.ProductQuantity = products.ProductQuantity - 1);
             ClearBarcode();
             _presenter.CalculateTotal(dgvCashier);
         }

@@ -25,6 +25,7 @@ namespace ProjectForm
             _cashierPresenter = cashierPresenter;
             _searchProductPresenter = new SearchProductPresenter(_cashierPresenter, this, _view);
             dgvProduct.AutoGenerateColumns = false;
+            DisplayProducts(_cashierPresenter._availableProducts);
             dgvProduct.RowPostPaint += DataGridSearchProductView_RowPostPaint;
             dgvProduct.CellContentClick += DataGridSearchProductView_CellContentClick;
             refreshBtn.Click += (s, e) => RefreshClicked?.Invoke(this, EventArgs.Empty);

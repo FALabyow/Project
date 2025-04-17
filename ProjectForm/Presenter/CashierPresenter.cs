@@ -146,6 +146,11 @@ namespace ProjectForm.Presenter
             {
                 int currentQty = _view.GetProductQuantityFromGrid(barcode);
                 int newQty = currentQty + 1;
+                if(product.ProductQuantity < newQty)
+                {
+                    MessageBox.Show("No Available stock");
+                    return;
+                }
                 _view.UpdateProductQuantityInGrid(barcode, newQty);
                 _view.ClearBarcode();
             }
@@ -158,7 +163,8 @@ namespace ProjectForm.Presenter
                     ProductName = product.ProductName,
                     ProductPrice = product.ProductPrice,
                     BuyersQuantity = 1,
-                    SubTotal = product.ProductPrice
+                    SubTotal = product.ProductPrice,
+                    ProductQuantity = product.ProductQuantity,
                 };
 
                 _view.DisplayProducts(productToDisplay);

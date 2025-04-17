@@ -43,14 +43,22 @@ namespace ProjectForm.Presenter
         private void OnAddToCartClicked(object? sender, DataGridViewCellEventArgs e)
         {
             var gridView = sender as DataGridView;
+            
             if (gridView == null || e.RowIndex < 0) { return; }
 
             string barcode = (string)gridView.Rows[e.RowIndex].Cells["BarcodeData"].Value;
-
+            int productQty = (int)gridView.Rows[e.RowIndex].Cells["ProductQuantity"].Value;
+           
             if (_cashierView.ProductExistsInGrid(barcode))
             {
                 int currentQty = _cashierView.GetProductQuantityFromGrid(barcode);
                 int newQty = currentQty + 1;
+                
+                if (newQty > productQty)
+                {
+                    MessageBox.Show("No Available stock");
+                    return;
+                }
                 _cashierView.UpdateProductQuantityInGrid(barcode, newQty);
             }
             else
@@ -62,7 +70,8 @@ namespace ProjectForm.Presenter
                     ProductName = (string)gridView.Rows[e.RowIndex].Cells["ProductName"].Value,
                     ProductPrice = (decimal)gridView.Rows[e.RowIndex].Cells["ProductPrice"].Value,
                     BuyersQuantity = 1,
-                    SubTotal = (decimal)gridView.Rows[e.RowIndex].Cells["ProductPrice"].Value
+                    SubTotal = (decimal)gridView.Rows[e.RowIndex].Cells["ProductPrice"].Value,
+                    ProductQuantity = (int)gridView.Rows[e.RowIndex].Cells["ProductQuantity"].Value,
                 };
 
                 _cashierView.DisplayProducts(addedToCart);

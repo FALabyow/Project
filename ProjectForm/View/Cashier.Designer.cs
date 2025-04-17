@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             panel1 = new Panel();
             adminBtn = new Button();
             btnLogout = new Button();
@@ -62,15 +62,16 @@
             label3 = new Label();
             lblDisplaytotal = new Label();
             dgvCashier = new DataGridView();
+            panel7 = new Panel();
+            timer1 = new System.Windows.Forms.Timer(components);
             BarcodeData = new DataGridViewTextBoxColumn();
             Column2 = new DataGridViewTextBoxColumn();
             ProductName = new DataGridViewTextBoxColumn();
             ProductPrice = new DataGridViewTextBoxColumn();
             BuyerQuantity = new DataGridViewTextBoxColumn();
             Column1 = new DataGridViewTextBoxColumn();
+            ProductQuantity = new DataGridViewTextBoxColumn();
             Remove = new DataGridViewImageColumn();
-            panel7 = new Panel();
-            timer1 = new System.Windows.Forms.Timer(components);
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
@@ -467,17 +468,17 @@
             dgvCashier.AllowUserToAddRows = false;
             dgvCashier.BackgroundColor = Color.White;
             dgvCashier.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = Color.FromArgb(93, 64, 55);
-            dataGridViewCellStyle2.Font = new Font("Microsoft Sans Serif", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle2.ForeColor = Color.FromArgb(255, 236, 179);
-            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
-            dgvCashier.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = Color.FromArgb(93, 64, 55);
+            dataGridViewCellStyle1.Font = new Font("Microsoft Sans Serif", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle1.ForeColor = Color.FromArgb(255, 236, 179);
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            dgvCashier.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dgvCashier.ColumnHeadersHeight = 40;
             dgvCashier.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dgvCashier.Columns.AddRange(new DataGridViewColumn[] { BarcodeData, Column2, ProductName, ProductPrice, BuyerQuantity, Column1, Remove });
+            dgvCashier.Columns.AddRange(new DataGridViewColumn[] { BarcodeData, Column2, ProductName, ProductPrice, BuyerQuantity, Column1, ProductQuantity, Remove });
             dgvCashier.Dock = DockStyle.Fill;
             dgvCashier.EnableHeadersVisualStyles = false;
             dgvCashier.GridColor = Color.White;
@@ -487,6 +488,18 @@
             dgvCashier.RowHeadersWidth = 51;
             dgvCashier.Size = new Size(763, 650);
             dgvCashier.TabIndex = 5;
+            // 
+            // panel7
+            // 
+            panel7.Dock = DockStyle.Fill;
+            panel7.Location = new Point(0, 0);
+            panel7.Name = "panel7";
+            panel7.Size = new Size(1191, 700);
+            panel7.TabIndex = 0;
+            // 
+            // timer1
+            // 
+            timer1.Enabled = true;
             // 
             // BarcodeData
             // 
@@ -537,6 +550,15 @@
             Column1.Name = "Column1";
             Column1.Width = 125;
             // 
+            // ProductQuantity
+            // 
+            ProductQuantity.DataPropertyName = "ProductQuantity";
+            ProductQuantity.HeaderText = "Stocks";
+            ProductQuantity.MinimumWidth = 6;
+            ProductQuantity.Name = "ProductQuantity";
+            ProductQuantity.Visible = false;
+            ProductQuantity.Width = 125;
+            // 
             // Remove
             // 
             Remove.HeaderText = "";
@@ -545,18 +567,6 @@
             Remove.MinimumWidth = 6;
             Remove.Name = "Remove";
             Remove.Width = 50;
-            // 
-            // panel7
-            // 
-            panel7.Dock = DockStyle.Fill;
-            panel7.Location = new Point(0, 0);
-            panel7.Name = "panel7";
-            panel7.Size = new Size(1191, 700);
-            panel7.TabIndex = 0;
-            // 
-            // timer1
-            // 
-            timer1.Enabled = true;
             // 
             // Cashier
             // 
@@ -633,6 +643,7 @@
         private DataGridViewTextBoxColumn ProductPrice;
         private DataGridViewTextBoxColumn BuyerQuantity;
         private DataGridViewTextBoxColumn Column1;
+        private DataGridViewTextBoxColumn ProductQuantity;
         private DataGridViewImageColumn Remove;
     }
 }
