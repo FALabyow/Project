@@ -1,5 +1,6 @@
 ﻿using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using Project.Application.DTOs.StockrRecordDtos;
 using Project.Application.Interfaces;
 using Project.Domain.Entities;
 using Project.Infrastructure.Persistence;
@@ -53,11 +54,11 @@ namespace Project.Infrastructure.Repositories
                 throw new InvalidOperationException("An error occurred while fetching stock records." + ex.Message);
             }
         }
-        public async Task AddStockRecordsAsync(IEnumerable<StockRecord> stockRecords)
+        public async Task AddStockRecordsAsync(IEnumerable<StockRecord> addStockRecordDtos)
         {
             try
             {
-                await _context.StockRecords.AddRangeAsync(stockRecords); 
+                await _context.StockRecords.AddRangeAsync(addStockRecordDtos); 
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateException ex)

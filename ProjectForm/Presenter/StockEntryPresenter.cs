@@ -1,4 +1,5 @@
 ﻿using Project.Application.DTOs.StockDtos;
+using Project.Application.DTOs.StockrRecordDtos;
 using ProjectForm.Model;
 using ProjectForm.Model.DTOs;
 using ProjectForm.Model.DTOs.StockDtos;
@@ -18,7 +19,7 @@ namespace ProjectForm.Presenter
         private readonly IStockEntryView _view;
         private string? newRef;
         private readonly HttpClient _httpClient;
-        private List<StockRecordDto>? _records;
+        private List<GetAllStocksRecordDto>? _records;
         public StockEntryPresenter(IStockEntryView view)
         {
             _view = view;
@@ -65,9 +66,9 @@ namespace ProjectForm.Presenter
             }
             gridView.Rows.RemoveAt(e.RowIndex);
         }
-        public List<StockRecordDto> GetStockRecords(DataGridView dgvStockIn)
+        public List<GetAllStocksRecordDto> GetStockRecords(DataGridView dgvStockIn)
         {
-            var stockRecords = new List<StockRecordDto>();
+            var stockRecords = new List<GetAllStocksRecordDto>();
             foreach (DataGridViewRow row in dgvStockIn.Rows)
             {
                 if (row.Cells["ProductQuantity1"].Value != null)
@@ -77,7 +78,7 @@ namespace ProjectForm.Presenter
                                            ? DateOnly.FromDateTime(tempDate)
                                            : DateOnly.MinValue;
 
-                    stockRecords.Add(new StockRecordDto
+                    stockRecords.Add(new GetAllStocksRecordDto
                     {
                         ReferenceNum = row.Cells["ReferenceNum1"].Value?.ToString() ?? string.Empty,
                         StockInQty = Convert.ToInt32(row.Cells["ProductQuantity1"].Value),
@@ -104,7 +105,7 @@ namespace ProjectForm.Presenter
                 return;
             }
 
-            var stockRecords = data.Select(d => new StockRecordDto
+            var stockRecords = data.Select(d => new AddStockRecordsDto
             {
                 ReferenceNum = d.ReferenceNum,
                 StockInQty = d.StockInQty,  
@@ -159,7 +160,7 @@ namespace ProjectForm.Presenter
 
                 if (res.IsSuccessStatusCode)
                 {
-                    var records = await res.Content.ReadFromJsonAsync<List<StockRecordDto>> ();
+                    var records = await res.Content.ReadFromJsonAsync<List<GetAllStocksRecordDto>> ();
 
                     if (records == null)
                     {

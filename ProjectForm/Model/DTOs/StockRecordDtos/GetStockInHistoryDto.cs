@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProjectForm.Model.DTOs
+namespace ProjectForm.Model.DTOs.StockRecordDtos
 {
     public class GetStockInHistoryDto
     {

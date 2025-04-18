@@ -1,5 +1,7 @@
-﻿using ProjectForm.Model.DTOs;
+﻿using Project.Application.DTOs.StockrRecordDtos;
+using ProjectForm.Model.DTOs;
 using ProjectForm.Model.DTOs.StockDtos;
+using ProjectForm.Model.DTOs.StockRecordDtos;
 using ProjectForm.Presenter;
 using ProjectForm.View.IView;
 using System;
@@ -63,7 +65,7 @@ namespace ProjectForm
             dgvStockIn.Rows
                       .Add(dgvStockIn.Rows.Count + 1, stockList.StockId, stockList.ProductId, stockList.ReferenceNum, stockList.ProductCode, stockList.ProductName, stockList.CategoryName, stockList.ProductQuantity, stockList.StockInDate);
         }
-        public void DisplayStockRecords(List<StockRecordDto> filteredRecords)
+        public void DisplayStockRecords(List<GetAllStocksRecordDto> filteredRecords)
         {
             dataStockIn.DataSource = filteredRecords;
         }
@@ -77,7 +79,7 @@ namespace ProjectForm
                 DeleteClicked?.Invoke(sender, e);
             }
         }
-        public List<StockRecordDto> GetStockRecordsFromGrid()
+        public List<GetAllStocksRecordDto> GetStockRecordsFromGrid()
         {
             var dgv = dgvStockIn as DataGridView;
             if (presenter != null)
@@ -86,7 +88,7 @@ namespace ProjectForm
                 return rec;
             }
 
-            return new List<StockRecordDto>();
+            return new List<GetAllStocksRecordDto>();
 
         }
         private async void btnEntry_Click(object sender, EventArgs e)

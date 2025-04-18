@@ -1,4 +1,5 @@
-﻿using Project.Domain.Entities;
+﻿using Project.Application.DTOs.StockrRecordDtos;
+using Project.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,6 @@ namespace Project.Application.Interfaces
     {
         Task<IEnumerable<StockRecord>> GetAllStockRecordsAsync();
         Task<IEnumerable<StockRecord>> GetAllStockRecordsAsyncByDate(DateOnly startDate, DateOnly endDate);
-        Task AddStockRecordsAsync(IEnumerable<StockRecord> stockRecords);
+        Task AddStockRecordsAsync(IEnumerable<StockRecord> addStockRecordDtos);
     }
 }

@@ -1,7 +1,7 @@
 ﻿using Project.Application.DTOs;
+using Project.Application.DTOs.StockrRecordDtos;
 using Project.Application.Interfaces;
 using Project.Domain.Entities;
-using ProjectForm.Model.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +17,7 @@ namespace Project.Application.Services
         {
             _stockRecordRepository = stockRecordRepository;
         }
-        public async Task<List<StockRecordDto>> GetAllStockRecordsAsync()
+        public async Task<List<GetAllStocksRecordDto>> GetAllStockRecordsAsync()
         {
             try
             {
@@ -25,7 +25,7 @@ namespace Project.Application.Services
                 if (!stockRecords.Any())
                     throw new InvalidOperationException("No stock records found in the database!");
 
-                return stockRecords.Select(b => new StockRecordDto
+                return stockRecords.Select(b => new GetAllStocksRecordDto
                 {
                     StockRecordId = b.StockRecordId,
                     ReferenceNum = b.ReferenceNum,
@@ -72,9 +72,9 @@ namespace Project.Application.Services
                 throw new InvalidOperationException("Unexpected error in service layer", ex);
             }
         }
-        public async Task AddStockRecordsAsync(IEnumerable<StockRecordDto> stockRecordDtos)
+        public async Task AddStockRecordsAsync(List<AddStockRecordsDto> addStockRecordDtos)
         {
-            var stockRecords = stockRecordDtos.Select(dto => new StockRecord
+            var stockRecords = addStockRecordDtos.Select(dto => new StockRecord
             {
                 ReferenceNum = dto.ReferenceNum,
                 StockInQty = dto.StockInQty,

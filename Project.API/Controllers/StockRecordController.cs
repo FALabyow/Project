@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Project.Application.DTOs;
+using Project.Application.DTOs.StockrRecordDtos;
 using Project.Application.Services;
-using ProjectForm.Model.DTOs;
 
 namespace Project.API.Controllers
 {
@@ -17,7 +17,7 @@ namespace Project.API.Controllers
         }
 
         [HttpGet("/StockRecords/All")]
-        public async Task<ActionResult<IEnumerable<StockRecordDto>>> GetAllStockRecordsAsync()
+        public async Task<ActionResult<IEnumerable<GetAllStocksRecordDto>>> GetAllStockRecordsAsync()
         {
             try
             {
@@ -53,16 +53,16 @@ namespace Project.API.Controllers
         }
 
         [HttpPost("/StockRecord/AddMultipleRecords")]
-        public async Task<IActionResult> AddStockRecordsAsync([FromBody] List<StockRecordDto> stockRecordDtos)
+        public async Task<IActionResult> AddStockRecordsAsync([FromBody] List<AddStockRecordsDto> addStockRecordDtos)
         {
-            if (stockRecordDtos == null || !stockRecordDtos.Any())
+            if (addStockRecordDtos == null || !addStockRecordDtos.Any())
             {
                 return BadRequest(new { error = "No stock records provided." });
             }
 
             try
             {
-                await _stockRecordService.AddStockRecordsAsync(stockRecordDtos);
+                await _stockRecordService.AddStockRecordsAsync(addStockRecordDtos);
                 return Ok(new { message = "Stock records added successfully." });
             }
             catch (InvalidOperationException ex)

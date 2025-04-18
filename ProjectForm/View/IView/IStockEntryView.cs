@@ -1,5 +1,7 @@
-﻿using ProjectForm.Model.DTOs;
+﻿using Project.Application.DTOs.StockrRecordDtos;
+using ProjectForm.Model.DTOs;
 using ProjectForm.Model.DTOs.StockDtos;
+using ProjectForm.Model.DTOs.StockRecordDtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,9 +15,9 @@ namespace ProjectForm.View.IView
         //void DisplayProductList(List<StockInProductDto> productList);
         string ReferenceNum { get; set; }
         void DisplayReferenceNumber(string referenceNumber);
-        List<StockRecordDto> GetStockRecordsFromGrid();
+        List<GetAllStocksRecordDto> GetStockRecordsFromGrid();
         void DisplayStockEntry(AddStockEntryDto stocksList);
-        void DisplayStockRecords(List<StockRecordDto> filteredRecords);
+        void DisplayStockRecords(List<GetAllStocksRecordDto> filteredRecords);
 
         event Action? OnDateSelected;
         DateTimePicker DatePicker { get; }
