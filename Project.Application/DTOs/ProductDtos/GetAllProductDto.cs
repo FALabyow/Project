@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Project.Application.DTOs
+namespace Project.Application.DTOs.ProductDtos
 {
-    public class ProductDto
+    public class GetAllProductDto
     {
         public Guid ProductId { get; set; }
         public string? ProductCode { get; set; }
@@ -18,6 +18,5 @@ namespace Project.Application.DTOs
         public DateTime ScannedAt { get; set; }
         public Guid CategoryId { get; set; }
         public string? CategoryName { get; set; }
-        //public string? ProductStatus { get; set; }
     }
 }

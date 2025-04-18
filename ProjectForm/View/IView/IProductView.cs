@@ -1,4 +1,5 @@
-﻿using ProjectForm.Model.DTOs;
+﻿using Project.Application.DTOs.ProductDtos;
+using ProjectForm.Model.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace ProjectForm.View.IView
 {
     public interface IProductView
     {
-        void DisplayProductList(List<ProductDto> productList);
+        void DisplayProductList(List<GetAllProductDto> productList);
         string SearchText { get; }
         void ShowMessage(string message);
         event EventHandler<DataGridViewCellEventArgs>? DeleteClicked;

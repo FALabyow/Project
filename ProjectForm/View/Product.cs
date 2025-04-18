@@ -1,4 +1,5 @@
-﻿using ProjectForm.Model.DTOs;
+﻿using Project.Application.DTOs.ProductDtos;
+using ProjectForm.Model.DTOs;
 using ProjectForm.Presenter;
 using ProjectForm.View.IView;
 using System;
@@ -47,7 +48,7 @@ namespace ProjectForm
         //    }
 
         //}
-        public void DisplayProductList(List<ProductDto> productList)
+        public void DisplayProductList(List<GetAllProductDto> productList)
         {
             _bindingSource.DataSource = productList;
             foreach (DataGridViewRow row in dgvProduct.Rows)
@@ -94,14 +95,5 @@ namespace ProjectForm
             RowNumber?.Invoke(sender, e);
 
         }
-
-        //private void dgvProduct_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
-        //{
-        //    using (SolidBrush brush = new SolidBrush(dgvProduct.RowHeadersDefaultCellStyle.ForeColor))
-        //    {
-        //        string rowNumber = (e.RowIndex + 1).ToString();
-        //        e.Graphics.DrawString(rowNumber, dgvProduct.Font, brush, e.RowBounds.Left + 10, e.RowBounds.Top + 4);
-        //    }
-        //}
     }
 }

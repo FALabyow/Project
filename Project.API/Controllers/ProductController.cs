@@ -1,9 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
-using Project.Application.DTOs;
+using Project.Application.DTOs.ProductDtos;
 using Project.Application.Services;
-using ProjectForm.Model.DTOs;
 
 namespace Project.API.Controllers
 {
@@ -18,7 +17,7 @@ namespace Project.API.Controllers
         }
 
         [HttpGet("/Products/All")]
-        public async Task<ActionResult<IEnumerable<ProductDto>>> GetAllProductAsync()
+        public async Task<ActionResult<IEnumerable<GetAllProductDto>>> GetAllProductAsync()
         {
             try
             {
@@ -41,7 +40,7 @@ namespace Project.API.Controllers
         }
 
         [HttpGet("/Products/Critical/all")]
-        public async Task<ActionResult<IEnumerable<ProductDto>>> GetAllCriticalProductAsync()
+        public async Task<ActionResult<IEnumerable<GetAllCriticalProductsDto>>> GetAllCriticalProductAsync()
         {
             try
             {
@@ -107,11 +106,11 @@ namespace Project.API.Controllers
         }
 
         [HttpPost("/Product/AddProduct")]
-        public async Task<IActionResult> AddProductAsync([FromBody] ProductDto productDto)
+        public async Task<IActionResult> AddProductAsync([FromBody] AddProductDto addProductDto)
         {
             try
             {
-                await _productService.AddProductAsync(productDto);
+                await _productService.AddProductAsync(addProductDto);
                 return NoContent();
             }
             catch(ArgumentNullException ex)
@@ -126,12 +125,12 @@ namespace Project.API.Controllers
         }      
 
         [HttpPut("/Product/Update/{id}")]
-        public async Task<IActionResult> UpdateProductAsync(Guid id, [FromBody] ProductDto productDto)
+        public async Task<IActionResult> UpdateProductAsync(Guid id, [FromBody] UpdateProductDto updateProductDto)
         {
-            if (id != productDto.ProductId) return BadRequest(new {error = "Id does not match!"});
+            if (id != updateProductDto.ProductId) return BadRequest(new {error = "Id does not match!"});
             try
             {
-                await _productService.UpdateProductAsync(productDto);
+                await _productService.UpdateProductAsync(updateProductDto);
                 return NoContent();
             }
             catch(KeyNotFoundException ex)

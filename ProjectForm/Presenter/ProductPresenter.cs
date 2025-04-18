@@ -1,4 +1,5 @@
-﻿using ProjectForm.Error;
+﻿using Project.Application.DTOs.ProductDtos;
+using ProjectForm.Error;
 using ProjectForm.Model.DTOs;
 using ProjectForm.View.IView;
 using System;
@@ -17,7 +18,7 @@ namespace ProjectForm.Presenter
     {
         private readonly IProductView _view;
         private readonly HttpClient _httpClient;
-        private List<ProductDto> _allProducts = new();
+        private List<GetAllProductDto> _allProducts = new();
         public ProductPresenter(IProductView view)
         {
             _view = view;
@@ -36,7 +37,7 @@ namespace ProjectForm.Presenter
 
                 if (res.IsSuccessStatusCode)
                 {
-                    var products = await res.Content.ReadFromJsonAsync<List<ProductDto>>();
+                    var products = await res.Content.ReadFromJsonAsync<List<GetAllProductDto>>();
 
                     if(products == null)
                     {
@@ -119,7 +120,7 @@ namespace ProjectForm.Presenter
             var productPrice = (Decimal)gridView.Rows[e.RowIndex].Cells["productPrice"].Value;
             var productReorder = (int)gridView.Rows[e.RowIndex].Cells["productReorder"].Value;
 
-            var product = new ProductDto
+            var product = new UpdateProductDto
             {
                 ProductId = productId,
                 ProductName = productName.ToUpper(),

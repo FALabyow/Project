@@ -21,8 +21,6 @@ namespace Project.Domain.Entities
         public DateTime ScannedAt { get; set; }  
         public Guid CategoryId { get; set; }
         public virtual Stock? Stock { get; set; }
-        public virtual Category? Category { get; set; }
-       
-        
+        public virtual Category? Category { get; set; }      
     }
 }

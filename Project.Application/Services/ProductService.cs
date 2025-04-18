@@ -1,7 +1,6 @@
-﻿using Project.Application.DTOs;
+﻿using Project.Application.DTOs.ProductDtos;
 using Project.Application.Interfaces;
 using Project.Domain.Entities;
-using ProjectForm.Model.DTOs;
 
 namespace Project.Application.Services
 {
@@ -12,7 +11,7 @@ namespace Project.Application.Services
         {
             _productRepository = productRepository;
         }
-        public async Task<List<ProductDto>> GetAllProductAsync()
+        public async Task<List<GetAllProductDto>> GetAllProductAsync()
         {
             try
             {
@@ -20,7 +19,7 @@ namespace Project.Application.Services
                 //if (!products.Any())
                 //    throw new InvalidOperationException("No products found in the database!");
   
-                return products.Select(b => new ProductDto
+                return products.Select(b => new GetAllProductDto
                 {
                     ProductId = b.ProductId,    
                     ProductCode = b.ProductCode,
@@ -46,7 +45,7 @@ namespace Project.Application.Services
 
 
         }
-        public async Task<List<ProductDto>> GetAllCriticalProductAsync()
+        public async Task<List<GetAllCriticalProductsDto>> GetAllCriticalProductAsync()
         {
             try
             {
@@ -56,7 +55,7 @@ namespace Project.Application.Services
 
                 return products
                        .Where(b => b.Stock != null && b.Stock.ProductQuantity <= b.ProductReOrder)
-                       .Select(b=> new ProductDto
+                       .Select(b=> new GetAllCriticalProductsDto
                        {
                            ProductCode = b.ProductCode,
                            BarcodeData = b.BarcodeData,
@@ -143,20 +142,20 @@ namespace Project.Application.Services
                 throw;
             }
         }
-        public async Task AddProductAsync(ProductDto productDto)
+        public async Task AddProductAsync(AddProductDto addProductDto)
         {
             try
             {
                 var product = new Product
                 { 
-                    ProductId = productDto.ProductId,
-                    ProductCode = productDto.ProductCode,
-                    BarcodeData = productDto.BarcodeData,
-                    ProductName = productDto.ProductName,
-                    ProductPrice = productDto.ProductPrice,
-                    ProductReOrder = productDto.ProductReOrder,
-                    ScannedAt = productDto.ScannedAt,
-                    CategoryId = productDto.CategoryId,
+                    ProductId = addProductDto.ProductId,
+                    ProductCode = addProductDto.ProductCode,
+                    BarcodeData = addProductDto.BarcodeData,
+                    ProductName = addProductDto.ProductName,
+                    ProductPrice = addProductDto.ProductPrice,
+                    ProductReOrder = addProductDto.ProductReOrder,
+                    ScannedAt = addProductDto.ScannedAt,
+                    CategoryId = addProductDto.CategoryId,
                 };
 
                 await _productRepository.AddProductAsync(product);
@@ -172,31 +171,15 @@ namespace Project.Application.Services
 
 
         }
-        public async Task<ProductDto> GetProductByIdAsync(Guid id)
+        public async Task UpdateProductAsync(UpdateProductDto updateproductDto)
         {
             try
             {
-                var product = await _productRepository.GetProductByIdAsync(id);
-                return new ProductDto
-                {
-                    ProductId = product.ProductId,
-                };
-            }
-            catch (KeyNotFoundException)
-            {
-                throw;
-            }
+                var product = await _productRepository.GetProductByIdAsync(updateproductDto.ProductId);
 
-        }
-        public async Task UpdateProductAsync(ProductDto productDto)
-        {
-            try
-            {
-                var product = await _productRepository.GetProductByIdAsync(productDto.ProductId);
-
-                product.ProductName = productDto.ProductName;
-                product.ProductPrice = productDto.ProductPrice;
-                product.ProductReOrder = productDto.ProductReOrder;
+                product.ProductName = updateproductDto.ProductName;
+                product.ProductPrice = updateproductDto.ProductPrice;
+                product.ProductReOrder = updateproductDto.ProductReOrder;
 
                 await _productRepository.UpdateProductAsync(product);
             }

@@ -45,7 +45,6 @@ namespace ProjectForm
         {
             this.Dispose();
         }
-
         private void DataGridSearchProductView_RowPostPaint(object? sender, DataGridViewRowPostPaintEventArgs e)
         {
             var gridView = sender as DataGridView;

@@ -1,4 +1,5 @@
-﻿using ProjectForm.Error;
+﻿using Project.Application.DTOs.ProductDtos;
+using ProjectForm.Error;
 using ProjectForm.Model.DTOs;
 using ProjectForm.View.IView;
 using System;
@@ -80,7 +81,7 @@ namespace ProjectForm.Presenter
         }
         private async void OnSaveClicked(object? sender, EventArgs e)
         {
-            var product = new ProductDto
+            var product = new AddProductDto
             {
                 ProductName = _view.Description,
                 BarcodeData = _view.Barcode,

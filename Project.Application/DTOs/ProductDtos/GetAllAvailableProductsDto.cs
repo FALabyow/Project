@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Project.Application.DTOs
+namespace Project.Application.DTOs.ProductDtos
 {
     public class GetAllAvailableProductsDto
     {
@@ -14,7 +14,7 @@ namespace Project.Application.DTOs
         public string? ProductName { get; set; }
         public string? ProductCategory { get; set; }
         public decimal ProductPrice { get; set; }
-        public int ProductQuantity  { get; set; }
+        public int ProductQuantity { get; set; }
 
     }
 }

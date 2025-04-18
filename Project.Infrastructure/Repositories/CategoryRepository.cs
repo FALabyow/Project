@@ -35,7 +35,6 @@ namespace Project.Infrastructure.Repositories
                 throw new InvalidOperationException("An error occurred while fetching categories.", ex);
             }
         }
-
         public async Task<Category> GetCategoryByIdAsync(Guid id)
         {
             var category = await _context.Categories.FindAsync(id) ?? throw new KeyNotFoundException("Category name does not exist");

@@ -24,7 +24,6 @@ namespace ProjectForm.Presenter
             _view.ProductSearchTextChanged += OnProductSearchTextChanged;
              
         }
-
         private async void OnRefreshClicked(object? sender, EventArgs e)
         {
             await _cashierPresenter.LoadAllAvailableProducts();
