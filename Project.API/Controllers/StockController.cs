@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Project.Application.DTOs;
+using Project.Application.DTOs.StockDtos;
 using Project.Application.Services;
 
 namespace Project.API.Controllers
@@ -16,7 +17,7 @@ namespace Project.API.Controllers
         }
 
         [HttpGet("/Stocks/All")]
-        public async Task<ActionResult<IEnumerable<StockDto>>> GetAllStocksAsync()
+        public async Task<ActionResult<IEnumerable<GetAllStocksDto>>> GetAllStocksAsync()
         {
             try
             {
@@ -34,7 +35,7 @@ namespace Project.API.Controllers
         }
 
         [HttpGet("/Stocks/Adjustments/All")]
-        public async Task<ActionResult<IEnumerable<StockAdjustmentsDto>>> GetAllStocksForAdjustmentsAsync()
+        public async Task<ActionResult<IEnumerable<GetAllStockAdjustmentsDto>>> GetAllStocksForAdjustmentsAsync()
         {
             try
             {
@@ -57,11 +58,11 @@ namespace Project.API.Controllers
         }
 
         [HttpPost("/Stock/AddStock")]
-        public async Task<IActionResult> AddStocksAsync([FromBody] StockDto stockDto)
+        public async Task<IActionResult> AddStocksAsync([FromBody] AddStocksDto addStocksDto)
         {
             try
             {
-                await _stockService.AddStocksAsync(stockDto);
+                await _stockService.AddStocksAsync(addStocksDto);
                 return NoContent();
 
             }
@@ -73,16 +74,16 @@ namespace Project.API.Controllers
         }
 
         [HttpPatch("/Stocks/UpdateStocks")]
-        public async Task<IActionResult> UpdateStocksAsync([FromBody] List<StockDto> stockDtos)
+        public async Task<IActionResult> UpdateStocksAsync([FromBody] List<UpdateStocksDto> updateStocksDto)
         {
-            if(stockDtos == null || !stockDtos.Any())
+            if(updateStocksDto == null || !updateStocksDto.Any())
             {
                 return BadRequest("Stock list cannot be empty");
             }
 
             try
             {
-                await _stockService.UpdateStocksAsync(stockDtos);
+                await _stockService.UpdateStocksAsync(updateStocksDto);
                 return NoContent();
             }
             catch (ArgumentNullException ex)
@@ -96,16 +97,16 @@ namespace Project.API.Controllers
         }
 
         [HttpPatch("/Stocks/UpdateStocks/Quantity")]
-        public async Task<IActionResult> UpdateStocksQtyAsync([FromBody] List<StockDto> stockDtos)
+        public async Task<IActionResult> UpdateStocksQtyAsync([FromBody] List<UpdateStocksDto> updateStocksDto)
         {
-            if (stockDtos == null || !stockDtos.Any())
+            if (updateStocksDto == null || !updateStocksDto.Any())
             {
                 return BadRequest("Stock list cannot be empty");
             }
 
             try
             {
-                await _stockService.UpdateStocksQtyAsync(stockDtos);
+                await _stockService.UpdateStocksQtyAsync(updateStocksDto);
                 return NoContent();
             }
             catch (ArgumentNullException ex)
@@ -120,16 +121,16 @@ namespace Project.API.Controllers
 
 
         [HttpPut("/Stock/StockAdjustments/UpdateStock/{id}")]
-        public async Task<IActionResult> UpdateStockAsync(Guid id, StockAdjustmentsDto stockAdjustmentsDto)
+        public async Task<IActionResult> UpdateStockAsync(Guid id, UpdateStocksDto updateStocksDto)
         {
-            if(id != stockAdjustmentsDto.StockId)
+            if(id != updateStocksDto.StockId)
             {
                 return BadRequest(new { error = "ID doesn't match" });
             }
 
             try
             {
-                await _stockService.UpdateStockAsync(stockAdjustmentsDto);
+                await _stockService.UpdateStockAsync(updateStocksDto);
                 return NoContent();
             }
             catch(KeyNotFoundException ex)

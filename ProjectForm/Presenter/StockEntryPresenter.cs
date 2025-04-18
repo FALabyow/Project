@@ -1,5 +1,7 @@
-﻿using ProjectForm.Model;
+﻿using Project.Application.DTOs.StockDtos;
+using ProjectForm.Model;
 using ProjectForm.Model.DTOs;
+using ProjectForm.Model.DTOs.StockDtos;
 using ProjectForm.View.IView;
 using System;
 using System.Collections.Generic;
@@ -15,7 +17,6 @@ namespace ProjectForm.Presenter
         private readonly ReferenceModel _model;
         private readonly IStockEntryView _view;
         private string? newRef;
-        private readonly StockInProductDto? date;
         private readonly HttpClient _httpClient;
         private List<StockRecordDto>? _records;
         public StockEntryPresenter(IStockEntryView view)
@@ -35,11 +36,11 @@ namespace ProjectForm.Presenter
             newRef = _model.GenerateReferenceNumber();
             _view.DisplayReferenceNumber(newRef);
         }
-        public void AddStockEntry(ProductDto productList)
+        public void AddStockEntry(AddStockEntryDto productList)
         {
             if(newRef != null)
             {
-                var stockEntry = new ProductDto
+                var stockEntry = new AddStockEntryDto
                 {
                     ProductCode = productList.ProductCode,
                     ProductId = productList.ProductId,
@@ -114,7 +115,7 @@ namespace ProjectForm.Presenter
 
             }).ToList();
 
-            var productQty = data.Select(d => new StockDto
+            var productQty = data.Select(d => new UpdateStocksDto
             {
                 ProductQuantity = d.StockInQty,
                 StockId = d.StockId

@@ -1,6 +1,8 @@
 ﻿using Project.Application.DTOs.ProductDtos;
+using Project.Application.DTOs.StockDtos;
 using ProjectForm.Error;
 using ProjectForm.Model.DTOs;
+using ProjectForm.Model.DTOs.CategoryDto;
 using ProjectForm.View.IView;
 using System;
 using System.Collections.Generic;
@@ -93,7 +95,7 @@ namespace ProjectForm.Presenter
                 ProductId = Guid.NewGuid(),
             };
 
-            var stock = new StockDto
+            var stock = new AddStocksDto
             {
                 ProductId = product.ProductId,
 

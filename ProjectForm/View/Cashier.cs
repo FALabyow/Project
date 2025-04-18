@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore.ValueGeneration.Internal;
 using Project.Application.DTOs;
+using Project.Application.DTOs.StockDtos;
 using ProjectForm.Model.DTOs;
+using ProjectForm.Model.DTOs.ProductDtos;
 using ProjectForm.Presenter;
 using ProjectForm.View.IView;
 using System;
@@ -111,16 +113,16 @@ namespace ProjectForm
                 return sales;
             }
         }
-        public List<StockDto> Stocks
+        public List<UpdateStocksDto> Stocks
         {
             get
             {
-                var stocks = new List<StockDto>();
+                var stocks = new List<UpdateStocksDto>();
                 foreach (DataGridViewRow row in dgvCashier.Rows)
                 {
                     if (row.IsNewRow) continue;
 
-                    stocks.Add(new StockDto
+                    stocks.Add(new UpdateStocksDto
                     {
                         StockId = (Guid)row.Cells["StockId"].Value,
                         ProductQuantity = (int)row.Cells["ProductQuantity"].Value,

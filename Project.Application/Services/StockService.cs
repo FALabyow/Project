@@ -1,6 +1,7 @@
 ﻿using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Project.Application.DTOs;
+using Project.Application.DTOs.StockDtos;
 using Project.Application.Interfaces;
 using Project.Domain.Entities;
 using System;
@@ -18,12 +19,12 @@ namespace Project.Application.Services
         {
             _stockRepository = stockRepository;
         }
-        public async Task<List<StockDto>> GetAllStocksAsync()
+        public async Task<List<GetAllStocksDto>> GetAllStocksAsync()
         {
             try
             {
                 var stocks = await _stockRepository.GetAllStocksAsync();
-                return stocks.Select(s => new StockDto
+                return stocks.Select(s => new GetAllStocksDto
                 {
                     StockId = s.StockId,
                     ProductQuantity = s.ProductQuantity,
@@ -43,12 +44,12 @@ namespace Project.Application.Services
                 throw;
             }
         }
-        public async Task<List<StockAdjustmentsDto>> GetAllStocksForAdjustmentsAsync()
+        public async Task<List<GetAllStockAdjustmentsDto>> GetAllStocksForAdjustmentsAsync()
         {
             try
             {
                 var stocks = await _stockRepository.GetAllStocksAsync();
-                return stocks.Select(s => new StockAdjustmentsDto
+                return stocks.Select(s => new GetAllStockAdjustmentsDto
                 {
                     StockId = s.StockId,
                     ProductQuantity = s.ProductQuantity,
@@ -68,12 +69,11 @@ namespace Project.Application.Services
                 throw;
             }
         }
-        public async Task AddStocksAsync(StockDto stockDto)
+        public async Task AddStocksAsync(AddStocksDto addStocksDto)
         {
             var stock = new Stock
             {
-                ProductQuantity = stockDto.ProductQuantity,
-                ProductId = stockDto.ProductId,
+                ProductId = addStocksDto.ProductId,
             };
                 
             try
@@ -89,16 +89,16 @@ namespace Project.Application.Services
                 throw;
             }
         }
-        public async Task UpdateStocksAsync(List<StockDto> stockDtos)
+        public async Task UpdateStocksAsync(List<UpdateStocksDto> updateStocksDto)
         {
             try
             {
-                var stockIds = stockDtos.Select(s => s.StockId).ToList();
+                var stockIds = updateStocksDto.Select(s => s.StockId).ToList();
                 var stocks = await _stockRepository.GetStocksByIdsAsync(stockIds);
 
                 foreach (var stock in stocks)
                 {
-                    var dto = stockDtos.FirstOrDefault(s => s.StockId == stock.StockId);
+                    var dto = updateStocksDto.FirstOrDefault(s => s.StockId == stock.StockId);
                     if (dto != null)
                     {
                         stock.ProductQuantity += dto.ProductQuantity;
@@ -118,16 +118,16 @@ namespace Project.Application.Services
             
 
         }
-        public async Task UpdateStocksQtyAsync(List<StockDto> stockDtos)
+        public async Task UpdateStocksQtyAsync(List<UpdateStocksDto> updateStocksDto)
         {
             try
             {
-                var stockIds = stockDtos.Select(s => s.StockId).ToList();
+                var stockIds = updateStocksDto.Select(s => s.StockId).ToList();
                 var stocks = await _stockRepository.GetStocksByIdsAsync(stockIds);
 
                 foreach (var stock in stocks)
                 {
-                    var dto = stockDtos.FirstOrDefault(s => s.StockId == stock.StockId);
+                    var dto = updateStocksDto.FirstOrDefault(s => s.StockId == stock.StockId);
                     if (dto != null)
                     {
                         stock.ProductQuantity = dto.ProductQuantity;
@@ -145,13 +145,13 @@ namespace Project.Application.Services
                 throw;
             }
         }
-        public async Task UpdateStockAsync(StockAdjustmentsDto stockAdjustmentsDto)
+        public async Task UpdateStockAsync(UpdateStocksDto updateStocksDto)
         {
             try
             {
-                var stock = await _stockRepository.GetStockByIdAsync(stockAdjustmentsDto.StockId);
+                var stock = await _stockRepository.GetStockByIdAsync(updateStocksDto.StockId);
 
-                stock.ProductQuantity = stockAdjustmentsDto.ProductQuantity;
+                stock.ProductQuantity = updateStocksDto.ProductQuantity;
 
                 await _stockRepository.UpdateStockAsync(stock);
             }

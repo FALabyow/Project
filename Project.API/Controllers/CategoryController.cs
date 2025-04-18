@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Project.Application.DTOs;
+using Project.Application.DTOs.CategoryDtos;
 using Project.Application.Services;
 
 namespace Project.API.Controllers

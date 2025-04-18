@@ -1,4 +1,4 @@
-﻿using ProjectForm.Model.DTOs;
+﻿using ProjectForm.Model.DTOs.CategoryDto;
 using ProjectForm.Presenter;
 using ProjectForm.View.IView;
 using System;
@@ -15,7 +15,7 @@ namespace ProjectForm
 {
     //Part 2 of the tutorial
     // https://youtu.be/bwLZAB8VT2Y?si=2yvkCOgqmHRAri6S
-    
+
     //------------------->Please buhata<---------------------
     //dapat with color ang edit and delete button sa grid
     //pagbutang ug loading na UI para while fetching sa data kay loading ang ma display instead of blank grid

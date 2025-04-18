@@ -1,4 +1,5 @@
-﻿using ProjectForm.Model.DTOs;
+﻿using Project.Application.DTOs.StockDtos;
+using ProjectForm.Model.DTOs;
 using ProjectForm.Presenter;
 using ProjectForm.View.IView;
 using System;
@@ -87,7 +88,7 @@ namespace ProjectForm
                 await presenter.LoadStocksAsync();
             }
         }
-        public void DisplayStocks(List<StockAdjustmentsDto> stocks)
+        public void DisplayStocks(List<GetAllStockAdjustmentsDto> stocks)
         {
             _bindingSource.DataSource = stocks;
             foreach (DataGridViewRow row in dgvAdjustment.Rows)

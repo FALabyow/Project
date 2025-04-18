@@ -16,6 +16,5 @@ namespace Project.Domain.Entities
         public string? ProductName { get; set; } //the recorded product name
         public string? ProductCode { get; set; } // the recorded product code
         public string? ProductCategory {  get; set; } //the recorded product category
-
     }
 }

@@ -1,4 +1,4 @@
-﻿using Project.Application.DTOs;
+﻿using ProjectForm.Model.DTOs.ProductDtos;
 using ProjectForm.Presenter;
 using ProjectForm.View.IView;
 using System;

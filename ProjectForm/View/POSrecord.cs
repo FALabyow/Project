@@ -1,4 +1,6 @@
-﻿using ProjectForm.Model.DTOs;
+﻿using Project.Application.DTOs.ProductDtos;
+using ProjectForm.Model.DTOs;
+using ProjectForm.Model.DTOs.ProductDtos;
 using ProjectForm.Presenter;
 using ProjectForm.View.IView;
 using System;
@@ -19,7 +21,7 @@ namespace ProjectForm
         private DateOnly dateFrom;
         private DateOnly dateTo;
         public string selectedComboBox = string.Empty;
-        private List<POSrecordDto2> criticalItems = new List<POSrecordDto2>();
+        private List<GetAllCriticalProductsDto> criticalItems = new List<GetAllCriticalProductsDto>();
         private List<GetInventoryListDto> inventoryList = new List<GetInventoryListDto>();
         public POSrecord()
         {
@@ -54,7 +56,7 @@ namespace ProjectForm
         {
             dgvSolditem.DataSource = sold;
         }
-        public void DisplayCriticalItems(List<POSrecordDto2> criticalItems)
+        public void DisplayCriticalItems(List<GetAllCriticalProductsDto> criticalItems)
         {
             dgvCriticalitem.DataSource = criticalItems;
         }

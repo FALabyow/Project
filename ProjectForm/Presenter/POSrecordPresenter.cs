@@ -1,4 +1,6 @@
-﻿using ProjectForm.Model.DTOs;
+﻿using Project.Application.DTOs.ProductDtos;
+using ProjectForm.Model.DTOs;
+using ProjectForm.Model.DTOs.ProductDtos;
 using ProjectForm.View.IView;
 using System;
 using System.Collections.Generic;
@@ -111,7 +113,7 @@ namespace ProjectForm.Presenter
                 return new List<POSrecordDto1>();
             }
         }
-        public async Task<List<POSrecordDto2>> LoadCriticalItemAsync()
+        public async Task<List<GetAllCriticalProductsDto>> LoadCriticalItemAsync()
         {
             try
             {
@@ -119,11 +121,11 @@ namespace ProjectForm.Presenter
 
                 res.EnsureSuccessStatusCode();
 
-                var criticalProducts = await res.Content.ReadFromJsonAsync<List<POSrecordDto2>>();
+                var criticalProducts = await res.Content.ReadFromJsonAsync<List<GetAllCriticalProductsDto>>();
 
                 if (criticalProducts == null)
                 {
-                    return new List<POSrecordDto2>();
+                    return new List<GetAllCriticalProductsDto>();
                 }
 
                 return criticalProducts;
@@ -132,7 +134,7 @@ namespace ProjectForm.Presenter
             catch (HttpRequestException ex)
             {
                 MessageBox.Show(ex.Message);
-                return new List<POSrecordDto2>();
+                return new List<GetAllCriticalProductsDto>();
             }
         }
         public async Task<List<GetInventoryListDto>> LoadInventoryListAsync()

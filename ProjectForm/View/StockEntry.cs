@@ -1,4 +1,5 @@
 ﻿using ProjectForm.Model.DTOs;
+using ProjectForm.Model.DTOs.StockDtos;
 using ProjectForm.Presenter;
 using ProjectForm.View.IView;
 using System;
@@ -57,7 +58,7 @@ namespace ProjectForm
         {
             LinkProductClicked?.Invoke(sender, e);
         }
-        public void DisplayStockEntry(ProductDto stockList)
+        public void DisplayStockEntry(AddStockEntryDto stockList)
         {
             dgvStockIn.Rows
                       .Add(dgvStockIn.Rows.Count + 1, stockList.StockId, stockList.ProductId, stockList.ReferenceNum, stockList.ProductCode, stockList.ProductName, stockList.CategoryName, stockList.ProductQuantity, stockList.StockInDate);

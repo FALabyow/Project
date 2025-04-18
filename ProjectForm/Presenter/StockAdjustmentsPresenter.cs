@@ -1,5 +1,7 @@
-﻿using ProjectForm.Error;
+﻿using Project.Application.DTOs.StockDtos;
+using ProjectForm.Error;
 using ProjectForm.Model.DTOs;
+using ProjectForm.Model.DTOs.StockDtos;
 using ProjectForm.View.IView;
 using System;
 using System.Collections.Generic;
@@ -39,7 +41,7 @@ namespace ProjectForm.Presenter
 
                 if (res.IsSuccessStatusCode)
                 {
-                    var stocks = await res.Content.ReadFromJsonAsync<List<StockAdjustmentsDto>>();
+                    var stocks = await res.Content.ReadFromJsonAsync<List<GetAllStockAdjustmentsDto>>();
 
                     if(stocks == null)
                     {
@@ -78,13 +80,13 @@ namespace ProjectForm.Presenter
         }
         private async void OnSaveClicked(object? sender, EventArgs e)
         {
-            var stock = new StockAdjustmentsDto
+            var stock = new UpdateStocksDto
             {
                 StockId = _stockId,
                 ProductQuantity = _view.ProductQuantity,
             };
 
-            var stockId = new StockAdjustmentsDto
+            var stockId = new DeleteStockDto
             {
                 StockId = _stockId,
             };

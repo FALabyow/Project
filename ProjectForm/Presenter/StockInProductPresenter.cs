@@ -1,4 +1,6 @@
-﻿using ProjectForm.Model.DTOs;
+﻿using Project.Application.DTOs.StockDtos;
+using ProjectForm.Model.DTOs;
+using ProjectForm.Model.DTOs.StockDtos;
 using ProjectForm.View.IView;
 using System;
 using System.Collections.Generic;
@@ -29,7 +31,7 @@ namespace ProjectForm.Presenter
 
                 if (res.IsSuccessStatusCode)
                 {
-                    var products = await res.Content.ReadFromJsonAsync<List<StockDto>>();
+                    var products = await res.Content.ReadFromJsonAsync<List<GetAllStocksDto>>();
                     
 
                     if (products == null)
@@ -37,7 +39,7 @@ namespace ProjectForm.Presenter
                         return;
                     }
 
-                    var _allProducts = products.Select(p => new StockDto
+                    var _allProducts = products.Select(p => new GetAllStocksDto
                     {
                         ProductId = p.ProductId,
                         ProductName = p.ProductName,
@@ -74,7 +76,7 @@ namespace ProjectForm.Presenter
 
             if (confirmResult != DialogResult.Yes) return;
 
-            var product = new ProductDto
+            var product = new AddStockEntryDto
             {
                 ProductId = productId,
                 ProductName = productName,
@@ -84,11 +86,12 @@ namespace ProjectForm.Presenter
                 StockId = stockId,  
             };
 
-            if (Application.OpenForms["StockEntry"] is StockEntry entry)
+
+            if (Application.OpenForms["StockEntry"] is StockEntry form)
             {
-                
-                entry.presenter?.AddStockEntry(product);
-                entry.presenter?.GenerateReference();
+
+                form.presenter?.AddStockEntry(product);
+                form.presenter?.GenerateReference();
             }
 
         }

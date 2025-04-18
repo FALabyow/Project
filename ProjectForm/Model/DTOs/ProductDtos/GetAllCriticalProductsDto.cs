@@ -4,16 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Project.Application.DTOs
+namespace Project.Application.DTOs.ProductDtos
 {
-    public class StockAdjustmentsDto
+    public class GetAllCriticalProductsDto
     {
-        public Guid StockId { get; set; }
         public string? ProductCode { get; set; }
+        public string? BarcodeData { get; set; }
         public string? ProductName { get; set; }
-        public string? ProductBarcode  { get; set; }
-        public string? ProductCategory { get; set; }
         public decimal ProductPrice { get; set; }
+        public int ProductReOrder { get; set; }
         public int ProductQuantity { get; set; }
+        public string? CategoryName { get; set; }
     }
 }

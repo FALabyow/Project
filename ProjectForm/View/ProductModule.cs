@@ -1,4 +1,4 @@
-﻿using ProjectForm.Model.DTOs;
+﻿using ProjectForm.Model.DTOs.CategoryDto;
 using ProjectForm.Presenter;
 using ProjectForm.View.IView;
 using System;
@@ -11,7 +11,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks; 
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ProjectForm

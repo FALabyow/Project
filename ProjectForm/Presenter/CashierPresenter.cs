@@ -1,6 +1,6 @@
 ﻿using Accessibility;
-using Project.Application.DTOs;
 using ProjectForm.Model.DTOs;
+using ProjectForm.Model.DTOs.ProductDtos;
 using ProjectForm.View.IView;
 using System.Data;
 using System.Linq;

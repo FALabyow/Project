@@ -1,4 +1,6 @@
-﻿using ProjectForm.Model.DTOs;
+﻿using Project.Application.DTOs.ProductDtos;
+using ProjectForm.Model.DTOs;
+using ProjectForm.Model.DTOs.ProductDtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +17,7 @@ namespace ProjectForm.View.IView
         //event EventHandler? SelectedItemCombo;
         void DisplayTopSellingItems(List<POSrecordDto1> topSelling);
         void DisplaySoldItems(List<POSrecordDto1> sold);
-        void DisplayCriticalItems(List<POSrecordDto2> criticalItems);
+        void DisplayCriticalItems(List<GetAllCriticalProductsDto> criticalItems);
         void DisplayInventoryList(List<GetInventoryListDto> inventoryList);
         void DisplayStockInHistory(List<GetStockInHistoryDto> stockInHistory);
         string SelectedItem(ComboBox comboBox);

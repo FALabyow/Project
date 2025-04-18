@@ -1,5 +1,7 @@
 ﻿using Project.Application.DTOs;
+using Project.Application.DTOs.StockDtos;
 using ProjectForm.Model.DTOs;
+using ProjectForm.Model.DTOs.ProductDtos;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -31,7 +33,7 @@ namespace ProjectForm.View.IView
         string Cash { get; set; }    
         string Change { get; set; }
         List<SalesDetail> Sales { get;}
-        List<StockDto> Stocks { get; }
+        List<UpdateStocksDto> Stocks { get; }
         void Slider(Button button);
         void DisplayProducts(DisplayAvailableProductsDto products);
         bool ProductExistsInGrid(string barcode);

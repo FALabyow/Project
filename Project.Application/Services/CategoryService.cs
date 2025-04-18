@@ -1,5 +1,4 @@
-﻿using Project.Application.DTOs;
-using Project.Application.Interfaces;
+﻿using Project.Application.Interfaces;
 using Project.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using System.Data.SqlClient;
@@ -9,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Data.SqlClient;
+using Project.Application.DTOs.CategoryDtos;
 
 namespace Project.Application.Services
 {

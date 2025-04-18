@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore.Query.Internal;
+using Project.Application.DTOs.StockDtos;
 using ProjectForm.Model.DTOs;
 using ProjectForm.Presenter;
 using ProjectForm.View.IView;
@@ -50,7 +51,7 @@ namespace ProjectForm
 
             }
         }
-        public void DisplayProductList(List<StockDto> productsList)
+        public void DisplayProductList(List<GetAllStocksDto> productsList)
         {
             _bindingSource.DataSource = productsList;
             foreach (DataGridViewRow row in dgvProduct.Rows)

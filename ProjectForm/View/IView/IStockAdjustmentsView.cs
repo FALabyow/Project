@@ -1,4 +1,5 @@
-﻿using ProjectForm.Model.DTOs;
+﻿using Project.Application.DTOs.StockDtos;
+using ProjectForm.Model.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +20,6 @@ namespace ProjectForm.View.IView
         event EventHandler<DataGridViewCellEventArgs>? SelectedClicked;
         event EventHandler<DataGridViewRowPostPaintEventArgs>? RowNumber;
         event EventHandler? SaveClicked;
-        public void DisplayStocks(List<StockAdjustmentsDto> stocks);
+        public void DisplayStocks(List<GetAllStockAdjustmentsDto> stocks);
     }
 }

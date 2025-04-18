@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProjectForm.Model.DTOs
+namespace Project.Application.DTOs.StockDtos
 {
-    public class StockAdjustmentsDto
+    public class GetAllStockAdjustmentsDto
     {
         public Guid StockId { get; set; }
         public string? ProductCode { get; set; }
