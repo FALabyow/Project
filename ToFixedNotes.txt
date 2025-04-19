@@ -5,3 +5,5 @@
 3. In Cashier.cs, the ProductCode is null in database. ---> FIXED
 
 4. In Cashier.cs, the rows for Qty must be editable this will ensure that when there are multiple the same products, no need to scan each of that product.
+
+5. Fix all the warning errors

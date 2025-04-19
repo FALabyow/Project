@@ -16,6 +16,8 @@ namespace Project.Domain.Entities
         public string? SalesHistoryId { get; set; } //this is for Invoice number
         public DateOnly SaleDate { get; set; } = DateOnly.FromDateTime(DateTime.Now);
         public decimal TotalAmount { get; set; } // the total amount recorded for each transaction
+        public decimal TotalFee { get; set; }
+        public decimal TotalChange {  get; set; }
         public ICollection<SalesDetail>? SalesDetails { get; set; }
     }
 }

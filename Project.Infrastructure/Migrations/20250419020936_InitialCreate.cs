@@ -29,7 +29,9 @@ namespace Project.Infrastructure.Migrations
                 {
                     SalesHistoryId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     SaleDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    TotalAmount = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
+                    TotalAmount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    TotalFee = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    TotalChange = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
                 },
                 constraints: table =>
                 {

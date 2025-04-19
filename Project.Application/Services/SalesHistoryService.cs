@@ -46,7 +46,9 @@ namespace Project.Application.Services
             var salesHistory = new SalesHistory
             {
                 TotalAmount= history.TotalAmount,
-                SalesHistoryId = history.SalesHistoryId
+                SalesHistoryId = history.SalesHistoryId,
+                TotalFee = history.TotalFee,
+                TotalChange = history.TotalChange,                
             };
 
             try

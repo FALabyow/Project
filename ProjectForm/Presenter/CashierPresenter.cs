@@ -118,7 +118,7 @@ namespace ProjectForm.Presenter
                 return;
             }
 
-            await SendSalesHistory(_view.TransactionNumber, decimal.Parse(_view.Total));
+            await SendSalesHistory(_view.TransactionNumber, decimal.Parse(_view.Total), decimal.Parse(_view.Cash), decimal.Parse(_view.Change));
             await SendSalesDetail();
             await SendStockQuantity();
             GetTranNo();
@@ -211,13 +211,15 @@ namespace ProjectForm.Presenter
 
             _view.DisplayTotal = $"{grandTotal}";
         }
-        private async Task SendSalesHistory(string salesHistoryId, decimal totalAmount)
+        private async Task SendSalesHistory(string salesHistoryId, decimal totalAmount, decimal totalFee, decimal totalChange)
         {
             
             var salesHistory = new AddSalesHistoryDto
             {
                 SalesHistoryId = salesHistoryId,
                 TotalAmount = totalAmount,
+                TotalFee = totalFee,
+                TotalChange = totalChange
             };
 
             try

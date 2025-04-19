@@ -10,5 +10,7 @@ namespace ProjectForm.Model.DTOs.SalesHistoryDto
     {
         public string? SalesHistoryId { get; set; }
         public decimal TotalAmount { get; set; }
+        public decimal TotalFee { get; set; }
+        public decimal TotalChange { get; set; }
     }
 }
