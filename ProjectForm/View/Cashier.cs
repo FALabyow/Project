@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore.ValueGeneration.Internal;
-using Project.Application.DTOs;
 using ProjectForm.Model.DTOs.SalesDetailDtos;
 using ProjectForm.Model.DTOs.StockDtos;
 using ProjectForm.Model.DTOs;
@@ -76,12 +75,12 @@ namespace ProjectForm
         }
         public string Total
         {
-            get => lblSalesTotal.Text;  
-            set => lblSalesTotal.Text = value;  
+            get => lblSalesTotal.Text;
+            set => lblSalesTotal.Text = value;
         }
         public string Cash
         {
-            get => lblCash.Text;    
+            get => lblCash.Text;
             set => lblCash.Text = value;
         }
         public string Change
@@ -105,7 +104,7 @@ namespace ProjectForm
                         ProductName = row.Cells["ProductName"].Value?.ToString(),
                         SalesHistoryId = lblTranNo.Text,
                         QuantitySold = (int)row.Cells["BuyerQuantity"].Value,
-                        UnitPrice = (decimal)row.Cells["ProductPrice"].Value, 
+                        UnitPrice = (decimal)row.Cells["ProductPrice"].Value,
                     });
 
 
@@ -165,7 +164,7 @@ namespace ProjectForm
                 {
                     row.Cells[4].Value = newQuantity;
                     row.Cells[5].Value = newQuantity * (decimal)row.Cells[3].Value;
-                    row.Cells[6].Value = (int)row.Cells[6].Value - 1;   
+                    row.Cells[6].Value = (int)row.Cells[6].Value - 1;
                     break;
                 }
             }
@@ -249,13 +248,12 @@ namespace ProjectForm
         private void DataGridCashierView_CellContentClick(object? sender, DataGridViewCellEventArgs e)
         {
             var gridView = sender as DataGridView;
-            if(gridView == null || e.RowIndex < 0) return;
+            if (gridView == null || e.RowIndex < 0) return;
 
             if (gridView.Columns[e.ColumnIndex].Name == "Remove")
             {
                 RemoveClicked?.Invoke(sender, e);
             }
         }
-
     }
 }

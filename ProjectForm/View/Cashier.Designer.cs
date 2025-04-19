@@ -535,7 +535,6 @@
             ProductCode.HeaderText = "ProductCode";
             ProductCode.MinimumWidth = 6;
             ProductCode.Name = "ProductCode";
-            ProductCode.Visible = false;
             ProductCode.Width = 125;
             // 
             // Remove

@@ -1,5 +1,4 @@
-﻿using Project.Application.DTOs;
-using ProjectForm.Model.DTOs.SalesDetailDtos;
+﻿using ProjectForm.Model.DTOs.SalesDetailDtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;

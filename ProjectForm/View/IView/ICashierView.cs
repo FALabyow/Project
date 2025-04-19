@@ -1,5 +1,4 @@
-﻿using Project.Application.DTOs;
-using ProjectForm.Model.DTOs.SalesDetailDtos;
+﻿using ProjectForm.Model.DTOs.SalesDetailDtos;
 using ProjectForm.Model.DTOs.StockDtos;
 using ProjectForm.Model.DTOs;
 using ProjectForm.Model.DTOs.ProductDtos;

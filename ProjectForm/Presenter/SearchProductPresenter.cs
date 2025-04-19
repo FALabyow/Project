@@ -73,6 +73,7 @@ namespace ProjectForm.Presenter
                     BuyersQuantity = 1,
                     SubTotal = (decimal)gridView.Rows[e.RowIndex].Cells["ProductPrice"].Value,
                     ProductQuantity = (int)gridView.Rows[e.RowIndex].Cells["ProductQuantity"].Value,
+                    ProductCode = (string)gridView.Rows[e.RowIndex].Cells["ProductCode"].Value
                 };
 
                 _cashierView.DisplayProducts(addedToCart);
