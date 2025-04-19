@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Project.Application.DTOs;
+using Project.Application.DTOs.SalesDetialDtos;
 using Project.Application.Services;
-using ProjectForm.Model.DTOs;
 
 namespace Project.API.Controllers
 {
@@ -17,7 +17,7 @@ namespace Project.API.Controllers
         }
         
         [HttpGet("/Sales/All/FilteredBy")]
-        public async Task<ActionResult<IEnumerable<GetSalesDetailDto>>> GetAllSalesByDateAsync(DateOnly startDate, DateOnly  endDate)
+        public async Task<ActionResult<IEnumerable<GetAllSalesByDateDto>>> GetAllSalesByDateAsync(DateOnly startDate, DateOnly  endDate)
         {
             try
             {
@@ -35,7 +35,7 @@ namespace Project.API.Controllers
         }
 
         [HttpGet("/Sales/TopSelling/FilteredBY")]
-        public async Task<ActionResult<IEnumerable<POSrecordDto1>>> GetTopSellingProductAsync(DateOnly startDate, DateOnly endDate, string action)
+        public async Task<ActionResult<IEnumerable<GetSalesByQtyDto>>> GetTopSellingProductAsync(DateOnly startDate, DateOnly endDate, string action)
         {
             try
             {

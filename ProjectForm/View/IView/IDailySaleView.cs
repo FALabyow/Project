@@ -1,4 +1,5 @@
 ﻿using Project.Application.DTOs;
+using ProjectForm.Model.DTOs.SalesDetailDtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace ProjectForm.View.IView
 {
     public interface IDailySaleView
     {
-        void DisplayDailySales(List<GetSalesDetailDto> sales);
+        void DisplayDailySales(List<GetAllSalesByDateDto> sales);
         void TotalSales(string total);
         DateOnly StartDate { get; }
         DateOnly EndDate { get; }

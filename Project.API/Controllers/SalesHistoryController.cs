@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Project.Application.DTOs;
+using Project.Application.DTOs.SalesHistoryDtos;
 using Project.Application.Services;
 
 namespace Project.API.Controllers

@@ -1,4 +1,5 @@
 ﻿using Project.Application.DTOs;
+using ProjectForm.Model.DTOs.SalesDetailDtos;
 using ProjectForm.Presenter;
 using ProjectForm.View.IView;
 using System;
@@ -35,7 +36,7 @@ namespace ProjectForm
 
         public DateOnly StartDate => DateOnly.FromDateTime(dtFrom.Value);
         public DateOnly EndDate => DateOnly.FromDateTime(dtTo.Value);
-        public void DisplayDailySales(List<GetSalesDetailDto> sales)
+        public void DisplayDailySales(List<GetAllSalesByDateDto> sales)
         {
             _bindingSource.DataSource = sales;
         }

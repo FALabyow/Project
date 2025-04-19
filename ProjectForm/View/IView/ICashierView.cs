@@ -1,5 +1,6 @@
 ﻿using Project.Application.DTOs;
-using Project.Application.DTOs.StockDtos;
+using ProjectForm.Model.DTOs.SalesDetailDtos;
+using ProjectForm.Model.DTOs.StockDtos;
 using ProjectForm.Model.DTOs;
 using ProjectForm.Model.DTOs.ProductDtos;
 using System;
@@ -32,7 +33,7 @@ namespace ProjectForm.View.IView
         string Total { get; set; }
         string Cash { get; set; }    
         string Change { get; set; }
-        List<SalesDetail> Sales { get;}
+        List<AddSalesDetailDto> Sales { get;}
         List<UpdateStocksDto> Stocks { get; }
         void Slider(Button button);
         void DisplayProducts(DisplayAvailableProductsDto products);

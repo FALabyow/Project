@@ -4,16 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProjectForm.Model.DTOs.StockDtos
+namespace Project.Application.DTOs.SalesDetialDtos
 {
-    public class GetAllStockAdjustmentsDto
+    public class GetAllSalesByDateDto
     {
-        public Guid StockId { get; set; }
-        public string? ProductCode { get; set; }
+        public string? SalesHistoryId { get; set; }
         public string? ProductName { get; set; }
-        public string? ProductBarcode { get; set; }
-        public string? ProductCategory { get; set; }
+        public string? ProductCode { get; set; }
         public decimal ProductPrice { get; set; }
+        public decimal TotalAmount { get; set; }
         public int ProductQuantity { get; set; }
     }
 }

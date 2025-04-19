@@ -1,4 +1,5 @@
 ﻿using Project.Application.DTOs;
+using ProjectForm.Model.DTOs.SalesDetailDtos;
 using ProjectForm.View.IView;
 using System;
 using System.Collections.Generic;
@@ -38,7 +39,7 @@ namespace ProjectForm.Presenter
 
                 res.EnsureSuccessStatusCode();
 
-                var sales = await res.Content.ReadFromJsonAsync<List<GetSalesDetailDto>>();
+                var sales = await res.Content.ReadFromJsonAsync<List<GetAllSalesByDateDto>>();
 
                 if (sales == null)
                 {

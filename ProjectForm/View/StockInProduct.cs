@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore.Query.Internal;
-using Project.Application.DTOs.StockDtos;
+using ProjectForm.Model.DTOs.StockDtos;
 using ProjectForm.Model.DTOs;
 using ProjectForm.Presenter;
 using ProjectForm.View.IView;

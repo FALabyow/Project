@@ -1,7 +1,6 @@
-﻿using Project.Application.DTOs;
+﻿using Project.Application.DTOs.SalesDetialDtos;
 using Project.Application.Interfaces;
 using Project.Domain.Entities;
-using ProjectForm.Model.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +16,7 @@ namespace Project.Application.Services
         {
             _salesDetailRepository = salesDetailRepository;
         }
-        public async Task<List<GetSalesDetailDto>> GetAllSalesByDateAsync(DateOnly startDate, DateOnly endDate)
+        public async Task<List<GetAllSalesByDateDto>> GetAllSalesByDateAsync(DateOnly startDate, DateOnly endDate)
             {
                 try
                 {
@@ -28,7 +27,7 @@ namespace Project.Application.Services
                         throw new InvalidOperationException("No sales found in the database");
                     }
 
-                    return sales.Select(x => new GetSalesDetailDto
+                    return sales.Select(x => new GetAllSalesByDateDto
                     {
                         SalesHistoryId = x.SalesHistoryId,
                         ProductCode = x.ProductCode,
@@ -47,7 +46,7 @@ namespace Project.Application.Services
                     throw;
                 }
         }
-        public async Task<List<POSrecordDto1>> GetSalesByQtyAsync(DateOnly startDate, DateOnly endDate)
+        public async Task<List<GetSalesByQtyDto>> GetSalesByQtyAsync(DateOnly startDate, DateOnly endDate)
         {
             try
             {
@@ -60,7 +59,7 @@ namespace Project.Application.Services
 
                 return sales
                        .GroupBy(sd => new { sd.ProductCode, sd.ProductName })
-                       .Select(sd => new POSrecordDto1
+                       .Select(sd => new GetSalesByQtyDto
                        {
                            ProductCode = sd.Key.ProductCode,
                            ProductName = sd.Key.ProductName,
@@ -81,7 +80,7 @@ namespace Project.Application.Services
                 throw;
             }
         }
-        public async Task<List<POSrecordDto1>> GetSalesByTotalAmountAsync(DateOnly startDate, DateOnly endDate)
+        public async Task<List<GetSalesByQtyDto>> GetSalesByTotalAmountAsync(DateOnly startDate, DateOnly endDate)
         {
             try
             {
@@ -94,7 +93,7 @@ namespace Project.Application.Services
 
                 return sales
                        .GroupBy(sd => new { sd.ProductCode, sd.ProductName })
-                       .Select(sd => new POSrecordDto1
+                       .Select(sd => new GetSalesByQtyDto
                        {
                            ProductCode = sd.Key.ProductCode,
                            ProductName = sd.Key.ProductName,

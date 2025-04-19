@@ -1,4 +1,4 @@
-﻿using Project.Application.DTOs.ProductDtos;
+﻿using ProjectForm.Model.DTOs.SalesDetailDtos;
 using ProjectForm.Model.DTOs;
 using ProjectForm.Model.DTOs.ProductDtos;
 using ProjectForm.Model.DTOs.StockRecordDtos;
@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace ProjectForm.View.IView
 {
     public interface IPOSrecordView
@@ -16,8 +17,8 @@ namespace ProjectForm.View.IView
         //event EventHandler? LoadTopSoldItemClicked;
         //event EventHandler<DataGridViewRowPostPaintEventArgs>? RowNumber;
         //event EventHandler? SelectedItemCombo;
-        void DisplayTopSellingItems(List<POSrecordDto1> topSelling);
-        void DisplaySoldItems(List<POSrecordDto1> sold);
+        void DisplayTopSellingItems(List<GetSalesByQtyDto> topSelling);
+        void DisplaySoldItems(List<GetSalesByQtyDto> sold);
         void DisplayCriticalItems(List<GetAllCriticalProductsDto> criticalItems);
         void DisplayInventoryList(List<GetInventoryListDto> inventoryList);
         void DisplayStockInHistory(List<GetStockInHistoryDto> stockInHistory);

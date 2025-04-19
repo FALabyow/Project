@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Project.Application.DTOs.ProductDtos
+namespace ProjectForm.Model.DTOs.ProductDtos
 {
     public class UpdateProductDto
     {

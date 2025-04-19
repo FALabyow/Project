@@ -4,12 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProjectForm.Model.DTOs
+namespace ProjectForm.Model.DTOs.SalesHistoryDto
 {
-    public class SalesHistoryInfoDto
+    public class AddSalesHistoryDto
     {
-        
+        public string? SalesHistoryId { get; set; }
         public decimal TotalAmount { get; set; }
-        public string? SalesHistoryId { get; set; } 
     }
 }

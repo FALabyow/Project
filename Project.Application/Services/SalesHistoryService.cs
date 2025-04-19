@@ -1,4 +1,4 @@
-﻿using Project.Application.DTOs;
+﻿using Project.Application.DTOs.SalesHistoryDtos;
 using Project.Application.Interfaces;
 using Project.Domain.Entities;
 using System;

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Project.Application.DTOs
+namespace Project.Application.DTOs.SalesHistoryDtos
 {
     public class AddSalesHistoryDto
     {

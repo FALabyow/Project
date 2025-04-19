@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Project.Application.DTOs.StockrRecordDtos
+namespace ProjectForm.Model.DTOs.StockRecordDtos
 {
     public class AddStockRecordsDto
     {

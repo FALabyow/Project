@@ -1,6 +1,7 @@
 ﻿using Accessibility;
 using ProjectForm.Model.DTOs;
 using ProjectForm.Model.DTOs.ProductDtos;
+using ProjectForm.Model.DTOs.SalesHistoryDto;
 using ProjectForm.View.IView;
 using System.Data;
 using System.Linq;
@@ -213,7 +214,7 @@ namespace ProjectForm.Presenter
         private async Task SendSalesHistory(string salesHistoryId, decimal totalAmount)
         {
             
-            var salesHistory = new SalesHistoryInfoDto
+            var salesHistory = new AddSalesHistoryDto
             {
                 SalesHistoryId = salesHistoryId,
                 TotalAmount = totalAmount,

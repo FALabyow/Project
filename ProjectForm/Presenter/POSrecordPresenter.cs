@@ -1,4 +1,4 @@
-﻿using Project.Application.DTOs.ProductDtos;
+﻿using ProjectForm.Model.DTOs.SalesDetailDtos;
 using ProjectForm.Model.DTOs;
 using ProjectForm.Model.DTOs.ProductDtos;
 using ProjectForm.Model.DTOs.StockRecordDtos;
@@ -66,7 +66,7 @@ namespace ProjectForm.Presenter
                 _pOSrecord.selectedComboBox = string.Empty;
             }
         }
-        public async Task<List<POSrecordDto1>> LoadTopSellingAsync(string startDate, string endDate, string selectedItem)
+        public async Task<List<GetSalesByQtyDto>> LoadTopSellingAsync(string startDate, string endDate, string selectedItem)
         {
             try
             {
@@ -74,11 +74,11 @@ namespace ProjectForm.Presenter
 
                 res.EnsureSuccessStatusCode();
 
-                var sales = await res.Content.ReadFromJsonAsync<List<POSrecordDto1>>();
+                var sales = await res.Content.ReadFromJsonAsync<List<GetSalesByQtyDto>>();
 
                 if (sales == null)
                 {
-                    return new List<POSrecordDto1>();
+                    return new List<GetSalesByQtyDto>();
                 }
 
                 return sales;
@@ -86,11 +86,11 @@ namespace ProjectForm.Presenter
             catch (HttpRequestException ex)
             {
                 MessageBox.Show(ex.Message);
-                return new List<POSrecordDto1>();
+                return new List<GetSalesByQtyDto>();
                 
             }
         }
-        public async Task<List<POSrecordDto1>> LoadSoldItemsAsync(string startDate, string endDate)
+        public async Task<List<GetSalesByQtyDto>> LoadSoldItemsAsync(string startDate, string endDate)
         {
             try
             {
@@ -98,11 +98,11 @@ namespace ProjectForm.Presenter
 
                 res.EnsureSuccessStatusCode();
 
-                var sales = await res.Content.ReadFromJsonAsync<List<POSrecordDto1>>();
+                var sales = await res.Content.ReadFromJsonAsync<List<GetSalesByQtyDto>>();
 
                 if (sales == null)
                 {
-                    return new List<POSrecordDto1>();
+                    return new List<GetSalesByQtyDto>();
                 }
 
                 return sales;
@@ -111,7 +111,7 @@ namespace ProjectForm.Presenter
             catch (HttpRequestException ex)
             {
                 MessageBox.Show(ex.Message);
-                return new List<POSrecordDto1>();
+                return new List<GetSalesByQtyDto>();
             }
         }
         public async Task<List<GetAllCriticalProductsDto>> LoadCriticalItemAsync()

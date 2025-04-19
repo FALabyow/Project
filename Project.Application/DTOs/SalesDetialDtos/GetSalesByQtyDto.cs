@@ -4,14 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Project.Application.DTOs
+namespace Project.Application.DTOs.SalesDetialDtos
 {
-    public class AddSalesDto
+    //DTOs for top selling and sold items
+    public class GetSalesByQtyDto
     {
-        public Guid SalesDetailId { get; set; }
         public string? ProductCode { get; set; }
         public string? ProductName { get; set; }
-        public int QuantitySold { get; set; }
-        public decimal UnitPrice { get; set; }
+        public int ProductQuantity { get; set; }
+        public decimal TotalAmount { get; set; }
+
     }
 }

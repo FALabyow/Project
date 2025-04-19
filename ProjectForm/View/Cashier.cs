@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore.ValueGeneration.Internal;
 using Project.Application.DTOs;
-using Project.Application.DTOs.StockDtos;
+using ProjectForm.Model.DTOs.SalesDetailDtos;
+using ProjectForm.Model.DTOs.StockDtos;
 using ProjectForm.Model.DTOs;
 using ProjectForm.Model.DTOs.ProductDtos;
 using ProjectForm.Presenter;
@@ -89,16 +90,16 @@ namespace ProjectForm
             set => lblChange.Text = value;
         }
         public string Barcode => barcodetxt.Text;
-        public List<SalesDetail> Sales
+        public List<AddSalesDetailDto> Sales
         {
             get
             {
-                var sales = new List<SalesDetail>();
+                var sales = new List<AddSalesDetailDto>();
                 foreach (DataGridViewRow row in dgvCashier.Rows)
                 {
                     if (row.IsNewRow) continue;
 
-                    sales.Add(new SalesDetail
+                    sales.Add(new AddSalesDetailDto
                     {
                         ProductCode = row.Cells["ProductCode"].Value?.ToString(),
                         ProductName = row.Cells["ProductName"].Value?.ToString(),

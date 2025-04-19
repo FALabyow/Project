@@ -1,7 +1,6 @@
-﻿using Project.Application.DTOs.StockrRecordDtos;
+﻿using ProjectForm.Model.DTOs.StockRecordDtos;
 using ProjectForm.Model.DTOs;
 using ProjectForm.Model.DTOs.StockDtos;
-using ProjectForm.Model.DTOs.StockRecordDtos;
 using ProjectForm.Presenter;
 using ProjectForm.View.IView;
 using System;

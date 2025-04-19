@@ -1,5 +1,4 @@
-﻿using Project.Application.DTOs.StockDtos;
-using Project.Application.DTOs.StockrRecordDtos;
+﻿using ProjectForm.Model.DTOs.StockRecordDtos;
 using ProjectForm.Model;
 using ProjectForm.Model.DTOs;
 using ProjectForm.Model.DTOs.StockDtos;

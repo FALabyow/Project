@@ -1,6 +1,7 @@
-﻿using Project.Application.DTOs.ProductDtos;
+﻿
 using ProjectForm.Model.DTOs;
 using ProjectForm.Model.DTOs.ProductDtos;
+using ProjectForm.Model.DTOs.SalesDetailDtos;
 using ProjectForm.Model.DTOs.StockRecordDtos;
 using ProjectForm.Presenter;
 using ProjectForm.View.IView;
@@ -49,11 +50,11 @@ namespace ProjectForm
 
         public event EventHandler<DataGridViewRowPostPaintEventArgs>? RowNumber;
 
-        public void DisplayTopSellingItems(List<POSrecordDto1> topSelling)
+        public void DisplayTopSellingItems(List<GetSalesByQtyDto> topSelling)
         {
             dgvTopselling.DataSource = topSelling;
         }
-        public void DisplaySoldItems(List<POSrecordDto1> sold)
+        public void DisplaySoldItems(List<GetSalesByQtyDto> sold)
         {
             dgvSolditem.DataSource = sold;
         }

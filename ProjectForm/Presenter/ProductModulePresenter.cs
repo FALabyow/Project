@@ -1,5 +1,5 @@
-﻿using Project.Application.DTOs.ProductDtos;
-using Project.Application.DTOs.StockDtos;
+﻿using ProjectForm.Model.DTOs.ProductDtos;
+using ProjectForm.Model.DTOs.StockDtos;
 using ProjectForm.Error;
 using ProjectForm.Model.DTOs;
 using ProjectForm.Model.DTOs.CategoryDto;

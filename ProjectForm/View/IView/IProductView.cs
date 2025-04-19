@@ -1,4 +1,4 @@
-﻿using Project.Application.DTOs.ProductDtos;
+﻿using ProjectForm.Model.DTOs.ProductDtos;
 using ProjectForm.Model.DTOs;
 using System;
 using System.Collections.Generic;

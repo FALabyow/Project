@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProjectForm.Model.DTOs
+namespace ProjectForm.Model.DTOs.SalesDetailDtos
 {
     //DTOs for top selling and sold items
-    public class POSrecordDto1
+    public class GetSalesByQtyDto
     {
-        public string? ProductCode {  get; set; }
+        public string? ProductCode { get; set; }
         public string? ProductName { get; set; }
         public int ProductQuantity { get; set; }
         public decimal TotalAmount { get; set; }

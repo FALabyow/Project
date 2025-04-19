@@ -1,5 +1,4 @@
-﻿using Project.Application.DTOs.StockDtos;
-using ProjectForm.Error;
+﻿using ProjectForm.Error;
 using ProjectForm.Model.DTOs;
 using ProjectForm.Model.DTOs.StockDtos;
 using ProjectForm.View.IView;
