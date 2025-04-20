@@ -1,0 +1,57 @@
+CategorModule.cs
+1. Add a category here.
+
+Category.cs
+1. All Categories will be displayed here.
+2. The delete button is restricted if the Category has product linked to it.
+
+ProductModule.cs
+1. Add a product here.
+2. The product code must be in this format: P01, P02, P03....
+3. When adding a product, behind the scene, Stock is also added but with a default value of 0 for ProductQuantity(see Stock.cs in Project.Domain/Entities).
+
+Product.cs
+1. All products will be displayed here.
+2. Can update the product name, price, and reorder value. Edit it inside a grid then click update button.
+3. The delete button is restricted if the ProductQuantity in Stocks is more than 0.
+4. The search for product in Product.cs are filtered by its price, product name, and category name.(To add more search filter, please see OnProductSearched method in ProductPresenter.cs)
+
+StockInProduct.cs
+1. The data displayed here are the in-stock products.
+2. Select the product you want to entry.
+
+In-stock refers to products that are currently available in inventory or storage and are ready for sale or use.
+Each product is recorded.
+
+StockEntry.cs - this is for added stocks
+1. The data displayed here are the in-stock products.
+2. You can edit the product quantity that needs to be added to the stock.
+3. Once the Entry button is clicked, the product quantity stored in the database will be updated, and each in-stock entry will be recorded in the database.
+4. Recorded stocks entry are displayed in Stock In Record.
+
+StockAdjustments.cs - this is for corrected stock quantity
+1. In-Stock products are displayed here.
+2. The product quantity can be updated here in case of damages or incorrect counts.
+3. Click the column, details will be displayed at the top.
+4. Update quantity in the quantity textbox.
+5. Choose action(Add to Inventory or Remove from inventory).
+6. Add to Inventory - this will add the updated product to the inventory, 
+7. Remove from Inventory - completely removes the product from the inventory
+
+--> The inventory contain the in-Stock products
+
+DailySales.cs
+1. Each sold items are recorded and displayed here.
+2. The total items sold (for filtered dates) are calculated and displayed here.
+
+POSrecord.cs
+1. Top Selling Tab - displays all the top 10 selling products
+2. Sold Items Tab - displays the data the same from DailySale.cs
+3. Critical items Tab - display items with product quantity of equal or less than the pre order value.
+4. Inventory List Tab - display items with product quantity of more than 0.
+5. Stock In History Tab - display items the same from Stock In Record Tab in StockEntry.cs
+
+
+
+
+

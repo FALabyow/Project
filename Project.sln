@@ -3,20 +3,22 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35327.3
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Project.Domain", "Project.Domain\Project.Domain.csproj", "{41D3CFBF-53F9-4636-990E-C58021D3C7DB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Project.Domain", "Project.Domain\Project.Domain.csproj", "{41D3CFBF-53F9-4636-990E-C58021D3C7DB}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{C91BC588-CE92-4677-B814-6B392097C869}"
 	ProjectSection(SolutionItems) = preProject
 		Document.txt = Document.txt
+		ProjectFlow.txt = ProjectFlow.txt
+		ToFixedNotes.txt = ToFixedNotes.txt
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Project.Application", "Project.Application\Project.Application.csproj", "{18B5A0DF-9B5A-47BE-BCD0-29297649AC3B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Project.Application", "Project.Application\Project.Application.csproj", "{18B5A0DF-9B5A-47BE-BCD0-29297649AC3B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Project.Infrastructure", "Project.Infrastructure\Project.Infrastructure.csproj", "{D967C660-96A4-4DFB-A81E-0A61DA80871A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Project.Infrastructure", "Project.Infrastructure\Project.Infrastructure.csproj", "{D967C660-96A4-4DFB-A81E-0A61DA80871A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Project.API", "Project.API\Project.API.csproj", "{5D45F72C-EF8D-4EE6-BC4F-A0638E95406A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Project.API", "Project.API\Project.API.csproj", "{5D45F72C-EF8D-4EE6-BC4F-A0638E95406A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectForm", "ProjectForm\ProjectForm.csproj", "{B184993D-8CEC-4B98-A0DA-C508541D157A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjectForm", "ProjectForm\ProjectForm.csproj", "{B184993D-8CEC-4B98-A0DA-C508541D157A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

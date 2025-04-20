@@ -29,13 +29,13 @@ namespace Project.Infrastructure.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("CategoryName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("CategoryId");
 
                     b.HasIndex("CategoryName")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[CategoryName] IS NOT NULL");
 
                     b.ToTable("Categories");
                 });
@@ -47,27 +47,21 @@ namespace Project.Infrastructure.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("BarcodeData")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("CategoryId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("ProductCode")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProductName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("ProductPreOrder")
-                        .HasColumnType("int");
 
                     b.Property<decimal>("ProductPrice")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int>("ProductQuantity")
+                    b.Property<int>("ProductReOrder")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("ScannedAt")
@@ -78,10 +72,12 @@ namespace Project.Infrastructure.Migrations
                     b.HasIndex("CategoryId");
 
                     b.HasIndex("ProductCode")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[ProductCode] IS NOT NULL");
 
                     b.HasIndex("ProductName")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[ProductName] IS NOT NULL");
 
                     b.ToTable("Products");
                 });
@@ -93,21 +89,16 @@ namespace Project.Infrastructure.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("ProductCode")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("ProductId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("ProductName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("QuantitySold")
                         .HasColumnType("int");
 
-                    b.Property<Guid>("SalesHistoryId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("SalesHistoryId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<decimal>("UnitPrice")
                         .HasColumnType("decimal(18,2)");
@@ -121,13 +112,8 @@ namespace Project.Infrastructure.Migrations
 
             modelBuilder.Entity("Project.Domain.Entities.SalesHistory", b =>
                 {
-                    b.Property<Guid>("SalesHistoryId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("InvoiceNumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<string>("SalesHistoryId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("SaleDate")
                         .HasColumnType("datetime2");
@@ -135,9 +121,35 @@ namespace Project.Infrastructure.Migrations
                     b.Property<decimal>("TotalAmount")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<decimal>("TotalChange")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("TotalFee")
+                        .HasColumnType("decimal(18,2)");
+
                     b.HasKey("SalesHistoryId");
 
                     b.ToTable("SalesHistory");
+                });
+
+            modelBuilder.Entity("Project.Domain.Entities.Stock", b =>
+                {
+                    b.Property<Guid>("StockId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("ProductId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("ProductQuantity")
+                        .HasColumnType("int");
+
+                    b.HasKey("StockId");
+
+                    b.HasIndex("ProductId")
+                        .IsUnique();
+
+                    b.ToTable("Stocks");
                 });
 
             modelBuilder.Entity("Project.Domain.Entities.StockRecord", b =>
@@ -146,22 +158,25 @@ namespace Project.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("ProductId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("ReferenceNum")
-                        .IsRequired()
+                    b.Property<string>("ProductCategory")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateOnly>("StockInDate")
-                        .HasColumnType("date");
+                    b.Property<string>("ProductCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ProductName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ReferenceNum")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("StockInDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("StockInQty")
                         .HasColumnType("int");
 
                     b.HasKey("StockRecordId");
-
-                    b.HasIndex("ProductId");
 
                     b.ToTable("StockRecords");
                 });
@@ -182,17 +197,16 @@ namespace Project.Infrastructure.Migrations
                     b.HasOne("Project.Domain.Entities.SalesHistory", "SalesHistory")
                         .WithMany("SalesDetails")
                         .HasForeignKey("SalesHistoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("SalesHistory");
                 });
 
-            modelBuilder.Entity("Project.Domain.Entities.StockRecord", b =>
+            modelBuilder.Entity("Project.Domain.Entities.Stock", b =>
                 {
                     b.HasOne("Project.Domain.Entities.Product", "Product")
-                        .WithMany("StockRecords")
-                        .HasForeignKey("ProductId")
+                        .WithOne("Stock")
+                        .HasForeignKey("Project.Domain.Entities.Stock", "ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -206,7 +220,7 @@ namespace Project.Infrastructure.Migrations
 
             modelBuilder.Entity("Project.Domain.Entities.Product", b =>
                 {
-                    b.Navigation("StockRecords");
+                    b.Navigation("Stock");
                 });
 
             modelBuilder.Entity("Project.Domain.Entities.SalesHistory", b =>

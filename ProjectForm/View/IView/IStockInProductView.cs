@@ -1,4 +1,5 @@
-﻿using ProjectForm.Model.DTOs;
+﻿using ProjectForm.Model.DTOs.StockDtos;
+using ProjectForm.Model.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,7 @@ namespace ProjectForm.View.IView
     public interface IStockInProductView
     {
         event EventHandler<DataGridViewCellEventArgs>? SelectProductClicked;
-        void DisplayProductList(List<StockInProductDto> productList);
+        void DisplayProductList(List<GetAllStocksDto> productsList);
         void ShowMessage(string message);
     }
 }

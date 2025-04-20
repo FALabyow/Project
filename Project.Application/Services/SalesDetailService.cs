@@ -1,4 +1,4 @@
-﻿using Project.Application.DTOs;
+﻿using Project.Application.DTOs.SalesDetialDtos;
 using Project.Application.Interfaces;
 using Project.Domain.Entities;
 using System;
@@ -16,53 +16,124 @@ namespace Project.Application.Services
         {
             _salesDetailRepository = salesDetailRepository;
         }
-        public async Task<List<SalesDetailDto>> GetAllSalesDetailsAsync()
+        public async Task<List<GetAllSalesByDateDto>> GetAllSalesByDateAsync(DateOnly startDate, DateOnly endDate)
+            {
+                try
+                {
+                    var sales = await _salesDetailRepository.GetAllSalesByDateAsync(startDate, endDate);
+
+                    if(sales == null || !sales.Any())
+                    {
+                        throw new InvalidOperationException("No sales found in the database");
+                    }
+
+                    return sales.Select(x => new GetAllSalesByDateDto
+                    {
+                        SalesHistoryId = x.SalesHistoryId,
+                        ProductCode = x.ProductCode,
+                        ProductName = x.ProductName,
+                        ProductPrice = x.UnitPrice,
+                        ProductQuantity = x.QuantitySold,
+                        TotalAmount = x.TotalAmount,
+                    }).ToList();
+                }
+                catch (InvalidOperationException)
+                {
+                    throw;
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+        }
+        public async Task<List<GetSalesByQtyDto>> GetSalesByQtyAsync(DateOnly startDate, DateOnly endDate)
         {
             try
             {
-                var salesDetails = await _salesDetailRepository.GetAllSalesDetailAsync();
-                if (!salesDetails.Any())
-                    throw new InvalidOperationException("No sales details found in the database!");
+                var sales = await _salesDetailRepository.GetAllSalesByDateAsync(startDate, endDate);
 
-                return salesDetails.Select(sd => new SalesDetailDto
+                if (sales == null || !sales.Any())
                 {
-                    InvoiceNumber = sd.SalesHistory.InvoiceNumber,
-                    ProductCode = sd.ProductCode,
-                    ProductName = sd.ProductName,
-                    QuantitySold = sd.QuantitySold,
-                    SalesDetailId = sd.SalesDetailId,
-                    UnitPrice = sd.UnitPrice,
-                    TotalAmount = sd.TotalAmount,
-                    SaleDate = sd.SalesHistory.SaleDate,
+                    throw new InvalidOperationException("No sales found in the database");
+                }
 
-                }).ToList();
+                return sales
+                       .GroupBy(sd => new { sd.ProductCode, sd.ProductName })
+                       .Select(sd => new GetSalesByQtyDto
+                       {
+                           ProductCode = sd.Key.ProductCode,
+                           ProductName = sd.Key.ProductName,
+                           ProductQuantity = sd.Sum(sd => sd.QuantitySold),
+                           TotalAmount = sd.Sum(sd => sd.TotalAmount),
+                       })
+                       .OrderByDescending(x => x.ProductQuantity)
+                       .Take(10)
+                       .ToList();
+
             }
             catch (InvalidOperationException)
             {
                 throw;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw new InvalidOperationException("Unexpected error in service layer", ex);
+                throw;
             }
         }
-        public async Task AddSalesDetailsAsync(IEnumerable<SalesDetailInfoDto> salesDetailInfoDtos)
+        public async Task<List<GetSalesByQtyDto>> GetSalesByTotalAmountAsync(DateOnly startDate, DateOnly endDate)
         {
-            var salesDetails = salesDetailInfoDtos.Select(sd => new SalesDetail
-            {
-                SalesHistoryId = sd.SalesHistoryId,
-                ProductCode = sd.ProductCode,
-                ProductName = sd.ProductName,
-                QuantitySold = sd.QuantitySold,
-                ProductId = sd.ProductId,
-                UnitPrice = sd.UnitPrice,
-            }).ToList();
-
             try
             {
-                await _salesDetailRepository.AddSalesDetailAsync(salesDetails);
+                var sales = await _salesDetailRepository.GetAllSalesByDateAsync(startDate, endDate);
+
+                if (sales == null || !sales.Any())
+                {
+                    throw new InvalidOperationException("No sales found in the database");
+                }
+
+                return sales
+                       .GroupBy(sd => new { sd.ProductCode, sd.ProductName })
+                       .Select(sd => new GetSalesByQtyDto
+                       {
+                           ProductCode = sd.Key.ProductCode,
+                           ProductName = sd.Key.ProductName,
+                           ProductQuantity = sd.Sum(sd => sd.QuantitySold),
+                           TotalAmount = sd.Sum(sd => sd.TotalAmount),
+                       })
+                       .OrderByDescending(x => x.TotalAmount)
+                       .Take(10)
+                       .ToList();
+
             }
             catch (InvalidOperationException)
+            {
+                throw;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public async Task AddSalesAsync(List<AddSalesDetailDto> sales)
+        {
+            try
+            {
+                var salesData = sales.Select(s => new SalesDetail
+                {
+                    SalesHistoryId= s.SalesHistoryId, //transaction id
+                    ProductCode = s.ProductCode,
+                    ProductName = s.ProductName,
+                    QuantitySold = s.QuantitySold,
+                    UnitPrice = s.UnitPrice,
+                }).ToList();
+
+                await _salesDetailRepository.AddSalesAsync(salesData);
+            }
+            catch (InvalidOperationException)
+            {
+                throw;
+            }
+            catch (ArgumentException)
             {
                 throw;
             }

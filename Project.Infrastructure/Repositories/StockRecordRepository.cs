@@ -1,5 +1,6 @@
 ﻿using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using Project.Application.DTOs.StockrRecordDtos;
 using Project.Application.Interfaces;
 using Project.Domain.Entities;
 using Project.Infrastructure.Persistence;
@@ -18,15 +19,11 @@ namespace Project.Infrastructure.Repositories
         {
             _context = context;
         }
-
         public async Task<IEnumerable<StockRecord>> GetAllStockRecordsAsync()
         {
             try
             {
-                return await _context.StockRecords
-                        .Include(s => s.Product) 
-                        .ToListAsync();
-                
+                return await _context.StockRecords.ToListAsync();
             }
             catch (InvalidOperationException ex) when (ex.InnerException is SqlException sqlEx && sqlEx.Number == 4060)
             {
@@ -37,36 +34,31 @@ namespace Project.Infrastructure.Repositories
                 throw new InvalidOperationException("An error occurred while fetching stock records." + ex.Message);
             }
         }
-        public async Task AddStockRecordAsync(StockRecord stockRecord)
+        public async Task<IEnumerable<StockRecord>> GetAllStockRecordsAsyncByDate(DateOnly startDate, DateOnly endDate)
         {
             try
             {
-                await _context.StockRecords.AddAsync(stockRecord);
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateException ex)
-            {
-                if (ex.InnerException is SqlException sqlEx && (sqlEx.Number == 2601 || sqlEx.Number == 2627))
-                {
-                    throw new InvalidOperationException("Error saving adding record: " + ex.Message);
-                }
+                var stocks = await _context.StockRecords
+                .Where(x => x.StockInDate >= startDate &&
+                            x.StockInDate <= endDate)
+                .ToListAsync();
 
+                return stocks;
             }
             catch (InvalidOperationException ex) when (ex.InnerException is SqlException sqlEx && sqlEx.Number == 4060)
             {
-                throw new InvalidOperationException("Database does not exist");
+                throw new InvalidOperationException("Database does not exist or access denied!", ex);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw new InvalidOperationException("An error occurred while adding stock record.");
+                throw new InvalidOperationException("An error occurred while fetching stock records." + ex.Message);
             }
-
         }
-        public async Task AddStockRecordsAsync(IEnumerable<StockRecord> stockRecords)
+        public async Task AddStockRecordsAsync(IEnumerable<StockRecord> addStockRecordDtos)
         {
             try
             {
-                await _context.StockRecords.AddRangeAsync(stockRecords); 
+                await _context.StockRecords.AddRangeAsync(addStockRecordDtos); 
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateException ex)

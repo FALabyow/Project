@@ -1,4 +1,4 @@
-﻿using ProjectForm.Model.DTOs;
+﻿using ProjectForm.Model.DTOs.CategoryDto;
 using ProjectForm.Presenter;
 using ProjectForm.View.IView;
 using System;
@@ -20,29 +20,25 @@ namespace ProjectForm
     {
         //Part 3 of the tutorial
         //https://www.youtube.com/watch?v=9LdU5zA5agA&list=PLcDvtJ2MXvhy_YrXdO4VXqZBOADCRJhSc&index=4
-        private readonly HttpClient _httpClient;
-        private Guid _productId;
+        
         private ProductModulePresenter? _presenter;
-        private readonly ProductPresenter presenterPresenter;
+        private readonly ProductPresenter _productPresenter;
 
-        public ProductModule(ProductPresenter presenterPresenter)
+        public ProductModule(ProductPresenter productPresenter)
         {
             InitializeComponent();
-            _httpClient = new HttpClient { BaseAddress = new Uri("https://localhost:7014/api") };
             cmbCategory.SelectedIndexChanged += (s, e) => SelectedIndexCategoryCombo?.Invoke(this, EventArgs.Empty);
             btnSave.Click += (s, e) => SaveClicked?.Invoke(this, EventArgs.Empty);
-            btnUpdate.Click += (s, e) => UpdateClicked?.Invoke(this, EventArgs.Empty);
             btnClear.Click += (s, e) => ClearClicked?.Invoke(this, EventArgs.Empty);
+            picClose.Click += (s, e) => ModuleCloseClicked?.Invoke(this, EventArgs.Empty);
             cmbCategory.Text = "Select Category";
-            this.presenterPresenter = presenterPresenter;
-
-
+            _productPresenter = productPresenter;
         }
         private async void ProductModule_Load(object sender, EventArgs e)
         {
             if (_presenter == null)
             {
-                _presenter = new ProductModulePresenter(this, presenterPresenter);
+                _presenter = new ProductModulePresenter(this, _productPresenter);
             }
             await _presenter.LoadCategoryAsync();
         }
@@ -50,8 +46,8 @@ namespace ProjectForm
         public event EventHandler? ClearClicked;
         public event EventHandler? SelectedIndexCategoryCombo;
         public event EventHandler? SaveClicked;
-        public event EventHandler? UpdateClicked;
-        public Guid Selectedcategory
+        public event EventHandler? ModuleCloseClicked;
+        public Guid SelectedCategory
         {
             get
             {
@@ -64,20 +60,20 @@ namespace ProjectForm
         }
         public string Pcode
         {
-            get => txtPcode.Text;
+            get => txtPcode.Text.ToUpper();
             set => txtPcode.Text = value;
         }
         public string Barcode
         {
-            get => txtBarcode.Text;
+            get => txtBarcode.Text.ToUpper();
             set => txtBarcode.Text = value;
         }
         public string Description
         {
-            get => txtDescription.Text;
+            get => txtDescription.Text.ToUpper();
             set => txtDescription.Text = value;
         }
-        public int Preorder
+        public int ReOrder
         {
             get
             {
@@ -106,27 +102,7 @@ namespace ProjectForm
             {
                 txtPrice.Text = value.ToString("0.00");
             }
-        }
-
-        public int Quantity
-        {
-            get
-            {
-                if(int.TryParse(textQty.Text, out int quantity))
-                {
-                    return quantity;
-                }
-                else
-                {
-                    return 0;
-                }
-            }
-
-            set
-            {
-                textQty.Text = value.ToString();
-            }
-        }
+        }        
         public void LoadCategory(List<CategoryDto> categoryDto)
         {
             categoryDto.Insert(0, new CategoryDto { CategoryId = Guid.Empty, CategoryName = "Select Category" });
@@ -136,7 +112,6 @@ namespace ProjectForm
             cmbCategory.SelectedIndex = 0;
 
         }
-
         public void ShowMessage(string message)
         {
             MessageBox.Show(message);
@@ -153,21 +128,10 @@ namespace ProjectForm
             txtDescription.Text = "";
             nudReorder.Value = 1;
             categoryLoadingMessageLabel.Text = "";
-            textQty.Text = "";
-            
         }
-
-
-        private void pictureBox1_Click(object sender, EventArgs e)
+        public void ModuleClose()
         {
             this.Dispose();
-        }
-
-        private void btnCancel_Click(object sender, EventArgs e)
-        {
-            Clear();
-        }
-
-        
+        }       
     }
 }

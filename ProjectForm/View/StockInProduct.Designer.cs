@@ -30,16 +30,18 @@
         {
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             dgvProduct = new DataGridView();
-            rowNumber = new DataGridViewTextBoxColumn();
-            ProductCode = new DataGridViewTextBoxColumn();
-            ProductName = new DataGridViewTextBoxColumn();
-            ProductId = new DataGridViewTextBoxColumn();
-            ProductQuantity = new DataGridViewTextBoxColumn();
-            Select = new DataGridViewImageColumn();
             panel1 = new Panel();
             btnClose = new Button();
             txtSearch = new TextBox();
             lblManageProduct = new Label();
+            rowNumber = new DataGridViewTextBoxColumn();
+            StockId = new DataGridViewTextBoxColumn();
+            ProductCode = new DataGridViewTextBoxColumn();
+            ProductName = new DataGridViewTextBoxColumn();
+            ProductCategory = new DataGridViewTextBoxColumn();
+            ProductId = new DataGridViewTextBoxColumn();
+            ProductQuantity = new DataGridViewTextBoxColumn();
+            Select = new DataGridViewImageColumn();
             ((System.ComponentModel.ISupportInitialize)dgvProduct).BeginInit();
             panel1.SuspendLayout();
             SuspendLayout();
@@ -59,7 +61,7 @@
             dgvProduct.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dgvProduct.ColumnHeadersHeight = 40;
             dgvProduct.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dgvProduct.Columns.AddRange(new DataGridViewColumn[] { rowNumber, ProductCode, ProductName, ProductId, ProductQuantity, Select });
+            dgvProduct.Columns.AddRange(new DataGridViewColumn[] { rowNumber, StockId, ProductCode, ProductName, ProductCategory, ProductId, ProductQuantity, Select });
             dgvProduct.Dock = DockStyle.Fill;
             dgvProduct.EnableHeadersVisualStyles = false;
             dgvProduct.GridColor = Color.White;
@@ -70,59 +72,6 @@
             dgvProduct.Size = new Size(838, 491);
             dgvProduct.TabIndex = 5;
             dgvProduct.RowPostPaint += dgvProduct_RowPostPaint_1;
-            // 
-            // rowNumber
-            // 
-            rowNumber.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            rowNumber.HeaderText = "No.";
-            rowNumber.MinimumWidth = 6;
-            rowNumber.Name = "rowNumber";
-            rowNumber.Width = 67;
-            // 
-            // ProductCode
-            // 
-            ProductCode.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            ProductCode.DataPropertyName = "ProductCode";
-            ProductCode.HeaderText = "Pcode";
-            ProductCode.MinimumWidth = 6;
-            ProductCode.Name = "ProductCode";
-            ProductCode.Width = 96;
-            // 
-            // ProductName
-            // 
-            ProductName.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            ProductName.DataPropertyName = "ProductName";
-            ProductName.HeaderText = "Description";
-            ProductName.MinimumWidth = 6;
-            ProductName.Name = "ProductName";
-            // 
-            // ProductId
-            // 
-            ProductId.DataPropertyName = "ProductId";
-            ProductId.HeaderText = "ProductId";
-            ProductId.MinimumWidth = 6;
-            ProductId.Name = "ProductId";
-            ProductId.Visible = false;
-            ProductId.Width = 125;
-            // 
-            // ProductQuantity
-            // 
-            ProductQuantity.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            ProductQuantity.DataPropertyName = "ProductQuantity";
-            ProductQuantity.HeaderText = "Qty";
-            ProductQuantity.MinimumWidth = 6;
-            ProductQuantity.Name = "ProductQuantity";
-            ProductQuantity.Width = 71;
-            // 
-            // Select
-            // 
-            Select.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            Select.HeaderText = "";
-            Select.Image = Properties.Resources.check;
-            Select.ImageLayout = DataGridViewImageCellLayout.Zoom;
-            Select.MinimumWidth = 6;
-            Select.Name = "Select";
-            Select.Width = 6;
             // 
             // panel1
             // 
@@ -168,6 +117,75 @@
             lblManageProduct.TabIndex = 3;
             lblManageProduct.Text = "Product Stock In";
             // 
+            // rowNumber
+            // 
+            rowNumber.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            rowNumber.HeaderText = "No.";
+            rowNumber.MinimumWidth = 6;
+            rowNumber.Name = "rowNumber";
+            rowNumber.Width = 67;
+            // 
+            // StockId
+            // 
+            StockId.DataPropertyName = "StockId";
+            StockId.HeaderText = "StockId";
+            StockId.MinimumWidth = 6;
+            StockId.Name = "StockId";
+            StockId.Width = 125;
+            // 
+            // ProductCode
+            // 
+            ProductCode.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            ProductCode.DataPropertyName = "ProductCode";
+            ProductCode.HeaderText = "Pcode";
+            ProductCode.MinimumWidth = 6;
+            ProductCode.Name = "ProductCode";
+            ProductCode.Width = 96;
+            // 
+            // ProductName
+            // 
+            ProductName.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            ProductName.DataPropertyName = "ProductName";
+            ProductName.HeaderText = "Description";
+            ProductName.MinimumWidth = 6;
+            ProductName.Name = "ProductName";
+            // 
+            // ProductCategory
+            // 
+            ProductCategory.DataPropertyName = "ProductCategory";
+            ProductCategory.HeaderText = "Category";
+            ProductCategory.MinimumWidth = 6;
+            ProductCategory.Name = "ProductCategory";
+            ProductCategory.Width = 125;
+            // 
+            // ProductId
+            // 
+            ProductId.DataPropertyName = "ProductId";
+            ProductId.HeaderText = "ProductId";
+            ProductId.MinimumWidth = 6;
+            ProductId.Name = "ProductId";
+            ProductId.Visible = false;
+            ProductId.Width = 125;
+            // 
+            // ProductQuantity
+            // 
+            ProductQuantity.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            ProductQuantity.DataPropertyName = "ProductQuantity";
+            ProductQuantity.HeaderText = "Qty";
+            ProductQuantity.MinimumWidth = 6;
+            ProductQuantity.Name = "ProductQuantity";
+            ProductQuantity.Width = 71;
+            // 
+            // Select
+            // 
+            Select.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            Select.HeaderText = "";
+            Select.Image = Properties.Resources.check;
+            Select.ImageLayout = DataGridViewImageCellLayout.Zoom;
+            Select.MinimumWidth = 6;
+            Select.Name = "Select";
+            Select.Width = 6;
+            // 
             // StockInProduct
             // 
             AutoScaleDimensions = new SizeF(11F, 21F);
@@ -197,8 +215,10 @@
         private Label lblManageProduct;
         private Button btnClose;
         private DataGridViewTextBoxColumn rowNumber;
+        private DataGridViewTextBoxColumn StockId;
         private DataGridViewTextBoxColumn ProductCode;
         private DataGridViewTextBoxColumn ProductName;
+        private DataGridViewTextBoxColumn ProductCategory;
         private DataGridViewTextBoxColumn ProductId;
         private DataGridViewTextBoxColumn ProductQuantity;
         private DataGridViewImageColumn Select;

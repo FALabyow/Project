@@ -1,5 +1,7 @@
-﻿using ProjectForm.Model;
+﻿using ProjectForm.Model.DTOs.StockRecordDtos;
+using ProjectForm.Model;
 using ProjectForm.Model.DTOs;
+using ProjectForm.Model.DTOs.StockDtos;
 using ProjectForm.View.IView;
 using System;
 using System.Collections.Generic;
@@ -9,49 +11,51 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace ProjectForm.Presenter
-{
-    
+{ 
     public class StockEntryPresenter
     {
         private readonly ReferenceModel _model;
         private readonly IStockEntryView _view;
         private string? newRef;
-        private readonly StockInProductDto? date;
         private readonly HttpClient _httpClient;
-        private List<StockRecordInfoDto>? _records;
+        private List<GetAllStocksRecordDto>? _records;
         public StockEntryPresenter(IStockEntryView view)
         {
             _view = view;
             _model = new ReferenceModel();
             _view.DeleteClicked += OnDeleteClicked;
             _view.LoadFilteredRecordsClicked += OnLoadFilteredRecordsClicked;
+            //_view.StockEntryFormLoad += OnStockEntryLoad;
+            _view.LinkReferenceClicked += OnLinkReferenceClicked;
+            _view.LinkProductClicked += OnLinkProductClicked;
             _httpClient = new HttpClient { BaseAddress = new Uri("https://localhost:7014/api") };
 
         }
-
         public void GenerateReference()
         {
             newRef = _model.GenerateReferenceNumber();
             _view.DisplayReferenceNumber(newRef);
         }
-
-        public void AddStockEntry(StockInProductDto stockInProduct)
+        public void AddStockEntry(AddStockEntryDto productList)
         {
-            var stockEntry = new StockInProductDto
+            if(newRef != null)
             {
-                ProductCode = stockInProduct.ProductCode,
-                ProductId = stockInProduct.ProductId,
-                ProductName = stockInProduct.ProductName,
-                ReferenceNum = newRef,
-                ProductQuantity = stockInProduct.ProductQuantity,
-                StockInDate = DateOnly.FromDateTime(_view.DatePicker.Value)
-                
-                
-            };
+                var stockEntry = new AddStockEntryDto
+                {
+                    ProductCode = productList.ProductCode,
+                    ProductId = productList.ProductId,
+                    ProductName = productList.ProductName,
+                    ReferenceNum = newRef,
+                    ProductQuantity = productList.ProductQuantity,
+                    StockInDate = DateOnly.FromDateTime(_view.DatePicker.Value),
+                    CategoryName = productList.CategoryName,
+                    StockId = productList.StockId,
 
-            _view.DisplayStockEntry(stockEntry);
+
+                };
+                _view.DisplayStockEntry(stockEntry);
+            }
         }
-
         private void OnDeleteClicked(object? sender, DataGridViewCellEventArgs e)
         {
             var gridView = sender as DataGridView;
@@ -61,16 +65,61 @@ namespace ProjectForm.Presenter
             }
             gridView.Rows.RemoveAt(e.RowIndex);
         }
+        public List<GetAllStocksRecordDto> GetStockRecords(DataGridView dgvStockIn)
+        {
+            var stockRecords = new List<GetAllStocksRecordDto>();
+            foreach (DataGridViewRow row in dgvStockIn.Rows)
+            {
+                if (row.Cells["ProductQuantity1"].Value != null)
+                {
+                    DateOnly stockInDate = row.Cells["StockInDate1"].Value != null &&
+                                           DateTime.TryParse(row.Cells["StockInDate1"].Value.ToString(), out DateTime tempDate)
+                                           ? DateOnly.FromDateTime(tempDate)
+                                           : DateOnly.MinValue;
 
+                    stockRecords.Add(new GetAllStocksRecordDto
+                    {
+                        ReferenceNum = row.Cells["ReferenceNum1"].Value?.ToString() ?? string.Empty,
+                        StockInQty = Convert.ToInt32(row.Cells["ProductQuantity1"].Value),
+                        StockInDate = stockInDate,
+                        ProductCode = row.Cells["ProductCode1"].Value?.ToString() ?? string.Empty,
+                        ProductName = row.Cells["ProductName1"].Value?.ToString() ?? string.Empty,
+                        ProductCategory = row.Cells["CategoryName"].Value?.ToString() ?? string.Empty,
+                        StockId = Guid.TryParse(row.Cells["StockId"].Value?.ToString(), out Guid stockId)
+                            ? stockId
+                            : Guid.Empty,
+
+                    });
+                }
+            }
+
+            return stockRecords;
+        }
         public async Task SendStockRecordsAsync()
         {
-            var stockRecords = _view.GetStockRecordsFromGrid();
-            if (stockRecords == null || stockRecords.Count == 0)
+            var data = _view.GetStockRecordsFromGrid();
+            if (data == null || data.Count == 0)
             {
                 MessageBox.Show("No records to send.");
                 return;
             }
 
+            var stockRecords = data.Select(d => new AddStockRecordsDto
+            {
+                ReferenceNum = d.ReferenceNum,
+                StockInQty = d.StockInQty,  
+                StockInDate = d.StockInDate,
+                ProductCode = d.ProductCode,
+                ProductName =d.ProductName,
+                ProductCategory = d.ProductCategory 
+
+            }).ToList();
+
+            var productQty = data.Select(d => new UpdateStocksDto
+            {
+                ProductQuantity = d.StockInQty,
+                StockId = d.StockId
+            }).ToList();
 
             try
             {
@@ -80,15 +129,18 @@ namespace ProjectForm.Presenter
 
                 
                 var response = await _httpClient.PostAsJsonAsync("/StockRecord/AddMultipleRecords", stockRecords);
+                var response1 = await _httpClient.PatchAsJsonAsync("/Stocks/UpdateStocks", productQty);
 
-                if (response.IsSuccessStatusCode)
+                if (response.IsSuccessStatusCode && response1.IsSuccessStatusCode)
                 {
                     MessageBox.Show("Stock records added successfully!");
                 }
                 else
                 {
                     var errorMessage = await response.Content.ReadAsStringAsync();
-                    MessageBox.Show($"Failed to add records: {errorMessage}");
+                    var errorMessage2 = await response1.Content.ReadAsStringAsync();
+
+                    MessageBox.Show($"Failed to add records: {(string.IsNullOrWhiteSpace(errorMessage) ? errorMessage2 : errorMessage)}");
                 }
 
             }
@@ -99,7 +151,6 @@ namespace ProjectForm.Presenter
 
 
         }
-
         public async Task LoadStockRecords()
         {
             try
@@ -108,7 +159,7 @@ namespace ProjectForm.Presenter
 
                 if (res.IsSuccessStatusCode)
                 {
-                    var records = await res.Content.ReadFromJsonAsync<List<StockRecordInfoDto>> ();
+                    var records = await res.Content.ReadFromJsonAsync<List<GetAllStocksRecordDto>> ();
 
                     if (records == null)
                     {
@@ -152,7 +203,24 @@ namespace ProjectForm.Presenter
 
             _view.DisplayStockRecords(filteredRecords);
         }
-    }
+        private void OnLinkReferenceClicked(object? sender, LinkLabelLinkClickedEventArgs e)
+        {
+            GenerateReference();
+        }
+        private void OnLinkProductClicked(object? sender, LinkLabelLinkClickedEventArgs e)
+        {
+            if (string.IsNullOrEmpty(_view.ReferenceNum))
+            {
+                MessageBox.Show("Reference number is empty");
+                return;
+            }
+            var stockInProduct = new StockInProduct();
+            stockInProduct.ShowDialog();
+        }
 
-   
+        //private async void OnStockEntryLoad(object? sender, EventArgs e)
+        //{
+        //    await LoadStockRecords();
+        //}       
+    }   
 }

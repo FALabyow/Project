@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Project.Application.DTOs;
+using Project.Application.DTOs.StockrRecordDtos;
 using Project.Application.Services;
 
 namespace Project.API.Controllers
@@ -16,7 +17,7 @@ namespace Project.API.Controllers
         }
 
         [HttpGet("/StockRecords/All")]
-        public async Task<ActionResult<IEnumerable<StockRecordDto>>> GetAllStockRecordsAsync()
+        public async Task<ActionResult<IEnumerable<GetAllStocksRecordDto>>> GetAllStockRecordsAsync()
         {
             try
             {
@@ -33,33 +34,35 @@ namespace Project.API.Controllers
             }
         }
 
-        [HttpPost("/StockRecord/AddRecord")]
-        public async Task<IActionResult> AddStockRecordAsync([FromBody] StockRecordInfoDto stockRecordInfoDto)
+        [HttpGet("/StockRecords/History/FilteredBy")]
+        public async Task<ActionResult<IEnumerable<GetStockInHistoryDto>>> GetStockInHistoryAsync(DateOnly startDate, DateOnly endDate)
         {
             try
             {
-                await _stockRecordService.AddStockRecordAsync(stockRecordInfoDto);
-                return Ok(stockRecordInfoDto);
-
+                var records = await _stockRecordService.GetStockInHistoryAsync(startDate, endDate);
+                return Ok(records);
             }
             catch (InvalidOperationException ex)
             {
                 return BadRequest(new { error = ex.Message });
             }
-
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { error = "An unexpected error occurred.", details = ex.Message });
+            }
         }
-        
+
         [HttpPost("/StockRecord/AddMultipleRecords")]
-        public async Task<IActionResult> AddStockRecordsAsync([FromBody] List<StockRecordInfoDto> stockRecordInfoDtos)
+        public async Task<IActionResult> AddStockRecordsAsync([FromBody] List<AddStockRecordsDto> addStockRecordDtos)
         {
-            if (stockRecordInfoDtos == null || !stockRecordInfoDtos.Any())
+            if (addStockRecordDtos == null || !addStockRecordDtos.Any())
             {
                 return BadRequest(new { error = "No stock records provided." });
             }
 
             try
             {
-                await _stockRecordService.AddStockRecordsAsync(stockRecordInfoDtos);
+                await _stockRecordService.AddStockRecordsAsync(addStockRecordDtos);
                 return Ok(new { message = "Stock records added successfully." });
             }
             catch (InvalidOperationException ex)

@@ -8,17 +8,19 @@ using System.Threading.Tasks;
 
 namespace Project.Domain.Entities
 {
+    //One-to-One Relationship with SalesHistory
+    //each sold product is stored in database using this class
+    //the new instance of this class is created when the Checkout button is clicked in Cashier.cs
     public class SalesDetail
     {
         [Key]
-        public Guid SalesDetailId { get; set; } = Guid.NewGuid(); 
-        public Guid SalesHistoryId { get; set; } 
-        public Guid ProductId { get; set; }
-        public string ProductCode { get; set; } = string.Empty;
-        public string ProductName { get; set; } = string.Empty;
+        public Guid SalesDetailId { get; set; } = Guid.NewGuid();
+        public string? SalesHistoryId { get; set; } //this is for invoice number
+        public string? ProductName { get; set; } 
+        public string? ProductCode { get; set; }
         public int QuantitySold { get; set; }
         public decimal UnitPrice { get; set; }
         public decimal TotalAmount => QuantitySold * UnitPrice;
-        public SalesHistory SalesHistory { get; set; }
+        public SalesHistory? SalesHistory { get; set; }
     }
 }

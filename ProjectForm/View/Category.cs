@@ -1,4 +1,4 @@
-﻿using ProjectForm.Model.DTOs;
+﻿using ProjectForm.Model.DTOs.CategoryDto;
 using ProjectForm.Presenter;
 using ProjectForm.View.IView;
 using System;
@@ -15,24 +15,29 @@ namespace ProjectForm
 {
     //Part 2 of the tutorial
     // https://youtu.be/bwLZAB8VT2Y?si=2yvkCOgqmHRAri6S
-    
+
     //------------------->Please buhata<---------------------
     //dapat with color ang edit and delete button sa grid
     //pagbutang ug loading na UI para while fetching sa data kay loading ang ma display instead of blank grid
     public partial class Category : Form, ICategoryView
     {
         
-        private CategoryPresenter? presenter;
+        private readonly CategoryPresenter? _presenter;
         public Category()
         {
             InitializeComponent();
             dgvCategory.CellContentClick += DataGridCategoryView_CellContentClick;
+            btnAdd.Click += (s, e) => AddClicked?.Invoke(this, EventArgs.Empty);
+            _presenter = new CategoryPresenter(this);
         }
 
-        public void DisplayCategoryList(List<CategoryDto> categortList, int rowNumber)
+        public event EventHandler<DataGridViewCellEventArgs>? DeleteClicked;
+        public event EventHandler<DataGridViewCellEventArgs>? EditClicked;
+        public event EventHandler? AddClicked;
+        public void DisplayCategoryList(List<CategoryDto> categoryList, int rowNumber)
         {
             dgvCategory.Rows.Clear();
-            foreach (var category in categortList)
+            foreach (var category in categoryList)
             {
                 rowNumber++;
                 int rowIndex = dgvCategory
@@ -43,31 +48,20 @@ namespace ProjectForm
                 dgvCategory.Rows[rowIndex].Cells["delete"].Value = Properties.Resources.delete;
             }
         }
-
         public void ShowMessage(string message)
         {
             MessageBox.Show(message);
         }
-
-        private void btnAdd_Click(object sender, EventArgs e)
+        private async void Category_Load(object sender, EventArgs e)
         {
-            if(presenter != null)
+            
+            if(_presenter != null)
             {
-                CategoryModule categoryModule = new CategoryModule(presenter);
-                //var presenter = new CategoryModulePresenter(categoryModule);
-                categoryModule.ShowDialog();
+                await _presenter.LoadCategoryList();
             }
+            
+            
         }
-
-        private void Category_Load(object sender, EventArgs e)
-        {
-            presenter = new CategoryPresenter(this);
-            presenter.LoadCategoryList();
-        }
-
-        public event EventHandler<DataGridViewCellEventArgs>? DeleteClicked;
-        public event EventHandler<DataGridViewCellEventArgs>? EditClicked;
-
         private void DataGridCategoryView_CellContentClick(object? sender, DataGridViewCellEventArgs e)
         {
             var gridView = sender as DataGridView;

@@ -30,6 +30,7 @@
         {
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
@@ -46,8 +47,8 @@
             productCategory = new DataGridViewTextBoxColumn();
             productCategoryId = new DataGridViewTextBoxColumn();
             productPrice = new DataGridViewTextBoxColumn();
-            productQty = new DataGridViewTextBoxColumn();
             productReorder = new DataGridViewTextBoxColumn();
+            ProductQuantity = new DataGridViewTextBoxColumn();
             scannedAt = new DataGridViewTextBoxColumn();
             Edit = new DataGridViewImageColumn();
             Delete = new DataGridViewImageColumn();
@@ -62,21 +63,18 @@
             panel1.Controls.Add(btnAdd);
             panel1.Controls.Add(lblManageProduct);
             panel1.Dock = DockStyle.Bottom;
-            panel1.Location = new Point(0, 357);
-            panel1.Margin = new Padding(3, 2, 3, 2);
+            panel1.Location = new Point(0, 476);
             panel1.Name = "panel1";
-            panel1.Size = new Size(859, 58);
+            panel1.Size = new Size(982, 77);
             panel1.TabIndex = 2;
             // 
             // txtSearch
             // 
-            txtSearch.Location = new Point(248, 17);
-            txtSearch.Margin = new Padding(3, 2, 3, 2);
+            txtSearch.Location = new Point(283, 23);
             txtSearch.Name = "txtSearch";
             txtSearch.PlaceholderText = "Search...";
-            txtSearch.Size = new Size(364, 23);
+            txtSearch.Size = new Size(415, 27);
             txtSearch.TabIndex = 5;
-            txtSearch.TextChanged += txtSearch_TextChanged;
             // 
             // btnAdd
             // 
@@ -84,22 +82,20 @@
             btnAdd.FlatAppearance.BorderSize = 0;
             btnAdd.FlatStyle = FlatStyle.Popup;
             btnAdd.Font = new Font("Microsoft Sans Serif", 22.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnAdd.Location = new Point(780, 8);
-            btnAdd.Margin = new Padding(3, 2, 3, 2);
+            btnAdd.Location = new Point(891, 11);
             btnAdd.Name = "btnAdd";
-            btnAdd.Size = new Size(69, 42);
+            btnAdd.Size = new Size(79, 56);
             btnAdd.TabIndex = 4;
             btnAdd.Text = "+";
             btnAdd.UseVisualStyleBackColor = true;
-            btnAdd.Click += btnAdd_Click;
             // 
             // lblManageProduct
             // 
             lblManageProduct.AutoSize = true;
             lblManageProduct.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold | FontStyle.Underline, GraphicsUnit.Point, 0);
-            lblManageProduct.Location = new Point(10, 17);
+            lblManageProduct.Location = new Point(11, 23);
             lblManageProduct.Name = "lblManageProduct";
-            lblManageProduct.Size = new Size(140, 20);
+            lblManageProduct.Size = new Size(170, 25);
             lblManageProduct.TabIndex = 3;
             lblManageProduct.Text = "Manage Product";
             // 
@@ -118,26 +114,33 @@
             dgvProduct.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dgvProduct.ColumnHeadersHeight = 40;
             dgvProduct.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dgvProduct.Columns.AddRange(new DataGridViewColumn[] { rowNumber, productId, productCode, productBarcode, productDescription, productCategory, productCategoryId, productPrice, productQty, productReorder, scannedAt, Edit, Delete });
+            dgvProduct.Columns.AddRange(new DataGridViewColumn[] { rowNumber, productId, productCode, productBarcode, productDescription, productCategory, productCategoryId, productPrice, productReorder, ProductQuantity, scannedAt, Edit, Delete });
+            dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = SystemColors.Window;
+            dataGridViewCellStyle5.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle5.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle5.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = DataGridViewTriState.True;
+            dgvProduct.DefaultCellStyle = dataGridViewCellStyle5;
             dgvProduct.Dock = DockStyle.Fill;
             dgvProduct.EnableHeadersVisualStyles = false;
             dgvProduct.GridColor = Color.White;
             dgvProduct.Location = new Point(0, 0);
-            dgvProduct.Margin = new Padding(3, 2, 3, 2);
             dgvProduct.Name = "dgvProduct";
-            dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = SystemColors.Window;
-            dataGridViewCellStyle5.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle5.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle5.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = DataGridViewTriState.True;
-            dgvProduct.RowHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = SystemColors.Window;
+            dataGridViewCellStyle6.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle6.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle6.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = DataGridViewTriState.True;
+            dgvProduct.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
             dgvProduct.RowHeadersVisible = false;
             dgvProduct.RowHeadersWidth = 51;
-            dgvProduct.Size = new Size(859, 357);
+            dgvProduct.Size = new Size(982, 476);
             dgvProduct.TabIndex = 6;
-            dgvProduct.RowPostPaint += dgvProduct_RowPostPaint;
+            
             // 
             // rowNumber
             // 
@@ -145,7 +148,7 @@
             rowNumber.HeaderText = "No.";
             rowNumber.MinimumWidth = 6;
             rowNumber.Name = "rowNumber";
-            rowNumber.Width = 55;
+            rowNumber.Width = 65;
             // 
             // productId
             // 
@@ -163,7 +166,7 @@
             productCode.HeaderText = "Pcode";
             productCode.MinimumWidth = 6;
             productCode.Name = "productCode";
-            productCode.Width = 74;
+            productCode.Width = 88;
             // 
             // productBarcode
             // 
@@ -172,7 +175,7 @@
             productBarcode.HeaderText = "Barcode";
             productBarcode.MinimumWidth = 6;
             productBarcode.Name = "productBarcode";
-            productBarcode.Width = 87;
+            productBarcode.Width = 104;
             // 
             // productDescription
             // 
@@ -191,7 +194,7 @@
             productCategory.HeaderText = "Category";
             productCategory.MinimumWidth = 6;
             productCategory.Name = "productCategory";
-            productCategory.Width = 91;
+            productCategory.Width = 110;
             // 
             // productCategoryId
             // 
@@ -211,27 +214,27 @@
             productPrice.HeaderText = "Price";
             productPrice.MinimumWidth = 6;
             productPrice.Name = "productPrice";
-            productPrice.Width = 65;
-            // 
-            // productQty
-            // 
-            productQty.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            productQty.DataPropertyName = "ProductQuantity";
-            productQty.HeaderText = "Qty";
-            productQty.MinimumWidth = 6;
-            productQty.Name = "productQty";
-            productQty.Width = 54;
+            productPrice.Width = 78;
             // 
             // productReorder
             // 
             productReorder.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            productReorder.DataPropertyName = "ProductPreOrder";
+            productReorder.DataPropertyName = "ProductReOrder";
             dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleRight;
             productReorder.DefaultCellStyle = dataGridViewCellStyle4;
             productReorder.HeaderText = "Reorder";
             productReorder.MinimumWidth = 6;
             productReorder.Name = "productReorder";
-            productReorder.Width = 85;
+            productReorder.Width = 102;
+            // 
+            // ProductQuantity
+            // 
+            ProductQuantity.DataPropertyName = "ProductQuantity";
+            ProductQuantity.HeaderText = "Qty";
+            ProductQuantity.MinimumWidth = 6;
+            ProductQuantity.Name = "ProductQuantity";
+            ProductQuantity.Visible = false;
+            ProductQuantity.Width = 125;
             // 
             // scannedAt
             // 
@@ -263,12 +266,11 @@
             // 
             // Product
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(859, 415);
+            ClientSize = new Size(982, 553);
             Controls.Add(dgvProduct);
             Controls.Add(panel1);
-            Margin = new Padding(3, 2, 3, 2);
             Name = "Product";
             Text = "Product";
             Load += Product_Load;
@@ -292,8 +294,8 @@
         private DataGridViewTextBoxColumn productCategory;
         private DataGridViewTextBoxColumn productCategoryId;
         private DataGridViewTextBoxColumn productPrice;
-        private DataGridViewTextBoxColumn productQty;
         private DataGridViewTextBoxColumn productReorder;
+        private DataGridViewTextBoxColumn ProductQuantity;
         private DataGridViewTextBoxColumn scannedAt;
         private DataGridViewImageColumn Edit;
         private DataGridViewImageColumn Delete;

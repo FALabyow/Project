@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore.Query.Internal;
+using ProjectForm.Model.DTOs.StockDtos;
 using ProjectForm.Model.DTOs;
 using ProjectForm.Presenter;
 using ProjectForm.View.IView;
@@ -32,7 +33,6 @@ namespace ProjectForm
         }
 
         public event EventHandler<DataGridViewCellEventArgs>? SelectProductClicked;
-
         private void btnClose_Click(object sender, EventArgs e)
         {
             this.Dispose();
@@ -51,9 +51,9 @@ namespace ProjectForm
 
             }
         }
-        public void DisplayProductList(List<StockInProductDto> productList)
+        public void DisplayProductList(List<GetAllStocksDto> productsList)
         {
-            _bindingSource.DataSource = productList;
+            _bindingSource.DataSource = productsList;
             foreach (DataGridViewRow row in dgvProduct.Rows)
             {
                 row.Cells["Select"].Value = Properties.Resources.add;

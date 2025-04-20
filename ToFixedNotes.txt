@@ -1,0 +1,9 @@
+1. In CategoryRepository.cs, CategoryService.cs, CategoryController.cs under adding a category method no checking of null objects. ---> FIXED
+
+2. In CategoryModule.cs, when adding a category the system should automatically capitalize the first letter of a word.(so far the first letter of a word gets capitalize) ---> FIXED
+
+3. In Cashier.cs, the ProductCode is null in database. ---> FIXED
+
+4. In Cashier.cs, the rows for Qty must be editable this will ensure that when there are multiple the same products, no need to scan each of that product.
+
+5. Fix all the warning errors

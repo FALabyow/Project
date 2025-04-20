@@ -1,5 +1,4 @@
-﻿using Project.Application.DTOs;
-using Project.Application.Interfaces;
+﻿using Project.Application.Interfaces;
 using Project.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using System.Data.SqlClient;
@@ -9,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Data.SqlClient;
+using Project.Application.DTOs.CategoryDtos;
 
 namespace Project.Application.Services
 {
@@ -24,14 +24,14 @@ namespace Project.Application.Services
             try
             {
                 var categories = await _categoryRepository.GetAllCategoryAsync();
-                if (!categories.Any())
-                    throw new InvalidOperationException("No categories found in the database!");
+                //if (!categories.Any())
+                //    throw new InvalidOperationException("No categories found in the database!");
 
                 return categories.Select(b => new CategoryDto
                 {
                     CategoryId = b.CategoryId,
                     CategoryName = b.CategoryName,
-                    
+
                 }).ToList();
             }
             catch (InvalidOperationException)
@@ -43,40 +43,6 @@ namespace Project.Application.Services
                 throw new InvalidOperationException("Unexpected error in service layer", ex);
             }
         }
-
-        public async Task AddCategoryAsync(CategoryInfoDto categoryInfoDto)
-        {
-            var category = new Category
-            {
-                CategoryName = categoryInfoDto.CategoryName,
-            };
-
-            try
-            {
-                await _categoryRepository.AddCategoryAsync(category);
-            }
-            catch (InvalidOperationException)
-            {
-                throw;
-            }
-            
-
-
-        }
-
-        public async Task DeleteCategoryAsync(Guid id)
-        {
-            try
-            {
-
-                await _categoryRepository.DeleteCategoryAsync(id);
-            }
-            catch (InvalidOperationException)
-            {
-                throw;
-            }
-        }
-
         public async Task<CategoryDto> GetCategoryByIdAsync(Guid id)
         {
             try
@@ -91,18 +57,24 @@ namespace Project.Application.Services
             {
                 throw;
             }
-            
+
         }
-        public async Task UpdateCategoryAsync(CategoryDto categoryDto)
+        public async Task AddCategoryAsync(CategoryDto categoryDto)
         {
+            var category = new Category
+            {
+                CategoryName = categoryDto.CategoryName,
+            };
+
             try
             {
-                var category = await _categoryRepository.GetCategoryByIdAsync(categoryDto.CategoryId);
-                category.CategoryName = categoryDto.CategoryName;
-
-                await _categoryRepository.UpdateCategoryAsync(category);
+                await _categoryRepository.AddCategoryAsync(category);
             }
             catch(ArgumentNullException)
+            {
+                throw;
+            }
+            catch (ArgumentException)
             {
                 throw;
             }
@@ -110,6 +82,49 @@ namespace Project.Application.Services
             {
                 throw;
             }
+            
+
+
         }
+        public async Task UpdateCategoryAsync(CategoryDto categoryDto)
+        {
+            try
+            {
+                var category = await _categoryRepository.GetCategoryByIdAsync(categoryDto.CategoryId);
+
+                category.CategoryName = categoryDto.CategoryName;
+
+                await _categoryRepository.UpdateCategoryAsync(category);
+            }
+            catch (KeyNotFoundException)
+            {
+                throw;
+            }
+            catch (ArgumentException)
+            {
+                throw;
+            }
+            catch (InvalidOperationException)
+            {
+                throw;
+            }
+        }  
+        public async Task DeleteCategoryAsync(Guid id)
+        {
+            try
+            {
+
+                await _categoryRepository.DeleteCategoryAsync(id);
+            }
+            catch (KeyNotFoundException)
+            {
+                throw;
+            }
+            catch (InvalidOperationException)
+            {
+                throw;
+            }
+        }        
+        
     }
 }

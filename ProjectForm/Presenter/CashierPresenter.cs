@@ -1,8 +1,13 @@
-﻿using Project.Application.DTOs;
-using Project.Application.Services;
+﻿using Accessibility;
+using ProjectForm.Model.DTOs;
+using ProjectForm.Model.DTOs.ProductDtos;
+using ProjectForm.Model.DTOs.SalesHistoryDto;
 using ProjectForm.View.IView;
 using System.Data;
 using System.Linq;
+using System.Net.Http.Json;
+using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace ProjectForm.Presenter
@@ -10,147 +15,260 @@ namespace ProjectForm.Presenter
     public class CashierPresenter
     {
         private readonly ICashierView _view;
-        private readonly CashierService _cashierService;
-        private List<ProductDto> _allProducts;
-        private List<CategoryDto> _allCategories;
-        private DataTable _dataTable;
-       
-
-        public CashierPresenter(ICashierView view, CashierService cashierService)
+        private readonly HttpClient _httpClient;
+        public List<GetAllAvailableProductsDto> _availableProducts = new();
+        private DataTable _dataTable;     
+        public CashierPresenter(ICashierView view)
         {
+            _httpClient = new HttpClient { BaseAddress = new Uri("https://localhost:7014/api") };
             _view = view;
-            _cashierService = cashierService;
             _dataTable = new DataTable();
-            _view.DisplayProducts(_dataTable);
-            _view.AddRemoveButtonColumn(); // Add the Remove button
-            _view.QuantityUpdated += UpdateQuantity;
-
+            _view.CloseClicked += OnCloseClicked;
+            _view.TimerTicked += OnTimerClicked;
+            _view.TransactionClicked += OnTransactionClicked;
+            _view.LogoutClicked += OnLogoutClicked;
+            _view.SearchProductClicked += OnSearchProductClicked;
+            _view.DailySalesClicked += OnDailySalesClicked;
+            _view.PaymentClicked += OnPaymentClicked;
+            _view.AdminClicked += OnAdminClicked;
+            _view.BarcodeTextChanged += OnBarcodeTextChanged;   
+            _view.RemoveClicked += OnRemoveClicked;
+            _view.CheckoutClicked += OnCheckoutClicked;
+            _view.Date = DateOnly.FromDateTime(DateTime.Now).ToString("MM-dd-yyyy");
         }
-
-        public async Task InitializeAsync()
+        private void OnCloseClicked(object? sender, EventArgs e)
         {
-            _dataTable.Columns.Add("BarcodeData", typeof(string));
-            _dataTable.Columns.Add("ProductName", typeof(string));
-            _dataTable.Columns.Add("ProductPrice", typeof(decimal));
-            _dataTable.Columns.Add("ProductQuantity", typeof(int));
-            _dataTable.Columns.Add("CategoryName", typeof(string));
-            _dataTable.Columns.Add("BuyerQuantity", typeof(int));
+            if (MessageBox.Show("Are you sure you want to exit?", "Exit", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                Application.Exit();
+            }
+        }
+        private void OnTimerClicked(object? sender, EventArgs e)
+        {
+            _view.Timer = DateTime.Now.ToString("hh:mm:ss tt");
+        }
+        private void OnTransactionClicked(object? sender, Button e)
+        {
+            _view.Slider(e);
+            GetTranNo();
+        }
+        private void OnSearchProductClicked(object? sender, Button e)
+        {
+            _view.Slider(e);
+            SearchProducts searchProducts = new SearchProducts(this, _view);
+            //await LoadAllAvailableProducts();
+            searchProducts.ShowDialog();
+        }
+        private void OnPaymentClicked(object? sender, Button e)
+        {
+            _view.Slider(e);
+            SettlePayment settlepayment = new SettlePayment(_view);
+            settlepayment.txtSale.Text = _view.DisplayTotal;
+            settlepayment.ShowDialog();
+        }
+        private void OnDailySalesClicked(object? sender, Button e)
+        {
+            _view.Slider(e);
+            DailySale dailySale = new DailySale();
+            dailySale.ShowDialog();
+        }
+        private void OnLogoutClicked(object? sender, Button e)
+        {
+            _view.Slider(e);
+            if (MessageBox.Show("Are you sure you want to exit?", "Exit", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                Application.Exit();
+            }
+        }
+        private void OnAdminClicked(object? sender, Button e)
+        {
+            _view.Slider(e);
+            Form1 form = new Form1();
+            form.ShowDialog();
+        }
+        private void OnBarcodeTextChanged(object? sender, EventArgs e)
+        {
+            string barcode = _view.Barcode;
+            SearchProduct(barcode);
+        }
+        private void OnRemoveClicked(object? sender, DataGridViewCellEventArgs e)
+        {
+            var gridView = sender as DataGridView;
+            if (gridView == null || e.RowIndex < 0) return;
+
+            gridView.Rows.RemoveAt(e.RowIndex);
+        }
+        private async void OnCheckoutClicked(object? sender, EventArgs e)
+        {
+            if (_view.TransactionNumber == "000000000")
+            {
+                MessageBox.Show("No transaction number is generated");
+                return;
+            }
+
+            if (_view.Sales.Count <= 0)
+            {
+                MessageBox.Show("Transaction is empty");
+                return;
+            }
+
+            if(decimal.Parse(_view.Total) == 0)
+            {
+                MessageBox.Show("Please settle the payment.");
+                return;
+            }
+
+            await SendSalesHistory(_view.TransactionNumber, decimal.Parse(_view.Total), decimal.Parse(_view.Cash), decimal.Parse(_view.Change));
+            await SendSalesDetail();
+            await SendStockQuantity();
+            GetTranNo();
+            _view.ClearTable();
+        }
+        private void GetTranNo()
+        {
+            string sdate = DateTime.Now.ToString("yyyyMMdd");
+            Guid id = Guid.NewGuid();
+            string shortId = id.ToString().Substring(0, 5);
+            string transNo = sdate + shortId;
+            _view.TransactionNumber = transNo;
+        }
+        public async Task LoadAllAvailableProducts()
+        {
+            try
+            {
+                var res = await _httpClient.GetAsync("/Products/Available");
+
+                if (res.IsSuccessStatusCode)
+                {
+                    var products = await res.Content.ReadFromJsonAsync<List<GetAllAvailableProductsDto>>();
+
+                    if (products == null)
+                    {
+                        return;
+                    }
+
+                    _availableProducts = products;
+                   
+
+                }
+                else
+                {
+                    MessageBox.Show("Cannot fetch Data");
+                }
+            }
+            catch(HttpRequestException ex)
+            {
+                MessageBox.Show("There's a problem with the server: " + ex.Message);
+            }
+        }
+        public void SearchProduct(string barcode)
+        {
+            var product = _availableProducts.FirstOrDefault(p => p.BarcodeData == barcode);
+            if (product == null)
+                return;
+
+            if (_view.ProductExistsInGrid(barcode))
+            {
+                int currentQty = _view.GetProductQuantityFromGrid(barcode);
+                int newQty = currentQty + 1;
+                if(product.ProductQuantity < newQty)
+                {
+                    MessageBox.Show("No Available stock");
+                    return;
+                }
+                _view.UpdateProductQuantityInGrid(barcode, newQty);
+                _view.ClearBarcode();
+            }
+            else
+            {
+                var productToDisplay = new DisplayAvailableProductsDto
+                {
+                    StockId = product.StockId,
+                    BarcodeData = product.BarcodeData,
+                    ProductName = product.ProductName,
+                    ProductPrice = product.ProductPrice,
+                    BuyersQuantity = 1,
+                    SubTotal = product.ProductPrice,
+                    ProductQuantity = product.ProductQuantity,
+                    ProductCode = product.ProductCode,
+                    
+                };
+
+                _view.DisplayProducts(productToDisplay);
+            }
+        }
+        public void CalculateTotal(DataGridView dataGridView)
+        {
+            decimal grandTotal = 0;
+            foreach (DataGridViewRow row in dataGridView.Rows)
+            {
+                if (row.Cells[5].Value != null)
+                {
+                    decimal subTotal = Convert.ToDecimal(row.Cells[5].Value);
+                    grandTotal += subTotal;
+                }
+            }
+
+            _view.DisplayTotal = $"{grandTotal}";
+        }
+        private async Task SendSalesHistory(string salesHistoryId, decimal totalAmount, decimal totalFee, decimal totalChange)
+        {
+            
+            var salesHistory = new AddSalesHistoryDto
+            {
+                SalesHistoryId = salesHistoryId,
+                TotalAmount = totalAmount,
+                TotalFee = totalFee,
+                TotalChange = totalChange
+            };
 
             try
             {
-                _allProducts = await _cashierService.GetAllProductsAsync();
-                _allCategories = await _cashierService.GetAllCategoriesAsync();
-                _view.DisplayProducts(_dataTable);
-            }
-            catch (Exception ex)
-            {
-                _view.ShowError($"Failed to load data: {ex.Message}");
-            }
-        }
+                var json = JsonSerializer.Serialize(salesHistory);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+                var res = await _httpClient.PostAsync("/SalesHistory/AddSalesHistory", content);
 
-        public void SearchProduct(string barcode)
+                res.EnsureSuccessStatusCode();
+
+            }catch(HttpRequestException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+
+
+        }
+        private async Task SendSalesDetail()
         {
-            if (_allProducts == null || _allCategories == null)
+            try
             {
-                return;
+                var json = JsonSerializer.Serialize(_view.Sales);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+                var res = await _httpClient.PostAsync("/Sales/AddSales", content);
+
+                res.EnsureSuccessStatusCode();
+
             }
-
-            var existingRow = _dataTable.AsEnumerable().FirstOrDefault(row => row.Field<string>("BarcodeData") == barcode);
-
-            if (existingRow != null)
+            catch (HttpRequestException ex)
             {
-                // If product exists, increment the BuyerQuantity by 0
-                int currentQuantity = existingRow.Field<int>("BuyerQuantity");
-                existingRow.SetField("BuyerQuantity", currentQuantity + 0);
-                UpdateTotal();
-                _view.DisplayProducts(_dataTable);
-                return;
+                MessageBox.Show(ex.Message);
             }
-
-            var matchedProducts = _allProducts.Where(p => p.BarcodeData == barcode).ToList();
-
-            if (matchedProducts.Count == 0)
-            {
-                return;
-            }
-
-            var productWithCategory = matchedProducts.Select(p => new
-            {
-                p.BarcodeData,
-                p.ProductName,
-                p.ProductPrice,
-                p.ProductQuantity,
-                CategoryName = _allCategories.FirstOrDefault(c => c.CategoryId == p.CategoryId)?.CategoryName ?? "Unknown"
-            });
-
-            foreach (var product in productWithCategory)
-            {
-                _dataTable.Rows.Add(product.BarcodeData, product.ProductName, product.ProductPrice, product.ProductQuantity, product.CategoryName, 1);
-            }
-
-            _view.DisplayProducts(_dataTable);
-            UpdateTotal();
         }
-
-
-        public void RemoveProduct(string barcode)
+        private async Task SendStockQuantity()
         {
-            if (string.IsNullOrEmpty(barcode)) return;
-
-            // Find the row in the DataTable using the barcode
-            var rows = _dataTable.AsEnumerable()
-                                  .Where(row => row.Field<string>("BarcodeData") == barcode)
-                                  .ToList();
-
-            if (rows.Any())
+            try
             {
-                foreach (var row in rows)
-                {
-                    _dataTable.Rows.Remove(row);
-                }
-                _view.DisplayProducts(_dataTable);
+                var json = JsonSerializer.Serialize(_view.Stocks);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+                var res = await _httpClient.PatchAsync("/Stocks/UpdateStocks/Quantity", content);
 
-                // Update total price
-                var remainingProducts = _allProducts
-                    .Where(p => _dataTable.AsEnumerable().Any(r => r.Field<string>("BarcodeData") == p.BarcodeData))
-                    .ToList();
+                res.EnsureSuccessStatusCode();
 
-                _view.UpdateTotal(remainingProducts.Sum(p => p.ProductPrice));
+            }
+            catch (HttpRequestException ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
-
-        public void UpdateQuantity(string barcode, int newQuantity)
-        {
-            var product = _allProducts.FirstOrDefault(p => p.BarcodeData == barcode);
-            if (product == null) return;
-
-            var row = _dataTable.AsEnumerable()
-                                 .FirstOrDefault(r => r.Field<string>("BarcodeData") == barcode);
-
-            if (row != null)
-            {
-                row.SetField("BuyerQuantity", newQuantity);
-                UpdateTotal();
-                _view.DisplayProducts(_dataTable);
-            }
-        }
-
-
-        private void UpdateTotal()
-        {
-            decimal total = _dataTable.AsEnumerable()
-                     .Sum(row => (row["ProductPrice"] != DBNull.Value && row["BuyerQuantity"] != DBNull.Value)
-                                 ? Convert.ToDecimal(row["ProductPrice"]) * Convert.ToInt32(row["BuyerQuantity"])
-                                 : 0);
-
-
-
-            _view.UpdateTotal(total);
-            _view.DisplayProducts(_dataTable);
-
-        }
-
-
-
     }
 }

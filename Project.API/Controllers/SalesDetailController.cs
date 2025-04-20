@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Project.Application.DTOs;
+using Project.Application.DTOs.SalesDetialDtos;
 using Project.Application.Services;
 
 namespace Project.API.Controllers
@@ -15,13 +16,43 @@ namespace Project.API.Controllers
             _salesDetailService = salesDetailService;
         }
         
-        [HttpGet("/SalesDetails/All")]
-        public async Task<ActionResult<IEnumerable<StockRecordDto>>> GetAllSalesDetailsAsync()
+        [HttpGet("/Sales/All/FilteredBy")]
+        public async Task<ActionResult<IEnumerable<GetAllSalesByDateDto>>> GetAllSalesByDateAsync(DateOnly startDate, DateOnly  endDate)
         {
             try
             {
-                var salesDetails = await _salesDetailService.GetAllSalesDetailsAsync();
-                return Ok(salesDetails);
+                var sales = await _salesDetailService.GetAllSalesByDateAsync(startDate, endDate);
+                return Ok(sales);
+            }
+            catch(InvalidOperationException ex)
+            {
+                return BadRequest(new { error = ex.Message });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { error = ex.Message });
+            }
+        }
+
+        [HttpGet("/Sales/TopSelling/FilteredBY")]
+        public async Task<ActionResult<IEnumerable<GetSalesByQtyDto>>> GetTopSellingProductAsync(DateOnly startDate, DateOnly endDate, string action)
+        {
+            try
+            {
+                if(action == "SortByQty")
+                {
+                    var sales = await _salesDetailService.GetSalesByQtyAsync(startDate, endDate);
+                    return Ok(sales);
+                }
+                else if(action == "SortByTotalAmount")
+                {
+                    var sales = await _salesDetailService.GetSalesByTotalAmountAsync(startDate, endDate);
+                    return Ok(sales);
+                }
+                
+                return NoContent();
+
+                
             }
             catch (InvalidOperationException ex)
             {
@@ -29,27 +60,28 @@ namespace Project.API.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(500, new { error = "An unexpected error occurred.", details = ex.Message });
+                return BadRequest(new { error = ex.Message });
             }
         }
 
-        [HttpPost("/SalesDetails/AddMultipleSalesDetail")]
-        public async Task<IActionResult> AddSalesDetailsAsync([FromBody] List<SalesDetailInfoDto> salesDetailInfoDtos)
+        [HttpPost("/Sales/AddSales")]
+        public async Task<IActionResult> AddSalesAsync([FromBody] List<AddSalesDetailDto> sales)
         {
-            if (salesDetailInfoDtos == null || !salesDetailInfoDtos.Any())
-            {
-                return BadRequest(new { error = "No details provided." });
-            }
-
             try
             {
-                await _salesDetailService.AddSalesDetailsAsync(salesDetailInfoDtos);
-                return Ok(salesDetailInfoDtos);
+                await _salesDetailService.AddSalesAsync(sales);
+                return Ok();
             }
-            catch (InvalidOperationException ex)
+            catch(InvalidOperationException ex)
+            {
+                return BadRequest(new {error =  ex.Message});
+            }
+            catch(ArgumentException ex)
             {
                 return BadRequest(new { error = ex.Message });
             }
         }
+
+
     }
 }

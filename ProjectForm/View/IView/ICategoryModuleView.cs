@@ -11,9 +11,10 @@ namespace ProjectForm.View.IView
         string CategoryName { get; set; }
 
         event EventHandler? SaveClicked;
-        event EventHandler? UpdateClicked;
         event EventHandler? ClearClicked;
+        event EventHandler? CloseClicked;
         void ShowMessage(string message);
         void ClearMessage();
+        void CloseCategoryModule();
     }
 }
