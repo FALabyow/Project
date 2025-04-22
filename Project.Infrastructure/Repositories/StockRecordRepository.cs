@@ -72,9 +72,9 @@ namespace Project.Infrastructure.Repositories
             {
                 throw new InvalidOperationException("Database does not exist");
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw new InvalidOperationException("An error occurred while adding stock records.");
+                throw new InvalidOperationException("An error occurred while adding stock records. " + ex.Message);
             }
         }
 

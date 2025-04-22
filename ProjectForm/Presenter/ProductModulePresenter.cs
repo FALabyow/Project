@@ -95,7 +95,7 @@ namespace ProjectForm.Presenter
                 ProductId = Guid.NewGuid(),
             };
 
-            var stock = new AddStocksDto
+            var stock = new AddStockDto
             {
                 ProductId = product.ProductId,
 

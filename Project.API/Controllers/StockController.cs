@@ -58,11 +58,11 @@ namespace Project.API.Controllers
         }
 
         [HttpPost("/Stock/AddStock")]
-        public async Task<IActionResult> AddStocksAsync([FromBody] AddStocksDto addStocksDto)
+        public async Task<IActionResult> AddStockAsync([FromBody] AddStockDto addStockDto)
         {
             try
             {
-                await _stockService.AddStocksAsync(addStocksDto);
+                await _stockService.AddStocksAsync(addStockDto);
                 return NoContent();
 
             }
@@ -70,7 +70,7 @@ namespace Project.API.Controllers
             {
                 return BadRequest(new { error = ex.Message });
             }
-
+              
         }
 
         [HttpPatch("/Stocks/UpdateStocks")]
@@ -101,7 +101,7 @@ namespace Project.API.Controllers
         {
             if (updateStocksDto == null || !updateStocksDto.Any())
             {
-                return BadRequest("Stock list cannot be empty");
+                return BadRequest(new { error = "Stock list cannot be empty" });
             }
 
             try
@@ -118,7 +118,6 @@ namespace Project.API.Controllers
                 return BadRequest(new { error = ex.Message });
             }
         }
-
 
         [HttpPut("/Stock/StockAdjustments/UpdateStock/{id}")]
         public async Task<IActionResult> UpdateStockAsync(Guid id, UpdateStocksDto updateStocksDto)

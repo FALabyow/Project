@@ -69,7 +69,7 @@ namespace Project.Application.Services
                 throw;
             }
         }
-        public async Task AddStocksAsync(AddStocksDto addStocksDto)
+        public async Task AddStocksAsync(AddStockDto addStocksDto)
         {
             var stock = new Stock
             {

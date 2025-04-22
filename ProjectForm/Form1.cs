@@ -11,7 +11,7 @@ namespace ProjectForm
             InitializeComponent();
             customizeDesign();
         }
-        private Form activeform = null;
+        private Form? activeform = null;
         private void openChildForm(Form childForm)
         {
             if (activeform != null)
