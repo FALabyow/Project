@@ -140,7 +140,7 @@ namespace ProjectForm.Presenter
                     if (confirmResult != DialogResult.Yes) return;
 
                     var json = JsonSerializer.Serialize(stockId);
-                    var content = new StringContent(json, Encoding .UTF8, "application/json");
+                    var content = new StringContent(json, Encoding.UTF8, "application/json");
                     var res = await _httpClient.DeleteAsync($"/Stock/StockAdjustments/DeleteStock/{stockId.StockId}");
 
                     if (res.IsSuccessStatusCode)

@@ -218,7 +218,7 @@ namespace ProjectForm.Presenter
             stockInProduct.ShowDialog();
         }
 
-        //private async void OnStockEntryLoad(object? sender, EventArgs e)
+        //private async void OnStockEntryLoad(o    bject? sender, EventArgs e)
         //{
         //    await LoadStockRecords();
         //}       
