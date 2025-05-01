@@ -14,7 +14,7 @@ namespace ProjectForm.Http
         {
             httpClient = new HttpClient
             {
-                BaseAddress = new Uri("https://localhost:7014/api/")
+                BaseAddress = new Uri("https://localhost:7014/api")
             };
         }
 
