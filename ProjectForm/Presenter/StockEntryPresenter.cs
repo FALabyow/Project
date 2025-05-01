@@ -9,6 +9,7 @@ using System.Linq;
 using System.Net.Http.Json;
 using System.Text;
 using System.Threading.Tasks;
+using ProjectForm.Http;
 
 namespace ProjectForm.Presenter
 { 
@@ -28,7 +29,7 @@ namespace ProjectForm.Presenter
             //_view.StockEntryFormLoad += OnStockEntryLoad;
             _view.LinkReferenceClicked += OnLinkReferenceClicked;
             _view.LinkProductClicked += OnLinkProductClicked;
-            _httpClient = new HttpClient { BaseAddress = new Uri("https://localhost:7014/api") };
+            _httpClient = Connection.Instance;
 
         }
         public void GenerateReference()

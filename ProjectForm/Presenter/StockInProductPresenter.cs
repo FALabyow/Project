@@ -1,4 +1,5 @@
-﻿using ProjectForm.Model.DTOs;
+﻿using ProjectForm.Http;
+using ProjectForm.Model.DTOs;
 using ProjectForm.Model.DTOs.StockDtos;
 using ProjectForm.View.IView;
 using System;
@@ -13,15 +14,13 @@ namespace ProjectForm.Presenter
     public class StockInProductPresenter
     {
         private readonly IStockInProductView _view;
-        private readonly HttpClient _httpClient;
-        
+        private readonly HttpClient _httpClient;       
         public StockInProductPresenter(IStockInProductView view)
         {
             _view = view;
-            _httpClient = new HttpClient { BaseAddress = new Uri("https://localhost:7014/api") };
+            _httpClient = Connection.Instance;
             _view.SelectProductClicked += OnSelectProductClicked;
         }
-
         public async Task LoadProductList()
         {
             try

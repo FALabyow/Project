@@ -10,6 +10,7 @@ using System.Net.Http.Json;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
+using ProjectForm.Http;
 
 namespace ProjectForm.Presenter
 {
@@ -20,52 +21,54 @@ namespace ProjectForm.Presenter
         private readonly HttpClient _httpClient;
         public POSrecordPresenter(IPOSrecordView view, POSrecord pOSrecord)
         {
-            _httpClient = new HttpClient { BaseAddress = new Uri("https://localhost:7014/api") };
+            _httpClient = Connection.Instance;
             _view = view;
             _pOSrecord = pOSrecord;
             _view.RowNumber += OnRowNumber;
         }
-        public async Task LoadDataAsync(string name, DateOnly startDate, DateOnly endDate, string selecteditem)
+        public async Task LoadDataAsync(string name, DateOnly startDate, DateOnly endDate, string selectedItem)
         {
-            
-            if(startDate > endDate || endDate < startDate)
+            if (startDate > endDate)
             {
-                MessageBox.Show("Invalid Date");
+                MessageBox.Show("Invalid date range.");
                 return;
             }
 
-            string dateTo = startDate.ToString("MM-dd-yyyy");
-            string dateFrom = endDate.ToString("MM-dd-yyyy");
-            string newSelectedItem = selecteditem.Replace(" ", "");
-            
-            if (name == "btnLoad")
-            {
-                if (selecteditem == string.Empty)
-                {
-                    MessageBox.Show("Please select sort type.");
-                    return;
-                }
-                //this is for top selling items
-                var data = await LoadTopSellingAsync(dateTo, dateFrom, newSelectedItem);
-                _view.DisplayTopSellingItems(data); 
-                 _pOSrecord.selectedComboBox= string.Empty;
+            string dateFrom = startDate.ToString("MM-dd-yyyy");
+            string dateTo = endDate.ToString("MM-dd-yyyy");
+            string cleanedSelectedItem = selectedItem.Replace(" ", "");
 
-            }
-            else if(name == "btnLoadSolditem")
+            switch (name)
             {
-                //this is for sold items
-                var data = await LoadSoldItemsAsync(dateTo, dateFrom);
-                _view.DisplaySoldItems(data);
-                _pOSrecord.selectedComboBox = string.Empty;
+                case "btnLoad":
+                    if (string.IsNullOrWhiteSpace(selectedItem))
+                    {
+                        MessageBox.Show("Please select a sort type.");
+                        return;
+                    }
+
+                    var topSellingData = await LoadTopSellingAsync(dateFrom, dateTo, cleanedSelectedItem);
+                    _view.DisplayTopSellingItems(topSellingData);
+                    break;
+
+                case "btnLoadSolditem":
+                    var soldItemsData = await LoadSoldItemsAsync(dateFrom, dateTo);
+                    _view.DisplaySoldItems(soldItemsData);
+                    break;
+
+                case "btnLoadstockin":
+                    var stockInHistoryData = await LoadStockInHistoryAsync(dateFrom, dateTo);
+                    _view.DisplayStockInHistory(stockInHistoryData);
+                    break;
+
+                default:
+                    MessageBox.Show("Invalid operation.");
+                    return;
             }
-            else if(name == "btnLoadstockin")
-            {
-                //this is for stock in history
-                var data =  await LoadStockInHistoryAsync(dateTo, dateFrom);
-                _view.DisplayStockInHistory(data);
-                _pOSrecord.selectedComboBox = string.Empty;
-            }
+
+            _pOSrecord.selectedComboBox = string.Empty;
         }
+
         public async Task<List<GetSalesByQtyDto>> LoadTopSellingAsync(string startDate, string endDate, string selectedItem)
         {
             try
@@ -146,14 +149,14 @@ namespace ProjectForm.Presenter
 
                 res.EnsureSuccessStatusCode();
 
-                var criticalProducts = await res.Content.ReadFromJsonAsync<List<GetInventoryListDto>>();
+                var inventoryList = await res.Content.ReadFromJsonAsync<List<GetInventoryListDto>>();
 
-                if (criticalProducts == null)
+                if (inventoryList == null)
                 {
                     return new List<GetInventoryListDto>();
                 }
 
-                return criticalProducts;
+                return inventoryList;
 
             }
             catch (HttpRequestException ex)

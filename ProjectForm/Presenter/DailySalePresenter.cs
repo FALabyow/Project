@@ -1,4 +1,5 @@
-﻿using ProjectForm.Model.DTOs.SalesDetailDtos;
+﻿using ProjectForm.Http;
+using ProjectForm.Model.DTOs.SalesDetailDtos;
 using ProjectForm.View.IView;
 using System;
 using System.Collections.Generic;
@@ -15,7 +16,7 @@ namespace ProjectForm.Presenter
         private readonly HttpClient _httpClient;
         public DailySalePresenter(IDailySaleView view)
         {
-            _httpClient = new HttpClient { BaseAddress = new Uri("https://localhost:7014/api") };
+            _httpClient = Connection.Instance;
             _view = view;
             //_view.KeyDownPressed += OnKeyDownPressed;
             _view.CloseClicked += OnCloseClicked;
@@ -40,7 +41,7 @@ namespace ProjectForm.Presenter
 
                 var sales = await res.Content.ReadFromJsonAsync<List<GetAllSalesByDateDto>>();
 
-                if (sales == null)
+                if (sales == null || !sales.Any())
                 {
                     return;
                 }
@@ -58,7 +59,6 @@ namespace ProjectForm.Presenter
                 MessageBox.Show(ex.Message);
             }
         }
-
         private async void OnLoadSalesClicked(object? sender, EventArgs e)
         {
             string dateFrom = _view.StartDate.ToString("MM-dd-yyyy");

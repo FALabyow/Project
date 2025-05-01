@@ -1,4 +1,5 @@
 ﻿using ProjectForm.Error;
+using ProjectForm.Http;
 using ProjectForm.Model.DTOs.CategoryDto;
 using ProjectForm.View.IView;
 using System;
@@ -20,7 +21,7 @@ namespace ProjectForm.Presenter
         public CategoryPresenter(ICategoryView view)
         {
             _view = view;
-            _httpClient = new HttpClient { BaseAddress = new Uri("https://localhost:7014/api")};
+            _httpClient = Connection.Instance;
             _view.DeleteClicked += OnDeleteClicked;
             _view.EditClicked += OnEditClicked;
             _view.AddClicked += OnAddClicked;

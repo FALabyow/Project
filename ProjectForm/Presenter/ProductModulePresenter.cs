@@ -13,6 +13,7 @@ using System.Net.Http.Json;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using ProjectForm.Http;
 
 namespace ProjectForm.Presenter
 {
@@ -25,7 +26,7 @@ namespace ProjectForm.Presenter
         {
             _view = view;
             _presenter = presenter;
-            _httpClient = new HttpClient { BaseAddress = new Uri("https://localhost:7014/api")};
+            _httpClient = Connection.Instance;
             _view.SelectedIndexCategoryCombo += OnSelectedIndexCategoryCombo;
             _view.SaveClicked -= OnSaveClicked; //Unsubsccibe event
             _view.SaveClicked += OnSaveClicked; //subscribe event

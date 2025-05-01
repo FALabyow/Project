@@ -1,4 +1,5 @@
 ﻿using ProjectForm.Error;
+using ProjectForm.Http;
 using ProjectForm.Model.DTOs;
 using ProjectForm.Model.DTOs.StockDtos;
 using ProjectForm.View.IView;
@@ -22,7 +23,7 @@ namespace ProjectForm.Presenter
         public StockAdjustmentsPresenter(IStockAdjustmentsView view)
         {
             _view = view;
-            _httpClient = new HttpClient { BaseAddress = new Uri("https://localhost:7014/api") };
+            _httpClient = Connection.Instance;
             _view.SelectedItemCombo += OnSelectedItemCombo;
             _view.SelectedClicked += OnSelectedClicked;
             _view.SaveClicked += OnSaveClicked;

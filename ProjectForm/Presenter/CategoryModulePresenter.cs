@@ -1,4 +1,5 @@
 ﻿using ProjectForm.Error;
+using ProjectForm.Http;
 using ProjectForm.Model.DTOs;
 using ProjectForm.Model.DTOs.CategoryDto;
 using ProjectForm.View.IView;
@@ -25,7 +26,7 @@ namespace ProjectForm.Presenter
         {
             _view = view;
             _presenter = presenter;
-            _httpClient = new HttpClient { BaseAddress = new Uri("https://localhost:7014/api") };
+            _httpClient = Connection.Instance;
             _view.SaveClicked += OnSaveClicked;  
             _view.ClearClicked += OnClearClicked;
             _view.CloseClicked += OnCloseClicked;

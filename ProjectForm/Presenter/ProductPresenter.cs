@@ -11,6 +11,7 @@ using System.Net.Http.Json;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using ProjectForm.Http;
 
 namespace ProjectForm.Presenter
 {
@@ -22,7 +23,7 @@ namespace ProjectForm.Presenter
         public ProductPresenter(IProductView view)
         {
             _view = view;
-            _httpClient = new HttpClient { BaseAddress = new Uri("https://localhost:7014/api") };
+            _httpClient = Connection.Instance;
             _view.DeleteClicked += OnDeleteClicked;
             _view.EditClicked += OnEditClicked;
             _view.ProductSearched += OnProductSearched;

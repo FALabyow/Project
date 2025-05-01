@@ -6,15 +6,18 @@ using System.Threading.Tasks;
 
 namespace ProjectForm.Http
 {
-    public class Connection
+    public static class Connection
     {
-        private HttpClient? httpClient;
+        private static readonly HttpClient httpClient;
 
-        public HttpClient Conn()
+        static Connection()
         {
-            httpClient = new HttpClient { BaseAddress = new Uri("https://localhost:7014/api") };
-            return httpClient;
+            httpClient = new HttpClient
+            {
+                BaseAddress = new Uri("https://localhost:7014/api/")
+            };
         }
-        
+
+        public static HttpClient Instance => httpClient;
     }
 }

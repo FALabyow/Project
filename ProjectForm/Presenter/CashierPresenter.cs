@@ -1,4 +1,5 @@
 ﻿using Accessibility;
+using ProjectForm.Http;
 using ProjectForm.Model.DTOs;
 using ProjectForm.Model.DTOs.ProductDtos;
 using ProjectForm.Model.DTOs.SalesHistoryDto;
@@ -20,11 +21,11 @@ namespace ProjectForm.Presenter
         private DataTable _dataTable;     
         public CashierPresenter(ICashierView view)
         {
-            _httpClient = new HttpClient { BaseAddress = new Uri("https://localhost:7014/api") };
+            _httpClient = Connection.Instance;
             _view = view;
             _dataTable = new DataTable();
             _view.CloseClicked += OnCloseClicked;
-            _view.TimerTicked += OnTimerClicked;
+            _view.TimerTicked += OnTimerTicked;
             _view.TransactionClicked += OnTransactionClicked;
             _view.LogoutClicked += OnLogoutClicked;
             _view.SearchProductClicked += OnSearchProductClicked;
@@ -43,7 +44,7 @@ namespace ProjectForm.Presenter
                 Application.Exit();
             }
         }
-        private void OnTimerClicked(object? sender, EventArgs e)
+        private void OnTimerTicked(object? sender, EventArgs e)
         {
             _view.Timer = DateTime.Now.ToString("hh:mm:ss tt");
         }
@@ -230,7 +231,8 @@ namespace ProjectForm.Presenter
 
                 res.EnsureSuccessStatusCode();
 
-            }catch(HttpRequestException ex)
+            }
+            catch(HttpRequestException ex)
             {
                 MessageBox.Show(ex.Message);
             }
