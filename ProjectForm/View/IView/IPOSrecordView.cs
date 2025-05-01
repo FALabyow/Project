@@ -18,7 +18,7 @@ namespace ProjectForm.View.IView
         //event EventHandler<DataGridViewRowPostPaintEventArgs>? RowNumber;
         //event EventHandler? SelectedItemCombo;
         void DisplayTopSellingItems(List<GetSalesByQtyDto> topSelling);
-        void DisplaySoldItems(List<GetSalesByQtyDto> sold);
+        void DisplaySoldItems(List<GetSalesByQtyDto> soldItems);
         void DisplayCriticalItems(List<GetAllCriticalProductsDto> criticalItems);
         void DisplayInventoryList(List<GetInventoryListDto> inventoryList);
         void DisplayStockInHistory(List<GetStockInHistoryDto> stockInHistory);

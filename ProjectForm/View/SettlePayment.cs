@@ -14,7 +14,7 @@ namespace ProjectForm
 {
     public partial class SettlePayment : Form, ISettlePaymentView
     {
-        private SettlePaymentPresenter _presenter;
+        private readonly SettlePaymentPresenter _presenter;
         private readonly ICashierView _cashierView;
         public SettlePayment(ICashierView cashierView)
         {
@@ -29,7 +29,6 @@ namespace ProjectForm
         public event EventHandler? CashTextChanged;
         public event EventHandler<KeyPressEventArgs>? CashKeyPressed;
         public event EventHandler? EnterClicked;
-
         public string Sale
         {
             get => txtSale.Text;

@@ -49,14 +49,13 @@ namespace ProjectForm
         }
 
         public event EventHandler<DataGridViewRowPostPaintEventArgs>? RowNumber;
-
         public void DisplayTopSellingItems(List<GetSalesByQtyDto> topSelling)
         {
             dgvTopselling.DataSource = topSelling;
         }
-        public void DisplaySoldItems(List<GetSalesByQtyDto> sold)
+        public void DisplaySoldItems(List<GetSalesByQtyDto> soldItems)
         {
-            dgvSolditem.DataSource = sold;
+            dgvSolditem.DataSource = soldItems;
         }
         public void DisplayCriticalItems(List<GetAllCriticalProductsDto> criticalItems)
         {
@@ -75,7 +74,7 @@ namespace ProjectForm
         {
             return comboBox.SelectedItem?.ToString() ?? string.Empty;
         }
-        public DateOnly StartDate(DateTimePicker dateTimePicker)
+        public DateOnly StartDate(DateTimePicker dateTimePicker) 
         {
             return DateOnly.FromDateTime(dateTimePicker.Value);
         }

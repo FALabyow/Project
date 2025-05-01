@@ -47,8 +47,6 @@ namespace Project.Infrastructure.Persistence
                 .Property(p => p.ProductPrice)
                 .HasColumnType("decimal(18,2)");
 
-
-
             //CANNOT DELETE a Category if there are still Products linked to it
             modelBuilder.Entity<Product>()
                 .HasOne(p => p.Category)

@@ -30,7 +30,7 @@ namespace Project.Infrastructure.Repositories
 
                 return stocks;
             }
-            catch (InvalidOperationException ex) when (ex.InnerException is SqlException sqlEx && sqlEx.Number == 40060)
+            catch (InvalidOperationException ex) when (ex.InnerException is SqlException sqlEx && sqlEx.Number == 4060)
             {
                 throw new InvalidOperationException("Access Denied! " + ex.Message);
             }
