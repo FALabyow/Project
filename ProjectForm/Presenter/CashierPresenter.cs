@@ -84,8 +84,7 @@ namespace ProjectForm.Presenter
         private void OnAdminClicked(object? sender, Button e)
         {
             _view.Slider(e);
-            Form1 form = new Form1();
-            form.ShowDialog();
+            _view.CloseThisForm();  
            
 
         }

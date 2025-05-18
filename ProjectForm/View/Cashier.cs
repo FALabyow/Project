@@ -23,7 +23,8 @@ namespace ProjectForm
     public partial class Cashier : Form, ICashierView
     {
         private readonly CashierPresenter _presenter;
-        public Cashier()
+        private Form1 _form1;
+        public Cashier(Form1 form1)
         {
             InitializeComponent();
             _presenter = new CashierPresenter(this);
@@ -40,6 +41,7 @@ namespace ProjectForm
             barcodetxt.TextChanged += Barcode_TextChanged;
             barcodetxt.Select();
             dgvCashier.CellContentClick += DataGridCashierView_CellContentClick;
+            _form1 = form1;
         }
 
         public event EventHandler? CloseClicked;
@@ -256,5 +258,10 @@ namespace ProjectForm
             }
         }
        
+        public void CloseThisForm()
+        {
+            this.Close();
+            _form1.Show();
+        }
     }
 }

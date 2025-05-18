@@ -41,6 +41,8 @@ namespace ProjectForm.View.IView
         int GetProductQuantityFromGrid(string barcode);
         void ClearBarcode();
         void ClearTable();
+
+        void CloseThisForm();
         
 
 

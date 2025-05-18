@@ -120,9 +120,9 @@ namespace ProjectForm
         }
         private void btnLogout_Click(object sender, EventArgs e)
         {
-            var cashier = new Cashier();
+            var cashier = new Cashier(new Form1());
             cashier.ShowDialog();
-            Close();
+            Hide();
             
         }
     }
