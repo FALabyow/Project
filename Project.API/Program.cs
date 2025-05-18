@@ -5,6 +5,8 @@ using Project.Application.Services;
 using Project.Infrastructure.Persistence;
 using Project.Infrastructure.Repositories;
 using System;
+using System.Net.Sockets;
+using System.Net;
 
 namespace Project.API
 {
@@ -35,8 +37,19 @@ namespace Project.API
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
+           
             builder.Services.AddSwaggerGen();
+            var listener = new TcpListener(IPAddress.Loopback, 0);
+            listener.Start();
+            int dynamicPort = ((IPEndPoint)listener.LocalEndpoint).Port;
+            listener.Stop();
 
+            builder.WebHost.ConfigureKestrel(serverOptions =>
+            {
+                serverOptions.Listen(IPAddress.Loopback, dynamicPort);
+            });
+
+            File.WriteAllText("port.txt", dynamicPort.ToString());
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
