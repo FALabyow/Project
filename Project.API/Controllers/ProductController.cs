@@ -174,5 +174,63 @@ namespace Project.API.Controllers
                 });
             }
         }
+
+        [HttpGet("/Products/Critical/all/count")]
+        public async Task<ActionResult<CriticalStocksCount>> GetAllCriticalProductCountAsync()
+        {
+            try
+            {
+                var products = await _productService.GetAllCriticalProductAsync();
+                var count = products.Count();
+                var countObj = new CriticalStocksCount
+                {
+                    Total = count,
+                };
+
+                //if(products.IsNullOrEmpty())
+                //{
+                //    return Ok(products);
+                //}
+                return Ok(countObj);
+            }
+            catch (InvalidOperationException ex)
+            {
+                return BadRequest(new { error = ex.Message });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { error = "An unexpected error occurred.", details = ex.Message });
+            }
+        }
+
+        [HttpGet("/Products/All/count")]
+        public async Task<ActionResult<CriticalStocksCount>> GetAllProductsCountAsync()
+        {
+            try
+            {
+                var products = await _productService.GetAllProductAsync();
+                var count = products.Count();
+                var countObj = new CriticalStocksCount
+                {
+                    Total = count,
+                };
+
+                //if(products.IsNullOrEmpty())
+                //{
+                //    return Ok(products);
+                //}
+                return Ok(countObj);
+            }
+            catch (InvalidOperationException ex)
+            {
+                return BadRequest(new { error = ex.Message });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { error = "An unexpected error occurred.", details = ex.Message });
+            }
+        }
+
     }
+
 }

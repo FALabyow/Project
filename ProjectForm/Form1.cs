@@ -8,11 +8,13 @@ namespace ProjectForm
     {
         // part 1 of the tutorial
         //https://www.youtube.com/watch?v=TipJwf0-yLg&list=PLcDvtJ2MXvhy_YrXdO4VXqZBOADCRJhSc
+
         public Form1()
         {
             InitializeComponent();
             customizeDesign();
             openChildForm(new Dashboard());
+            this.Icon = Properties.Resources.icons8_cashier;
         }
         private Form? activeform = null;
         private void openChildForm(Form childForm)

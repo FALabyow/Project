@@ -10,5 +10,7 @@ namespace ProjectForm.View.IView
     {
         void ShowDailySales(decimal sales);
         void ShowStocksOnHand(int total);
+        void ShowCriticalStocksCount(int total);
+        void ShowProductsCount(int total);
     }
 }

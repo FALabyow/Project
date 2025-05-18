@@ -31,12 +31,23 @@ namespace ProjectForm.View
         {
             stocksLabel.Text = total.ToString();
         }
+
+        public void ShowCriticalStocksCount(int total)
+        {
+            criticalProductsLabel.Text = total.ToString();
+        }
+        public void ShowProductsCount(int total)
+        {
+            totalProductLabel.Text = total.ToString();  
+        }
         private void Dashboard_Load(object sender, EventArgs e)
         {
             if (_presenter != null)
             {
                 _presenter.LoadDailSalesAsync();
                 _presenter.LoadStocksOnHandAsync();
+                _presenter?.LoadCriticalStocksCountAsync();
+                _presenter?.LoadProductssCountAsync();
             }
         }
     }

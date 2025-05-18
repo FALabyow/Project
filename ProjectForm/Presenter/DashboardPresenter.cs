@@ -2,6 +2,7 @@
 using ProjectForm.View.IView;
 using ProjectForm.Model.DTOs.SalesDetailDtos;
 using ProjectForm.Model.DTOs.StockDtos;
+using ProjectForm.Model.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,14 +11,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
 using ProjectForm.Error;
+using ProjectForm.Model.DTOs.ProductDtos;
 
 namespace ProjectForm.Presenter
 {
     public class DashboardPresenter
     {
         private readonly IDashboardView _view;
-        private readonly HttpClient _httpClient;
-        
+        private readonly HttpClient _httpClient;       
         public DashboardPresenter(IDashboardView view)
         {
             _view = view;
@@ -74,6 +75,70 @@ namespace ProjectForm.Presenter
                     }
 
                     _view.ShowStocksOnHand(count.count);
+                }
+                else if (res.StatusCode == System.Net.HttpStatusCode.BadRequest)
+                {
+                    var errorRes = await res.Content.ReadFromJsonAsync<ApiErrorResponse>();
+
+                    if (errorRes != null)
+                    {
+                        MessageBox.Show(errorRes.Error);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        public async void LoadCriticalStocksCountAsync()
+        {
+            try
+            {
+                var res = await _httpClient.GetAsync("/Products/Critical/all/count");
+
+                if (res.IsSuccessStatusCode)
+                {
+                    var count = await res.Content.ReadFromJsonAsync<CriticalStocksCount>();
+
+                    if (count == null)
+                    {
+                        return;
+                    }
+
+                    _view.ShowCriticalStocksCount(count.Total);
+                }
+                else if (res.StatusCode == System.Net.HttpStatusCode.BadRequest)
+                {
+                    var errorRes = await res.Content.ReadFromJsonAsync<ApiErrorResponse>();
+
+                    if (errorRes != null)
+                    {
+                        MessageBox.Show(errorRes.Error);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        public async void LoadProductssCountAsync()
+        {
+            try
+            {
+                var res = await _httpClient.GetAsync("/Products/All/count");
+
+                if (res.IsSuccessStatusCode)
+                {
+                    var count = await res.Content.ReadFromJsonAsync<CriticalStocksCount>();
+
+                    if (count == null)
+                    {
+                        return;
+                    }
+
+                    _view.ShowProductsCount(count.Total);
                 }
                 else if (res.StatusCode == System.Net.HttpStatusCode.BadRequest)
                 {
