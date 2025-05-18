@@ -1,6 +1,7 @@
 ﻿using ProjectForm.Http;
 using ProjectForm.View.IView;
 using ProjectForm.Model.DTOs.SalesDetailDtos;
+using ProjectForm.Model.DTOs.StockDtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -59,7 +60,35 @@ namespace ProjectForm.Presenter
         }
         public async void LoadStocksOnHandAsync()
         {
-            
+            try
+            {
+                var res = await _httpClient.GetAsync("/Stocks/count");
+
+                if (res.IsSuccessStatusCode)
+                {
+                    var count = await res.Content.ReadFromJsonAsync<StockOnHandDto>();
+
+                    if (count == null)
+                    {
+                        return;
+                    }
+
+                    _view.ShowStocksOnHand(count.count);
+                }
+                else if (res.StatusCode == System.Net.HttpStatusCode.BadRequest)
+                {
+                    var errorRes = await res.Content.ReadFromJsonAsync<ApiErrorResponse>();
+
+                    if (errorRes != null)
+                    {
+                        MessageBox.Show(errorRes.Error);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
     }

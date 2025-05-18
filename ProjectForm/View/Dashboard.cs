@@ -36,6 +36,7 @@ namespace ProjectForm.View
             if (_presenter != null)
             {
                 _presenter.LoadDailSalesAsync();
+                _presenter.LoadStocksOnHandAsync();
             }
         }
     }
