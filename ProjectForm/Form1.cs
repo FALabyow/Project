@@ -1,3 +1,5 @@
+using ProjectForm.View;
+
 namespace ProjectForm
 {
 
@@ -10,6 +12,7 @@ namespace ProjectForm
         {
             InitializeComponent();
             customizeDesign();
+            openChildForm(new Dashboard());
         }
         private Form? activeform = null;
         private void openChildForm(Form childForm)
@@ -52,7 +55,8 @@ namespace ProjectForm
         }
         private void btnDashboard_Click(object sender, EventArgs e)
         {
-
+            openChildForm(new Dashboard());
+            hideSubMenu();
         }
         private void btnProduct_Click(object sender, EventArgs e)
         {
@@ -114,7 +118,10 @@ namespace ProjectForm
         }
         private void btnLogout_Click(object sender, EventArgs e)
         {
+            var cashier = new Cashier();
+            cashier.ShowDialog();
             Close();
+            
         }
     }
 }

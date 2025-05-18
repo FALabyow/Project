@@ -10,6 +10,7 @@ namespace Project.Application.Interfaces
     public interface ISalesDetailRepository
     {
         Task<IEnumerable<SalesDetail>> GetAllSalesByDateAsync(DateOnly startDate, DateOnly endDate);
+        Task<IEnumerable<decimal>> GetTotalDailySalesAsync(DateOnly date);
         Task AddSalesAsync(IEnumerable<SalesDetail> sales);
     }
 }

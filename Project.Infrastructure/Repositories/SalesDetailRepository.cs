@@ -1,4 +1,4 @@
-﻿using Microsoft.Data.SqlClient;
+﻿ using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Project.Application.Interfaces;
 using Project.Domain.Entities;
@@ -62,6 +62,27 @@ namespace Project.Infrastructure.Repositories
             catch(Exception ex)
             {
                 throw new InvalidOperationException(ex.Message);
+            }
+        }
+        public async Task<IEnumerable<decimal>> GetTotalDailySalesAsync(DateOnly date)
+        {
+            try
+            {
+                var stocks = await _context.SalesDetails
+                .Where(x => x.SalesHistory != null &&
+                            x.SalesHistory.SaleDate == date)
+                .Select(s => s.TotalAmount)
+                .ToListAsync();
+
+                return stocks;
+            }
+            catch (InvalidOperationException ex) when (ex.InnerException is SqlException sqlEx && sqlEx.Number == 4060)
+            {
+                throw new InvalidOperationException("Access Denied! " + ex.Message);
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException("An error occured while fetching sales. " + ex.Message);
             }
         }
     }

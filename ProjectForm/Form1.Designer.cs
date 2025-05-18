@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             pnlSlide = new Panel();
             btnLogout = new Button();
             pnlSubSetting = new Panel();
@@ -85,13 +86,14 @@
             btnLogout.BackColor = Color.Peru;
             btnLogout.Dock = DockStyle.Bottom;
             btnLogout.FlatStyle = FlatStyle.Flat;
+            btnLogout.Image = Properties.Resources.logout;
+            btnLogout.ImageAlign = ContentAlignment.MiddleLeft;
             btnLogout.Location = new Point(0, 712);
             btnLogout.Name = "btnLogout";
             btnLogout.Padding = new Padding(5, 0, 0, 0);
             btnLogout.Size = new Size(191, 45);
             btnLogout.TabIndex = 9;
-            btnLogout.Text = "Logout";
-            btnLogout.TextAlign = ContentAlignment.MiddleLeft;
+            btnLogout.Text = "Cashier";
             btnLogout.UseVisualStyleBackColor = false;
             btnLogout.Click += btnLogout_Click;
             // 
@@ -376,6 +378,7 @@
             Controls.Add(pnlSlide);
             Font = new Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             FormBorderStyle = FormBorderStyle.FixedSingle;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(4, 3, 4, 3);
             Name = "Form1";
             StartPosition = FormStartPosition.CenterScreen;

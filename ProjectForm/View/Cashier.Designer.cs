@@ -30,6 +30,7 @@
         {
             components = new System.ComponentModel.Container();
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Cashier));
             panel1 = new Panel();
             adminBtn = new Button();
             btnLogout = new Button();
@@ -572,6 +573,7 @@
             Controls.Add(panel7);
             Font = new Font("Microsoft Sans Serif", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             FormBorderStyle = FormBorderStyle.None;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(4, 3, 4, 3);
             Name = "Cashier";
             StartPosition = FormStartPosition.CenterScreen;

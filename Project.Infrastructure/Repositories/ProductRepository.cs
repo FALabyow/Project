@@ -118,7 +118,7 @@ namespace Project.Infrastructure.Repositories
             }
             catch (DbUpdateException ex)
             {
-                throw new InvalidOperationException("Failed to delete product: " + ex.Message);
+                throw new InvalidOperationException("Failed to delete productgg: " + ex.Message);
             }
         }
     }

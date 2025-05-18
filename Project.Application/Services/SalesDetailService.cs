@@ -138,6 +138,32 @@ namespace Project.Application.Services
                 throw;
             }
         }
+        public async Task<GetDailySalesDto> GetTotalDailySalesAsync(DateOnly date)
+        {
+            try
+            {
+                var sales = await _salesDetailRepository.GetTotalDailySalesAsync(date);
+
+                if (sales == null || !sales.Any())
+                {
+                    throw new InvalidOperationException("No sales found in the database");
+                }
+
+                return new GetDailySalesDto
+                {
+                    TotalAmount = sales.Sum(),
+                };
+
+            }
+            catch (InvalidOperationException)
+            {
+                throw;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
     }
 }

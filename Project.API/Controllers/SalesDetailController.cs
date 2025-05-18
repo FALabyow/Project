@@ -82,6 +82,22 @@ namespace Project.API.Controllers
             }
         }
 
-
+        [HttpGet("/Sales/DailySales/FilteredBY")]
+        public async Task<ActionResult<GetDailySalesDto>> GetTotalDailySalesAsync(DateOnly date)
+        {
+            try
+            {
+                var sales = await _salesDetailService.GetTotalDailySalesAsync(date);
+                return Ok(sales);
+            }
+            catch (InvalidOperationException ex)
+            {
+                return BadRequest(new { error = ex.Message });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { error = ex.Message });
+            }
+        }
     }
 }
