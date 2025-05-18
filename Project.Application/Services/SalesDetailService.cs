@@ -144,7 +144,7 @@ namespace Project.Application.Services
             {
                 var sales = await _salesDetailRepository.GetTotalDailySalesAsync(date);
 
-                if (sales == null || !sales.Any())
+                if (sales == null)
                 {
                     throw new InvalidOperationException("No sales found in the database");
                 }

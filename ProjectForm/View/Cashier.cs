@@ -255,5 +255,6 @@ namespace ProjectForm
                 RemoveClicked?.Invoke(sender, e);
             }
         }
+       
     }
 }

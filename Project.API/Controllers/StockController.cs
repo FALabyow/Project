@@ -34,6 +34,25 @@ namespace Project.API.Controllers
             }
         }
 
+        [HttpGet("/Stocks/count")]
+        public async Task<ActionResult<StockOnHandDto>> GetStocksOnHandAsync()
+        {
+            try
+            {
+                var count = await _stockService.GetStocksOnHandAsync();
+                
+                return Ok(count);
+            }
+            catch (InvalidOperationException ex)
+            {
+                return BadRequest(new { error = ex.Message });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { error = "An unexpected error occurred.", details = ex.Message });
+            }
+        }
+
         [HttpGet("/Stocks/Adjustments/All")]
         public async Task<ActionResult<IEnumerable<GetAllStockAdjustmentsDto>>> GetAllStocksForAdjustmentsAsync()
         {

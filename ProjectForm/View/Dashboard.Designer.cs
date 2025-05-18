@@ -71,7 +71,7 @@
             // 
             // panel11
             // 
-            panel11.BackColor = Color.FromArgb(0, 192, 0);
+            panel11.BackColor = Color.FromArgb(0, 192, 192);
             panel11.Controls.Add(pictureBox4);
             panel11.Controls.Add(totalProductLabel);
             panel11.Controls.Add(label11);
@@ -327,7 +327,6 @@
             label1.Size = new Size(103, 25);
             label1.TabIndex = 1;
             label1.Text = "Daily Sales";
-            label1.Click += label1_Click;
             // 
             // panel3
             // 

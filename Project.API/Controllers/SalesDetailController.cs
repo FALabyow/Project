@@ -92,11 +92,11 @@ namespace Project.API.Controllers
             }
             catch (InvalidOperationException ex)
             {
-                return BadRequest(new { error = ex.Message });
+                return BadRequest(new { error = ex.Message + date });
             }
             catch (Exception ex)
             {
-                return BadRequest(new { error = ex.Message });
+                return BadRequest(new { error = ex.Message + date});
             }
         }
     }

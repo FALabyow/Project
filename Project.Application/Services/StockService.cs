@@ -179,5 +179,26 @@ namespace Project.Application.Services
                 throw;
             }
         }
+        public async Task<StockOnHandDto> GetStocksOnHandAsync()
+        {
+            try
+            {
+                var count = await _stockRepository.GetStocksOnHandAsync();
+                var countObj = new StockOnHandDto
+                {
+                    count = count.Sum()
+                };
+                return countObj;
+                
+            }
+            catch (InvalidOperationException)
+            {
+                throw;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

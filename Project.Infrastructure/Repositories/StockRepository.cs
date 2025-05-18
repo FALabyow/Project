@@ -115,7 +115,24 @@ namespace Project.Infrastructure.Repositories
                 throw new InvalidOperationException("Unable to delete stock item: " + ex.Message);
             }
         }
-
+        public async Task<IEnumerable<int>> GetStocksOnHandAsync()
+        {
+            try
+            {
+                var count = await _context.Stocks
+                    .Select(x => x.ProductQuantity)
+                    .ToListAsync();
+                return count;
+            }
+            catch (InvalidOperationException ex) when (ex.InnerException is SqlException sqlEx && sqlEx.Number == 4060)
+            {
+                throw new InvalidOperationException("Database does not exist or access denied!", ex);
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException("An error occurred while fetching stocks.", ex);
+            }
+        }
 
 
     }

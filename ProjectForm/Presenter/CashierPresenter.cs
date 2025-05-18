@@ -86,6 +86,8 @@ namespace ProjectForm.Presenter
             _view.Slider(e);
             Form1 form = new Form1();
             form.ShowDialog();
+           
+
         }
         private void OnBarcodeTextChanged(object? sender, EventArgs e)
         {
