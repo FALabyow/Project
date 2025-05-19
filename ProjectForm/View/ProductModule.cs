@@ -128,6 +128,7 @@ namespace ProjectForm
             txtDescription.Text = "";
             nudReorder.Value = 1;
             categoryLoadingMessageLabel.Text = "";
+            cmbCategory.Text = "Select Category";
         }
         public void ModuleClose()
         {

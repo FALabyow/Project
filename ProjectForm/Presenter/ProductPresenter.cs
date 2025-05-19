@@ -51,7 +51,8 @@ namespace ProjectForm.Presenter
             }
             catch(HttpRequestException ex)
             {
-                _view.ShowMessage(ex.Message);
+                //_view.ShowMessage(ex.Message);
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         private async void OnDeleteClicked(object? sender, DataGridViewCellEventArgs e)
@@ -72,7 +73,8 @@ namespace ProjectForm.Presenter
 
             if (productQuantity > 0)
             {
-                MessageBox.Show("This product can't be deleted because it is currently in stock.");
+                //MessageBox.Show("This product can't be deleted because it is currently in stock.");
+                MessageBox.Show("This product can't be deleted because it is currently in stock.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -90,21 +92,25 @@ namespace ProjectForm.Presenter
                     var errorRes = await res.Content.ReadFromJsonAsync<ApiErrorResponse>();
                     if (errorRes != null)
                     {
-                        _view.ShowMessage(errorRes.Error);
+                        //_view.ShowMessage(errorRes.Error);
+                        MessageBox.Show(errorRes.Error, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
                     }
                 }
                 else
                 {
-                    _view.ShowMessage("Failed to delete product!");
+                    //_view.ShowMessage("Failed to delete product!");
+                    MessageBox.Show("Failed to delete product!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (HttpRequestException ex)
             {
-                _view.ShowMessage("Failed to connect to a server: " + ex.Message);
+                //_view.ShowMessage("Failed to connect to a server: " + ex.Message);  
+                MessageBox.Show("Failed to connect to a server: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (Exception ex)
             {
-                _view.ShowMessage(ex.Message);
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         private async void OnEditClicked(object? sender, DataGridViewCellEventArgs e)
@@ -133,20 +139,25 @@ namespace ProjectForm.Presenter
 
             if (string.IsNullOrWhiteSpace(product.ProductName))
             {
-                _view.ShowMessage("Product name cannot be empty");
+                //_view.ShowMessage("Product name cannot be empty");
+                MessageBox.Show("Product name cannot be empty", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
             if (product.ProductPrice <= 0)
             {
-                _view.ShowMessage("Invalid Price Value!");
+                //_view.ShowMessage("Invalid Price Value!");
+                MessageBox.Show("Invalid Price Value!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
+               
             }
 
             if (product.ProductReOrder <= 0)
             {
-                _view.ShowMessage("Invalid Re-order Value!");
+                //_view.ShowMessage("Invalid Re-order Value!");
+                MessageBox.Show("Invalid Re-order Value!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
+                
             }
 
 
@@ -172,24 +183,26 @@ namespace ProjectForm.Presenter
 
                     if (errorRes != null)
                     {
-                        _view.ShowMessage("dli maka update uy" + productId);
+                        MessageBox.Show(errorRes.Error, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         await LoadProductList();
                     }
                 }
                 else
                 {
-                    _view.ShowMessage("Failed to update product!");
+                    //_view.ShowMessage("Failed to update product!");
+                    MessageBox.Show("Failed to update product!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     await LoadProductList();
                 }
             }
             catch (HttpRequestException ex)
             {
-                _view.ShowMessage("Failed to connect to a server: " + ex.Message);
+                //_view.ShowMessage("Failed to connect to a server: " + ex.Message);
+                MessageBox.Show("Failed to connect to a server: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 await LoadProductList();
             }
             catch (Exception ex)
             {
-                _view.ShowMessage("Hello: " + ex.Message);
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 await LoadProductList();
             }
         }

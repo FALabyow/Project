@@ -30,6 +30,7 @@ namespace ProjectForm.Presenter
             _view.SelectedIndexCategoryCombo += OnSelectedIndexCategoryCombo;
             _view.SaveClicked -= OnSaveClicked; //Unsubsccibe event
             _view.SaveClicked += OnSaveClicked; //subscribe event
+            _view.ClearClicked += OnClearClicked;
             _view.ModuleCloseClicked += OnModuleCloseClicked;         
         }
         public async Task LoadCategoryAsync()
@@ -58,20 +59,22 @@ namespace ProjectForm.Presenter
                     var errorRes = await response.Content.ReadFromJsonAsync<ApiErrorResponse>();
                     if(errorRes != null)
                     {
-                        _view.ShowMessage(errorRes.Error);
+                        //_view.ShowMessage(errorRes.Error);
+                        MessageBox.Show(errorRes.Error, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                    
                     
                 }
                 else
                 {
-                    _view.ShowMessage("An unexpected error occured!");
+                    //_view.ShowMessage("An unexpected error occured!");
+                    MessageBox.Show("An unexpected error occured!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 _view.LoadingMessage("");
             }
             catch(Exception ex)
             {
-                _view?.ShowMessage(ex.Message);
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         private void OnSelectedIndexCategoryCombo(object? sender, EventArgs e)
@@ -104,19 +107,22 @@ namespace ProjectForm.Presenter
 
             if (string.IsNullOrEmpty(product.ProductName) || string.IsNullOrEmpty(product.BarcodeData))
             {
-                _view.ShowMessage("Field cannot be empty!");
+                //_view.ShowMessage("Field cannot be empty!");
+                MessageBox.Show("Field cannot be empty!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
             if(product.CategoryId == Guid.Empty)
             {
-                _view.ShowMessage("Please select category");
+                //_view.ShowMessage("Please select category");
+                MessageBox.Show("Please select category", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
             if(product.ProductPrice < 0)
             {
-                _view.ShowMessage("Invalid price");
+                //_view.ShowMessage("Invalid price");
+                MessageBox.Show("Invalid price", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -141,7 +147,9 @@ namespace ProjectForm.Presenter
                     var errorRes = await res.Content.ReadFromJsonAsync<ApiErrorResponse>();
                     if(errorRes != null)
                     {
-                        _view.ShowMessage(errorRes.Error);
+                        //_view.ShowMessage(errorRes.Error);
+                        MessageBox.Show(errorRes.Error, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
                     }
 
                 }
@@ -150,22 +158,30 @@ namespace ProjectForm.Presenter
                     var errorRes = await stockRes.Content.ReadFromJsonAsync<ApiErrorResponse>();
                     if (errorRes != null)
                     {
-                        _view.ShowMessage(errorRes.Error);
+                        //_view.ShowMessage(errorRes.Error);
+                        MessageBox.Show(errorRes.Error, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
                     }
                 }
                 else
                 {
-                    _view?.ShowMessage("Something went wrong");
+                    //_view?.ShowMessage("Something went wrong");
+                    MessageBox.Show("Something went wrong", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (Exception ex)
             {
-                _view?.ShowMessage(ex.Message);
+                //_view?.ShowMessage(ex.Message);
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         private void OnModuleCloseClicked(object? sender, EventArgs e)
         {
             _view.ModuleClose();
+        }
+        private void OnClearClicked(object? sender, EventArgs e)
+        {
+            _view?.Clear();
         }
     }
 }
