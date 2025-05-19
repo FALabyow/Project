@@ -134,20 +134,24 @@ namespace ProjectForm.Presenter
 
                 if (response.IsSuccessStatusCode && response1.IsSuccessStatusCode)
                 {
-                    MessageBox.Show("Stock records added successfully!");
+                    //MessageBox.Show("Stock records added successfully!");
+                    MessageBox.Show("Stock recorded successfully!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
                 {
                     var errorMessage = await response.Content.ReadAsStringAsync();
                     var errorMessage2 = await response1.Content.ReadAsStringAsync();
 
-                    MessageBox.Show($"Failed to add records: {(string.IsNullOrWhiteSpace(errorMessage) ? errorMessage2 : errorMessage)}");
+                    //MessageBox.Show($"Failed to add records: {(string.IsNullOrWhiteSpace(errorMessage) ? errorMessage2 : errorMessage)}");
+
+                    MessageBox.Show($"Failed to add records: {(string.IsNullOrWhiteSpace(errorMessage) ? errorMessage2 : errorMessage)}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
 
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error: " + ex.Message);
+                //MessageBox.Show("Error: " + ex.Message);
+                MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
 
@@ -175,7 +179,7 @@ namespace ProjectForm.Presenter
             }
             catch (HttpRequestException ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         private async void OnLoadFilteredRecordsClicked(object? sender, EventArgs e)
@@ -193,7 +197,7 @@ namespace ProjectForm.Presenter
 
             if (_records == null)
             {
-                MessageBox.Show("records is empty");
+                MessageBox.Show("The record list is empty.");
                 return;
             }
 
@@ -212,7 +216,8 @@ namespace ProjectForm.Presenter
         {
             if (string.IsNullOrEmpty(_view.ReferenceNum))
             {
-                MessageBox.Show("Reference number is empty");
+                //MessageBox.Show("Reference number is empty");
+                MessageBox.Show("Reference number is empty", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
             var stockInProduct = new StockInProduct();
