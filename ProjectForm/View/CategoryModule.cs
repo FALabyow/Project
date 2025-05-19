@@ -39,9 +39,8 @@ namespace ProjectForm
         }
         public void ShowMessage(string message)
         {
-            MessageBox.Show(message);
+            MessageBox.Show(message, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
         }
-
         public void ClearMessage()
         {
             showMessageLabel.Text = "";

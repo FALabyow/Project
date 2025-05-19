@@ -39,17 +39,22 @@ namespace Project.API
             builder.Services.AddEndpointsApiExplorer();
            
             builder.Services.AddSwaggerGen();
-            var listener = new TcpListener(IPAddress.Loopback, 0);
-            listener.Start();
-            int dynamicPort = ((IPEndPoint)listener.LocalEndpoint).Port;
-            listener.Stop();
 
-            builder.WebHost.ConfigureKestrel(serverOptions =>
-            {
-                serverOptions.Listen(IPAddress.Loopback, dynamicPort);
-            });
+            //var listener = new TcpListener(IPAddress.Loopback, 0);
+            //listener.Start();
+            //int port = ((IPEndPoint)listener.LocalEndpoint).Port;
+            //listener.Stop();
 
-            File.WriteAllText("port.txt", dynamicPort.ToString());
+            //// Log and write port to file
+            //string portFilePath = @"C:\Temp\port.txt";
+            //Directory.CreateDirectory(@"C:\Temp");
+            //File.WriteAllText(portFilePath, port.ToString());
+
+            //builder.WebHost.ConfigureKestrel(options =>
+            //{
+            //    options.Listen(IPAddress.Loopback, port);
+            //});
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

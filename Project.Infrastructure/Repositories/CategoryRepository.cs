@@ -68,10 +68,10 @@ namespace Project.Infrastructure.Repositories
             {
                 if (ex.InnerException is SqlException sqlEx && (sqlEx.Number == 2601 || sqlEx.Number == 2627))
                 {
-                    throw new InvalidOperationException("Duplicate category name detected!" + ex.Message);
+                    throw new InvalidOperationException("Duplicate category name detected!");
                 }
 
-                throw new InvalidOperationException("Error saving categorty! " + ex.Message);
+                throw new InvalidOperationException("Error saving category name!");
 
             }
             catch (InvalidOperationException ex) when (ex.InnerException is SqlException sqlEx && sqlEx.Number == 4060)
@@ -98,7 +98,7 @@ namespace Project.Infrastructure.Repositories
             }
             catch(DbUpdateException ex)
             {
-                throw new InvalidOperationException("The category cannot be updated because the name already exists. " + ex.Message);
+                throw new InvalidOperationException("The category cannot be updated because the name already exists. ");
             }
            
         }

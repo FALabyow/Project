@@ -12,6 +12,7 @@ using System.Net.Http.Json;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace ProjectForm.Presenter
 {
@@ -47,7 +48,7 @@ namespace ProjectForm.Presenter
 
             if (category.CategoryName == "" )
             {
-                _view.ShowMessage("Field cannot be empty!");
+                _view.ShowMessage("The field cannot be empty!");
                 return;
             }
 
@@ -73,14 +74,15 @@ namespace ProjectForm.Presenter
                     var errorRes = await response.Content.ReadFromJsonAsync<ApiErrorResponse>();
                     if(errorRes != null)
                     {
-                        _view.ShowMessage(errorRes.Error);
+                        //_view.ShowMessage(errorRes.Error);
+                        MessageBox.Show(errorRes.Error, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                     
                 }
             }
             catch (Exception ex)
             {
-                _view?.ShowMessage(ex.Message);
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }       
         private void OnClearClicked(object? sender, EventArgs e)
