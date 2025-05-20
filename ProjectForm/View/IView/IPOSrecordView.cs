@@ -23,6 +23,7 @@ namespace ProjectForm.View.IView
         void DisplayInventoryList(List<GetInventoryListDto> inventoryList);
         void DisplayStockInHistory(List<GetStockInHistoryDto> stockInHistory);
         string SelectedItem(ComboBox comboBox);
+        void TotalSoldItems(string total);
         DateOnly StartDate(DateTimePicker dateTimePicker);
         DateOnly EndDate(DateTimePicker dateTimePicker);
         event EventHandler<DataGridViewRowPostPaintEventArgs>? RowNumber;

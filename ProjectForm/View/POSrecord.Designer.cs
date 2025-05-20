@@ -146,7 +146,7 @@
             lblManageRecord.Font = new Font("Century Gothic", 12F, FontStyle.Bold | FontStyle.Underline, GraphicsUnit.Point, 0);
             lblManageRecord.Location = new Point(12, 23);
             lblManageRecord.Name = "lblManageRecord";
-            lblManageRecord.Size = new Size(172, 23);
+            lblManageRecord.Size = new Size(139, 19);
             lblManageRecord.TabIndex = 3;
             lblManageRecord.Text = "Manage Product";
             // 
@@ -169,10 +169,10 @@
             // 
             tabPage1.Controls.Add(dgvTopselling);
             tabPage1.Controls.Add(panel2);
-            tabPage1.Location = new Point(4, 36);
+            tabPage1.Location = new Point(4, 34);
             tabPage1.Name = "tabPage1";
             tabPage1.Padding = new Padding(3);
-            tabPage1.Size = new Size(974, 516);
+            tabPage1.Size = new Size(974, 518);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "Top Selling";
             tabPage1.UseVisualStyleBackColor = true;
@@ -200,7 +200,7 @@
             dgvTopselling.Name = "dgvTopselling";
             dgvTopselling.RowHeadersVisible = false;
             dgvTopselling.RowHeadersWidth = 51;
-            dgvTopselling.Size = new Size(968, 394);
+            dgvTopselling.Size = new Size(968, 396);
             dgvTopselling.TabIndex = 8;
             // 
             // Column1
@@ -209,7 +209,7 @@
             Column1.HeaderText = "No.";
             Column1.MinimumWidth = 6;
             Column1.Name = "Column1";
-            Column1.Width = 67;
+            Column1.Width = 57;
             // 
             // ProductCode
             // 
@@ -218,7 +218,7 @@
             ProductCode.HeaderText = "Pcode";
             ProductCode.MinimumWidth = 6;
             ProductCode.Name = "ProductCode";
-            ProductCode.Width = 96;
+            ProductCode.Width = 81;
             // 
             // ProductName
             // 
@@ -237,7 +237,7 @@
             ProductQuantity.HeaderText = "Qty";
             ProductQuantity.MinimumWidth = 6;
             ProductQuantity.Name = "ProductQuantity";
-            ProductQuantity.Width = 71;
+            ProductQuantity.Width = 58;
             // 
             // TotalAmount
             // 
@@ -248,7 +248,7 @@
             TotalAmount.HeaderText = "Total Sales";
             TotalAmount.MinimumWidth = 6;
             TotalAmount.Name = "TotalAmount";
-            TotalAmount.Width = 127;
+            TotalAmount.Width = 105;
             // 
             // panel2
             // 
@@ -284,7 +284,7 @@
             cbTopsell.Items.AddRange(new object[] { "Sort By Qty", "Sort By Total Amount", "" });
             cbTopsell.Location = new Point(482, 38);
             cbTopsell.Name = "cbTopsell";
-            cbTopsell.Size = new Size(179, 29);
+            cbTopsell.Size = new Size(179, 27);
             cbTopsell.TabIndex = 4;
             cbTopsell.Text = "Select Sort Type";
             // 
@@ -293,7 +293,7 @@
             dtTotopsell.Format = DateTimePickerFormat.Short;
             dtTotopsell.Location = new Point(328, 37);
             dtTotopsell.Name = "dtTotopsell";
-            dtTotopsell.Size = new Size(129, 30);
+            dtTotopsell.Size = new Size(129, 25);
             dtTotopsell.TabIndex = 3;
             // 
             // label3
@@ -301,7 +301,7 @@
             label3.AutoSize = true;
             label3.Location = new Point(292, 42);
             label3.Name = "label3";
-            label3.Size = new Size(30, 21);
+            label3.Size = new Size(24, 20);
             label3.TabIndex = 2;
             label3.Text = "To";
             // 
@@ -310,7 +310,7 @@
             dtFromtopsell.Format = DateTimePickerFormat.Short;
             dtFromtopsell.Location = new Point(157, 37);
             dtFromtopsell.Name = "dtFromtopsell";
-            dtFromtopsell.Size = new Size(129, 30);
+            dtFromtopsell.Size = new Size(129, 25);
             dtFromtopsell.TabIndex = 1;
             // 
             // label2
@@ -318,7 +318,7 @@
             label2.AutoSize = true;
             label2.Location = new Point(18, 42);
             label2.Name = "label2";
-            label2.Size = new Size(133, 21);
+            label2.Size = new Size(110, 20);
             label2.TabIndex = 0;
             label2.Text = "Filter By : From";
             // 
@@ -326,10 +326,10 @@
             // 
             tabPage2.Controls.Add(dgvSolditem);
             tabPage2.Controls.Add(panel3);
-            tabPage2.Location = new Point(4, 35);
+            tabPage2.Location = new Point(4, 34);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(974, 517);
+            tabPage2.Size = new Size(974, 518);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Sold Items";
             tabPage2.UseVisualStyleBackColor = true;
@@ -357,7 +357,7 @@
             dgvSolditem.Name = "dgvSolditem";
             dgvSolditem.RowHeadersVisible = false;
             dgvSolditem.RowHeadersWidth = 51;
-            dgvSolditem.Size = new Size(968, 395);
+            dgvSolditem.Size = new Size(968, 396);
             dgvSolditem.TabIndex = 9;
             // 
             // dataGridViewTextBoxColumn1
@@ -366,7 +366,7 @@
             dataGridViewTextBoxColumn1.HeaderText = "No.";
             dataGridViewTextBoxColumn1.MinimumWidth = 6;
             dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            dataGridViewTextBoxColumn1.Width = 67;
+            dataGridViewTextBoxColumn1.Width = 57;
             // 
             // dataGridViewTextBoxColumn2
             // 
@@ -375,7 +375,7 @@
             dataGridViewTextBoxColumn2.HeaderText = "Pcode";
             dataGridViewTextBoxColumn2.MinimumWidth = 6;
             dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            dataGridViewTextBoxColumn2.Width = 96;
+            dataGridViewTextBoxColumn2.Width = 81;
             // 
             // dataGridViewTextBoxColumn3
             // 
@@ -394,7 +394,7 @@
             dataGridViewTextBoxColumn4.HeaderText = "Qty";
             dataGridViewTextBoxColumn4.MinimumWidth = 6;
             dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            dataGridViewTextBoxColumn4.Width = 71;
+            dataGridViewTextBoxColumn4.Width = 58;
             // 
             // dataGridViewTextBoxColumn5
             // 
@@ -405,7 +405,7 @@
             dataGridViewTextBoxColumn5.HeaderText = "Total ";
             dataGridViewTextBoxColumn5.MinimumWidth = 6;
             dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
-            dataGridViewTextBoxColumn5.Width = 84;
+            dataGridViewTextBoxColumn5.Width = 69;
             // 
             // panel3
             // 
@@ -451,7 +451,7 @@
             dtToSolditem.Format = DateTimePickerFormat.Short;
             dtToSolditem.Location = new Point(328, 37);
             dtToSolditem.Name = "dtToSolditem";
-            dtToSolditem.Size = new Size(129, 30);
+            dtToSolditem.Size = new Size(129, 25);
             dtToSolditem.TabIndex = 3;
             // 
             // label1
@@ -459,7 +459,7 @@
             label1.AutoSize = true;
             label1.Location = new Point(292, 42);
             label1.Name = "label1";
-            label1.Size = new Size(30, 21);
+            label1.Size = new Size(24, 20);
             label1.TabIndex = 2;
             label1.Text = "To";
             // 
@@ -468,7 +468,7 @@
             dtFromSolditem.Format = DateTimePickerFormat.Short;
             dtFromSolditem.Location = new Point(157, 37);
             dtFromSolditem.Name = "dtFromSolditem";
-            dtFromSolditem.Size = new Size(129, 30);
+            dtFromSolditem.Size = new Size(129, 25);
             dtFromSolditem.TabIndex = 1;
             // 
             // label4
@@ -476,7 +476,7 @@
             label4.AutoSize = true;
             label4.Location = new Point(18, 42);
             label4.Name = "label4";
-            label4.Size = new Size(133, 21);
+            label4.Size = new Size(110, 20);
             label4.TabIndex = 0;
             label4.Text = "Filter By : From";
             // 
@@ -484,9 +484,9 @@
             // 
             tabPage3.BackColor = Color.White;
             tabPage3.Controls.Add(dgvCriticalitem);
-            tabPage3.Location = new Point(4, 35);
+            tabPage3.Location = new Point(4, 30);
             tabPage3.Name = "tabPage3";
-            tabPage3.Size = new Size(974, 517);
+            tabPage3.Size = new Size(974, 522);
             tabPage3.TabIndex = 2;
             tabPage3.Text = "Critical Stocks";
             // 
@@ -513,7 +513,7 @@
             dgvCriticalitem.Name = "dgvCriticalitem";
             dgvCriticalitem.RowHeadersVisible = false;
             dgvCriticalitem.RowHeadersWidth = 51;
-            dgvCriticalitem.Size = new Size(974, 517);
+            dgvCriticalitem.Size = new Size(974, 522);
             dgvCriticalitem.TabIndex = 7;
             // 
             // dataGridViewTextBoxColumn6
@@ -522,7 +522,7 @@
             dataGridViewTextBoxColumn6.HeaderText = "No.";
             dataGridViewTextBoxColumn6.MinimumWidth = 6;
             dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
-            dataGridViewTextBoxColumn6.Width = 67;
+            dataGridViewTextBoxColumn6.Width = 57;
             // 
             // dataGridViewTextBoxColumn7
             // 
@@ -531,7 +531,7 @@
             dataGridViewTextBoxColumn7.HeaderText = "Pcode";
             dataGridViewTextBoxColumn7.MinimumWidth = 6;
             dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
-            dataGridViewTextBoxColumn7.Width = 96;
+            dataGridViewTextBoxColumn7.Width = 81;
             // 
             // Column8
             // 
@@ -540,7 +540,7 @@
             Column8.HeaderText = "Barcode";
             Column8.MinimumWidth = 6;
             Column8.Name = "Column8";
-            Column8.Width = 112;
+            Column8.Width = 96;
             // 
             // dataGridViewTextBoxColumn8
             // 
@@ -559,7 +559,7 @@
             dataGridViewTextBoxColumn9.HeaderText = "Category";
             dataGridViewTextBoxColumn9.MinimumWidth = 6;
             dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
-            dataGridViewTextBoxColumn9.Width = 123;
+            dataGridViewTextBoxColumn9.Width = 102;
             // 
             // dataGridViewTextBoxColumn10
             // 
@@ -570,7 +570,7 @@
             dataGridViewTextBoxColumn10.HeaderText = "Price";
             dataGridViewTextBoxColumn10.MinimumWidth = 6;
             dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
-            dataGridViewTextBoxColumn10.Width = 80;
+            dataGridViewTextBoxColumn10.Width = 69;
             // 
             // Column5
             // 
@@ -581,7 +581,7 @@
             Column5.HeaderText = "Reorder";
             Column5.MinimumWidth = 6;
             Column5.Name = "Column5";
-            Column5.Width = 106;
+            Column5.Width = 91;
             // 
             // Column7
             // 
@@ -592,16 +592,16 @@
             Column7.HeaderText = "Stock In Hand";
             Column7.MinimumWidth = 6;
             Column7.Name = "Column7";
-            Column7.Width = 159;
+            Column7.Width = 133;
             // 
             // tabPage4
             // 
             tabPage4.BackColor = Color.White;
             tabPage4.Controls.Add(dgvInventorylist);
             tabPage4.Controls.Add(panel4);
-            tabPage4.Location = new Point(4, 35);
+            tabPage4.Location = new Point(4, 30);
             tabPage4.Name = "tabPage4";
-            tabPage4.Size = new Size(974, 517);
+            tabPage4.Size = new Size(974, 522);
             tabPage4.TabIndex = 3;
             tabPage4.Text = "Inventory List";
             // 
@@ -628,7 +628,7 @@
             dgvInventorylist.Name = "dgvInventorylist";
             dgvInventorylist.RowHeadersVisible = false;
             dgvInventorylist.RowHeadersWidth = 51;
-            dgvInventorylist.Size = new Size(974, 450);
+            dgvInventorylist.Size = new Size(974, 455);
             dgvInventorylist.TabIndex = 8;
             // 
             // dataGridViewTextBoxColumn11
@@ -637,7 +637,7 @@
             dataGridViewTextBoxColumn11.HeaderText = "No.";
             dataGridViewTextBoxColumn11.MinimumWidth = 6;
             dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
-            dataGridViewTextBoxColumn11.Width = 67;
+            dataGridViewTextBoxColumn11.Width = 57;
             // 
             // dataGridViewTextBoxColumn12
             // 
@@ -646,7 +646,7 @@
             dataGridViewTextBoxColumn12.HeaderText = "Pcode";
             dataGridViewTextBoxColumn12.MinimumWidth = 6;
             dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
-            dataGridViewTextBoxColumn12.Width = 96;
+            dataGridViewTextBoxColumn12.Width = 81;
             // 
             // dataGridViewTextBoxColumn13
             // 
@@ -655,7 +655,7 @@
             dataGridViewTextBoxColumn13.HeaderText = "Barcode";
             dataGridViewTextBoxColumn13.MinimumWidth = 6;
             dataGridViewTextBoxColumn13.Name = "dataGridViewTextBoxColumn13";
-            dataGridViewTextBoxColumn13.Width = 112;
+            dataGridViewTextBoxColumn13.Width = 96;
             // 
             // dataGridViewTextBoxColumn14
             // 
@@ -674,7 +674,7 @@
             dataGridViewTextBoxColumn15.HeaderText = "Category";
             dataGridViewTextBoxColumn15.MinimumWidth = 6;
             dataGridViewTextBoxColumn15.Name = "dataGridViewTextBoxColumn15";
-            dataGridViewTextBoxColumn15.Width = 123;
+            dataGridViewTextBoxColumn15.Width = 102;
             // 
             // dataGridViewTextBoxColumn16
             // 
@@ -685,7 +685,7 @@
             dataGridViewTextBoxColumn16.HeaderText = "Price";
             dataGridViewTextBoxColumn16.MinimumWidth = 6;
             dataGridViewTextBoxColumn16.Name = "dataGridViewTextBoxColumn16";
-            dataGridViewTextBoxColumn16.Width = 80;
+            dataGridViewTextBoxColumn16.Width = 69;
             // 
             // dataGridViewTextBoxColumn18
             // 
@@ -696,7 +696,7 @@
             dataGridViewTextBoxColumn18.HeaderText = "Qty";
             dataGridViewTextBoxColumn18.MinimumWidth = 6;
             dataGridViewTextBoxColumn18.Name = "dataGridViewTextBoxColumn18";
-            dataGridViewTextBoxColumn18.Width = 71;
+            dataGridViewTextBoxColumn18.Width = 58;
             // 
             // dataGridViewTextBoxColumn17
             // 
@@ -707,7 +707,7 @@
             dataGridViewTextBoxColumn17.HeaderText = "Reorder";
             dataGridViewTextBoxColumn17.MinimumWidth = 6;
             dataGridViewTextBoxColumn17.Name = "dataGridViewTextBoxColumn17";
-            dataGridViewTextBoxColumn17.Width = 106;
+            dataGridViewTextBoxColumn17.Width = 91;
             // 
             // panel4
             // 
@@ -721,9 +721,9 @@
             // 
             tabPage5.Controls.Add(dgvStockin);
             tabPage5.Controls.Add(panel5);
-            tabPage5.Location = new Point(4, 36);
+            tabPage5.Location = new Point(4, 30);
             tabPage5.Name = "tabPage5";
-            tabPage5.Size = new Size(974, 516);
+            tabPage5.Size = new Size(974, 522);
             tabPage5.TabIndex = 4;
             tabPage5.Text = "Stock In History";
             tabPage5.UseVisualStyleBackColor = true;
@@ -751,7 +751,7 @@
             dgvStockin.Name = "dgvStockin";
             dgvStockin.RowHeadersVisible = false;
             dgvStockin.RowHeadersWidth = 51;
-            dgvStockin.Size = new Size(974, 400);
+            dgvStockin.Size = new Size(974, 406);
             dgvStockin.TabIndex = 9;
             // 
             // dataGridViewTextBoxColumn19
@@ -760,7 +760,7 @@
             dataGridViewTextBoxColumn19.HeaderText = "No.";
             dataGridViewTextBoxColumn19.MinimumWidth = 6;
             dataGridViewTextBoxColumn19.Name = "dataGridViewTextBoxColumn19";
-            dataGridViewTextBoxColumn19.Width = 67;
+            dataGridViewTextBoxColumn19.Width = 57;
             // 
             // dataGridViewTextBoxColumn26
             // 
@@ -771,7 +771,7 @@
             dataGridViewTextBoxColumn26.HeaderText = "Reference#";
             dataGridViewTextBoxColumn26.MinimumWidth = 6;
             dataGridViewTextBoxColumn26.Name = "dataGridViewTextBoxColumn26";
-            dataGridViewTextBoxColumn26.Width = 143;
+            dataGridViewTextBoxColumn26.Width = 121;
             // 
             // dataGridViewTextBoxColumn20
             // 
@@ -780,7 +780,7 @@
             dataGridViewTextBoxColumn20.HeaderText = "Pcode";
             dataGridViewTextBoxColumn20.MinimumWidth = 6;
             dataGridViewTextBoxColumn20.Name = "dataGridViewTextBoxColumn20";
-            dataGridViewTextBoxColumn20.Width = 96;
+            dataGridViewTextBoxColumn20.Width = 81;
             // 
             // dataGridViewTextBoxColumn22
             // 
@@ -799,7 +799,7 @@
             dataGridViewTextBoxColumn25.HeaderText = "Qty";
             dataGridViewTextBoxColumn25.MinimumWidth = 6;
             dataGridViewTextBoxColumn25.Name = "dataGridViewTextBoxColumn25";
-            dataGridViewTextBoxColumn25.Width = 71;
+            dataGridViewTextBoxColumn25.Width = 58;
             // 
             // Column9
             // 
@@ -808,7 +808,7 @@
             Column9.HeaderText = "Stock In Date";
             Column9.MinimumWidth = 6;
             Column9.Name = "Column9";
-            Column9.Width = 156;
+            Column9.Width = 130;
             // 
             // panel5
             // 
@@ -842,7 +842,7 @@
             dtTostockin.Format = DateTimePickerFormat.Short;
             dtTostockin.Location = new Point(328, 37);
             dtTostockin.Name = "dtTostockin";
-            dtTostockin.Size = new Size(129, 30);
+            dtTostockin.Size = new Size(129, 25);
             dtTostockin.TabIndex = 3;
             // 
             // label5
@@ -850,7 +850,7 @@
             label5.AutoSize = true;
             label5.Location = new Point(292, 42);
             label5.Name = "label5";
-            label5.Size = new Size(30, 21);
+            label5.Size = new Size(24, 20);
             label5.TabIndex = 2;
             label5.Text = "To";
             // 
@@ -859,7 +859,7 @@
             dtFromstockin.Format = DateTimePickerFormat.Short;
             dtFromstockin.Location = new Point(157, 37);
             dtFromstockin.Name = "dtFromstockin";
-            dtFromstockin.Size = new Size(129, 30);
+            dtFromstockin.Size = new Size(129, 25);
             dtFromstockin.TabIndex = 1;
             // 
             // label6
@@ -867,13 +867,13 @@
             label6.AutoSize = true;
             label6.Location = new Point(18, 42);
             label6.Name = "label6";
-            label6.Size = new Size(133, 21);
+            label6.Size = new Size(110, 20);
             label6.TabIndex = 0;
             label6.Text = "Filter By : From";
             // 
             // POSrecord
             // 
-            AutoScaleDimensions = new SizeF(11F, 21F);
+            AutoScaleDimensions = new SizeF(8F, 19F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             ClientSize = new Size(982, 626);

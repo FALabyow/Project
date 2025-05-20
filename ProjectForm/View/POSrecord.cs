@@ -69,7 +69,10 @@ namespace ProjectForm
         {
             dgvStockin.DataSource = stockInHistory;
         }
-
+        public void TotalSoldItems(string total)
+        {
+            lblTotal.Text = total;
+        }
         public string SelectedItem(ComboBox comboBox)
         {
             return comboBox.SelectedItem?.ToString() ?? string.Empty;

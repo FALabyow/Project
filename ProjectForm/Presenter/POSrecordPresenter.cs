@@ -107,7 +107,8 @@ namespace ProjectForm.Presenter
                 {
                     return new List<GetSalesByQtyDto>();
                 }
-
+                var total = sales.Sum(sd => sd.TotalAmount);
+                _view.TotalSoldItems(total.ToString());
                 return sales;
 
             }
