@@ -62,6 +62,8 @@
             label3 = new Label();
             lblDisplaytotal = new Label();
             dgvCashier = new DataGridView();
+            panel7 = new Panel();
+            timer1 = new System.Windows.Forms.Timer(components);
             BarcodeData = new DataGridViewTextBoxColumn();
             StockId = new DataGridViewTextBoxColumn();
             ProductName = new DataGridViewTextBoxColumn();
@@ -71,8 +73,7 @@
             ProductQuantity = new DataGridViewTextBoxColumn();
             ProductCode = new DataGridViewTextBoxColumn();
             Remove = new DataGridViewImageColumn();
-            panel7 = new Panel();
-            timer1 = new System.Windows.Forms.Timer(components);
+            Edit = new DataGridViewImageColumn();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
@@ -223,7 +224,7 @@
             label1.ForeColor = Color.Black;
             label1.Location = new Point(55, 139);
             label1.Name = "label1";
-            label1.Size = new Size(80, 25);
+            label1.Size = new Size(63, 20);
             label1.TabIndex = 0;
             label1.Text = "Cashier";
             // 
@@ -327,7 +328,7 @@
             label5.AutoSize = true;
             label5.Location = new Point(8, 454);
             label5.Name = "label5";
-            label5.Size = new Size(78, 22);
+            label5.Size = new Size(63, 18);
             label5.TabIndex = 13;
             label5.Text = "Change ";
             // 
@@ -345,7 +346,7 @@
             label2.AutoSize = true;
             label2.Location = new Point(8, 419);
             label2.Name = "label2";
-            label2.Size = new Size(52, 22);
+            label2.Size = new Size(43, 18);
             label2.TabIndex = 11;
             label2.Text = "Cash";
             // 
@@ -353,7 +354,7 @@
             // 
             barcodetxt.Location = new Point(8, 280);
             barcodetxt.Name = "barcodetxt";
-            barcodetxt.Size = new Size(190, 28);
+            barcodetxt.Size = new Size(190, 24);
             barcodetxt.TabIndex = 10;
             // 
             // lblTimer
@@ -382,7 +383,7 @@
             label8.AutoSize = true;
             label8.Location = new Point(8, 380);
             label8.Name = "label8";
-            label8.Size = new Size(56, 22);
+            label8.Size = new Size(45, 18);
             label8.TabIndex = 7;
             label8.Text = "Total ";
             // 
@@ -392,7 +393,7 @@
             label7.Font = new Font("Microsoft Sans Serif", 10.8F, FontStyle.Underline, GraphicsUnit.Point, 0);
             label7.Location = new Point(8, 247);
             label7.Name = "label7";
-            label7.Size = new Size(77, 22);
+            label7.Size = new Size(64, 18);
             label7.TabIndex = 5;
             label7.Text = "Barcode";
             // 
@@ -401,7 +402,7 @@
             lblDate.AutoSize = true;
             lblDate.Location = new Point(8, 204);
             lblDate.Name = "lblDate";
-            lblDate.Size = new Size(90, 22);
+            lblDate.Size = new Size(72, 18);
             lblDate.TabIndex = 4;
             lblDate.Text = "00000000";
             // 
@@ -411,7 +412,7 @@
             label6.Font = new Font("Microsoft Sans Serif", 10.8F, FontStyle.Underline, GraphicsUnit.Point, 0);
             label6.Location = new Point(8, 167);
             label6.Name = "label6";
-            label6.Size = new Size(48, 22);
+            label6.Size = new Size(39, 18);
             label6.TabIndex = 3;
             label6.Text = "Date";
             // 
@@ -420,7 +421,7 @@
             lblTranNo.AutoSize = true;
             lblTranNo.Location = new Point(6, 125);
             lblTranNo.Name = "lblTranNo";
-            lblTranNo.Size = new Size(100, 22);
+            lblTranNo.Size = new Size(80, 18);
             lblTranNo.TabIndex = 2;
             lblTranNo.Text = "000000000";
             // 
@@ -430,7 +431,7 @@
             label3.Font = new Font("Microsoft Sans Serif", 10.8F, FontStyle.Underline, GraphicsUnit.Point, 0);
             label3.Location = new Point(6, 88);
             label3.Name = "label3";
-            label3.Size = new Size(138, 22);
+            label3.Size = new Size(114, 18);
             label3.TabIndex = 1;
             label3.Text = "Transaction No.";
             // 
@@ -461,7 +462,7 @@
             dgvCashier.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dgvCashier.ColumnHeadersHeight = 40;
             dgvCashier.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dgvCashier.Columns.AddRange(new DataGridViewColumn[] { BarcodeData, StockId, ProductName, ProductPrice, BuyerQuantity, Column1, ProductQuantity, ProductCode, Remove });
+            dgvCashier.Columns.AddRange(new DataGridViewColumn[] { BarcodeData, StockId, ProductName, ProductPrice, BuyerQuantity, Column1, ProductQuantity, ProductCode, Remove, Edit });
             dgvCashier.Dock = DockStyle.Fill;
             dgvCashier.EnableHeadersVisualStyles = false;
             dgvCashier.GridColor = Color.White;
@@ -471,6 +472,18 @@
             dgvCashier.RowHeadersWidth = 51;
             dgvCashier.Size = new Size(763, 650);
             dgvCashier.TabIndex = 5;
+            // 
+            // panel7
+            // 
+            panel7.Dock = DockStyle.Fill;
+            panel7.Location = new Point(0, 0);
+            panel7.Name = "panel7";
+            panel7.Size = new Size(1191, 700);
+            panel7.TabIndex = 0;
+            // 
+            // timer1
+            // 
+            timer1.Enabled = true;
             // 
             // BarcodeData
             // 
@@ -547,21 +560,17 @@
             Remove.Name = "Remove";
             Remove.Width = 50;
             // 
-            // panel7
+            // Edit
             // 
-            panel7.Dock = DockStyle.Fill;
-            panel7.Location = new Point(0, 0);
-            panel7.Name = "panel7";
-            panel7.Size = new Size(1191, 700);
-            panel7.TabIndex = 0;
-            // 
-            // timer1
-            // 
-            timer1.Enabled = true;
+            Edit.HeaderText = "";
+            Edit.Image = Properties.Resources.edit;
+            Edit.ImageLayout = DataGridViewImageCellLayout.Zoom;
+            Edit.Name = "Edit";
+            Edit.Width = 30;
             // 
             // Cashier
             // 
-            AutoScaleDimensions = new SizeF(10F, 22F);
+            AutoScaleDimensions = new SizeF(8F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(225, 215, 190);
             ClientSize = new Size(1191, 700);
@@ -637,5 +646,6 @@
         private DataGridViewTextBoxColumn ProductQuantity;
         private DataGridViewTextBoxColumn ProductCode;
         private DataGridViewImageColumn Remove;
+        private DataGridViewImageColumn Edit;
     }
 }

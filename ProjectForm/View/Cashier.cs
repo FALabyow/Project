@@ -54,6 +54,7 @@ namespace ProjectForm
         public event EventHandler<Button>? AdminClicked;
         public event EventHandler? BarcodeTextChanged;
         public event EventHandler<DataGridViewCellEventArgs>? RemoveClicked;
+        public event EventHandler<DataGridViewCellEventArgs>? EditClicked;
         public event EventHandler? CheckoutClicked;
         public string TransactionNumber
         {
@@ -158,16 +159,28 @@ namespace ProjectForm
             }
             return false;
         }
-        public void UpdateProductQuantityInGrid(string barcode, int newQuantity)
+        public void UpdateProductQuantityInGrid(string barcode, int newQuantity, bool isEdit, int stock)
         {
             foreach (DataGridViewRow row in dgvCashier.Rows)
             {
+
                 if (row.Cells[0].Value?.ToString() == barcode)
                 {
-                    row.Cells[4].Value = newQuantity;
-                    row.Cells[5].Value = newQuantity * (decimal)row.Cells[3].Value;
-                    row.Cells[6].Value = (int)row.Cells[6].Value - 1;
-                    break;
+                    if(isEdit == false)
+                    {
+                        row.Cells[4].Value = newQuantity;
+                        row.Cells[5].Value = newQuantity * (decimal)row.Cells[3].Value;
+                        row.Cells[6].Value = (int)row.Cells[6].Value - 1;
+                        break;
+                    }
+                    else
+                    {
+                        row.Cells[4].Value = newQuantity;
+                        row.Cells[5].Value = newQuantity * (decimal)row.Cells[3].Value;
+                        row.Cells[6].Value = stock - newQuantity;
+                        break;
+                    }
+                    
                 }
             }
             _presenter.CalculateTotal(dgvCashier);
@@ -255,6 +268,11 @@ namespace ProjectForm
             if (gridView.Columns[e.ColumnIndex].Name == "Remove")
             {
                 RemoveClicked?.Invoke(sender, e);
+            }
+
+            if (gridView.Columns[e.ColumnIndex].Name == "Edit")
+            {
+                EditClicked?.Invoke(sender, e);
             }
         }
        

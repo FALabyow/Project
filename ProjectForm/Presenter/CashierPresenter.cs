@@ -18,7 +18,8 @@ namespace ProjectForm.Presenter
         private readonly ICashierView _view;
         private readonly HttpClient _httpClient;
         public List<GetAllAvailableProductsDto> _availableProducts = new();
-        private DataTable _dataTable;     
+        private DataTable _dataTable;
+        private int _originalStockQty;
         public CashierPresenter(ICashierView view)
         {
             _httpClient = Connection.Instance;
@@ -34,6 +35,7 @@ namespace ProjectForm.Presenter
             _view.AdminClicked += OnAdminClicked;
             _view.BarcodeTextChanged += OnBarcodeTextChanged;   
             _view.RemoveClicked += OnRemoveClicked;
+            _view.EditClicked += OnEditClicked;
             _view.CheckoutClicked += OnCheckoutClicked;
             _view.Date = DateOnly.FromDateTime(DateTime.Now).ToString("MM-dd-yyyy");
         }
@@ -99,6 +101,42 @@ namespace ProjectForm.Presenter
             if (gridView == null || e.RowIndex < 0) return;
 
             gridView.Rows.RemoveAt(e.RowIndex);
+        }
+        private void OnEditClicked(object? sender, DataGridViewCellEventArgs e)
+        {
+            var gridView = sender as DataGridView;
+            if (gridView == null || e.RowIndex < 0) return;
+
+            try
+            {
+                int newBuyerQty = Convert.ToInt32(gridView.Rows[e.RowIndex].Cells["BuyerQuantity"].Value);
+                string? barcode = Convert.ToString(gridView.Rows[e.RowIndex].Cells[0].Value);
+
+                if(barcode == null)
+                {
+                    return;
+                }
+
+                if(newBuyerQty < 1)
+                {
+                    MessageBox.Show("The quantity value cannot be negative.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return ;
+                }
+
+                if(_originalStockQty < newBuyerQty)
+                {
+                    MessageBox.Show("No stock available.");
+                    return;
+                }
+
+                _view.UpdateProductQuantityInGrid(barcode, newBuyerQty, true, _originalStockQty);
+                
+            }
+            catch(FormatException ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            
         }
         private async void OnCheckoutClicked(object? sender, EventArgs e)
         {
@@ -178,7 +216,7 @@ namespace ProjectForm.Presenter
                     MessageBox.Show("No Available stock");
                     return;
                 }
-                _view.UpdateProductQuantityInGrid(barcode, newQty);
+                _view.UpdateProductQuantityInGrid(barcode, newQty, false, 0);
                 _view.ClearBarcode();
             }
             else
@@ -195,6 +233,8 @@ namespace ProjectForm.Presenter
                     ProductCode = product.ProductCode,
                     
                 };
+
+                _originalStockQty = productToDisplay.ProductQuantity;
 
                 _view.DisplayProducts(productToDisplay);
             }

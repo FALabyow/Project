@@ -60,7 +60,7 @@ namespace ProjectForm.Presenter
                     MessageBox.Show("No Available stock");
                     return;
                 }
-                _cashierView.UpdateProductQuantityInGrid(barcode, newQty);
+                _cashierView.UpdateProductQuantityInGrid(barcode, newQty, false, 0);
             }
             else
             {

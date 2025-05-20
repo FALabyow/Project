@@ -25,6 +25,7 @@ namespace ProjectForm.View.IView
         event EventHandler<Button>? AdminClicked;
         event EventHandler? BarcodeTextChanged;
         event EventHandler<DataGridViewCellEventArgs>? RemoveClicked;
+        event EventHandler<DataGridViewCellEventArgs>? EditClicked;
         event EventHandler? CheckoutClicked;
         string Timer { get; set; }
         string Barcode { get; }
@@ -37,7 +38,7 @@ namespace ProjectForm.View.IView
         void Slider(Button button);
         void DisplayProducts(DisplayAvailableProductsDto products);
         bool ProductExistsInGrid(string barcode);
-        void UpdateProductQuantityInGrid(string barcode, int newQuantity);
+        void UpdateProductQuantityInGrid(string barcode, int newQuantity, bool isEdit, int stock);
         int GetProductQuantityFromGrid(string barcode);
         void ClearBarcode();
         void ClearTable();
